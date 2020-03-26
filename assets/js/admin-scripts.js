@@ -129,7 +129,6 @@
     }).change();
 
     $(document).on('change', '.typography_face', function () {
-        console.log($(this).val());
         var font_family = $(this).val();
         var $this = $(this);
         $.ajax({
@@ -139,11 +138,11 @@
                 font_family: font_family,
             },
             beforeSend: function () {
-                $this.parent('.typography-font-family').next('.typography-font-style').addClass('typography-loading');
+                $this.closest('.sfm-typography-font-family').next('.sfm-typography-font-style').addClass('typography-loading');
             },
             success: function (response) {
-                $this.parent('.typography-font-family').next('.typography-font-style').removeClass('typography-loading');
-                $this.parent('.typography-font-family').next('.typography-font-style').children('select').html(response).trigger("chosen:updated");
+                $this.closest('.sfm-typography-font-family').next('.sfm-typography-font-style').removeClass('typography-loading');
+                $this.closest('.sfm-typography-font-family').next('.sfm-typography-font-style').find('select').html(response).trigger("chosen:updated");
             }
         });
         if (font_family != 'Courier' && font_family != 'Times' && font_family != 'Arial' && font_family != 'Verdana' && font_family != 'Trebuchet' && font_family != 'Georgia' && font_family != 'Tahoma' && font_family != 'Palatino' && font_family != 'Helvetica') {

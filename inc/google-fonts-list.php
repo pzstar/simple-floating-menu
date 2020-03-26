@@ -177,7 +177,7 @@ function sfm_get_google_font_variants() {
 
     $font_list = array_merge(sfm_standard_font_array(), sfm_google_font_array());
 
-    $font_family = $_REQUEST['font_family'];
+    $font_family = sanitize_text_field($_REQUEST['font_family']);
     $font_array = sfm_search_key($font_list, 'family', $font_family);
 
     $variants_array = $font_array['0']['variants'];
