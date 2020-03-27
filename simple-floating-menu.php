@@ -747,7 +747,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                         if ($key == 'url') {
                             $sanitize_settings['buttons'][$index][$key] = esc_url_raw($value);
                         } elseif ($key == 'tool_tip_text') {
-                            $sanitize_settings['buttons'][$index][$key] = esc_html($value);
+                            $sanitize_settings['buttons'][$index][$key] = sanitize_text_field($value);
                         } elseif ($key == 'open_new_tab') {
                             $sanitize_settings['buttons'][$index][$key] = isset($value) ? true : false;
                         } elseif ($key == 'icon') {
