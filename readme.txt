@@ -1,4 +1,4 @@
-=== HashThemes Demo Importer ===
+=== Simple Floating Menu ===
 Contributors: hashthemes
 Tags: menu, sticky button, floating menu
 Requires at least: 5.0
@@ -19,7 +19,7 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 
 <ol>
 <li>Go to WordPress Dashboard > Plugins > Add New</li>
-<li>Search for "HashThemes Demo Importer" and install the plugin.</li>
+<li>Search for "Simple Floating Menu" and install the plugin.</li>
 <li>Activate Plugin from "Plugins" menu in WordPress.</li>
 </ol>
 
