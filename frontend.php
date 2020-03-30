@@ -22,6 +22,8 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), '1.0.0');
             wp_enqueue_style('sfm-fonts', self::sfm_fonts_url(), array(), '1.00');
             wp_add_inline_style('sfm-style', sfm_dymanic_styles());
+
+            wp_enqueue_script('sfm-custom-scripts', SFM_URL . 'assets/js/custom-scripts.js', array(), '1.0.0', true);
         }
 
         public function floating_menu_html() {
