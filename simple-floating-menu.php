@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,6 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
+define('SFM_VERSION', '1.0.1');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -80,12 +81,12 @@ if (!class_exists('Simple_Floating_Menu')) {
 
         public function load_menu() {
             // Add the menu item and page
-            $page_title = esc_html__('Floating Menu', 'simple-floating-menu');
-            $menu_title = esc_html__('Floating Menu', 'simple-floating-menu');
+            $page_title = esc_html__('Simple Floating Menu', 'simple-floating-menu');
+            $menu_title = esc_html__('Simple Floating Menu', 'simple-floating-menu');
             $capability = 'manage_options';
             $slug = 'simple-floating-menu';
             $callback = array($this, 'settings_page_content');
-            $icon = 'dashicons-admin-plugins';
+            $icon = 'dashicons-admin-generic';
             $position = 100;
 
             add_menu_page($page_title, $menu_title, $capability, $slug, $callback, $icon, $position);
@@ -107,24 +108,25 @@ if (!class_exists('Simple_Floating_Menu')) {
          */
 
         public function load_backends() {
-            wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), '1.0.0', true);
-            wp_enqueue_script('webfont', SFM_URL . 'assets/js/webfont.js', array(), '1.0.0', true);
-            wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'wp-color-picker', 'jquery-ui-slider', 'jquery-ui-sortable'), '1.0.0', true);
+            wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), SFM_VERSION, true);
+            wp_enqueue_script('webfont', SFM_URL . 'assets/js/webfont.js', array(), SFM_VERSION, true);
+            wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'wp-color-picker', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
 
             wp_enqueue_style('wp-color-picker');
-            wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essential-icon.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), '1.0.0');
-            wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), '1.00');
-            wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), '1.0.0');
+            wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essential-icon.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
+            wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), SFM_VERSION);
+            wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
         }
 
         public static function default_settings() {
             $defaults = array(
+                'enable_sfm' => 'yes',
                 'buttons' => array(array(
                         'id' => uniqid('sfm-'),
                         'icon' => 'icofont-dart',
@@ -173,23 +175,49 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         public function settings_page_content() {
-            if (isset($_POST['updated']) && $_POST['updated'] === 'true') {
-                $this->handle_form();
-            }
-            $sfm_settings = self::get_settings();
             ?>
             <div class="wrap">
-                <h2><?php esc_html_e('Floating Menu Settings', 'simple-floating-menu'); ?></h2>
 
-                <div id="sfm-tab-wrapper" class="nav-tab-wrapper">
-                    <a id="sfm-buttons-nav" class="nav-tab nav-tab-active" href="#tab-sfm-buttons"><?php esc_html_e('Buttons', 'simple-floating-menu'); ?></a>
-                    <a id="sfm-setting-nav" class="nav-tab" href="#tab-sfm-settings"><?php esc_html_e('Settings', 'simple-floating-menu'); ?></a>		
+                <div id="sfm-header">
+                    <h2><?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?></h2>
+
+                    <div id="sfm-tab-wrapper" class="sfm-tab-wrapper">
+                        <a id="sfm-buttons-nav" class="sfm-tab sfm-tab-active" href="#tab-sfm-buttons">
+                            <i class="mdi mdi-animation"></i>
+                            <?php esc_html_e('Buttons', 'simple-floating-menu'); ?>
+                        </a>
+
+                        <a id="sfm-setting-nav" class="sfm-tab" href="#tab-sfm-settings">
+                            <i class="mdi mdi-settings"></i>
+                            <?php esc_html_e('Settings', 'simple-floating-menu'); ?>
+                        </a>		
+                    </div>
                 </div>
 
                 <div id="sfm-form-wrap">
                     <form method="POST">
+                        <?php
+                        if (isset($_POST['updated']) && $_POST['updated'] === 'true') {
+                            $this->handle_form();
+                        }
+
+                        $sfm_settings = self::get_settings();
+                        ?>
                         <input type="hidden" name="updated" value="true" />
                         <?php wp_nonce_field('sfm_nonce_update', 'sfm_nonce'); ?>
+
+                        <div class="form-row sfm-form-row">
+                            <label class="form-label"><?php esc_html_e('Enable Floating Menu', 'simple-floating-menu'); ?></label>
+                            <div class="form-field">
+                                <div class="onoff-switch">
+                                    <?php
+                                    $enable_sfm = isset($sfm_settings['enable_sfm']) ? $sfm_settings['enable_sfm'] : 'yes';
+                                    ?>
+                                    <input type="checkbox" id="enable_sfm" name="sfm_settings[enable_sfm]" class="onoff-switch-checkbox" value="1" <?php checked($enable_sfm, 'yes'); ?>>
+                                    <label class="onoff-switch-label" for="enable_sfm"></label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div id="tab-sfm-buttons" class="sfm-form-page sfm-active">
                             <div id="sfm-buttons-settings">
@@ -370,7 +398,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     }
                                     ?>
                                 </div>
-                                <div class="sfm-add-new-button-fields"><a class="button" href="#"><?php esc_html_e('Add New', 'simple-floating-menu'); ?></a></div>
+                                <div class="sfm-add-new-button-fields"><a class="button" href="#"><i class="mdi mdi-plus"></i> <?php esc_html_e('Add New', 'simple-floating-menu'); ?></a></div>
                             </div>
                         </div>
 
@@ -687,7 +715,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </div>
 
                         <p class="submit">
-                            <input type="submit" name="submit" class="button button-primary" value="<?php esc_html_e('Save Settings', 'simple-floating-menu'); ?>">
+                            <button type="submit" name="submit" class="button button-primary"><i class="mdi mdi-content-save"></i> <?php esc_html_e('Save Settings', 'simple-floating-menu'); ?></button>
                         </p>
                     </form>
 
@@ -704,12 +732,13 @@ if (!class_exists('Simple_Floating_Menu')) {
         public function handle_form() {
             if (!isset($_POST['sfm_nonce']) || !wp_verify_nonce($_POST['sfm_nonce'], 'sfm_nonce_update')) {
                 ?>
-                <div class="error">
+                <div class="sfm-error-notice sfm-notice">
                     <p><?php esc_html_e('Sorry, your nonce was not correct. Please try again.', 'simple-floating-menu'); ?></p>
                 </div> <?php
                 exit;
             } else {
                 $sfm_settings = isset($_POST['sfm_settings']) ? $_POST['sfm_settings'] : '';
+                //var_dump($sfm_settings);
                 $defaults = self::default_settings();
 
                 $valid_positions = array('top-left', 'top-right', 'top-middle', 'bottom-middle', 'bottom-left', 'bottom-right', 'middle-left', 'middle-right');
@@ -726,6 +755,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 $right_offset = (int) $sfm_settings['right_offset'];
                 $button_spacing = (int) $sfm_settings['button_spacing'];
 
+                $sanitize_settings['enable_sfm'] = isset($sfm_settings['enable_sfm']) ? 'yes' : 'no';
                 $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
                 $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];
                 $sanitize_settings['style'] = in_array($sfm_settings['style'], $valid_styles) ? $sfm_settings['style'] : $defaults['style'];
@@ -778,7 +808,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                 update_option('sfm_settings', $sanitize_settings);
                 ?>
-                <div class="updated">
+                <div class="sfm-success-notice sfm-notice">
                     <p><?php esc_html_e('Settings saved!', 'simple-floating-menu'); ?></p>
                 </div>
                 <?php

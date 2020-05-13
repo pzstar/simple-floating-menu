@@ -1,9 +1,9 @@
 (function ($) {
 
-    $('#sfm-tab-wrapper .nav-tab').click(function () {
+    $('#sfm-tab-wrapper .sfm-tab').click(function () {
         var id = $(this).attr('href');
-        $(this).parent().find('.nav-tab').removeClass('nav-tab-active');
-        $(this).addClass('nav-tab-active');
+        $(this).parent().find('.sfm-tab').removeClass('sfm-tab-active');
+        $(this).addClass('sfm-tab-active');
 
         $('.sfm-form-page').hide();
         $(id).fadeIn()

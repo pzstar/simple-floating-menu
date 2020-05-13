@@ -30,10 +30,11 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             $class = array('sfm-floating-menu');
             $settings = Simple_Floating_Menu::get_settings();
             $buttons = $settings['buttons'];
+            $enable_sfm = $settings['enable_sfm'];
             $class[] = isset($settings['position']) && $settings['position'] ? $settings['position'] : '';
             $class[] = isset($settings['style']) && $settings['style'] ? $settings['style'] : '';
             $class[] = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
-            if ($buttons) {
+            if ((is_admin() || $enable_sfm == 'yes') && $buttons) {
                 ?>
                 <div class="<?php echo esc_attr(implode(' ', $class)); ?>">
                     <?php
