@@ -44,6 +44,10 @@ The easy way to install the plugin is via WordPress.org plugin directory.
  
 == Changelog ==
 
+= 1.0.1 =
+* Added Option to enable/disable floating menu
+* Admin panel design refinement
+
 = 1.0 =
 * Release
 
