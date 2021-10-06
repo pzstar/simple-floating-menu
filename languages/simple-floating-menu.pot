@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple Floating Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-12 21:16+0000\n"
+"POT-Creation-Date: 2021-10-06 06:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,334 +15,322 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.1; wp-5.3.2"
 
-#. Name of the plugin
-#: simple-floating-menu.php:84 simple-floating-menu.php:85
-msgid "Simple Floating Menu"
-msgstr ""
-
-#: simple-floating-menu.php:182
-msgid "Simple Floating Menu Settings"
-msgstr ""
-
-#: simple-floating-menu.php:187
-msgid "Buttons"
-msgstr ""
-
-#: simple-floating-menu.php:192
-msgid "Settings"
-msgstr ""
-
-#: simple-floating-menu.php:210
-msgid "Enable Floating Menu"
-msgstr ""
-
-#: simple-floating-menu.php:236
-msgid "Button"
-msgstr ""
-
-#: simple-floating-menu.php:240
-msgid "Choose Icon"
-msgstr ""
-
-#: simple-floating-menu.php:253
-msgid "Ico Font"
-msgstr ""
-
-#: simple-floating-menu.php:257
-msgid "Font Awesome"
-msgstr ""
-
-#: simple-floating-menu.php:261
-msgid "Essential Icon"
-msgstr ""
-
-#: simple-floating-menu.php:265
-msgid "Material Icon"
-msgstr ""
-
-#: simple-floating-menu.php:269
-msgid "Elegant Icon"
-msgstr ""
-
-#: simple-floating-menu.php:273
-msgid "Type to filter"
-msgstr ""
-
-#: simple-floating-menu.php:334
-msgid "Button Url"
-msgstr ""
-
-#: simple-floating-menu.php:337
-msgid "Leaving empty will not display the button"
-msgstr ""
-
-#: simple-floating-menu.php:341
-msgid "Tool Tip Text"
-msgstr ""
-
-#: simple-floating-menu.php:344
-msgid "This text will display on hovering the button"
-msgstr ""
-
-#: simple-floating-menu.php:348 simple-floating-menu.php:355
-msgid "Open in New Tab"
-msgstr ""
-
-#: simple-floating-menu.php:362
-msgid "Button Background Color"
-msgstr ""
-
-#: simple-floating-menu.php:369
-msgid "Button Icon Color"
-msgstr ""
-
-#: simple-floating-menu.php:373
-msgid "Button Background Color Hover"
-msgstr ""
-
-#: simple-floating-menu.php:377
-msgid "Button Icon Color Hover"
-msgstr ""
-
-#: simple-floating-menu.php:385
-msgid "Tool Tip Background Color"
-msgstr ""
-
-#: simple-floating-menu.php:389
-msgid "Tool Tip Text Color"
-msgstr ""
-
-#: simple-floating-menu.php:401
-msgid "Add New"
-msgstr ""
-
-#: simple-floating-menu.php:409
-msgid "Button Position"
-msgstr ""
-
-#: simple-floating-menu.php:412
-msgid "Top Left"
-msgstr ""
-
-#: simple-floating-menu.php:413
-msgid "Top Middle"
-msgstr ""
-
-#: simple-floating-menu.php:414
-msgid "Top Right"
-msgstr ""
-
-#: simple-floating-menu.php:415
-msgid "Bottom Left"
-msgstr ""
-
-#: simple-floating-menu.php:416
-msgid "Bottom Middle"
-msgstr ""
-
-#: simple-floating-menu.php:417
-msgid "Bottom Right"
-msgstr ""
-
-#: simple-floating-menu.php:418
-msgid "Middle Left"
-msgstr ""
-
-#: simple-floating-menu.php:419
-msgid "Middle Right"
-msgstr ""
-
-#: simple-floating-menu.php:424
-msgid "Orientation"
-msgstr ""
-
 #: simple-floating-menu.php:427
-msgid "Horizontal"
-msgstr ""
-
-#: simple-floating-menu.php:428
-msgid "Vertical"
-msgstr ""
-
-#: simple-floating-menu.php:434
-msgid "Button Style"
-msgstr ""
-
-#: simple-floating-menu.php:437
-msgid "Rectangle"
-msgstr ""
-
-#: simple-floating-menu.php:438
-msgid "Round"
-msgstr ""
-
-#: simple-floating-menu.php:439
-msgid "Triangle"
-msgstr ""
-
-#: simple-floating-menu.php:440
-msgid "Rhombus"
-msgstr ""
-
-#: simple-floating-menu.php:441
-msgid "Pentagon"
-msgstr ""
-
-#: simple-floating-menu.php:442
-msgid "Hexagon"
-msgstr ""
-
-#: simple-floating-menu.php:443
-msgid "Star"
-msgstr ""
-
-#: simple-floating-menu.php:444
-msgid "Rabbet"
-msgstr ""
-
-#: simple-floating-menu.php:445
-msgid "Oval"
-msgstr ""
-
-#: simple-floating-menu.php:453
-msgid "Button Height"
-msgstr ""
-
-#: simple-floating-menu.php:464
-msgid "Button Width"
-msgstr ""
-
-#: simple-floating-menu.php:478
-msgid "Icon Size"
-msgstr ""
-
-#: simple-floating-menu.php:489
-msgid "Icon Vertical Position"
-msgstr ""
-
-#: simple-floating-menu.php:503
-msgid "Tool Tip Typography"
-msgstr ""
-
-#: simple-floating-menu.php:508
-msgid "Font Family"
-msgstr ""
-
-#: simple-floating-menu.php:542
-msgid "Font Style"
-msgstr ""
-
-#: simple-floating-menu.php:562
-msgid "Text Transform"
-msgstr ""
-
-#: simple-floating-menu.php:581
-msgid "Text Decoration"
-msgstr ""
-
-#: simple-floating-menu.php:600
-msgid "Font Size"
-msgstr ""
-
-#: simple-floating-menu.php:614
-msgid "Line Height"
-msgstr ""
-
-#: simple-floating-menu.php:628
-msgid "Letter Spacing"
-msgstr ""
-
-#: simple-floating-menu.php:645
-msgid "Floating Menu Top Offset"
-msgstr ""
-
-#: simple-floating-menu.php:657
-msgid "Floating Menu Bottom Offset"
-msgstr ""
-
-#: simple-floating-menu.php:669
-msgid "Floating Menu Left Offset"
-msgstr ""
-
-#: simple-floating-menu.php:681
-msgid "Floating Menu Right Offset"
-msgstr ""
-
-#: simple-floating-menu.php:695
-msgid "Spacing Between Buttons"
-msgstr ""
-
-#: simple-floating-menu.php:706
-msgid "Z Index"
-msgstr ""
-
-#: simple-floating-menu.php:718
-msgid "Save Settings"
-msgstr ""
-
-#: simple-floating-menu.php:736
-msgid "Sorry, your nonce was not correct. Please try again."
-msgstr ""
-
-#: simple-floating-menu.php:812
-msgid "Settings saved!"
+msgid "Add New"
 msgstr ""
 
 #. To add an additional character subset specific to your language,
 #. translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
-#: frontend.php:71
+#: frontend.php:79
 msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
 msgid "no-subset"
 msgstr ""
 
-#: inc/google-fonts-list.php:139
-msgid "Normal"
+#: simple-floating-menu.php:441
+msgid "Bottom Left"
 msgstr ""
 
-#: inc/google-fonts-list.php:140
-msgid "Bold"
+#: simple-floating-menu.php:442
+msgid "Bottom Middle"
 msgstr ""
 
-#: inc/google-fonts-list.php:147 inc/google-fonts-list.php:156
-msgid "None"
+#: simple-floating-menu.php:443
+msgid "Bottom Right"
 msgstr ""
 
-#: inc/google-fonts-list.php:148
-msgid "Uppercase"
+#: simple-floating-menu.php:262
+msgid "Button"
 msgstr ""
 
-#: inc/google-fonts-list.php:149
-msgid "Lowercase"
+#: simple-floating-menu.php:388
+msgid "Button Background Color"
 msgstr ""
 
-#: inc/google-fonts-list.php:150
-msgid "Capitalize"
+#: simple-floating-menu.php:399
+msgid "Button Background Color Hover"
 msgstr ""
 
-#: inc/google-fonts-list.php:157
-msgid "Underline"
+#: simple-floating-menu.php:479
+msgid "Button Height"
 msgstr ""
 
-#: inc/google-fonts-list.php:158
-msgid "Line-through"
+#: simple-floating-menu.php:395
+msgid "Button Icon Color"
 msgstr ""
 
-#: inc/google-fonts-list.php:159
-msgid "Overline"
+#: simple-floating-menu.php:403
+msgid "Button Icon Color Hover"
 msgstr ""
 
-#. Description of the plugin
-msgid "Simple Floating Menu adds a stylish designed menu in your website."
+#: simple-floating-menu.php:435
+msgid "Button Position"
 msgstr ""
 
-#. URI of the plugin
-msgid "https://github.com/pzstar/simple-floating-menu"
+#: simple-floating-menu.php:460
+msgid "Button Style"
+msgstr ""
+
+#: simple-floating-menu.php:360
+msgid "Button Url"
+msgstr ""
+
+#: simple-floating-menu.php:490
+msgid "Button Width"
+msgstr ""
+
+#: simple-floating-menu.php:188
+msgid "Buttons"
+msgstr ""
+
+#: simple-floating-menu.php:751
+msgid "Buy Premium Version"
+msgstr ""
+
+#: simple-floating-menu.php:266
+msgid "Choose Icon"
+msgstr ""
+
+#: simple-floating-menu.php:236
+msgid "Display Setting Button on Menu"
+msgstr ""
+
+#: frontend.php:43
+msgid "Edit"
+msgstr ""
+
+#: simple-floating-menu.php:295
+msgid "Elegant Icon"
+msgstr ""
+
+#: simple-floating-menu.php:223
+msgid "Enable Floating Menu"
+msgstr ""
+
+#: simple-floating-menu.php:287
+msgid "Essential Icon"
+msgstr ""
+
+#: simple-floating-menu.php:683
+msgid "Floating Menu Bottom Offset"
+msgstr ""
+
+#: simple-floating-menu.php:695
+msgid "Floating Menu Left Offset"
+msgstr ""
+
+#: simple-floating-menu.php:707
+msgid "Floating Menu Right Offset"
+msgstr ""
+
+#: simple-floating-menu.php:671
+msgid "Floating Menu Top Offset"
+msgstr ""
+
+#: simple-floating-menu.php:283
+msgid "Font Awesome"
+msgstr ""
+
+#: simple-floating-menu.php:534
+msgid "Font Family"
+msgstr ""
+
+#: simple-floating-menu.php:626
+msgid "Font Size"
+msgstr ""
+
+#: simple-floating-menu.php:568
+msgid "Font Style"
 msgstr ""
 
 #. Author of the plugin
 msgid "HashThemes"
 msgstr ""
 
+#: simple-floating-menu.php:468
+msgid "Hexagon"
+msgstr ""
+
+#: simple-floating-menu.php:453
+msgid "Horizontal"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/pzstar/simple-floating-menu"
+msgstr ""
+
 #. Author URI of the plugin
 msgid "https://hashthemes.com"
+msgstr ""
+
+#: simple-floating-menu.php:279
+msgid "Ico Font"
+msgstr ""
+
+#: simple-floating-menu.php:504
+msgid "Icon Size"
+msgstr ""
+
+#: simple-floating-menu.php:515
+msgid "Icon Vertical Position"
+msgstr ""
+
+#: simple-floating-menu.php:363
+msgid "Leaving empty will not display the button"
+msgstr ""
+
+#: simple-floating-menu.php:654
+msgid "Letter Spacing"
+msgstr ""
+
+#: simple-floating-menu.php:640
+msgid "Line Height"
+msgstr ""
+
+#: simple-floating-menu.php:291
+msgid "Material Icon"
+msgstr ""
+
+#: simple-floating-menu.php:444
+msgid "Middle Left"
+msgstr ""
+
+#: simple-floating-menu.php:445
+msgid "Middle Right"
+msgstr ""
+
+#: simple-floating-menu.php:374 simple-floating-menu.php:381
+msgid "Open in New Tab"
+msgstr ""
+
+#: simple-floating-menu.php:450
+msgid "Orientation"
+msgstr ""
+
+#: simple-floating-menu.php:471
+msgid "Oval"
+msgstr ""
+
+#: simple-floating-menu.php:467
+msgid "Pentagon"
+msgstr ""
+
+#: simple-floating-menu.php:747
+msgid "Premium Demos"
+msgstr ""
+
+#: simple-floating-menu.php:198
+msgid "Premium Features"
+msgstr ""
+
+#: simple-floating-menu.php:470
+msgid "Rabbet"
+msgstr ""
+
+#: simple-floating-menu.php:463
+msgid "Rectangle"
+msgstr ""
+
+#: simple-floating-menu.php:466
+msgid "Rhombus"
+msgstr ""
+
+#: simple-floating-menu.php:464
+msgid "Round"
+msgstr ""
+
+#: simple-floating-menu.php:804
+msgid "Save Settings"
+msgstr ""
+
+#: simple-floating-menu.php:193
+msgid "Settings"
+msgstr ""
+
+#: simple-floating-menu.php:899
+msgid "Settings saved!"
+msgstr ""
+
+#. Name of the plugin
+#: simple-floating-menu.php:84 simple-floating-menu.php:85
+msgid "Simple Floating Menu"
+msgstr ""
+
+#. Description of the plugin
+msgid "Simple Floating Menu adds a stylish designed menu in your website."
+msgstr ""
+
+#: simple-floating-menu.php:183
+msgid "Simple Floating Menu Settings"
+msgstr ""
+
+#: simple-floating-menu.php:822
+msgid "Sorry, your nonce was not correct. Please try again."
+msgstr ""
+
+#: simple-floating-menu.php:721
+msgid "Spacing Between Buttons"
+msgstr ""
+
+#: simple-floating-menu.php:469
+msgid "Star"
+msgstr ""
+
+#: simple-floating-menu.php:607
+msgid "Text Decoration"
+msgstr ""
+
+#: simple-floating-menu.php:588
+msgid "Text Transform"
+msgstr ""
+
+#: simple-floating-menu.php:236
+msgid "This menu only displays for the Administrator in the Frontend"
+msgstr ""
+
+#: simple-floating-menu.php:370
+msgid "This text will display on hovering the button"
+msgstr ""
+
+#: simple-floating-menu.php:411
+msgid "Tool Tip Background Color"
+msgstr ""
+
+#: simple-floating-menu.php:367
+msgid "Tool Tip Text"
+msgstr ""
+
+#: simple-floating-menu.php:415
+msgid "Tool Tip Text Color"
+msgstr ""
+
+#: simple-floating-menu.php:529
+msgid "Tool Tip Typography"
+msgstr ""
+
+#: simple-floating-menu.php:438
+msgid "Top Left"
+msgstr ""
+
+#: simple-floating-menu.php:439
+msgid "Top Middle"
+msgstr ""
+
+#: simple-floating-menu.php:440
+msgid "Top Right"
+msgstr ""
+
+#: simple-floating-menu.php:465
+msgid "Triangle"
+msgstr ""
+
+#: simple-floating-menu.php:299
+msgid "Type to filter"
+msgstr ""
+
+#: simple-floating-menu.php:454
+msgid "Vertical"
+msgstr ""
+
+#: simple-floating-menu.php:732
+msgid "Z Index"
 msgstr ""

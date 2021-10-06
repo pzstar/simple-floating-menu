@@ -172,4 +172,6 @@ if (!class_exists('Simple_Floating_Menu_Live_Preview')) {
 
 }
 
-new Simple_Floating_Menu_Live_Preview();
+if (is_admin()) {
+    new Simple_Floating_Menu_Live_Preview();
+}

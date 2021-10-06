@@ -80,6 +80,53 @@
     position: relative;
 }
 
+.sfm-floating-menu .sfm-button.sfm-edit a.sfm-shape-button{
+    background: red !important;
+    color: #FFF !important;
+}
+
+.sfm-floating-menu .sfm-button.sfm-edit .sfm-tool-tip a{
+    background: red !important;
+}
+
+.sfm-floating-menu .sfm-button.sfm-edit .sfm-tool-tip:after{
+    border-color: transparent transparent transparent red !important;
+}
+
+.sfm-floating-menu.top-left.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.top-middle.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.top-right.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after{
+    border-color: transparent transparent red transparent !important;
+}
+.sfm-floating-menu.top-left.vertical .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.top-middle.vertical .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.bottom-left.vertical .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.bottom-middle.vertical .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.middle-left.vertical .sfm-button.sfm-edit .sfm-tool-tip:after{
+    border-color: transparent red transparent transparent !important;
+}
+.sfm-floating-menu.top-right.vertical .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.middle-right.vertical .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.bottom-right.vertical .sfm-button.sfm-edit .sfm-tool-tip:after{
+    border-color: transparent transparent transparent red !important;
+}
+.sfm-floating-menu.bottom-left.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.bottom-middle.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.bottom-right.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.middle-left.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after,
+.sfm-floating-menu.middle-right.horizontal .sfm-button.sfm-edit .sfm-tool-tip:after{
+    border-color: red transparent transparent transparent !important;
+}
+
+.sfm-floating-menu .sfm-button.sfm-edit a.sfm-shape-button i {
+    -webkit-animation:sfm-spin 4s linear infinite;
+    -moz-animation:sfm-spin 4s linear infinite;
+    animation:sfm-spin 4s linear infinite;
+}
+@-moz-keyframes sfm-spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes sfm-spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes sfm-spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 .sfm-floating-menu.sfm-round a.sfm-shape-button{
     clip-path: circle(50% at 50% 50%);
 }

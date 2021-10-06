@@ -31,12 +31,20 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             $settings = Simple_Floating_Menu::get_settings();
             $buttons = $settings['buttons'];
             $enable_sfm = $settings['enable_sfm'];
+            $enable_sfm_setting = $settings['enable_sfm_setting'];
             $class[] = isset($settings['position']) && $settings['position'] ? $settings['position'] : '';
             $class[] = isset($settings['style']) && $settings['style'] ? $settings['style'] : '';
             $class[] = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
             if ((is_admin() || $enable_sfm == 'yes') && $buttons) {
                 ?>
                 <div class="<?php echo esc_attr(implode(' ', $class)); ?>">
+                    <?php if (current_user_can('administrator') && $enable_sfm_setting == 'yes') { ?>
+                        <div class="sfm-button sfm-edit">
+                            <div class="sfm-tool-tip"><a href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><?php echo esc_html__('Edit', 'simple-floating-menu') ?></a></div>
+                            <a class="sfm-shape-button" target="_blank" href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><i class="icofont-gear"></i></a>
+                        </div>
+                    <?php } ?>
+
                     <?php
                     foreach ($buttons as $button) {
                         if ($button['url']) {
@@ -108,4 +116,6 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
 
 }
 
-new Simple_Floating_Menu_Frontend;
+if (!is_admin()) {
+    new Simple_Floating_Menu_Frontend;
+}

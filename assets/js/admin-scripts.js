@@ -7,6 +7,12 @@
 
         $('.sfm-form-page').hide();
         $(id).fadeIn()
+        if(id == '#tab-upgrade-pro') {
+            $('body').find('.sfm-form-row').hide();
+        }
+        else {
+            $('body').find('.sfm-form-row').show();   
+        }
         return false;
     });
 
@@ -126,6 +132,14 @@
 
         // show current
         $viewMap[$(this).val()].show();
+    }).change();
+
+    $('#enable_sfm').change(function () {
+        if ($(this).is(':checked')) {
+            $('#enable_sfm_setting').parents('.sfm-form-row').show();
+        } else {
+            $('#enable_sfm_setting').parents('.sfm-form-row').hide();
+        }
     }).change();
 
     $(document).on('change', '.typography_face', function () {
@@ -253,9 +267,11 @@
             data: {action: 'sfm_live_preview', values: value},
             beforeSend: function () {
                 $('.sfm-live-demo').addClass('sfm-loading');
+                $('.submit .button').attr('disabled', 'disabled');
             },
             success: function (result) {
                 $('.sfm-live-demo').html(result).removeClass('sfm-loading');
+                $('.submit .button').removeAttr('disabled', 'disabled');
             }
         });
     }

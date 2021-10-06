@@ -2,7 +2,7 @@
 Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
-Tested up to: 5.3.2
+Tested up to: 5.8
 Stable tag: 1.0
 Requires PHP: 5.0
 License: GPLv2 or later
@@ -41,8 +41,26 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 1. Admin Panel of Simple Floating Menu
 2. Admin Panel of Simple Floating Menu
 3. Admin Panel of Simple Floating Menu
+
+== Premium Upgrade ==
+For premium upgrade, please click below link <br>
+<a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.0.6 =  06 Oct, 2021
+* Simple Floating Menu displaying in the new gutenberg widget page fixed.
+
+= 1.0.5 =  13 Apr, 2021
+* Minor Design fixes in admin panel
+
+= 1.0.4 = 
+* Minor Changes and Pro Version Upgrade Banner
+
+= 1.0.3 = 12 Oct, 2020
+* Design issue in the ToolTip pointer arrow of the Edit Button for various position/orientation fixed
+
+= 1.0.2 =
+* Added setting button in front end with disable option in the admin
 
 = 1.0.1 =
 * Added Option to enable/disable floating menu

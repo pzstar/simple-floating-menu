@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.0.1
+ * Version: 1.0.6
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.0.1');
+define('SFM_VERSION', '1.0.6');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -127,6 +127,7 @@ if (!class_exists('Simple_Floating_Menu')) {
         public static function default_settings() {
             $defaults = array(
                 'enable_sfm' => 'yes',
+                'enable_sfm_setting' => 'yes',
                 'buttons' => array(array(
                         'id' => uniqid('sfm-'),
                         'icon' => 'icofont-dart',
@@ -179,7 +180,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             <div class="wrap">
 
                 <div id="sfm-header">
-                    <h2><?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?></h2>
+                    <h3><?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?></h3>
 
                     <div id="sfm-tab-wrapper" class="sfm-tab-wrapper">
                         <a id="sfm-buttons-nav" class="sfm-tab sfm-tab-active" href="#tab-sfm-buttons">
@@ -190,7 +191,19 @@ if (!class_exists('Simple_Floating_Menu')) {
                         <a id="sfm-setting-nav" class="sfm-tab" href="#tab-sfm-settings">
                             <i class="mdi mdi-settings"></i>
                             <?php esc_html_e('Settings', 'simple-floating-menu'); ?>
+                        </a>
+
+                        <a id="sfm-upgrade-nav" class="sfm-tab" href="#tab-upgrade-pro">
+                            <i class="mdi mdi-arrow-up-bold"></i>
+                            <?php esc_html_e('Premium Features', 'simple-floating-menu'); ?>
+                            <img src="<?php echo SFM_URL; ?>assets/img/upgrade-pro.png">
                         </a>		
+                    </div>
+
+                    <div class="upgrade-pro-banner">
+                        <a href="https://1.envato.market/LPXYao" target="_blank">
+                            <img src="<?php echo SFM_URL; ?>assets/img/banner-image.png">
+                        </a>
                     </div>
                 </div>
 
@@ -215,6 +228,19 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     ?>
                                     <input type="checkbox" id="enable_sfm" name="sfm_settings[enable_sfm]" class="onoff-switch-checkbox" value="1" <?php checked($enable_sfm, 'yes'); ?>>
                                     <label class="onoff-switch-label" for="enable_sfm"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row sfm-form-row">
+                            <label class="form-label"><?php esc_html_e('Display Setting Button on Menu', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('This menu only displays for the Administrator in the Frontend', 'simple-floating-menu'); ?></span></label>
+                            <div class="form-field">
+                                <div class="onoff-switch">
+                                    <?php
+                                    $enable_sfm_setting = isset($sfm_settings['enable_sfm_setting']) ? $sfm_settings['enable_sfm_setting'] : 'yes';
+                                    ?>
+                                    <input type="checkbox" id="enable_sfm_setting" name="sfm_settings[enable_sfm_setting]" class="onoff-switch-checkbox" value="1" <?php checked($enable_sfm_setting, 'yes'); ?>>
+                                    <label class="onoff-switch-label" for="enable_sfm_setting"></label>
                                 </div>
                             </div>
                         </div>
@@ -714,6 +740,66 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </table>
                         </div>
 
+                        <div id="tab-upgrade-pro" class="sfm-form-page">
+                            <h2>Demo and Purchase Links</h2>
+                            <div class="sfm-inline-buttons">
+                                <div class="sfm-buy-link sfm-link-button">
+                                    <a href="https://demo.hashthemes.com/super-floating-flying-menu/" target="_blank"><?php esc_html_e('Premium Demos', 'simple-floating-menu'); ?></a>
+                                </div>
+
+                                <div class="sfm-demo-link sfm-link-button">
+                                    <a href="https://1.envato.market/LPXYao" target="_blank"><?php esc_html_e('Buy Premium Version', 'simple-floating-menu'); ?></a>
+                                </div>
+                            </div>
+                            <h2>15+ FLOATING MENU DESIGNS</h2>
+                            <a href="https://1.envato.market/LPXYao" target="_blank">
+                                <img src="<?php echo SFM_URL; ?>assets/img/floating-menu-design.jpg">
+                            </a>
+
+                            <h2>Premium Features - Floating Menu</h2>
+                            <ul class="sfm-feature-box">
+                                <li>15+ Pre Designed Menu Layouts</li>
+                                <li>Create Unlimited Floating Menus</li>
+                                <li>Selective Display of Menu in Different Pages</li>
+                                <li>Various Animation Effects</li>
+                                <li>Various Menu Positions</li>
+                                <li>Color Picker to Design Menu</li>
+                                <li>5000+ Menu Icons</li>
+                                <li>Advanced Typography Option for Tool Tips</li>
+                                <li>Social Media Menu Creations</li>
+                                <li>Page Scroll Option</li>
+                                <li>Selective Display for Desktop and Mobile</li>
+                            </ul>
+
+                            <h2>10+ FLY MENU DESIGNS</h2>
+                            <a href="https://1.envato.market/LPXYao" target="_blank">
+                                <img src="<?php echo SFM_URL; ?>assets/img/fly-menu-design.jpg">
+                            </a>
+                            <h2>Premium Features - Fly Menu</h2>
+                            <ul class="sfm-feature-box">
+                                <li>4 Different Menu Types to Select From</li>
+                                <li>10 Pre Designed Menu Layouts</li>
+                                <li>5 Menu Animation Effects</li>
+                                <li>4 Menu Hover Animation Effects</li>
+                                <li>Different Menu Orientations</li>
+                                <li>Create Unlimited Menus</li>
+                                <li>Selective Display of Menu on Pages</li>
+                                <li>Custom Menu Header Image</li>
+                                <li>5000+ Pre Designed Menu Icons</li>
+                                <li>Add Search Form in Menu Header or Footer</li>
+                                <li>Add Social Icons in Menu Header or Footer</li>
+                                <li>Advanced Settings for Menu Toggle Button</li>
+                                <li>Advanced Typography Options</li>
+                                <li>Video Menu Background</li>
+                                <li>Unlimited Color Options to Choose From</li>
+                            </ul>
+
+                            <h2>Pre Sales Questions?</h2>
+                            <p>If you have any pre sales questions, then feel free to email us at support@hashthemes.com</p>
+
+
+                        </div>
+
                         <p class="submit">
                             <button type="submit" name="submit" class="button button-primary"><i class="mdi mdi-content-save"></i> <?php esc_html_e('Save Settings', 'simple-floating-menu'); ?></button>
                         </p>
@@ -756,6 +842,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 $button_spacing = (int) $sfm_settings['button_spacing'];
 
                 $sanitize_settings['enable_sfm'] = isset($sfm_settings['enable_sfm']) ? 'yes' : 'no';
+                $sanitize_settings['enable_sfm_setting'] = isset($sfm_settings['enable_sfm_setting']) ? 'yes' : 'no';
                 $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
                 $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];
                 $sanitize_settings['style'] = in_array($sfm_settings['style'], $valid_styles) ? $sfm_settings['style'] : $defaults['style'];
