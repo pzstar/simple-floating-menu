@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 1.0
+Stable tag: 1.0.7
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +47,9 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.0.7 =  24 Oct, 2021
+* Stable tag updated.
+
 = 1.0.6 =  06 Oct, 2021
 * Simple Floating Menu displaying in the new gutenberg widget page fixed.
 
