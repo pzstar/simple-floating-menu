@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ The plugin has 5 sets of icons pack with total of more than 5000+ icon to choose
 
 <h4>Main features</h4>
 <ul>
-<li>Custom Icons - 5 icon pack with 5000+ icons to choose</li>
+<li>Custom Icons - 5 icon pack with 10,000+ icons to choose</li>
 <li>Unlimited Menu Items</li>
 <li>Option to show is same tab or new tab</li>
 <li>8 different position to display</li>
@@ -47,6 +47,10 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.0.8 =  12 Dec, 2021
+* All font icons updated to latest version
+* Files and codes minimized for better performance
+
 = 1.0.7 =  24 Oct, 2021
 * Stable tag updated.
 
