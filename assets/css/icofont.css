@@ -1,16 +1,9 @@
-/*! 
-* @package IcoFont 
-* @version 1.0.1 
-* @author IcoFont https://icofont.com 
-* @copyright Copyright (c) 2015 - 2018 IcoFont 
-* @license - https://icofont.com/license/
-*/
-
 @font-face {
     font-family: "IcoFont";
     font-weight: normal;
     font-style: "Regular";
-    src: url("fonts/icofont/icofont.woff2") format("woff2"), url("fonts/icofont/icofont.woff") format("woff");
+    src: url("fonts/icofont/icofont.woff2") format("woff2"), 
+         url("fonts/icofont/icofont.woff") format("woff");
 }
 
 [class^="icofont-"],
@@ -950,7 +943,7 @@
     content: "\e8e5";
 }
 
-.icofont-brand-hfmc:before {
+.icofont-brand-hsbc:before {
     content: "\e8e6";
 }
 

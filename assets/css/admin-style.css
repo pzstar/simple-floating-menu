@@ -266,6 +266,15 @@
     -webkit-box-sizing: border-box;
 }
 
+.sfm-customizer-icon-box .sfm-icon-list {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+}
+
+.sfm-customizer-icon-box .sfm-icon-list::-webkit-scrollbar {
+    display: none; 
+}
+
 .sfm-customizer-icon-box .sfm-icon-list:first-of-type {
     display: block;
 }
@@ -595,7 +604,7 @@
 }
 
 #adminmenu #toplevel_page_simple-floating-menu div.wp-menu-image:before{
-    font-family: Flaticon;
+    font-family: essentialicon;
     content: "\f1bf";
     font-weight: bold;
     font-size: 18px;

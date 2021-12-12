@@ -115,7 +115,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             wp_enqueue_style('wp-color-picker');
             wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), SFM_VERSION);
             wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essential-icon.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
             wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
             wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
             wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
@@ -189,7 +189,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </a>
 
                         <a id="sfm-setting-nav" class="sfm-tab" href="#tab-sfm-settings">
-                            <i class="mdi mdi-settings"></i>
+                            <i class="mdi mdi-application-edit-outline"></i>
                             <?php esc_html_e('Settings', 'simple-floating-menu'); ?>
                         </a>
 
