@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.0.8');
+define('SFM_VERSION', '1.0.9');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -233,7 +233,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </div>
 
                         <div class="form-row sfm-form-row">
-                            <label class="form-label"><?php esc_html_e('Display Setting Button on Menu', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('This menu only displays for the Administrator in the Frontend', 'simple-floating-menu'); ?></span></label>
+                            <label class="form-label"><?php esc_html_e('Display Setting Button on Menu', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('Displays for the Administrator only in the Frontend so that you can quickly access the setting page for edit.', 'simple-floating-menu'); ?></span></label>
                             <div class="form-field">
                                 <div class="onoff-switch">
                                     <?php

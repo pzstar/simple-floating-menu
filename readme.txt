@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 1.0.8
+Tested up to: 5.9
+Stable tag: 1.0.9
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +47,10 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.0.9 =  28 Jan, 2022
+* Slow loading of font icon list when switching font pack - fixed
+* Compatibility issue with latest WordPress v5.9 fixed
+
 = 1.0.8 =  12 Dec, 2021
 * All font icons updated to latest version
 * Files and codes minimized for better performance
