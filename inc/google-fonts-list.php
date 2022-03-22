@@ -195,4 +195,4 @@ function sfm_get_google_font_variants() {
     die();
 }
 
-add_action("wp_ajax_get_google_font_variants", "sfm_get_google_font_variants");
+add_action("wp_ajax_sfm_get_google_font_variants", "sfm_get_google_font_variants");
