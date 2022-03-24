@@ -16,6 +16,8 @@ Simple Floating Menu is a free WordPress plugin that allows you to add a floatin
 
 The plugin has 5 sets of icons pack with total of more than 5000+ icon to choose from to display the floating menu and interestingly you can add unlimited menu icon buttons. You can show the menu in 8 different positions with 9 different button shapes.
 
+Want to test the dashboard settings without installing on your website? <a href="https://demo.tastewp.com/simple-floating-menu" target="_blank">Test Dashboard Settings Here</a>
+
 <h4>Main features</h4>
 <ul>
 <li>Custom Icons - 5 icon pack with 10,000+ icons to choose</li>
