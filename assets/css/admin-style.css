@@ -657,9 +657,6 @@
     background: #3c89d8;
 }
 
-
-
-
 /* Dropzone */
 .sfm-dropzone-wrapper {
     border: 2px dashed #91b0b3;
@@ -715,6 +712,10 @@
     justify-content: center;
     box-shadow: none;
     margin-bottom: 0;
+}
+
+.sfm-preview-zone .box-solid p{
+    margin: 10px 0;
 }
 
 .sfm-preview-zone .sfm-remove-preview{
