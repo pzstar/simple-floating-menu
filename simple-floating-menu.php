@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.0.9
+ * Version: 1.1.0
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.0.9');
+define('SFM_VERSION', '1.1.0');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -876,151 +876,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             </div> <?php
         }
 
-        public function handle_form() {
-            if (!isset($_POST['sfm_nonce']) || !wp_verify_nonce($_POST['sfm_nonce'], 'sfm_nonce_update')) {
-                ?>
-                <div class="sfm-error-notice sfm-notice">
-                    <p><?php esc_html_e('Sorry, your nonce was not correct. Please try again.', 'simple-floating-menu'); ?></p>
-                </div> <?php
-                exit;
-            } else {
-                $sfm_settings = isset($_POST['sfm_settings']) ? $_POST['sfm_settings'] : '';
-                //var_dump($sfm_settings);
-                $defaults = self::default_settings();
-
-                $valid_positions = array('top-left', 'top-right', 'top-middle', 'bottom-middle', 'bottom-left', 'bottom-right', 'middle-left', 'middle-right');
-                $valid_styles = array('sfm-rect', 'sfm-round', 'sfm-triangle', 'sfm-rhombus', 'sfm-pentagon', 'sfm-hexagon', 'sfm-star', 'sfm-rabbet', 'sfm-oval');
-                $valid_orientation = array('vertical', 'horizontal');
-                $valid_icons = array_merge(sfm_font_awesome_icon_array(), sfm_materialdesignicons_array(), sfm_essential_icon_array(), sfm_icofont_icon_array(), sfm_eleganticons_array());
-                $button_height = (int) $sfm_settings['button_height'];
-                $button_width = (int) $sfm_settings['button_width'];
-                $icon_size = (int) $sfm_settings['icon_size'];
-                $icon_position = (int) $sfm_settings['icon_position'];
-                $top_offset = (int) $sfm_settings['top_offset'];
-                $bottom_offset = (int) $sfm_settings['bottom_offset'];
-                $left_offset = (int) $sfm_settings['left_offset'];
-                $right_offset = (int) $sfm_settings['right_offset'];
-                $button_spacing = (int) $sfm_settings['button_spacing'];
-
-                $sanitize_settings['enable_sfm'] = isset($sfm_settings['enable_sfm']) ? 'yes' : 'no';
-                $sanitize_settings['enable_sfm_setting'] = isset($sfm_settings['enable_sfm_setting']) ? 'yes' : 'no';
-                $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
-                $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];
-                $sanitize_settings['style'] = in_array($sfm_settings['style'], $valid_styles) ? $sfm_settings['style'] : $defaults['style'];
-                $sanitize_settings['button_height'] = ( 40 <= $button_height && $button_height <= 200 && is_int($button_height)) ? $button_height : $defaults['button_height'];
-                $sanitize_settings['button_width'] = ( 40 <= $button_width && $button_width <= 200 && is_int($button_width)) ? $button_width : $defaults['button_width'];
-                $sanitize_settings['icon_size'] = ( 10 <= $icon_size && $icon_size <= 60 && is_int($icon_size)) ? $icon_size : $defaults['icon_size'];
-                $sanitize_settings['icon_position'] = ( -40 <= $icon_position && $icon_position <= 40 && is_int($icon_position)) ? $icon_position : $defaults['icon_position'];
-                $sanitize_settings['top_offset'] = ( 0 <= $top_offset && $top_offset <= 200 && is_int($top_offset)) ? $top_offset : $defaults['top_offset'];
-                $sanitize_settings['bottom_offset'] = ( 0 <= $bottom_offset && $bottom_offset <= 200 && is_int($bottom_offset)) ? $bottom_offset : $defaults['bottom_offset'];
-                $sanitize_settings['left_offset'] = ( 0 <= $left_offset && $left_offset <= 200 && is_int($left_offset)) ? $left_offset : $defaults['left_offset'];
-                $sanitize_settings['right_offset'] = ( 0 <= $right_offset && $right_offset <= 200 && is_int($right_offset)) ? $right_offset : $defaults['right_offset'];
-                $sanitize_settings['button_spacing'] = ( 0 <= $button_spacing && $button_spacing <= 200 && is_int($button_spacing)) ? $button_spacing : $defaults['button_spacing'];
-                $sanitize_settings['zindex'] = (int) $sfm_settings['zindex'];
-
-                $buttons_settings = $sfm_settings['buttons'];
-
-                foreach ($buttons_settings as $index => $settings) {
-                    foreach ($settings as $key => $value) {
-                        if ($key == 'url') {
-                            $sanitize_settings['buttons'][$index][$key] = esc_url_raw($value);
-                        } elseif ($key == 'tool_tip_text') {
-                            $sanitize_settings['buttons'][$index][$key] = sanitize_text_field($value);
-                        } elseif ($key == 'open_new_tab') {
-                            $sanitize_settings['buttons'][$index][$key] = isset($value) ? true : false;
-                        } elseif ($key == 'icon') {
-                            $sanitize_settings['buttons'][$index][$key] = in_array($value, $valid_icons) ? $value : '';
-                        } elseif ($key == 'button_bg_color' || $key == 'button_icon_color' || $key == 'button_bg_color_hover' || $key == 'button_icon_color_hover' || $key == 'tooltip_bg_color' || $key == 'tooltip_text_color') {
-                            $sanitize_settings['buttons'][$index][$key] = sanitize_hex_color($value);
-                        } else {
-                            $sanitize_settings['buttons'][$index][$key] = sanitize_text_field($value);
-                        }
-                    }
-                }
-
-                $sfm_standard_font = sfm_get_standard_font_families();
-                $sfm_google_font = sfm_get_google_font_families();
-                $font_size = (int) $sfm_settings['tooltip_font']['size'];
-                $line_height = (float) $sfm_settings['tooltip_font']['line_height'];
-                $letter_spacing = (float) $sfm_settings['tooltip_font']['letter_spacing'];
-
-                $sfm_font = array_merge($sfm_standard_font, $sfm_google_font);
-
-                $sanitize_settings['tooltip_font']['family'] = array_key_exists($sfm_settings['tooltip_font']['family'], $sfm_font) ? $sfm_settings['tooltip_font']['family'] : $defaults['tooltip_font']['family'];
-                $sanitize_settings['tooltip_font']['style'] = array_key_exists($sfm_settings['tooltip_font']['style'], sfm_get_font_weight_choices($sfm_settings['tooltip_font']['family'])) ? $sfm_settings['tooltip_font']['style'] : $defaults['tooltip_font']['style'];
-                $sanitize_settings['tooltip_font']['transform'] = array_key_exists($sfm_settings['tooltip_font']['transform'], sfm_get_text_transform_choices()) ? $sfm_settings['tooltip_font']['transform'] : $defaults['tooltip_font']['transform'];
-                $sanitize_settings['tooltip_font']['decoration'] = array_key_exists($sfm_settings['tooltip_font']['decoration'], sfm_get_text_decoration_choices()) ? $sfm_settings['tooltip_font']['decoration'] : $defaults['tooltip_font']['decoration'];
-                $sanitize_settings['tooltip_font']['size'] = ( 10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
-                $sanitize_settings['tooltip_font']['line_height'] = ( 0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
-                $sanitize_settings['tooltip_font']['letter_spacing'] = ( -5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
-
-                update_option('sfm_settings', $sanitize_settings);
-                ?>
-                <div class="sfm-success-notice sfm-notice">
-                    <p><?php esc_html_e('Settings saved!', 'simple-floating-menu'); ?></p>
-                </div>
-                <?php
-            }
-        }
-
-        public function sfm_dymanic_styles() {
-            echo '<style>';
-            echo sfm_dymanic_styles();
-            echo '</style>';
-        }
-
-        public function sfm_imex_process_settings_export() {
-
-            if (empty($_POST['sfm_imex_action']) || 'export_settings' != $_POST['sfm_imex_action'])
-                return;
-
-            if (!wp_verify_nonce($_POST['sfm_imex_export_nonce'], 'sfm_imex_export_nonce'))
-                return;
-
-            if (!current_user_can('manage_options'))
-                return;
-
-            $sfm_settings = self::get_settings();
-
-            ignore_user_abort(true);
-
-            nocache_headers();
-            header('Content-Type: application/json; charset=utf-8');
-            header('Content-Disposition: attachment; filename=sfm-' . date('m-d-Y') . '.json');
-            header("Expires: 0");
-
-            echo json_encode($sfm_settings);
-            exit;
-
-        }
-
-        public function sfm_imex_process_settings_import() {
-
-            if (empty($_POST['sfm_imex_action']) || 'import_settings' != $_POST['sfm_imex_action'])
-                return;
-
-            if (!wp_verify_nonce($_POST['sfm_imex_import_nonce'], 'sfm_imex_import_nonce'))
-                return;
-
-            if (!current_user_can('manage_options'))
-                return;
-
-            $filename = $_FILES['sfm_import_file']['name'];
-            $extension = explode('.', $filename);
-            $extension = end($extension);
-
-            if ($extension != 'json') {
-                wp_die(__('Please upload a valid .json file'));
-            }
-
-            $sfm_import_file = $_FILES['sfm_import_file']['tmp_name'];
-
-            if (empty($sfm_import_file)) {
-                wp_die(__('Please upload a file to import'));
-            }
-
-            // Retrieve the settings from the file and convert the json object to an array.
-            $sfm_settings = json_decode(file_get_contents($sfm_import_file), true);
+        public function sanitize_form($sfm_settings) {
             $defaults = self::default_settings();
 
             $valid_positions = array('top-left', 'top-right', 'top-middle', 'bottom-middle', 'bottom-left', 'bottom-right', 'middle-left', 'middle-right');
@@ -1088,7 +944,86 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['tooltip_font']['size'] = ( 10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
             $sanitize_settings['tooltip_font']['line_height'] = ( 0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
             $sanitize_settings['tooltip_font']['letter_spacing'] = ( -5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
+            return $sanitize_settings;
+        }
 
+        public function handle_form() {
+            if (!isset($_POST['sfm_nonce']) || !wp_verify_nonce($_POST['sfm_nonce'], 'sfm_nonce_update')) {
+                ?>
+                <div class="sfm-error-notice sfm-notice">
+                    <p><?php esc_html_e('Sorry, your nonce was not correct. Please try again.', 'simple-floating-menu'); ?></p>
+                </div> <?php
+                exit;
+            } else {
+                $sfm_settings = isset($_POST['sfm_settings']) ? $_POST['sfm_settings'] : '';
+                $sanitize_settings = $this->sanitize_form($sfm_settings);
+                update_option('sfm_settings', $sanitize_settings);
+                ?>
+                <div class="sfm-success-notice sfm-notice">
+                    <p><?php esc_html_e('Settings saved!', 'simple-floating-menu'); ?></p>
+                </div>
+                <?php
+            }
+        }
+
+        public function sfm_dymanic_styles() {
+            echo '<style>';
+            echo sfm_dymanic_styles();
+            echo '</style>';
+        }
+
+        public function sfm_imex_process_settings_export() {
+
+            if (empty($_POST['sfm_imex_action']) || 'export_settings' != $_POST['sfm_imex_action'])
+                return;
+
+            if (!wp_verify_nonce($_POST['sfm_imex_export_nonce'], 'sfm_imex_export_nonce'))
+                return;
+
+            if (!current_user_can('manage_options'))
+                return;
+
+            $sfm_settings = self::get_settings();
+
+            ignore_user_abort(true);
+
+            nocache_headers();
+            header('Content-Type: application/json; charset=utf-8');
+            header('Content-Disposition: attachment; filename=sfm-' . date('m-d-Y') . '.json');
+            header("Expires: 0");
+
+            echo json_encode($sfm_settings);
+            exit;
+        }
+
+        public function sfm_imex_process_settings_import() {
+
+            if (empty($_POST['sfm_imex_action']) || 'import_settings' != $_POST['sfm_imex_action'])
+                return;
+
+            if (!wp_verify_nonce($_POST['sfm_imex_import_nonce'], 'sfm_imex_import_nonce'))
+                return;
+
+            if (!current_user_can('manage_options'))
+                return;
+
+            $filename = $_FILES['sfm_import_file']['name'];
+            $extension = explode('.', $filename);
+            $extension = end($extension);
+
+            if ($extension != 'json') {
+                wp_die(__('Please upload a valid .json file'));
+            }
+
+            $sfm_import_file = $_FILES['sfm_import_file']['tmp_name'];
+
+            if (empty($sfm_import_file)) {
+                wp_die(__('Please upload a file to import'));
+            }
+
+            // Retrieve the settings from the file and convert the json object to an array.
+            $sfm_settings = json_decode(file_get_contents($sfm_import_file), true);
+            $sanitize_settings = $this->sanitize_form($sfm_settings);
             update_option('sfm_settings', $sanitize_settings);
         }
 

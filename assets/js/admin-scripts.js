@@ -337,6 +337,7 @@
         }
     }
 
+<<<<<<< HEAD
     function reset(e) {
         e.wrap('<form>').closest('form').get(0).reset();
         e.unwrap();
@@ -365,6 +366,59 @@
         boxZone.empty();
         previewZone.addClass('hidden');
         reset(dropzone);
+=======
+        /* Custom File Upload */
+        function sfmReadFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var htmlPreview =
+                            '<p>' + input.files[0].name + '</p>';
+                    var wrapperZone = $(input).parent();
+                    var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
+                    var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
+
+                    wrapperZone.removeClass('dragover');
+                    previewZone.removeClass('hidden');
+                    boxZone.empty();
+                    boxZone.append(htmlPreview);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function reset(e) {
+            e.wrap('<form>').closest('form').get(0).reset();
+            e.unwrap();
+        }
+
+        $(".sfm-dropzone").change(function () {
+            sfmReadFile(this);
+        });
+
+        $('.sfm-dropzone-wrapper').on('dragover', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(this).addClass('dragover');
+        });
+
+        $('.sfm-dropzone-wrapper').on('dragleave', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(this).removeClass('dragover');
+        });
+
+        $('.sfm-remove-preview').on('click', function () {
+            var boxZone = $(this).parents('.sfm-preview-zone').find('.box-body');
+            var previewZone = $(this).parents('.sfm-preview-zone');
+            var dropzone = $(this).parents('.sfm-settings-fields').find('.sfm-dropzone');
+            boxZone.empty();
+            previewZone.addClass('hidden');
+            reset(dropzone);
+        });
+>>>>>>> 215c51a24f88cd21393e1e8b77c8ce049b97dbbe
     });
 })(jQuery);
 

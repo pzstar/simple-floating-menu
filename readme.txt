@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
-Tested up to: 5.9
-Stable tag: 1.0.9
+Tested up to: 6.0
+Stable tag: 1.1.0
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -28,6 +28,7 @@ Want to test the dashboard settings without installing on your website? <a href=
 <li>Customize button with height/width, icon size, color of buttons and toot tip text fonts</li>
 <li>600+ Google fonts to choose from for the toot tip text</li>
 <li>Add internal, external or one page scrolling links</li>
+<li>Export/Import Settings to transfer settings from one to another website</li>
 </ul>
 
 == Installation ==
@@ -49,6 +50,9 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.1.0 =  22 May, 2022
+* Option to Import/Export Settings - Added
+
 = 1.0.9 =  28 Jan, 2022
 * Slow loading of font icon list when switching font pack - fixed
 * Compatibility issue with latest WordPress v5.9 fixed
