@@ -337,7 +337,6 @@
         }
     }
 
-<<<<<<< HEAD
     function reset(e) {
         e.wrap('<form>').closest('form').get(0).reset();
         e.unwrap();
@@ -366,7 +365,6 @@
         boxZone.empty();
         previewZone.addClass('hidden');
         reset(dropzone);
-=======
         /* Custom File Upload */
         function sfmReadFile(input) {
             if (input.files && input.files[0]) {
@@ -418,7 +416,6 @@
             previewZone.addClass('hidden');
             reset(dropzone);
         });
->>>>>>> 215c51a24f88cd21393e1e8b77c8ce049b97dbbe
     });
 })(jQuery);
 
