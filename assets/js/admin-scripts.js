@@ -320,20 +320,20 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function(e) {
-            var htmlPreview =
-            '<p>' + input.files[0].name + '</p>';
-            var wrapperZone = $(input).parent();
-            var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
-            var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
+            reader.onload = function (e) {
+                var htmlPreview =
+                        '<p>' + input.files[0].name + '</p>';
+                var wrapperZone = $(input).parent();
+                var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
+                var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
 
-            wrapperZone.removeClass('dragover');
-            previewZone.removeClass('hidden');
-            boxZone.empty();
-            boxZone.append(htmlPreview);
-        };
+                wrapperZone.removeClass('dragover');
+                previewZone.removeClass('hidden');
+                boxZone.empty();
+                boxZone.append(htmlPreview);
+            };
 
-        reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0]);
         }
     }
 
@@ -342,23 +342,23 @@
         e.unwrap();
     }
 
-    $(".sfm-dropzone").change(function() {
+    $(".sfm-dropzone").change(function () {
         sfmReadFile(this);
     });
 
-    $('.sfm-dropzone-wrapper').on('dragover', function(e) {
+    $('.sfm-dropzone-wrapper').on('dragover', function (e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).addClass('dragover');
     });
 
-    $('.sfm-dropzone-wrapper').on('dragleave', function(e) {
+    $('.sfm-dropzone-wrapper').on('dragleave', function (e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).removeClass('dragover');
     });
 
-    $('.sfm-remove-preview').on('click', function() {
+    $('.sfm-remove-preview').on('click', function () {
         var boxZone = $(this).parents('.sfm-preview-zone').find('.box-body');
         var previewZone = $(this).parents('.sfm-preview-zone');
         var dropzone = $(this).parents('.sfm-settings-fields').find('.sfm-dropzone');
