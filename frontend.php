@@ -35,7 +35,8 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             $class[] = isset($settings['position']) && $settings['position'] ? $settings['position'] : '';
             $class[] = isset($settings['style']) && $settings['style'] ? $settings['style'] : '';
             $class[] = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
-            if ((is_admin() || $enable_sfm == 'yes') && $buttons) {
+            $sfm_show_menu = (is_admin() || $enable_sfm == 'yes') && $buttons;
+            if (apply_filters('sfm_before_floating_menu_render', $sfm_show_menu)) {
                 ?>
                 <div class="<?php echo esc_attr(implode(' ', $class)); ?>">
                     <?php if (current_user_can('administrator') && $enable_sfm_setting == 'yes') { ?>

@@ -182,6 +182,30 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         public function settings_page_content() {
+            $settings_array = apply_filters('sfm_settings_page_content_array', 
+                array(
+                    'sfm-buttons-nav' => array(
+                        'href'=> '#tab-sfm-buttons',
+                        'icon' => 'mdi mdi-animation',
+                        'title' => esc_html__('Buttons', 'simple-floating-menu')
+                    ),
+                    'sfm-setting-nav' => array(
+                        'href'=> '#tab-sfm-settings',
+                        'icon' => 'mdi mdi-application-edit-outline',
+                        'title' => esc_html__('Settings', 'simple-floating-menu')
+                    ),
+                    'sfm-imex-nav' => array(
+                        'href'=> '#tab-sfm-imex',
+                        'icon' => 'mdi mdi-database-export',
+                        'title' => esc_html__('Import/Export', 'simple-floating-menu')
+                    ),
+                    'sfm-upgrade-nav' => array(
+                        'href'=> '#tab-upgrade-pro',
+                        'icon' => 'mdi mdi-arrow-up-bold',
+                        'title' => esc_html__('Premium Features', 'simple-floating-menu'),
+                        'image' => SFM_URL.'assets/img/upgrade-pro.png'
+                    ),
+                ));
             ?>
             <div class="wrap">
 
@@ -189,26 +213,21 @@ if (!class_exists('Simple_Floating_Menu')) {
                     <h3><?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?></h3>
 
                     <div id="sfm-tab-wrapper" class="sfm-tab-wrapper">
-                        <a id="sfm-buttons-nav" class="sfm-tab sfm-tab-active" href="#tab-sfm-buttons">
-                            <i class="mdi mdi-animation"></i>
-                            <?php esc_html_e('Buttons', 'simple-floating-menu'); ?>
-                        </a>
-
-                        <a id="sfm-setting-nav" class="sfm-tab" href="#tab-sfm-settings">
-                            <i class="mdi mdi-application-edit-outline"></i>
-                            <?php esc_html_e('Settings', 'simple-floating-menu'); ?>
-                        </a>
-
-                        <a id="sfm-imex-nav" class="sfm-tab" href="#tab-sfm-imex">
-                            <i class="mdi mdi-database-export"></i>
-                            <?php esc_html_e('Import/Export', 'simple-floating-menu'); ?>
-                        </a>
-
-                        <a id="sfm-upgrade-nav" class="sfm-tab" href="#tab-upgrade-pro">
-                            <i class="mdi mdi-arrow-up-bold"></i>
-                            <?php esc_html_e('Premium Features', 'simple-floating-menu'); ?>
-                            <img src="<?php echo SFM_URL; ?>assets/img/upgrade-pro.png">
-                        </a>
+                        <?php
+                        foreach($settings_array as $id=>$settings){
+                            $count = 1;
+                            ?>
+                            <a id="<?php echo esc_attr($id) ?>" class="sfm-tab <?php $count==1 ? 'sfm-tab-active' : '' ?>" href="<?php echo esc_attr($settings['href']) ?>">
+                                <i class="<?php echo esc_attr($settings['icon']) ?>"></i>
+                                <?php echo esc_html($settings['title']) ?>
+                                <?php if(isset($settings['image'])): ?>
+                                    <img src="<?php echo esc_url($settings['image']) ?>">
+                                <?php endif; ?>
+                            </a>
+                            <?php
+                            $count++;
+                        }
+                        ?>
                     </div>
 
                     <div class="upgrade-pro-banner">
@@ -757,6 +776,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <button type="submit" name="submit" class="button button-primary"><i class="mdi mdi-content-save"></i> <?php esc_html_e('Save Settings', 'simple-floating-menu'); ?></button>
                                 </p>
                             </div>
+
+                            <?php do_action('sfm_before_settings_form_end') ?>
                         </form>
 
                         <div id="tab-sfm-imex" class="sfm-form-page">
@@ -864,6 +885,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                             <h2>Pre Sales Questions?</h2>
                             <p>If you have any pre sales questions, then feel free to email us at support@hashthemes.com</p>
                         </div>
+
                     </div>
 
                     <div class="sfm-live-demo">
@@ -944,6 +966,14 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['tooltip_font']['size'] = ( 10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
             $sanitize_settings['tooltip_font']['line_height'] = ( 0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
             $sanitize_settings['tooltip_font']['letter_spacing'] = ( -5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
+            $sanitize_settings['floatmenu_hide_show_pages'] = isset($sfm_settings['floatmenu_hide_show_pages']) && $sfm_settings['floatmenu_hide_show_pages'] == 'show_in_pages' ? 'show_in_pages' : 'hide_in_pages';
+            $sanitize_settings['floatmenu_front_pages'] = isset($sfm_settings['floatmenu_front_pages']) ? 'yes' : 'no';
+            $sanitize_settings['floatmenu_blog_pages'] = isset($sfm_settings['floatmenu_blog_pages']) ? 'yes' : 'no';
+            $sanitize_settings['floatmenu_archive_pages'] = isset($sfm_settings['floatmenu_archive_pages']) ? 'yes' : 'no';
+            $sanitize_settings['floatmenu_error_pages'] = isset($sfm_settings['floatmenu_error_pages']) ? 'yes' : 'no';
+            $sanitize_settings['floatmenu_search_pages'] = isset($sfm_settings['floatmenu_search_pages']) ? 'yes' : 'no';
+            $sanitize_settings['floatmenu_single_pages'] = isset($sfm_settings['floatmenu_single_pages']) ? 'yes' : 'no';
+            $sanitize_settings['floatmenu_specific_pages'] = isset($sfm_settings['floatmenu_specific_pages']) ? $sfm_settings['floatmenu_specific_pages'] : [];
             return $sanitize_settings;
         }
 
