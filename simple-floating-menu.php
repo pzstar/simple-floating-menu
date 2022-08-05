@@ -72,6 +72,11 @@ if (!class_exists('Simple_Floating_Menu')) {
 
             // Process a settings import from a json file
             add_action('admin_init', array($this, 'sfm_imex_process_settings_import'));
+
+            add_action('admin_init', array($this, 'welcome_init'));
+            add_action('admin_notices', array($this, 'admin_notice_content'));
+
+            register_deactivation_hook(__FILE__, array($this, 'erase_hide_notice'));
         }
 
         /**
@@ -1055,6 +1060,113 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sfm_settings = json_decode(file_get_contents($sfm_import_file), true);
             $sanitize_settings = $this->sanitize_form($sfm_settings);
             update_option('sfm_settings', $sanitize_settings);
+        }
+
+        /**
+         * Handle a click on the dismiss button
+         *
+         * @return void
+         */
+        public function welcome_init() {
+            if(!get_option('sfm_first_activation')) {
+                update_option('sfm_first_activation', time());
+            };
+
+            if (isset($_GET['sfm-hide-notice'], $_GET['sfm_notice_nonce'])) {
+                $notice = sanitize_key($_GET['sfm-hide-notice']);
+                check_admin_referer($notice, 'sfm_notice_nonce');
+                self::dismiss($notice);
+                wp_safe_redirect(remove_query_arg(array('sfm-hide-notice', 'sfm_notice_nonce' ), wp_get_referer()));
+                exit;
+            }
+        }
+
+        /**
+         * Displays a notice asking for a review
+         *
+         * @return void
+         */
+        private function review_notice() {
+            ?>
+            <div class="sfm-notice notice notice-info">
+            <?php $this->dismiss_button('review'); ?>
+                <p>
+                    <?php
+                    printf(
+                        /* translators: %1$s is link start tag, %2$s is link end tag. */
+                        esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'),
+                        '<a href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">',
+                        '</a>'
+                    );
+                    ?>
+                </p>
+            </div>
+            <?php
+        }
+
+        /**
+         * Has a notice been dismissed?
+         *
+         * @param string $notice Notice name
+         * @return bool
+         */
+        public static function is_dismissed($notice) {
+            $dismissed = get_option('sfm_dismissed_notices', array());
+
+            // Handle legacy user meta
+            $dismissed_meta = get_user_meta(get_current_user_id(), 'sfm_dismissed_notices', true);
+            if (is_array($dismissed_meta)) {
+                if (array_diff($dismissed_meta, $dismissed)) {
+                    $dismissed = array_merge($dismissed, $dismissed_meta);
+                    update_option('sfm_dismissed_notices', $dismissed);
+                }
+                if (!is_multisite()) {
+                    // Don't delete on multisite to avoid the notices to appear in other sites.
+                    delete_user_meta(get_current_user_id(), 'sfm_dismissed_notices');
+                }
+            }
+
+            return in_array($notice, $dismissed);
+        }
+
+        /**
+         * Displays a dismiss button
+         *
+         * @param string $name Notice name
+         * @return void
+         */
+        public function dismiss_button($name) {
+            printf('<a class="notice-dismiss" href="%s"><span class="screen-reader-text">%s</span></a>', esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', $name), $name, 'sfm_notice_nonce')), esc_html__( 'Dismiss this notice.', 'simple-floating-menu' )
+            );
+        }
+
+        /**
+         * Stores a dismissed notice in database
+         *
+         * @param string $notice
+         * @return void
+         */
+        public static function dismiss( $notice ) {
+            $dismissed = get_option('sfm_dismissed_notices', array());
+
+            if (!in_array($notice, $dismissed)) {
+                $dismissed[] = $notice;
+                update_option('sfm_dismissed_notices', array_unique($dismissed));
+            }
+        }
+
+        /** Welcome Message Notification */
+        public function admin_notice_content() {
+            if (!$this->is_dismissed('review') && !empty(get_option('sfm_first_activation')) && time() > get_option('sfm_first_activation') + DAY_IN_SECONDS) {
+                $this->review_notice();
+            }
+        }
+
+        /**
+         * Deactivation hook.
+         */
+        public function erase_hide_notice() {
+            delete_option('sfm_dismissed_notices');
         }
 
     }

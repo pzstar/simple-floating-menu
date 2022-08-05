@@ -738,3 +738,13 @@
 .sfm-preview-zone.hidden + .sfm-dropzone-wrapper + #sfm_import{
     display: none;
 }
+
+/** Admin Notice **/
+.sfm-notice.notice {
+    padding-right: 38px;
+    position: relative;
+}
+
+.sfm-notice a.notice-dismiss {
+    text-decoration: none;
+}
