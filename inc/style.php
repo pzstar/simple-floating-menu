@@ -128,6 +128,22 @@ function sfm_dymanic_styles() {
         $custom_css .= ".sfm-floating-menu .sfm-tool-tip a{color:{$tooltip_font_color}}";
     }
 
+    if (is_numeric($settings['button_shadow']['x'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button{--sfm-button-shadow-x:{$settings['button_shadow']['x']}px;}";
+    }
+
+    if (is_numeric($settings['button_shadow']['y'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button{--sfm-button-shadow-y:{$settings['button_shadow']['y']}px;}";
+    }
+
+    if (is_numeric($settings['button_shadow']['blur'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button{--sfm-button-shadow-blur:{$settings['button_shadow']['blur']}px;}";
+    }
+
+    if ($settings['button_shadow']['color']) {
+        $custom_css .= ".sfm-floating-menu .sfm-button{--sfm-button-shadow-color:{$settings['button_shadow']['color']};}";
+    }
+
     return sfm_css_strip_whitespace($custom_css);
 }
 

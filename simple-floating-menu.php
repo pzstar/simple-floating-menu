@@ -174,7 +174,13 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'left_offset' => 0,
                 'right_offset' => 0,
                 'button_spacing' => 5,
-                'zindex' => 9
+                'zindex' => 9,
+                'button_shadow' => array(
+                    'x' => 0,
+                    'y' => 0,
+                    'blur' => 0,
+                    'color' => '#000000'
+                )
             );
             return $defaults;
         }
@@ -775,6 +781,31 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 ?>
                                             </td>
                                         </tr>
+
+                                        <tr>
+                                            <th><label><?php esc_html_e('Button Shadow', 'simple-floating-menu'); ?></label></th>
+                                            <td>
+                                                <ul class="sfm-shadow-fields">
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <input type="number" name="sfm_settings[button_shadow][x]" value="<?php echo absint($sfm_settings['button_shadow']['x']) ?>">
+                                                        <label><?php esc_html_e('X', 'super-floating-and-fly-menu') ?></label>
+                                                    </li>
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <input type="number" name="sfm_settings[button_shadow][y]" value="<?php echo absint($sfm_settings['button_shadow']['y']) ?>">
+                                                        <label><?php esc_html_e('Y', 'super-floating-and-fly-menu') ?></label>
+                                                    </li>
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <input type="number" name="sfm_settings[button_shadow][blur]" value="<?php echo absint($sfm_settings['button_shadow']['blur']) ?>">
+                                                        <label><?php esc_html_e('Blur', 'super-floating-and-fly-menu') ?></label>
+                                                    </li>
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <div class="uwcc-color-input-field">
+                                                            <input type="text" class="sfm-color-picker" name="sfm_settings[button_shadow][color]" value="<?php echo esc_attr($sfm_settings['button_shadow']['color']) ?>"  data-default="#000000">
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <p class="submit">
@@ -979,6 +1010,15 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['floatmenu_search_pages'] = isset($sfm_settings['floatmenu_search_pages']) ? 'yes' : 'no';
             $sanitize_settings['floatmenu_single_pages'] = isset($sfm_settings['floatmenu_single_pages']) ? 'yes' : 'no';
             $sanitize_settings['floatmenu_specific_pages'] = isset($sfm_settings['floatmenu_specific_pages']) ? $sfm_settings['floatmenu_specific_pages'] : [];
+
+            $button_shadow_settings = $sfm_settings['button_shadow'];
+            foreach ($button_shadow_settings as $key => $value) {
+                if ($key == 'color') {
+                    $sanitize_settings['button_shadow'][$key] = sanitize_hex_color($value);
+                } else {
+                    $sanitize_settings['button_shadow'][$key] = sanitize_text_field($value);
+                }
+            }
             return $sanitize_settings;
         }
 

@@ -78,6 +78,7 @@
 
 .sfm-floating-menu .sfm-button{
     position: relative;
+    filter: drop-shadow(var(--sfm-button-shadow-x, 0) var(--sfm-button-shadow-y, 0) var(--sfm-button-shadow-blur, 0) var(--sfm-button-shadow-color, transparent));
 }
 
 .sfm-floating-menu .sfm-button.sfm-edit a.sfm-shape-button{
@@ -278,4 +279,23 @@
     left: 50%;
     top: 100%;
     transform: translateX(-50%);
+}
+
+/* Shadow */
+
+.sfm-shadow-fields {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.sfm-shadow-fields li>label {
+    text-align: center;
+    display: block;
+}
+
+.sfm-shadow-fields li input[type="number"] {
+    width: 60px;
+    text-align: center;
 }
