@@ -139,6 +139,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             $defaults = array(
                 'enable_sfm' => 'yes',
                 'enable_sfm_setting' => 'yes',
+                'sfm_load_google_font_locally' => 'no',
                 'buttons' => array(array(
                         'id' => uniqid('sfm-'),
                         'icon' => 'icofont-dart',
@@ -283,6 +284,19 @@ if (!class_exists('Simple_Floating_Menu')) {
                                         ?>
                                         <input type="checkbox" id="enable_sfm_setting" name="sfm_settings[enable_sfm_setting]" class="onoff-switch-checkbox" value="1" <?php checked($enable_sfm_setting, 'yes'); ?>>
                                         <label class="onoff-switch-label" for="enable_sfm_setting"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row sfm-form-row">
+                                <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with Google Fonts then you can check this field off.', 'simple-floating-menu'); ?></span></label>
+                                <div class="form-field">
+                                    <div class="onoff-switch">
+                                        <?php
+                                        $sfm_load_google_font_locally = isset($sfm_settings['sfm_load_google_font_locally']) ? $sfm_settings['sfm_load_google_font_locally'] : 'no';
+                                        ?>
+                                        <input type="checkbox" id="sfm_load_google_font_locally" name="sfm_settings[sfm_load_google_font_locally]" class="onoff-switch-checkbox" value="1" <?php checked($sfm_load_google_font_locally, 'yes'); ?>>
+                                        <label class="onoff-switch-label" for="sfm_load_google_font_locally"></label>
                                     </div>
                                 </div>
                             </div>
@@ -953,6 +967,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
             $sanitize_settings['enable_sfm'] = isset($sfm_settings['enable_sfm']) ? 'yes' : 'no';
             $sanitize_settings['enable_sfm_setting'] = isset($sfm_settings['enable_sfm_setting']) ? 'yes' : 'no';
+            $sanitize_settings['sfm_load_google_font_locally'] = isset($sfm_settings['sfm_load_google_font_locally']) ? 'yes' : 'no';
             $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
             $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];
             $sanitize_settings['style'] = in_array($sfm_settings['style'], $valid_styles) ? $sfm_settings['style'] : $defaults['style'];
