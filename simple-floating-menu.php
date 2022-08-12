@@ -1209,7 +1209,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
         /** Welcome Message Notification */
         public function admin_notice_content() {
-            if (!$this->is_dismissed('review') && !empty(get_option('sfm_first_activation')) && time() > get_option('sfm_first_activation') + DAY_IN_SECONDS) {
+            if (!$this->is_dismissed('review') && !empty(get_option('sfm_first_activation')) && time() > get_option('sfm_first_activation') + 15 * DAY_IN_SECONDS) {
                 $this->review_notice();
             }
         }
@@ -1219,6 +1219,7 @@ if (!class_exists('Simple_Floating_Menu')) {
          */
         public function erase_hide_notice() {
             delete_option('sfm_dismissed_notices');
+            delete_option('sfm_first_activation');
         }
 
         private static function sfm_sanitize_color($color) {
