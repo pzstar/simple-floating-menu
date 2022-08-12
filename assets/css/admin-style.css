@@ -739,6 +739,16 @@
     display: none;
 }
 
+.sfm-form-start .sfm-success-notice{
+    background: green;
+    padding: 15px;
+}
+
+.sfm-form-start .sfm-success-notice p{
+    margin: 0;
+    color: #FFF;
+}
+
 /** Admin Notice **/
 .sfm-notice.notice {
     padding-right: 38px;

@@ -165,6 +165,22 @@ if (!class_exists('Simple_Floating_Menu_Live_Preview')) {
                 $custom_css .= "body .sfm-floating-menu .sfm-tool-tip a{letter-spacing:{$tooltip_font_letter_spacing}px}";
             }
 
+            if (is_numeric($settings->button_shadow_x)) {
+                $custom_css .= "body .sfm-floating-menu .sfm-button{--sfm-button-shadow-x:{$settings->button_shadow_x}px;}";
+            }
+
+            if (is_numeric($settings->button_shadow_y)) {
+                $custom_css .= "body .sfm-floating-menu .sfm-button{--sfm-button-shadow-y:{$settings->button_shadow_y}px;}";
+            }
+
+            if (is_numeric($settings->button_shadow_blur)) {
+                $custom_css .= "body .sfm-floating-menu .sfm-button{--sfm-button-shadow-blur:{$settings->button_shadow_blur}px;}";
+            }
+
+            if (isset($settings->button_shadow_color)) {
+                $custom_css .= "body .sfm-floating-menu .sfm-button{--sfm-button-shadow-color:{$settings->button_shadow_color};}";
+            }
+
             return sfm_css_strip_whitespace($custom_css);
         }
 

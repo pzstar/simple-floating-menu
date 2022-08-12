@@ -121,7 +121,8 @@ if (!class_exists('Simple_Floating_Menu')) {
         public function load_backends() {
             wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), SFM_VERSION, true);
             wp_enqueue_script('webfont', SFM_URL . 'assets/js/webfont.js', array(), SFM_VERSION, true);
-            wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'wp-color-picker', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
+            wp_enqueue_script('wp-color-picker-alpha', SFM_URL . 'assets/js/wp-color-picker-alpha.js', array('jquery', 'wp-color-picker'), SFM_VERSION, true);
+            wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
 
             wp_enqueue_style('wp-color-picker');
             wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), SFM_VERSION);
@@ -180,7 +181,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                     'x' => 0,
                     'y' => 0,
                     'blur' => 0,
-                    'color' => '#000000'
+                    'color' => ''
                 )
             );
             return $defaults;
@@ -194,30 +195,29 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         public function settings_page_content() {
-            $settings_array = apply_filters('sfm_settings_page_content_array', 
-                array(
-                    'sfm-buttons-nav' => array(
-                        'href'=> '#tab-sfm-buttons',
-                        'icon' => 'mdi mdi-animation',
-                        'title' => esc_html__('Buttons', 'simple-floating-menu')
-                    ),
-                    'sfm-setting-nav' => array(
-                        'href'=> '#tab-sfm-settings',
-                        'icon' => 'mdi mdi-application-edit-outline',
-                        'title' => esc_html__('Settings', 'simple-floating-menu')
-                    ),
-                    'sfm-imex-nav' => array(
-                        'href'=> '#tab-sfm-imex',
-                        'icon' => 'mdi mdi-database-export',
-                        'title' => esc_html__('Import/Export', 'simple-floating-menu')
-                    ),
-                    'sfm-upgrade-nav' => array(
-                        'href'=> '#tab-upgrade-pro',
-                        'icon' => 'mdi mdi-arrow-up-bold',
-                        'title' => esc_html__('Premium Features', 'simple-floating-menu'),
-                        'image' => SFM_URL.'assets/img/upgrade-pro.png'
-                    ),
-                ));
+            $settings_array = apply_filters('sfm_settings_page_content_array', array(
+                'sfm-buttons-nav' => array(
+                    'href' => '#tab-sfm-buttons',
+                    'icon' => 'mdi mdi-animation',
+                    'title' => esc_html__('Buttons', 'simple-floating-menu')
+                ),
+                'sfm-setting-nav' => array(
+                    'href' => '#tab-sfm-settings',
+                    'icon' => 'mdi mdi-application-edit-outline',
+                    'title' => esc_html__('Settings', 'simple-floating-menu')
+                ),
+                'sfm-imex-nav' => array(
+                    'href' => '#tab-sfm-imex',
+                    'icon' => 'mdi mdi-database-export',
+                    'title' => esc_html__('Import/Export', 'simple-floating-menu')
+                ),
+                'sfm-upgrade-nav' => array(
+                    'href' => '#tab-upgrade-pro',
+                    'icon' => 'mdi mdi-arrow-up-bold',
+                    'title' => esc_html__('Premium Features', 'simple-floating-menu'),
+                    'image' => SFM_URL . 'assets/img/upgrade-pro.png'
+                ),
+            ));
             ?>
             <div class="wrap">
 
@@ -226,13 +226,13 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                     <div id="sfm-tab-wrapper" class="sfm-tab-wrapper">
                         <?php
-                        foreach($settings_array as $id=>$settings){
+                        foreach ($settings_array as $id => $settings) {
                             $count = 1;
                             ?>
-                            <a id="<?php echo esc_attr($id) ?>" class="sfm-tab <?php $count==1 ? 'sfm-tab-active' : '' ?>" href="<?php echo esc_attr($settings['href']) ?>">
+                            <a id="<?php echo esc_attr($id) ?>" class="sfm-tab <?php $count == 1 ? 'sfm-tab-active' : '' ?>" href="<?php echo esc_attr($settings['href']) ?>">
                                 <i class="<?php echo esc_attr($settings['icon']) ?>"></i>
                                 <?php echo esc_html($settings['title']) ?>
-                                <?php if(isset($settings['image'])): ?>
+                                <?php if (isset($settings['image'])): ?>
                                     <img src="<?php echo esc_url($settings['image']) ?>">
                                 <?php endif; ?>
                             </a>
@@ -557,6 +557,30 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             </td>
                                         </tr>
                                         <tr>
+                                            <th><label><?php esc_html_e('Button Shadow', 'simple-floating-menu'); ?></label></th>
+                                            <td>
+                                                <ul class="sfm-shadow-fields">
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <input type="number" name="sfm_settings[button_shadow][x]" value="<?php echo absint($sfm_settings['button_shadow']['x']) ?>">
+                                                        <label><?php esc_html_e('X', 'super-floating-and-fly-menu') ?></label>
+                                                    </li>
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <input type="number" name="sfm_settings[button_shadow][y]" value="<?php echo absint($sfm_settings['button_shadow']['y']) ?>">
+                                                        <label><?php esc_html_e('Y', 'super-floating-and-fly-menu') ?></label>
+                                                    </li>
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <input type="number" name="sfm_settings[button_shadow][blur]" value="<?php echo absint($sfm_settings['button_shadow']['blur']) ?>">
+                                                        <label><?php esc_html_e('Blur', 'super-floating-and-fly-menu') ?></label>
+                                                    </li>
+                                                    <li class="sfm-shadow-settings-field">
+                                                        <div class="uwcc-color-input-field">
+                                                            <input type="text" class="sfm-color-picker" data-alpha-enabled="true" data-alpha-custom-width="30px" data-alpha-color-type="hex" name="sfm_settings[button_shadow][color]" value="<?php echo esc_attr($sfm_settings['button_shadow']['color']) ?>"  data-default="#000000">
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2" class="sfm-seperator"><hr></td>
                                         </tr>
                                         <tr>
@@ -795,31 +819,6 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 ?>
                                             </td>
                                         </tr>
-
-                                        <tr>
-                                            <th><label><?php esc_html_e('Button Shadow', 'simple-floating-menu'); ?></label></th>
-                                            <td>
-                                                <ul class="sfm-shadow-fields">
-                                                    <li class="sfm-shadow-settings-field">
-                                                        <input type="number" name="sfm_settings[button_shadow][x]" value="<?php echo absint($sfm_settings['button_shadow']['x']) ?>">
-                                                        <label><?php esc_html_e('X', 'super-floating-and-fly-menu') ?></label>
-                                                    </li>
-                                                    <li class="sfm-shadow-settings-field">
-                                                        <input type="number" name="sfm_settings[button_shadow][y]" value="<?php echo absint($sfm_settings['button_shadow']['y']) ?>">
-                                                        <label><?php esc_html_e('Y', 'super-floating-and-fly-menu') ?></label>
-                                                    </li>
-                                                    <li class="sfm-shadow-settings-field">
-                                                        <input type="number" name="sfm_settings[button_shadow][blur]" value="<?php echo absint($sfm_settings['button_shadow']['blur']) ?>">
-                                                        <label><?php esc_html_e('Blur', 'super-floating-and-fly-menu') ?></label>
-                                                    </li>
-                                                    <li class="sfm-shadow-settings-field">
-                                                        <div class="uwcc-color-input-field">
-                                                            <input type="text" class="sfm-color-picker" name="sfm_settings[button_shadow][color]" value="<?php echo esc_attr($sfm_settings['button_shadow']['color']) ?>"  data-default="#000000">
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                                 <p class="submit">
@@ -1029,7 +1028,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             $button_shadow_settings = $sfm_settings['button_shadow'];
             foreach ($button_shadow_settings as $key => $value) {
                 if ($key == 'color') {
-                    $sanitize_settings['button_shadow'][$key] = sanitize_hex_color($value);
+                    $sanitize_settings['button_shadow'][$key] = self::sfm_sanitize_color($value);
                 } else {
                     $sanitize_settings['button_shadow'][$key] = sanitize_text_field($value);
                 }
@@ -1123,7 +1122,7 @@ if (!class_exists('Simple_Floating_Menu')) {
          * @return void
          */
         public function welcome_init() {
-            if(!get_option('sfm_first_activation')) {
+            if (!get_option('sfm_first_activation')) {
                 update_option('sfm_first_activation', time());
             };
 
@@ -1131,7 +1130,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 $notice = sanitize_key($_GET['sfm-hide-notice']);
                 check_admin_referer($notice, 'sfm_notice_nonce');
                 self::dismiss($notice);
-                wp_safe_redirect(remove_query_arg(array('sfm-hide-notice', 'sfm_notice_nonce' ), wp_get_referer()));
+                wp_safe_redirect(remove_query_arg(array('sfm-hide-notice', 'sfm_notice_nonce'), wp_get_referer()));
                 exit;
             }
         }
@@ -1144,14 +1143,12 @@ if (!class_exists('Simple_Floating_Menu')) {
         private function review_notice() {
             ?>
             <div class="sfm-notice notice notice-info">
-            <?php $this->dismiss_button('review'); ?>
+                <?php $this->dismiss_button('review'); ?>
                 <p>
                     <?php
                     printf(
-                        /* translators: %1$s is link start tag, %2$s is link end tag. */
-                        esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'),
-                        '<a href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">',
-                        '</a>'
+                            /* translators: %1$s is link start tag, %2$s is link end tag. */
+                            esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'), '<a href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
                     );
                     ?>
                 </p>
@@ -1191,7 +1188,7 @@ if (!class_exists('Simple_Floating_Menu')) {
          * @return void
          */
         public function dismiss_button($name) {
-            printf('<a class="notice-dismiss" href="%s"><span class="screen-reader-text">%s</span></a>', esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', $name), $name, 'sfm_notice_nonce')), esc_html__( 'Dismiss this notice.', 'simple-floating-menu' )
+            printf('<a class="notice-dismiss" href="%s"><span class="screen-reader-text">%s</span></a>', esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', $name), $name, 'sfm_notice_nonce')), esc_html__('Dismiss this notice.', 'simple-floating-menu')
             );
         }
 
@@ -1201,7 +1198,7 @@ if (!class_exists('Simple_Floating_Menu')) {
          * @param string $notice
          * @return void
          */
-        public static function dismiss( $notice ) {
+        public static function dismiss($notice) {
             $dismissed = get_option('sfm_dismissed_notices', array());
 
             if (!in_array($notice, $dismissed)) {
@@ -1222,6 +1219,18 @@ if (!class_exists('Simple_Floating_Menu')) {
          */
         public function erase_hide_notice() {
             delete_option('sfm_dismissed_notices');
+        }
+
+        private static function sfm_sanitize_color($color) {
+            // Is this an rgba color or a hex?
+            $mode = ( false === strpos($color, 'rgba') ) ? 'hex' : 'rgba';
+            if ('rgba' === $mode) {
+                $color = str_replace(' ', '', $color);
+                sscanf($color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha);
+                return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+            } else {
+                return sanitize_hex_color($color);
+            }
         }
 
     }
