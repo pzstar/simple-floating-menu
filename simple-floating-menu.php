@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.1.2');
+define('SFM_VERSION', '1.1.3');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -289,7 +289,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="form-row sfm-form-row">
-                                <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with Google Fonts then you can check this field off.', 'simple-floating-menu'); ?></span></label>
+                                <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with GDPR then you can check this field off.', 'simple-floating-menu'); ?></span></label>
                                 <div class="form-field">
                                     <div class="onoff-switch">
                                         <?php
@@ -1148,10 +1148,12 @@ if (!class_exists('Simple_Floating_Menu')) {
                     <?php
                     printf(
                             /* translators: %1$s is link start tag, %2$s is link end tag. */
-                            esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'), '<a href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
+                            esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'), '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
                     );
                     ?>
                 </p>
+                <a target="_blank" class="button action" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post"><?php echo esc_html__('Yes, of course', 'simple-floating-menu') ?></a> &nbsp;
+                <a class="button action" href="<?php echo esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', 'review'), 'review', 'sfm_notice_nonce')); ?>"><?php echo esc_html__('I have already rated', 'simple-floating-menu') ?></a>
             </div>
             <?php
         }

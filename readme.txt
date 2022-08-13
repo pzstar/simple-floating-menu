@@ -50,9 +50,10 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
-= 1.1.3 =  12 Aug, 2022
+= 1.1.3 =  13 Aug, 2022
 * Added shadow option for buttons
 * Option to load the Google fonts locally to comply with GDPR
+* Notice to review the plugin - Added
 
 = 1.1.2 =  31 May, 2022
 * Added hooks for developers

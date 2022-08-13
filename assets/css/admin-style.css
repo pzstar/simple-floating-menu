@@ -751,8 +751,12 @@
 
 /** Admin Notice **/
 .sfm-notice.notice {
-    padding-right: 38px;
+    padding: 20px 40px 20px 20px;
     position: relative;
+}
+
+.sfm-notice.notice p{
+    margin: 0 0 10px;
 }
 
 .sfm-notice a.notice-dismiss {
