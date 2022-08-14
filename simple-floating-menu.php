@@ -1128,10 +1128,11 @@ if (!class_exists('Simple_Floating_Menu')) {
 
             if (isset($_GET['sfm-hide-notice'], $_GET['sfm_notice_nonce'])) {
                 $notice = sanitize_key($_GET['sfm-hide-notice']);
-                check_admin_referer($notice, 'sfm_notice_nonce');
-                self::dismiss($notice);
-                wp_safe_redirect(remove_query_arg(array('sfm-hide-notice', 'sfm_notice_nonce'), wp_get_referer()));
-                exit;
+                if (check_admin_referer($notice, 'sfm_notice_nonce')) {
+                    self::dismiss($notice);
+                    wp_safe_redirect(remove_query_arg(array('sfm-hide-notice', 'sfm_notice_nonce'), wp_get_referer()));
+                    exit;
+                }
             }
         }
 
