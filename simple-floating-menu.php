@@ -118,22 +118,24 @@ if (!class_exists('Simple_Floating_Menu')) {
           Register necessary backend js
          */
 
-        public function load_backends() {
-            wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), SFM_VERSION, true);
-            wp_enqueue_script('webfont', SFM_URL . 'assets/js/webfont.js', array(), SFM_VERSION, true);
-            wp_enqueue_script('wp-color-picker-alpha', SFM_URL . 'assets/js/wp-color-picker-alpha.js', array('jquery', 'wp-color-picker'), SFM_VERSION, true);
-            wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
+        public function load_backends($hook) {
+            if ('toplevel_page_simple-floating-menu' == $hook) {
+                wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), SFM_VERSION, true);
+                wp_enqueue_script('webfont', SFM_URL . 'assets/js/webfont.js', array(), SFM_VERSION, true);
+                wp_enqueue_script('wp-color-picker-alpha', SFM_URL . 'assets/js/wp-color-picker-alpha.js', array('jquery', 'wp-color-picker'), SFM_VERSION, true);
+                wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
 
-            wp_enqueue_style('wp-color-picker');
-            wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
-            wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), SFM_VERSION);
-            wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
+                wp_enqueue_style('wp-color-picker');
+                wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), SFM_VERSION);
+                wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
+                wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
+                wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
+                wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
+                wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
+                wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), SFM_VERSION);
+                wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
+                wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
+            }
         }
 
         public static function default_settings() {
