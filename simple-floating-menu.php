@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.1.3');
+define('SFM_VERSION', '1.1.4');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -133,9 +133,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                 wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
                 wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), SFM_VERSION);
-                wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
             }
+            wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
         }
 
         public static function default_settings() {
