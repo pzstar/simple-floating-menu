@@ -751,14 +751,25 @@
 
 /** Admin Notice **/
 .sfm-notice.notice {
-    padding: 20px 40px 20px 20px;
+    padding: 20px 40px 20px 20px !important;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .sfm-notice.notice p{
-    margin: 0 0 10px;
+    margin: 0 0 12px;
 }
 
 .sfm-notice a.notice-dismiss {
     text-decoration: none;
+}
+
+.sfm-notice.notice .essentialicon-menu-1 {
+    font-size: 42px;
+    margin-right: 25px;
+    float: left;
+    color: #72aee6;
+    line-height: 1;
+    vertical-align: middle;
 }

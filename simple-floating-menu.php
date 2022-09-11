@@ -228,10 +228,10 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                     <div id="sfm-tab-wrapper" class="sfm-tab-wrapper">
                         <?php
+                        $count = 1;
                         foreach ($settings_array as $id => $settings) {
-                            $count = 1;
                             ?>
-                            <a id="<?php echo esc_attr($id) ?>" class="sfm-tab <?php $count == 1 ? 'sfm-tab-active' : '' ?>" href="<?php echo esc_attr($settings['href']) ?>">
+                            <a id="<?php echo esc_attr($id) ?>" class="sfm-tab <?php echo $count == 1 ? 'sfm-tab-active' : '' ?>" href="<?php echo esc_attr($settings['href']) ?>">
                                 <i class="<?php echo esc_attr($settings['icon']) ?>"></i>
                                 <?php echo esc_html($settings['title']) ?>
                                 <?php if (isset($settings['image'])): ?>
@@ -286,19 +286,6 @@ if (!class_exists('Simple_Floating_Menu')) {
                                         ?>
                                         <input type="checkbox" id="enable_sfm_setting" name="sfm_settings[enable_sfm_setting]" class="onoff-switch-checkbox" value="1" <?php checked($enable_sfm_setting, 'yes'); ?>>
                                         <label class="onoff-switch-label" for="enable_sfm_setting"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-row sfm-form-row">
-                                <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with GDPR then you can check this field off.', 'simple-floating-menu'); ?></span></label>
-                                <div class="form-field">
-                                    <div class="onoff-switch">
-                                        <?php
-                                        $sfm_load_google_font_locally = isset($sfm_settings['sfm_load_google_font_locally']) ? $sfm_settings['sfm_load_google_font_locally'] : 'no';
-                                        ?>
-                                        <input type="checkbox" id="sfm_load_google_font_locally" name="sfm_settings[sfm_load_google_font_locally]" class="onoff-switch-checkbox" value="1" <?php checked($sfm_load_google_font_locally, 'yes'); ?>>
-                                        <label class="onoff-switch-label" for="sfm_load_google_font_locally"></label>
                                     </div>
                                 </div>
                             </div>
@@ -490,6 +477,18 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div id="tab-sfm-settings" class="sfm-form-page">
+                                <div class="form-row sfm-form-row">
+                                    <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with GDPR then you can check this field off.', 'simple-floating-menu'); ?></span></label>
+                                    <div class="form-field">
+                                        <div class="onoff-switch">
+                                            <?php
+                                            $sfm_load_google_font_locally = isset($sfm_settings['sfm_load_google_font_locally']) ? $sfm_settings['sfm_load_google_font_locally'] : 'no';
+                                            ?>
+                                            <input type="checkbox" id="sfm_load_google_font_locally" name="sfm_settings[sfm_load_google_font_locally]" class="onoff-switch-checkbox" value="1" <?php checked($sfm_load_google_font_locally, 'yes'); ?>>
+                                            <label class="onoff-switch-label" for="sfm_load_google_font_locally"></label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table class="form-table">
                                     <tbody>
                                         <tr>
@@ -1058,9 +1057,12 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         public function sfm_dymanic_styles() {
-            echo '<style>';
-            echo sfm_dymanic_styles();
-            echo '</style>';
+            $currentScreen = get_current_screen();
+            if ('toplevel_page_simple-floating-menu' == $currentScreen->id) {
+                echo '<style id="sfm-dynamic-styles">';
+                echo sfm_dymanic_styles();
+                echo '</style>';
+            }
         }
 
         public function sfm_imex_process_settings_export() {
@@ -1147,16 +1149,20 @@ if (!class_exists('Simple_Floating_Menu')) {
             ?>
             <div class="sfm-notice notice notice-info">
                 <?php $this->dismiss_button('review'); ?>
-                <p>
-                    <?php
-                    printf(
-                            /* translators: %1$s is link start tag, %2$s is link end tag. */
-                            esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'), '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
-                    );
-                    ?>
-                </p>
-                <a target="_blank" class="button action" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post"><?php echo esc_html__('Yes, of course', 'simple-floating-menu') ?></a> &nbsp;
-                <a class="button action" href="<?php echo esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', 'review'), 'review', 'sfm_notice_nonce')); ?>"><?php echo esc_html__('I have already rated', 'simple-floating-menu') ?></a>
+                <i class="essentialicon-menu-1"></i>
+                <div class="sfm-notice-info">
+                    <p>
+
+                        <?php
+                        printf(
+                                /* translators: %1$s is link start tag, %2$s is link end tag. */
+                                esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'), '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
+                        );
+                        ?>
+                    </p>
+                    <a target="_blank" class="button button-primary action" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post"><?php echo esc_html__('Yes, of course !', 'simple-floating-menu') ?></a> &nbsp;
+                    <a class="button action" href="<?php echo esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', 'review'), 'review', 'sfm_notice_nonce')); ?>"><?php echo esc_html__('I have already rated !', 'simple-floating-menu') ?></a>
+                </div>
             </div>
             <?php
         }
