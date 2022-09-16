@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 6.0
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -50,6 +50,11 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.1.5 =  16 Sep, 2022
+* Icon not displaying in dashboard menu fixed
+* Setting panel first tab not active issue fixed
+* Selective display of dynamic styles in setting page only in admin dashboard
+
 = 1.1.4 =  31 Aug, 2022
 * Design issue in admin notice fixed
 
