@@ -178,7 +178,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'left_offset' => 0,
                 'right_offset' => 0,
                 'button_spacing' => 5,
-                'zindex' => 9,
+                'zindex' => 999,
                 'button_shadow' => array(
                     'x' => 0,
                     'y' => 0,
