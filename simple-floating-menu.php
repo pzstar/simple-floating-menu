@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.1.5
+ * Version: 1.1.6
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.1.54');
+define('SFM_VERSION', '1.1.6');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -882,7 +882,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                             <h2>Demo and Purchase Links</h2>
                             <div class="sfm-inline-buttons">
                                 <div class="sfm-buy-link sfm-link-button">
-                                    <a href="https://demo.hashthemes.com/super-floating-flying-menu/" target="_blank"><?php esc_html_e('Premium Demos', 'simple-floating-menu'); ?></a>
+                                    <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank"><?php esc_html_e('Premium Demos', 'simple-floating-menu'); ?></a>
                                 </div>
 
                                 <div class="sfm-demo-link sfm-link-button">

@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 6.1
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -47,9 +47,13 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 
 == Premium Upgrade ==
 For premium upgrade, please click below link <br>
-<a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-flying-menu/">Premium Demos</a>
+<a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.1.6 =  12 Dec, 2022
+* Google fonts for typography updated
+* Minor design fixes
+
 = 1.1.5 =  16 Sep, 2022
 * Icon not displaying in dashboard menu fixed
 * Setting panel first tab not active issue fixed
