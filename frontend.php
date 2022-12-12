@@ -82,7 +82,6 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
         public static function sfm_fonts_url() {
             $fonts_url = '';
             $settings = Simple_Floating_Menu::get_settings();
-            $standard_font_family = array();
             $subsets = 'latin,latin-ext';
 
             /*
@@ -100,18 +99,13 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             } elseif ('vietnamese' == $subset) {
                 $subsets .= ',vietnamese';
             }
-            $standard_font = sfm_standard_font_array();
-            $google_font = sfm_google_font_array();
-
-            foreach ($standard_font as $key => $value) {
-                $standard_font_family[] = $value['family'];
-            }
+            $standard_font_families = sfm_get_standard_font_families();
+            $all_font = array_merge(sfm_standard_font_array(), sfm_google_font_array());
 
             if (isset($settings['tooltip_font']['family'])) {
                 $font_family = $settings['tooltip_font']['family'];
-                if (!in_array($font_family, $standard_font_family)) {
-                    $font_array = sfm_search_key($google_font, 'family', $font_family);
-                    $variants_array = $font_array['0']['variants'];
+                if (!in_array($font_family, $standard_font_families)) {
+                    $variants_array = $all_font[$font_family]['variants'];
                     $variants_keys = array_keys($variants_array);
                     $variants = implode(',', $variants_keys);
                     $fonts = $font_family . ':' . str_replace('italic', 'i', $variants);
