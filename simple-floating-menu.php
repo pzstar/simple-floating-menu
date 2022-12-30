@@ -321,23 +321,23 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         echo '<select>';
 
                                                         if (apply_filters('sfm_show_ico_font', true)) {
-                                                            echo '<option value="icofont-list">' . esc_html__('Ico Font', 'simple-floating-menu') . '</option>';
+                                                            echo '<option value="sfm-icofont-list">' . esc_html__('Ico Font', 'simple-floating-menu') . '</option>';
                                                         }
 
                                                         if (apply_filters('sfm_show_font_awesome', true)) {
-                                                            echo '<option value="fontawesome-list">' . esc_html__('Font Awesome', 'simple-floating-menu') . '</option>';
+                                                            echo '<option value="sfm-fontawesome-list">' . esc_html__('Font Awesome', 'simple-floating-menu') . '</option>';
                                                         }
 
                                                         if (apply_filters('sfm_show_essential_icon', true)) {
-                                                            echo '<option value="essential-icon-list">' . esc_html__('Essential Icon', 'simple-floating-menu') . '</option>';
+                                                            echo '<option value="sfm-essential-icon-list">' . esc_html__('Essential Icon', 'simple-floating-menu') . '</option>';
                                                         }
 
                                                         if (apply_filters('sfm_show_material_icon', true)) {
-                                                            echo '<option value="material-icon-list">' . esc_html__('Material Icon', 'simple-floating-menu') . '</option>';
+                                                            echo '<option value="sfm-material-icon-list">' . esc_html__('Material Icon', 'simple-floating-menu') . '</option>';
                                                         }
 
                                                         if (apply_filters('sfm_show_elegant_icon', true)) {
-                                                            echo '<option value="elegant-icon-list">' . esc_html__('Elegant Icon', 'simple-floating-menu') . '</option>';
+                                                            echo '<option value="sfm-elegant-icon-list">' . esc_html__('Elegant Icon', 'simple-floating-menu') . '</option>';
                                                         }
 
                                                         echo '</select>';
@@ -345,7 +345,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         echo '</div>';
 
                                                         if (apply_filters('sfm_show_ico_font', true)) {
-                                                            echo '<ul class="sfm-icon-list icofont-list clearfix active">';
+                                                            echo '<ul class="sfm-icon-list sfm-icofont-list clearfix active">';
                                                             $sfm_icofont_icon_array = sfm_icofont_icon_array();
                                                             foreach ($sfm_icofont_icon_array as $sfm_icofont_icon) {
                                                                 $icon_class = $button['icon'] == $sfm_icofont_icon ? 'icon-active' : '';
@@ -355,7 +355,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         }
 
                                                         if (apply_filters('sfm_show_font_awesome', true)) {
-                                                            echo '<ul class="sfm-icon-list fontawesome-list clearfix">';
+                                                            echo '<ul class="sfm-icon-list sfm-fontawesome-list clearfix">';
                                                             $sfm_font_awesome_icon_array = sfm_font_awesome_icon_array();
                                                             foreach ($sfm_font_awesome_icon_array as $sfm_font_awesome_icon) {
                                                                 $icon_class = $button['icon'] == $sfm_font_awesome_icon ? 'icon-active' : '';
@@ -365,7 +365,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         }
 
                                                         if (apply_filters('sfm_show_essential_icon', true)) {
-                                                            echo '<ul class="sfm-icon-list essential-icon-list clearfix">';
+                                                            echo '<ul class="sfm-icon-list sfm-essential-icon-list clearfix">';
                                                             $sfm_essential_icon_array = sfm_essential_icon_array();
                                                             foreach ($sfm_essential_icon_array as $sfm_essential_icon) {
                                                                 $icon_class = $button['icon'] == $sfm_essential_icon ? 'icon-active' : '';
@@ -375,7 +375,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         }
 
                                                         if (apply_filters('sfm_show_material_icon', true)) {
-                                                            echo '<ul class="sfm-icon-list material-icon-list clearfix">';
+                                                            echo '<ul class="sfm-icon-list sfm-material-icon-list clearfix">';
                                                             $sfm_materialdesignicons_icon_array = sfm_materialdesignicons_array();
                                                             foreach ($sfm_materialdesignicons_icon_array as $sfm_materialdesignicons_icon) {
                                                                 $icon_class = $button['icon'] == $sfm_materialdesignicons_icon ? 'icon-active' : '';
@@ -385,7 +385,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         }
 
                                                         if (apply_filters('sfm_show_elegant_icon', true)) {
-                                                            echo '<ul class="sfm-icon-list elegant-icon-list clearfix">';
+                                                            echo '<ul class="sfm-icon-list sfm-elegant-icon-list clearfix">';
                                                             $sfm_eleganticons_icon_array = sfm_eleganticons_array();
                                                             foreach ($sfm_eleganticons_icon_array as $sfm_eleganticons_icon) {
                                                                 $icon_class = $button['icon'] == $sfm_eleganticons_icon ? 'icon-active' : '';
