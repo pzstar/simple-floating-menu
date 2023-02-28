@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.1.7
+ * Version: 1.1.8
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.1.7');
+define('SFM_VERSION', '1.1.8');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -879,7 +879,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </div>
 
                         <div id="tab-upgrade-pro" class="sfm-form-page">
-                            <h2>Demo and Purchase Links</h2>
+                            <h3>Demo and Purchase Links</h3>
                             <div class="sfm-inline-buttons">
                                 <div class="sfm-buy-link sfm-link-button">
                                     <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank"><?php esc_html_e('Premium Demos', 'simple-floating-menu'); ?></a>
@@ -891,9 +891,11 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="sfm-premium-features">
-                                <h2>Premium Features - Floating Buttons</h2>
+                                <h4>Premium Features - Floating Buttons</h4>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-buttons.png"/>
                                 <ul class="sfm-feature-box">
                                     <li>Create Unlimited Floating Menu</li>
+                                    <li>10 Differently Designed Styles</li>
                                     <li>11 Different Button Shapes</li>
                                     <li>7 Font Icon Packs With 10,000+ Icons</li>
                                     <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
@@ -908,7 +910,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="sfm-premium-features">
-                                <h2>Premium Features - Circular Floating Buttons</h2>
+                                <h4>Premium Features - Circular Floating Buttons</h4>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-circular-buttons.png"/>
                                 <ul class="sfm-feature-box">
                                     <li>11 Different Button Shapes</li>
                                     <li>7 Font Icon Packs With 10,000+ Icons</li>
@@ -927,7 +930,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="sfm-premium-features">
-                                <h2>Premium Features - Navigation Indicator(One Page) Menu</h2>
+                                <h4>Premium Features - Navigation Indicator(One Page) Menu</h4>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/nav-menu.png"/>
                                 <ul class="sfm-feature-box">
                                     <li>One Page Sticky Menu</li>
                                     <li>13 Different Styles</li>
@@ -940,7 +944,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="sfm-premium-features">
-                                <h2>Premium Features - Side Panel & Full Screen Menu</h2>
+                                <h4>Premium Features - Side Panel & Full Screen Menu</h4>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/side-full-menu.png"/>
                                 <ul class="sfm-feature-box">
                                     <li>7 Sub Menu Open/Close Animations Styles.</li>
                                     <li>Align the menu items to left, center, or right with 3 different Menu hover animations.</li>
@@ -960,7 +965,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                 <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
                             </div>
 
-                            <h2>Pre Sales Questions?</h2>
+                            <h3>Pre Sales Questions?</h3>
                             <p>If you have any pre sales questions, then feel free to email us at support@hashthemes.com</p>
                         </div>
 
