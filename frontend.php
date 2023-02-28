@@ -14,7 +14,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
         }
 
         public function load_scripts() {
-            wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), '1.0.0');
+            wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), '1.0.0');
             wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), '1.0.0');
             wp_enqueue_style('sfm-essential-icon', SFM_URL . 'assets/css/essentialicon.css', array(), '1.0.0');
             wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), '1.0.0');

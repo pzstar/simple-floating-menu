@@ -604,7 +604,7 @@
 }
 
 #adminmenu #toplevel_page_simple-floating-menu div.wp-menu-image:before{
-    font-family: essentialicon;
+    font-family: 'EssentialIcon';
     content: "\f1bf";
     font-weight: bold;
     font-size: 18px;
@@ -615,26 +615,46 @@
     display: none;
 }
 
+.sfm-premium-features{
+    border: 1px solid #EEE;
+    padding: 30px;
+    margin: 0 0 30px;
+    max-width: 800px;
+}
+
+.sfm-premium-features h2{
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0 0 15px;
+    letter-spacing: 1px;
+}
+
 .sfm-feature-box{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
+    margin: 0 0 30px;
+    padding: 0;
+    text-transform: capitalize;
 }
 
 .sfm-feature-box li{
-    margin: 0 10px 20px;
-    padding: 20px;
-    border: 1px solid #EEE;
-    width: 22%;
-    text-align: center;
     font-size: 16px;
-    font-weight: bold;
-    line-height: 1.5;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 16px rgb(0 0 0 / 10%);
+    line-height: 1.4;
+    margin: 0 0 10px;
+    padding: 0 0 0 30px;
+    position: relative;
+}
+
+.sfm-feature-box li:last-child{
+    margin-bottom: 0;
+}
+
+.sfm-feature-box li:before{
+    font-family: 'IcoFont' !important;
+    content: "\f00d";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    color: #3caf0e;
 }
 
 .sfm-inline-buttons{
@@ -642,7 +662,8 @@
     margin-bottom: 40px;
 }
 
-.sfm-inline-buttons .sfm-link-button a{
+.sfm-inline-buttons .sfm-link-button a,
+.sfm-premium-features > a {
     display: inline-block;
     background: #48a3ff;
     padding: 15px 40px;
@@ -751,14 +772,25 @@
 
 /** Admin Notice **/
 .sfm-notice.notice {
+    display: flex;
+    gap: 20px;
+    align-items: center;
     padding: 20px 40px 20px 20px !important;
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
 .sfm-notice.notice p{
-    margin: 0 0 12px;
+    padding: 0;
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+
+.sfm-notice.notice .button .dashicons{
+    height: auto;
+    width: auto;
+    margin: 0 6px 0 0;
+    vertical-align: middle;
+    font-size: 16px;
 }
 
 .sfm-notice a.notice-dismiss {
@@ -766,10 +798,6 @@
 }
 
 .sfm-notice.notice .essentialicon-menu-1 {
-    font-size: 42px;
-    margin-right: 25px;
-    float: left;
+    font-size: 52px;
     color: #72aee6;
-    line-height: 1;
-    vertical-align: middle;
 }

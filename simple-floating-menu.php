@@ -126,7 +126,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
 
                 wp_enqueue_style('wp-color-picker');
-                wp_enqueue_style('sfm-fontawesome', SFM_URL . 'assets/css/all.css', array(), SFM_VERSION);
+                wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
@@ -889,48 +889,76 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <a href="https://1.envato.market/LPXYao" target="_blank"><?php esc_html_e('Buy Premium Version', 'simple-floating-menu'); ?></a>
                                 </div>
                             </div>
-                            <h2>15+ FLOATING MENU DESIGNS</h2>
-                            <a href="https://1.envato.market/LPXYao" target="_blank">
-                                <img src="<?php echo SFM_URL; ?>assets/img/floating-menu-design.jpg">
-                            </a>
 
-                            <h2>Premium Features - Floating Menu</h2>
-                            <ul class="sfm-feature-box">
-                                <li>15+ Pre Designed Menu Layouts</li>
-                                <li>Create Unlimited Floating Menus</li>
-                                <li>Selective Display of Menu in Different Pages</li>
-                                <li>Various Animation Effects</li>
-                                <li>Various Menu Positions</li>
-                                <li>Color Picker to Design Menu</li>
-                                <li>5000+ Menu Icons</li>
-                                <li>Advanced Typography Option for Tool Tips</li>
-                                <li>Social Media Menu Creations</li>
-                                <li>Page Scroll Option</li>
-                                <li>Selective Display for Desktop and Mobile</li>
-                            </ul>
+                            <div class="sfm-premium-features">
+                                <h2>Premium Features - Floating Buttons</h2>
+                                <ul class="sfm-feature-box">
+                                    <li>Create Unlimited Floating Menu</li>
+                                    <li>11 Different Button Shapes</li>
+                                    <li>7 Font Icon Packs With 10,000+ Icons</li>
+                                    <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
+                                    <li>Configure Button/Icon Size & Colors</li>
+                                    <li>Display Buttons Selectively On Specific Posts/Pages Only</li>
+                                    <li>Set Custom Typography With 800+ Google Fonts And Font Parameters</li>
+                                    <li>Import/Export Settings Easily With Just One Click</li>
+                                    <li>Set The Colors Of Buttons At Once Or Set The Colors Of Each Button Individually</li>
+                                    <li>12 Show/Hide Animation</li>
+                                </ul>
+                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                            </div>
 
-                            <h2>10+ FLY MENU DESIGNS</h2>
-                            <a href="https://1.envato.market/LPXYao" target="_blank">
-                                <img src="<?php echo SFM_URL; ?>assets/img/fly-menu-design.jpg">
-                            </a>
-                            <h2>Premium Features - Fly Menu</h2>
-                            <ul class="sfm-feature-box">
-                                <li>4 Different Menu Types to Select From</li>
-                                <li>10 Pre Designed Menu Layouts</li>
-                                <li>5 Menu Animation Effects</li>
-                                <li>4 Menu Hover Animation Effects</li>
-                                <li>Different Menu Orientations</li>
-                                <li>Create Unlimited Menus</li>
-                                <li>Selective Display of Menu on Pages</li>
-                                <li>Custom Menu Header Image</li>
-                                <li>5000+ Pre Designed Menu Icons</li>
-                                <li>Add Search Form in Menu Header or Footer</li>
-                                <li>Add Social Icons in Menu Header or Footer</li>
-                                <li>Advanced Settings for Menu Toggle Button</li>
-                                <li>Advanced Typography Options</li>
-                                <li>Video Menu Background</li>
-                                <li>Unlimited Color Options to Choose From</li>
-                            </ul>
+                            <div class="sfm-premium-features">
+                                <h2>Premium Features - Circular Floating Buttons</h2>
+                                <ul class="sfm-feature-box">
+                                    <li>11 Different Button Shapes</li>
+                                    <li>7 Font Icon Packs With 10,000+ Icons</li>
+                                    <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
+                                    <li>Configure Button/Icon Size & Colors</li>
+                                    <li>Display Buttons Selectively On Specific Posts/Pages Only</li>
+                                    <li>Set Custom Typography With 800+ Google Fonts And Font Parameters</li>
+                                    <li>Import/Export Settings Easily With Just One Click</li>
+                                    <li>Set The Colors Of Buttons At Once Or Set The Colors Of Each Button Individually</li>
+                                    <li>12 Show/Hide Animation</li>
+                                    <li>30 Hover Animation</li>
+                                    <li>12 Idle Animation To Grad User Attentions</li>
+                                    <li>Open Sub Menu Items On Hover Or Click</li>
+                                </ul>
+                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                            </div>
+
+                            <div class="sfm-premium-features">
+                                <h2>Premium Features - Navigation Indicator(One Page) Menu</h2>
+                                <ul class="sfm-feature-box">
+                                    <li>One Page Sticky Menu</li>
+                                    <li>13 Different Styles</li>
+                                    <li>Display Left Or Right</li>
+                                    <li>Custom Navigation Item Size, Color & Spacing</li>
+                                    <li>Custom Top Offset Value For Sticky Header</li>
+                                    <li>Custom Typography For Tool Tips</li>
+                                </ul>
+                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                            </div>
+
+                            <div class="sfm-premium-features">
+                                <h2>Premium Features - Side Panel & Full Screen Menu</h2>
+                                <ul class="sfm-feature-box">
+                                    <li>7 Sub Menu Open/Close Animations Styles.</li>
+                                    <li>Align the menu items to left, center, or right with 3 different Menu hover animations.</li>
+                                    <li>Apply color background, Image background or video background to the panel.</li>
+                                    <li>Align the content to left, center or right with custom spacing, typography, colors for each elements.</li>
+                                    <li>There are 31 different panel show/hide animation styles in which you can animate the menu panel on the entrance and exit.</li>
+                                    <li>Align the content to left, center or right with custom spacing, typography, colors for each elements.</li>
+                                    <li>Choose from 10,000 fonts icon or 16 animated Hamburger Icons or add your own custom jpg, png or gif images.</li>
+                                    <li>Eye catching Button Hover and Idle Animation to grab the attention of the users.</li>
+                                    <li>Adjust the button and icon size, colors and shadow.</li>
+                                    <li>Place the button at any position on the screen. There are 8 predefined positions to choose from along with offset values to move it.</li>
+                                    <li>Display the Menu selectively only on the pages that you want.</li>
+                                    <li>Insert the trigger button at the start or at the end of the menu items on any menu. </li>
+                                    <li>Download the menu setting easily with just one click. And import it to any other menus on the same website or different website easily.</li>
+                                    <li>If you are a fan of pagebuider then you can create the content of the side panel with the Elementor Page builder.</li>
+                                </ul>
+                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                            </div>
 
                             <h2>Pre Sales Questions?</h2>
                             <p>If you have any pre sales questions, then feel free to email us at support@hashthemes.com</p>
@@ -1156,12 +1184,12 @@ if (!class_exists('Simple_Floating_Menu')) {
                         <?php
                         printf(
                                 /* translators: %1$s is link start tag, %2$s is link end tag. */
-                                esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s.', 'simple-floating-menu'), '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
+                                esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s and spread your words to the world.', 'simple-floating-menu'), '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
                         );
                         ?>
                     </p>
-                    <a target="_blank" class="button button-primary action" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post"><?php echo esc_html__('Yes, of course !', 'simple-floating-menu') ?></a> &nbsp;
-                    <a class="button action" href="<?php echo esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', 'review'), 'review', 'sfm_notice_nonce')); ?>"><?php echo esc_html__('I have already rated !', 'simple-floating-menu') ?></a>
+                    <a target="_blank" class="button button-primary action" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post"><span class="dashicons dashicons-thumbs-up"></span><?php echo esc_html__('Yes, of course', 'simple-floating-menu') ?></a> &nbsp;
+                    <a class="button action" href="<?php echo esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', 'review'), 'review', 'sfm_notice_nonce')); ?>"><span class="dashicons dashicons-yes"></span><?php echo esc_html__('I have already rated', 'simple-floating-menu') ?></a>
                 </div>
             </div>
             <?php

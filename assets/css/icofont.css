@@ -1,26 +1,29 @@
+/*! 
+* @package IcoFont 
+* @version 1.0.1 
+*/
+
+
 @font-face {
     font-family: "IcoFont";
-    font-weight: normal;
-    font-style: "Regular";
     src: url("fonts/icofont/icofont.woff2") format("woff2"), 
-         url("fonts/icofont/icofont.woff") format("woff");
+        url("fonts/icofont/icofont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
 
 [class^="icofont-"],
 [class*=" icofont-"] {
     font-family: 'IcoFont' !important;
-    speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-feature-settings: "liga";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icofont-angry-monster:before {

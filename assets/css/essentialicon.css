@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "essentialicon";
+    font-family: "EssentialIcon";
     src: url("fonts/essentialicon/essentialicon.woff") format("woff"), 
         url("fonts/essentialicon/essentialicon.ttf") format("truetype");
     font-weight: normal;
@@ -8,9 +8,16 @@
 
 [class^="essentialicon-"],
 [class*=" essentialicon-"] {
-    font-family: essentialicon;
+    font-family: 'EssentialIcon' !important;
     font-style: normal;
     font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .essentialicon-add:before {
