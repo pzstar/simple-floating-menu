@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.1.8
+ * Version: 1.1.9
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.1.8');
+define('SFM_VERSION', '1.1.9');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -906,7 +906,18 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Set The Colors Of Buttons At Once Or Set The Colors Of Each Button Individually</li>
                                     <li>12 Show/Hide Animation</li>
                                 </ul>
-                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                                <ul class="sfm-grid-col-4 sfm-grid-col">
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Template 1', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-2/" target="_blank"><?php esc_html_e('Template 2', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-3/" target="_blank"><?php esc_html_e('Template 3', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-4/" target="_blank"><?php esc_html_e('Template 4', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-5/" target="_blank"><?php esc_html_e('Template 5', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-6/" target="_blank"><?php esc_html_e('Template 6', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-7/" target="_blank"><?php esc_html_e('Template 7', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-8/" target="_blank"><?php esc_html_e('Template 8', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-9/" target="_blank"><?php esc_html_e('Template 9', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-10/" target="_blank"><?php esc_html_e('Template 10', 'super-floating-flying-menu'); ?></a></li>
+                                </ul>
                             </div>
 
                             <div class="sfm-premium-features">
@@ -926,7 +937,11 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>12 Idle Animation To Grad User Attentions</li>
                                     <li>Open Sub Menu Items On Hover Or Click</li>
                                 </ul>
-                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                                <ul class="sfm-grid-col-3 sfm-grid-col">
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-quater-circular/" target="_blank"><?php esc_html_e('Quater Circular', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-half-circular/" target="_blank"><?php esc_html_e('Half Circular', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-full-circular/" target="_blank"><?php esc_html_e('Full Circular', 'super-floating-flying-menu'); ?></a></li> 
+                                </ul>
                             </div>
 
                             <div class="sfm-premium-features">
@@ -940,7 +955,21 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Custom Top Offset Value For Sticky Header</li>
                                     <li>Custom Typography For Tool Tips</li>
                                 </ul>
-                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                                <ul class="sfm-grid-col-4 sfm-grid-col">
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-1/" target="_blank"><?php esc_html_e('Template 1', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-2/" target="_blank"><?php esc_html_e('Template 2', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-3/" target="_blank"><?php esc_html_e('Template 3', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-4/" target="_blank"><?php esc_html_e('Template 4', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-5/" target="_blank"><?php esc_html_e('Template 5', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-6/" target="_blank"><?php esc_html_e('Template 6', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-7/" target="_blank"><?php esc_html_e('Template 7', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-8/" target="_blank"><?php esc_html_e('Template 8', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-9/" target="_blank"><?php esc_html_e('Template 9', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-10/" target="_blank"><?php esc_html_e('Template 10', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-11/" target="_blank"><?php esc_html_e('Template 11', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-12/" target="_blank"><?php esc_html_e('Template 12', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-13/" target="_blank"><?php esc_html_e('Template 13', 'super-floating-flying-menu'); ?></a></li> 
+                                </ul>
                             </div>
 
                             <div class="sfm-premium-features">
@@ -962,7 +991,11 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Download the menu setting easily with just one click. And import it to any other menus on the same website or different website easily.</li>
                                     <li>If you are a fan of pagebuider then you can create the content of the side panel with the Elementor Page builder.</li>
                                 </ul>
-                                <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See Demos</a>
+                                <ul class="sfm-grid-col-3 sfm-grid-col">
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Side Panel Menu', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/skew-side-panel-menu/" target="_blank"><?php esc_html_e('Skew Side Panel Menu', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/full-screen-menu-wave-animation-1/" target="_blank"><?php esc_html_e('Full Screen Menu', 'super-floating-flying-menu'); ?></a></li>
+                                </ul>
                             </div>
 
                             <h3>Pre Sales Questions?</h3>
