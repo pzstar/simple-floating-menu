@@ -39,43 +39,45 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
         }
 
         public function floating_menu_html() {
-            $class = array('sfm-floating-menu');
-            $settings = Simple_Floating_Menu::get_settings();
-            $buttons = $settings['buttons'];
-            $enable_sfm = $settings['enable_sfm'];
-            $enable_sfm_setting = $settings['enable_sfm_setting'];
-            $class[] = isset($settings['position']) && $settings['position'] ? $settings['position'] : '';
-            $class[] = isset($settings['style']) && $settings['style'] ? $settings['style'] : '';
-            $class[] = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
-            $sfm_show_menu = (is_admin() || $enable_sfm == 'yes') && $buttons;
-            if (apply_filters('sfm_before_floating_menu_render', $sfm_show_menu)) {
-                ?>
-                <div class="<?php echo esc_attr(implode(' ', $class)); ?>">
-                    <?php if (current_user_can('administrator') && $enable_sfm_setting == 'yes') { ?>
-                        <div class="sfm-button sfm-edit">
-                            <div class="sfm-tool-tip"><a href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><?php echo esc_html__('Edit', 'simple-floating-menu') ?></a></div>
-                            <a class="sfm-shape-button" target="_blank" href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><i class="icofont-gear"></i></a>
-                        </div>
-                    <?php } ?>
-
-                    <?php
-                    foreach ($buttons as $button) {
-                        if ($button['url']) {
-                            $target = isset($button['open_new_tab']) && $button['open_new_tab'] ? 'target="_blank"' : '';
-                            $unique_id = $button['id'];
-                            ?>
-                            <div class="sfm-button <?php echo esc_attr($unique_id); ?>">
-                                <?php if ($button['tool_tip_text']) { ?>
-                                    <div class="sfm-tool-tip"><a <?php echo $target; ?> href="<?php echo esc_url($button['url']) ?>"><?php echo esc_html($button['tool_tip_text']) ?></a></div>
-                                <?php } ?>
-                                <a class="sfm-shape-button" <?php echo $target; ?> href="<?php echo esc_url($button['url']) ?>"><i class="<?php echo esc_attr($button['icon']) ?>"></i></a>
-                            </div>
-                            <?php
-                        }
-                    }
+            if (!(defined('REST_REQUEST') && REST_REQUEST)) {
+                $class = array('sfm-floating-menu');
+                $settings = Simple_Floating_Menu::get_settings();
+                $buttons = $settings['buttons'];
+                $enable_sfm = $settings['enable_sfm'];
+                $enable_sfm_setting = $settings['enable_sfm_setting'];
+                $class[] = isset($settings['position']) && $settings['position'] ? $settings['position'] : '';
+                $class[] = isset($settings['style']) && $settings['style'] ? $settings['style'] : '';
+                $class[] = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
+                $sfm_show_menu = (is_admin() || $enable_sfm == 'yes') && $buttons;
+                if (apply_filters('sfm_before_floating_menu_render', $sfm_show_menu)) {
                     ?>
-                </div>
-                <?php
+                    <div class="<?php echo esc_attr(implode(' ', $class)); ?>">
+                        <?php if (current_user_can('administrator') && $enable_sfm_setting == 'yes') { ?>
+                            <div class="sfm-button sfm-edit">
+                                <div class="sfm-tool-tip"><a href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><?php echo esc_html__('Edit', 'simple-floating-menu') ?></a></div>
+                                <a class="sfm-shape-button" target="_blank" href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><i class="icofont-gear"></i></a>
+                            </div>
+                        <?php } ?>
+
+                        <?php
+                        foreach ($buttons as $button) {
+                            if ($button['url']) {
+                                $target = isset($button['open_new_tab']) && $button['open_new_tab'] ? 'target="_blank"' : '';
+                                $unique_id = $button['id'];
+                                ?>
+                                <div class="sfm-button <?php echo esc_attr($unique_id); ?>">
+                                    <?php if ($button['tool_tip_text']) { ?>
+                                        <div class="sfm-tool-tip"><a <?php echo $target; ?> href="<?php echo esc_url($button['url']) ?>"><?php echo esc_html($button['tool_tip_text']) ?></a></div>
+                                    <?php } ?>
+                                    <a class="sfm-shape-button" <?php echo $target; ?> href="<?php echo esc_url($button['url']) ?>"><i class="<?php echo esc_attr($button['icon']) ?>"></i></a>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                    <?php
+                }
             }
         }
 

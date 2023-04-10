@@ -50,7 +50,7 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
  
 == Changelog ==
-= 1.2.0 =  03 Mar, 2023
+= 1.2.1 =  10 Apr, 2023
 * Minor Fixes
 * Compatibility test with WordPress v6.2.2
 
