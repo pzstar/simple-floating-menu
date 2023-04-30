@@ -14,15 +14,15 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
         }
 
         public function load_scripts() {
-            wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), '1.0.0');
-            wp_enqueue_style('eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), '1.0.0');
-            wp_enqueue_style('essentialicon', SFM_URL . 'assets/css/essentialicon.css', array(), '1.0.0');
-            wp_enqueue_style('iconfont', SFM_URL . 'assets/css/icofont.css', array(), '1.0.0');
-            wp_enqueue_style('materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), '1.0.0');
-            wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), '1.0.0');
+            wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
+            wp_enqueue_style('eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
+            wp_enqueue_style('essentialicon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
+            wp_enqueue_style('iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
+            wp_enqueue_style('materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
+            wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
             wp_add_inline_style('sfm-style', sfm_dymanic_styles());
 
-            wp_enqueue_script('sfm-custom-scripts', SFM_URL . 'assets/js/custom-scripts.js', array(), '1.0.0', true);
+            wp_enqueue_script('sfm-custom-scripts', SFM_URL . 'assets/js/custom-scripts.js', array(), SFM_VERSION, true);
             $fonts_url = self::sfm_fonts_url();
             $settings = Simple_Floating_Menu::get_settings();
             $load_font_locally = $settings['sfm_load_google_font_locally'];
@@ -34,7 +34,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
 
             // Load Fonts if necessary.
             if ($fonts_url) {
-                wp_enqueue_style('sfm-fonts', $fonts_url, array(), '1.00');
+                wp_enqueue_style('sfm-fonts', $fonts_url, array(), SFM_VERSION);
             }
         }
 
