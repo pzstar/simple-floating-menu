@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 6.2
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -50,6 +50,9 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.2.3 =  8 May, 2023
+* Minor Design fixes for RTL
+
 = 1.2.2 =  1 May, 2023
 * Floating Menu displaying in widget fixed
 
