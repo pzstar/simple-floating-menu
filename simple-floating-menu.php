@@ -135,7 +135,11 @@ if (!class_exists('Simple_Floating_Menu')) {
                 wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
             }
             wp_enqueue_style('essentialicon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
-            wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
+            if (is_rtl()) {
+                wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.rtl.css', array(), SFM_VERSION);
+            } else {
+                wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.css', array(), SFM_VERSION);
+            }
         }
 
         public static function default_settings() {

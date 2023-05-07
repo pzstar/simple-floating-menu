@@ -35,13 +35,13 @@
     font-size: 14px;
     font-weight: bold;
     background: rgba(255, 255, 255, .2);
-    margin-right: 15px;
+    margin-left: 15px;
     position: relative;
 }
 #sfm-tab-wrapper a.sfm-tab img {
     width: 120px;
     position: absolute;
-    left: -10px;
+    right: -10px;
     top: -12px;
 }
 
@@ -53,7 +53,7 @@
 .upgrade-pro-banner {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     height: 100%;
     bottom: 0;
     opacity: 1;
@@ -66,7 +66,7 @@
 
 #sfm-tab-wrapper a.sfm-tab i{
     display: inline-block;
-    margin-right: 6px;
+    margin-left: 6px;
 }
 
 #sfm-tab-wrapper a.sfm-tab.sfm-tab-active{
@@ -138,11 +138,11 @@
 
 .sfm-button-fields .sfm-remove{
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     height: 50px;
     width: 50px;
-    border-left: 1px solid #F3F3F3;
+    border-right: 1px solid #F3F3F3;
     color: #000;
     text-align: center;
     line-height: 50px;
@@ -165,14 +165,14 @@
 }
 
 .sfm-button-fields-header .sfm-drag{
-    float: left;
+    float: right;
     height: 50px;
     width: 50px;
     color: #000;
     text-align: center;
     line-height: 50px;
     font-size: 16px;
-    margin: -15px 0 15px -20px;
+    margin: -15px -20px 15px 0;
 }
 
 .form-col-2 .form-col{
@@ -196,7 +196,7 @@
 .sfm-add-new-button-fields{
     background: #FFF;
     padding: 20px;
-    text-align: right;
+    text-align: left;
 }
 
 .form-table td.sfm-seperator{
@@ -220,7 +220,7 @@
     text-align: center;
     border: 1px solid #EEE;
     position: relative;
-    margin-right: 44px;
+    margin-left: 44px;
     cursor: pointer;
     font-size: 22px;
     width: 60px;
@@ -234,7 +234,7 @@
 .sfm-customizer-icon-box .sfm-selected-icon span {
     position: absolute;
     background: #F6F6F6;
-    right: -45px;
+    left: -45px;
     top: -1px;
     height: 45px;
     width: 45px;
@@ -261,7 +261,7 @@
     font-size: 18px;
     border: 1px solid #EEE;
     background: #FFF;
-    border-right: 0;
+    border-left: 0;
     border-top: 0;
     margin: 0;
     padding: 0;
@@ -286,7 +286,7 @@
 }
 
 .sfm-customizer-icon-box .sfm-icon-list li {
-    float: left;
+    float: right;
     height: 40px;
     width: 40px;
     text-align: center;
@@ -340,7 +340,7 @@
     background: #d9d9d9;
     border: none;
     border-radius: 0;
-    margin-left: -1px;
+    margin-right: -1px;
     top: -6px;
     cursor: pointer;
 }
@@ -348,8 +348,8 @@
 .sfm-range-slider .ui-slider .ui-slider-handle span{
     position: absolute;
     bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 50%;
+    transform: translateX(50%);
     background: #13a1dc;
     color: #FFF;
     padding: 4px 6px;
@@ -364,7 +364,7 @@
 }
 
 .sfm-range-slider .ui-slider .ui-slider-handle span:hover{
-    transform: scale(1.05) translateX(-50%);
+    transform: scale(1.05) translateX(50%);
 }
 
 .sfm-range-slider .ui-slider .ui-slider-handle span:after{
@@ -398,11 +398,11 @@
     border-color: #8c8f94;
     box-shadow: none;
     border-radius: 3px;
-    background: #fff url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
+    background: #fff url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat left 5px top 55%;
     background-size: 16px 16px;
     cursor: pointer;
     vertical-align: middle;
-    padding: 0 0 0 10px;
+    padding: 0 10px 0 0;
 }
 
 .sfm-typography-fields .chosen-container-single .chosen-single div{
@@ -410,7 +410,7 @@
 }
 
 .sfm-typography-fields .chosen-container-single .chosen-single span {
-    margin: 0 26px 0 0;
+    margin: 0 0 0 26px;
 }
 
 .sfm-typography-fields .chosen-container-single .chosen-search input[type="text"]{
@@ -430,7 +430,7 @@
     height: 500px;
     width: 30%;
     margin-top: 20px;
-    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .sfm-live-demo.sfm-loading .sfm-floating-menu{
@@ -445,9 +445,9 @@
     content: "";
     display: none;
     position: absolute;
-    left: 50%;
+    right: 50%;
     top: 50%;
-    margin-left: -15px;
+    margin-right: -15px;
     margin-top: -15px;
     border: 4px solid #f3f3f3;
     border-radius: 50%;
@@ -468,9 +468,9 @@
     color: #F6F6F6;
     text-align: center;
     position: absolute;
-    left: 50%;
+    right: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(50%, -50%);
     text-transform: uppercase;
     font-weight: bold;
     border: 1px dashed #f6f6f6;
@@ -516,7 +516,7 @@
     position: relative;
     width: 52px;
     display: inline-block;
-    float: right;
+    float: left;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -550,7 +550,7 @@
     position: absolute;
     top: 2px;
     bottom: 0;
-    right: 32px;
+    left: 32px;
     background-color: #fff;
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
@@ -566,7 +566,7 @@
     position: absolute;
     top: 2px;
     bottom: 2px;
-    right: 6px;
+    left: 6px;
     font-size: 11px;
     font-family: 'Arial';
 }
@@ -581,7 +581,7 @@
 }
 
 .onoff-switch-checkbox:checked+.onoff-switch-label:before {
-    right: 2px;
+    left: 2px;
 }
 
 .onoff-switch-checkbox:checked+.onoff-switch-label:after {
@@ -591,7 +591,7 @@
     position: absolute;
     top: 2px;
     bottom: 2px;
-    right: 27px;
+    left: 27px;
     font-size: 11px;
     font-family: 'Arial';
 }
@@ -611,17 +611,17 @@
 /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    100% { -webkit-transform: rotate(-360deg); }
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    100% { transform: rotate(-360deg); }
 }
 
 .wp-core-ui #sfm-form-wrap .button.button-small{
     height: 30px;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 
 #adminmenu #toplevel_page_simple-floating-menu div.wp-menu-image:before{
@@ -660,7 +660,7 @@
     font-size: 16px;
     line-height: 1.4;
     margin: 0 0 10px;
-    padding: 0 0 0 30px;
+    padding: 0 30px 0 0;
     position: relative;
 }
 
@@ -672,7 +672,7 @@
     font-family: 'IcoFont' !important;
     content: "\f00d";
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     font-size: 20px;
     color: #3caf0e;
@@ -716,8 +716,8 @@
 
 .sfm-dropzone-desc {
     position: absolute;
-    left: 0;
     right: 0;
+    left: 0;
     top: 0;
     bottom: 0;
     display: flex;
@@ -767,7 +767,7 @@
 
 .sfm-preview-zone .sfm-remove-preview{
     position: absolute;
-    right: 10px;
+    left: 10px;
     top: 10px;
     color: red;
     border: none;
@@ -805,7 +805,7 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    padding: 20px 40px 20px 20px !important;
+    padding: 20px 20px 20px 40px !important;
     position: relative;
 }
 
@@ -818,7 +818,7 @@
 .sfm-notice.notice .button .dashicons{
     height: auto;
     width: auto;
-    margin: 0 6px 0 0;
+    margin: 0 0 0 6px;
     vertical-align: middle;
     font-size: 16px;
 }
