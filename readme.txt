@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 6.2
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
