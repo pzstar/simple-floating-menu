@@ -50,6 +50,9 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
  
 == Changelog ==
+= 1.2.4 =  8 May, 2023
+* Design fixes for RTL
+
 = 1.2.3 =  8 May, 2023
 * Minor Design fixes for RTL
 

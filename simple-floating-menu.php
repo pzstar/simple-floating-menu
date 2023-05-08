@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.2.3
+ * Version: 1.2.4
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.2.3');
+define('SFM_VERSION', '1.2.4');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -410,7 +410,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 <div class="form-row">
                                                     <label class="form-label"><?php esc_html_e('Button Url', 'simple-floating-menu'); ?></label>
                                                     <div class="form-field">
-                                                        <input name="sfm_settings[buttons][<?php echo $count; ?>][url]" type="text" value="<?php echo esc_attr($button['url']); ?>" class="regular-text" data-default="http://" />
+                                                        <input name="sfm_settings[buttons][<?php echo $count; ?>][url]" type="text" value="<?php echo esc_attr($button['url']); ?>" class="regular-text sfm-ltr" data-default="http://" />
                                                         <p class="form-description"><?php esc_html_e('Leaving empty will not display the button', 'simple-floating-menu'); ?></p>
                                                     </div>
                                                 </div>
@@ -912,6 +912,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Import/Export Settings Easily With Just One Click</li>
                                     <li>Set The Colors Of Buttons At Once Or Set The Colors Of Each Button Individually</li>
                                     <li>12 Show/Hide Animation</li>
+                                    <li>RTL (Right to Left Text) Ready</li>
+                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-4 sfm-grid-col">
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Template 1', 'super-floating-flying-menu'); ?></a></li>
@@ -944,6 +946,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>30 Hover Animation</li>
                                     <li>12 Idle Animation To Grad User Attentions</li>
                                     <li>Open Sub Menu Items On Hover Or Click</li>
+                                    <li>RTL (Right to Left Text) Ready</li>
+                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-3 sfm-grid-col">
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-quater-circular/" target="_blank"><?php esc_html_e('Quater Circular', 'super-floating-flying-menu'); ?></a></li>
@@ -962,6 +966,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Custom Navigation Item Size, Color & Spacing</li>
                                     <li>Custom Top Offset Value For Sticky Header</li>
                                     <li>Custom Typography For Tool Tips</li>
+                                    <li>RTL (Right to Left Text) Ready</li>
+                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-4 sfm-grid-col">
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-1/" target="_blank"><?php esc_html_e('Template 1', 'super-floating-flying-menu'); ?></a></li>
@@ -998,6 +1004,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Insert the trigger button at the start or at the end of the menu items on any menu. </li>
                                     <li>Download the menu setting easily with just one click. And import it to any other menus on the same website or different website easily.</li>
                                     <li>If you are a fan of pagebuider then you can create the content of the side panel with the Elementor Page builder.</li>
+                                    <li>RTL (Right to Left Text) Ready</li>
+                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-3 sfm-grid-col">
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Side Panel Menu', 'super-floating-flying-menu'); ?></a></li>

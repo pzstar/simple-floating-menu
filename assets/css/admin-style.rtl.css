@@ -865,3 +865,22 @@
 .sfm-grid-col li a:hover{
     background: #3c89d8;
 }
+
+/* Additional RTL CSS */
+.sfm-range-slider .ui-slider .ui-slider-range{
+    left: 0;
+}
+
+#sfm-tab-wrapper a.sfm-tab img{
+    left: -10px;
+    right: auto;
+}
+
+.sfm-feature-box li{
+    direction: ltr;
+}
+
+.sfm-ltr{
+    direction: ltr;
+    text-align: right;
+}
