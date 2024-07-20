@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -50,8 +50,11 @@ For premium upgrade, please click below link <br>
 <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
  
 == Changelog ==
-= 1.2.7 =  20 Jul, 2024
+= 1.2.8 =  20 Jul, 2024
 * Compatibility test with latest WordPress 6.6
+
+= 1.2.7 =  02 Jan, 2024
+* Compatibility test with latest WordPress
 
 = 1.2.6 =  02 Sep, 2023
 * Fontawesome icon updated with twitter new icon
