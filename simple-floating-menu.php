@@ -202,29 +202,31 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         public function settings_page_content() {
-            $settings_array = apply_filters('sfm_settings_page_content_array', array(
-                'sfm-buttons-nav' => array(
-                    'href' => '#tab-sfm-buttons',
-                    'icon' => 'mdi mdi-animation',
-                    'title' => esc_html__('Buttons', 'simple-floating-menu')
-                ),
-                'sfm-setting-nav' => array(
-                    'href' => '#tab-sfm-settings',
-                    'icon' => 'mdi mdi-application-edit-outline',
-                    'title' => esc_html__('Settings', 'simple-floating-menu')
-                ),
-                'sfm-imex-nav' => array(
-                    'href' => '#tab-sfm-imex',
-                    'icon' => 'mdi mdi-database-export',
-                    'title' => esc_html__('Import/Export', 'simple-floating-menu')
-                ),
-                'sfm-upgrade-nav' => array(
-                    'href' => '#tab-upgrade-pro',
-                    'icon' => 'mdi mdi-arrow-up-bold',
-                    'title' => esc_html__('Premium Features', 'simple-floating-menu'),
-                    'image' => SFM_URL . 'assets/img/upgrade-pro.png'
-                ),
-            )
+            $settings_array = apply_filters(
+                'sfm_settings_page_content_array',
+                array(
+                    'sfm-buttons-nav' => array(
+                        'href' => '#tab-sfm-buttons',
+                        'icon' => 'mdi mdi-animation',
+                        'title' => esc_html__('Buttons', 'simple-floating-menu')
+                    ),
+                    'sfm-setting-nav' => array(
+                        'href' => '#tab-sfm-settings',
+                        'icon' => 'mdi mdi-application-edit-outline',
+                        'title' => esc_html__('Settings', 'simple-floating-menu')
+                    ),
+                    'sfm-imex-nav' => array(
+                        'href' => '#tab-sfm-imex',
+                        'icon' => 'mdi mdi-database-export',
+                        'title' => esc_html__('Import/Export', 'simple-floating-menu')
+                    ),
+                    'sfm-upgrade-nav' => array(
+                        'href' => '#tab-upgrade-pro',
+                        'icon' => 'mdi mdi-arrow-up-bold',
+                        'title' => esc_html__('Premium Features', 'simple-floating-menu'),
+                        'image' => SFM_URL . 'assets/img/upgrade-pro.png'
+                    ),
+                )
             );
             ?>
             <div class="wrap">
