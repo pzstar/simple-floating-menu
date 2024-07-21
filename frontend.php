@@ -111,10 +111,11 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
                     $variants_keys = array_keys($variants_array);
                     $variants = implode(',', $variants_keys);
                     $fonts = $font_family . ':' . str_replace('italic', 'i', $variants);
-                    $fonts_url = add_query_arg(array(
-                        'family' => urlencode($fonts),
-                        'subset' => urlencode($subsets),
-                            ), 'https://fonts.googleapis.com/css');
+                    $fonts_url = add_query_arg(
+                        array(
+                            'family' => urlencode($fonts),
+                            'subset' => urlencode($subsets),
+                        ), 'https://fonts.googleapis.com/css');
                 }
             }
 

@@ -30,7 +30,7 @@ if (!class_exists('Simple_Floating_Menu')) {
          *
          * @var object
          */
-        protected static $instance = null;
+        protected static $instance = NULL;
 
         /* Saved Settings */
         public $settings;
@@ -41,7 +41,7 @@ if (!class_exists('Simple_Floating_Menu')) {
          * @return object A single instance of this class.
          */
         public static function get_instance() {
-            if (null == self::$instance) {
+            if (NULL == self::$instance) {
                 self::$instance = new self;
             }
 
@@ -147,7 +147,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'enable_sfm' => 'yes',
                 'enable_sfm_setting' => 'yes',
                 'sfm_load_google_font_locally' => 'no',
-                'buttons' => array(array(
+                'buttons' => array(
+                    array(
                         'id' => uniqid('sfm-'),
                         'icon' => 'icofont-dart',
                         'url' => 'http://',
@@ -223,7 +224,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                     'title' => esc_html__('Premium Features', 'simple-floating-menu'),
                     'image' => SFM_URL . 'assets/img/upgrade-pro.png'
                 ),
-            ));
+            )
+            );
             ?>
             <div class="wrap">
 
@@ -283,7 +285,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="form-row sfm-form-row">
-                                <label class="form-label"><?php esc_html_e('Display Setting Button on Menu', 'simple-floating-menu'); ?><br/>
+                                <label class="form-label"><?php esc_html_e('Display Setting Button on Menu', 'simple-floating-menu'); ?><br />
                                     <span><?php esc_html_e('Displays only for the Administrator on the Frontend so that you can quickly access the setting page for edit.', 'simple-floating-menu'); ?></span></label>
                                 <div class="form-field">
                                     <div class="onoff-switch">
@@ -438,7 +440,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Background Color', 'simple-floating-menu'); ?></label>
                                                             <div class="form-field">
-                                                                <input class="sfm-color-picker sfm-button-bg-color" name="sfm_settings[buttons][<?php echo $count; ?>][button_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color']); ?>" data-default="#000000"/>
+                                                                <input class="sfm-color-picker sfm-button-bg-color" name="sfm_settings[buttons][<?php echo $count; ?>][button_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color']); ?>" data-default="#000000" />
                                                             </div>
                                                         </div>
 
@@ -448,11 +450,11 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         </div>
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Background Color Hover', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-button-bg-color-hover" name="sfm_settings[buttons][<?php echo $count; ?>][button_bg_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color_hover']); ?>"  data-default="#000000"/></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-button-bg-color-hover" name="sfm_settings[buttons][<?php echo $count; ?>][button_bg_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color_hover']); ?>" data-default="#000000" /></div>
                                                         </div>
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Icon Color Hover', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-icon-color-hover" name="sfm_settings[buttons][<?php echo $count; ?>][button_icon_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_icon_color_hover']); ?>"  data-default="#FFFFFF"/></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-icon-color-hover" name="sfm_settings[buttons][<?php echo $count; ?>][button_icon_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_icon_color_hover']); ?>" data-default="#FFFFFF" /></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -460,7 +462,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                     <div class="form-flex form-col-2">
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Tool Tip Background Color', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-tool-tip-bg-color" name="sfm_settings[buttons][<?php echo $count; ?>][tooltip_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['tooltip_bg_color']); ?>" data-default="#000000"/></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-tool-tip-bg-color" name="sfm_settings[buttons][<?php echo $count; ?>][tooltip_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['tooltip_bg_color']); ?>" data-default="#000000" /></div>
                                                         </div>
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Tool Tip Text Color', 'simple-floating-menu'); ?></label>
@@ -484,7 +486,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                             <div id="tab-sfm-settings" class="sfm-form-page">
                                 <div class="form-row sfm-form-row">
-                                    <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br/><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with GDPR then you can check this field off.', 'simple-floating-menu'); ?></span></label>
+                                    <label class="form-label"><?php esc_html_e('Load Google Fonts Locally', 'simple-floating-menu'); ?><br /><span><?php esc_html_e('It is required to load the Google Fonts locally in order to comply with GDPR. However, if your website is not required to comply with GDPR then you can check this field off.', 'simple-floating-menu'); ?></span></label>
                                     <div class="form-field">
                                         <div class="onoff-switch">
                                             <?php
@@ -539,7 +541,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="sfm-seperator"><hr></td>
+                                            <td colspan="2" class="sfm-seperator">
+                                                <hr>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th><label><?php esc_html_e('Button Height', 'simple-floating-menu'); ?></label></th>
@@ -581,14 +585,16 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                     </li>
                                                     <li class="sfm-shadow-settings-field">
                                                         <div class="uwcc-color-input-field">
-                                                            <input type="text" class="sfm-color-picker" data-alpha-enabled="true" data-alpha-custom-width="30px" data-alpha-color-type="hex" name="sfm_settings[button_shadow][color]" value="<?php echo esc_attr($sfm_settings['button_shadow']['color']) ?>"  data-default="#000000">
+                                                            <input type="text" class="sfm-color-picker" data-alpha-enabled="true" data-alpha-custom-width="30px" data-alpha-color-type="hex" name="sfm_settings[button_shadow][color]" value="<?php echo esc_attr($sfm_settings['button_shadow']['color']) ?>" data-default="#000000">
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="sfm-seperator"><hr></td>
+                                            <td colspan="2" class="sfm-seperator">
+                                                <hr>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th><label><?php esc_html_e('Icon Size', 'simple-floating-menu'); ?></label></th>
@@ -613,7 +619,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="sfm-seperator"><hr></td>
+                                            <td colspan="2" class="sfm-seperator">
+                                                <hr>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th><label><?php esc_html_e('Tool Tip Typography', 'simple-floating-menu'); ?></label></th>
@@ -632,7 +640,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                                         ?>
                                                                         <optgroup label="Standard Fonts">
                                                                             <?php foreach ($standard_fonts as $standard_font) { ?>
-                                                                                <option value="<?php echo esc_attr($standard_font); ?>" <?php selected($sfm_settings['tooltip_font']['family'], $standard_font); ?> ><?php echo esc_html($standard_font); ?></option>
+                                                                                <option value="<?php echo esc_attr($standard_font); ?>" <?php selected($sfm_settings['tooltip_font']['family'], $standard_font); ?>><?php echo esc_html($standard_font); ?></option>
                                                                             <?php } ?>
                                                                         </optgroup>
                                                                     <?php } ?>
@@ -717,8 +725,8 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                                                             <div class="form-field">
                                                                 <div class="sfm-range-slider">
-                                                                    <div class="range-input"  value="<?php echo absint($sfm_settings['tooltip_font']['size']); ?>" data-min="10" data-max="60" data-step="1"></div>
-                                                                    <input class="range-input-selector" type="hidden" value="<?php echo absint($sfm_settings['tooltip_font']['size']); ?>" name="sfm_settings[tooltip_font][size]"/>
+                                                                    <div class="range-input" value="<?php echo absint($sfm_settings['tooltip_font']['size']); ?>" data-min="10" data-max="60" data-step="1"></div>
+                                                                    <input class="range-input-selector" type="hidden" value="<?php echo absint($sfm_settings['tooltip_font']['size']); ?>" name="sfm_settings[tooltip_font][size]" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -731,9 +739,9 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                                                             <div class="form-field">
                                                                 <div class="sfm-range-slider">
-                                                                    <div class="range-input"  value="<?php echo esc_attr($sfm_settings['tooltip_font']['line_height']); ?>" data-min="0.5" data-max="5" data-step="0.1"></div>
-                                                                    <input class="range-input-selector" type="hidden" value="<?php echo esc_attr($sfm_settings['tooltip_font']['line_height']); ?>" name="sfm_settings[tooltip_font][line_height]"/>
-                                                                </div>         
+                                                                    <div class="range-input" value="<?php echo esc_attr($sfm_settings['tooltip_font']['line_height']); ?>" data-min="0.5" data-max="5" data-step="0.1"></div>
+                                                                    <input class="range-input-selector" type="hidden" value="<?php echo esc_attr($sfm_settings['tooltip_font']['line_height']); ?>" name="sfm_settings[tooltip_font][line_height]" />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -745,9 +753,9 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                                                             <div class="form-field">
                                                                 <div class="sfm-range-slider">
-                                                                    <div class="range-input"  value="<?php echo esc_attr($sfm_settings['tooltip_font']['letter_spacing']); ?>" data-min="-5" data-max="5" data-step="0.1"></div>
-                                                                    <input class="range-input-selector" type="hidden" value="<?php echo esc_attr($sfm_settings['tooltip_font']['letter_spacing']); ?>" name="sfm_settings[tooltip_font][letter_spacing]"/>
-                                                                </div>   
+                                                                    <div class="range-input" value="<?php echo esc_attr($sfm_settings['tooltip_font']['letter_spacing']); ?>" data-min="-5" data-max="5" data-step="0.1"></div>
+                                                                    <input class="range-input-selector" type="hidden" value="<?php echo esc_attr($sfm_settings['tooltip_font']['letter_spacing']); ?>" name="sfm_settings[tooltip_font][letter_spacing]" />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -755,7 +763,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="sfm-seperator"><hr></td>
+                                            <td colspan="2" class="sfm-seperator">
+                                                <hr>
+                                            </td>
                                         </tr>
                                         <tr class="sfm-top-offset-wrap">
                                             <th><label><?php esc_html_e('Floating Menu Top Offset', 'simple-floating-menu'); ?></label></th>
@@ -805,7 +815,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="sfm-seperator"><hr></td>
+                                            <td colspan="2" class="sfm-seperator">
+                                                <hr>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th><label><?php esc_html_e('Spacing Between Buttons', 'simple-floating-menu'); ?></label></th>
@@ -898,7 +910,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Floating Buttons</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-buttons.png"/>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-buttons.png" />
                                 <ul class="sfm-feature-box">
                                     <li>Create Unlimited Floating Menu</li>
                                     <li>10 Differently Designed Styles</li>
@@ -931,7 +943,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Circular Floating Buttons</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-circular-buttons.png"/>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-circular-buttons.png" />
                                 <ul class="sfm-feature-box">
                                     <li>11 Different Button Shapes</li>
                                     <li>7 Font Icon Packs With 10,000+ Icons</li>
@@ -952,13 +964,13 @@ if (!class_exists('Simple_Floating_Menu')) {
                                 <ul class="sfm-grid-col-3 sfm-grid-col">
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-quater-circular/" target="_blank"><?php esc_html_e('Quater Circular', 'super-floating-flying-menu'); ?></a></li>
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-half-circular/" target="_blank"><?php esc_html_e('Half Circular', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-full-circular/" target="_blank"><?php esc_html_e('Full Circular', 'super-floating-flying-menu'); ?></a></li> 
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-full-circular/" target="_blank"><?php esc_html_e('Full Circular', 'super-floating-flying-menu'); ?></a></li>
                                 </ul>
                             </div>
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Navigation Indicator(One Page) Menu</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/nav-menu.png"/>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/nav-menu.png" />
                                 <ul class="sfm-feature-box">
                                     <li>One Page Sticky Menu</li>
                                     <li>13 Different Styles</li>
@@ -982,13 +994,13 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-10/" target="_blank"><?php esc_html_e('Template 10', 'super-floating-flying-menu'); ?></a></li>
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-11/" target="_blank"><?php esc_html_e('Template 11', 'super-floating-flying-menu'); ?></a></li>
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-12/" target="_blank"><?php esc_html_e('Template 12', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-13/" target="_blank"><?php esc_html_e('Template 13', 'super-floating-flying-menu'); ?></a></li> 
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-13/" target="_blank"><?php esc_html_e('Template 13', 'super-floating-flying-menu'); ?></a></li>
                                 </ul>
                             </div>
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Side Panel & Full Screen Menu</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/side-full-menu.png"/>
+                                <img src="<?php echo SFM_URL; ?>/assets/img/side-full-menu.png" />
                                 <ul class="sfm-feature-box">
                                     <li>7 Sub Menu Open/Close Animations Styles.</li>
                                     <li>Align the menu items to left, center, or right with 3 different Menu hover animations.</li>
@@ -1053,15 +1065,15 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
             $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];
             $sanitize_settings['style'] = in_array($sfm_settings['style'], $valid_styles) ? $sfm_settings['style'] : $defaults['style'];
-            $sanitize_settings['button_height'] = ( 40 <= $button_height && $button_height <= 200 && is_int($button_height)) ? $button_height : $defaults['button_height'];
-            $sanitize_settings['button_width'] = ( 40 <= $button_width && $button_width <= 200 && is_int($button_width)) ? $button_width : $defaults['button_width'];
-            $sanitize_settings['icon_size'] = ( 10 <= $icon_size && $icon_size <= 60 && is_int($icon_size)) ? $icon_size : $defaults['icon_size'];
-            $sanitize_settings['icon_position'] = ( -40 <= $icon_position && $icon_position <= 40 && is_int($icon_position)) ? $icon_position : $defaults['icon_position'];
-            $sanitize_settings['top_offset'] = ( 0 <= $top_offset && $top_offset <= 200 && is_int($top_offset)) ? $top_offset : $defaults['top_offset'];
-            $sanitize_settings['bottom_offset'] = ( 0 <= $bottom_offset && $bottom_offset <= 200 && is_int($bottom_offset)) ? $bottom_offset : $defaults['bottom_offset'];
-            $sanitize_settings['left_offset'] = ( 0 <= $left_offset && $left_offset <= 200 && is_int($left_offset)) ? $left_offset : $defaults['left_offset'];
-            $sanitize_settings['right_offset'] = ( 0 <= $right_offset && $right_offset <= 200 && is_int($right_offset)) ? $right_offset : $defaults['right_offset'];
-            $sanitize_settings['button_spacing'] = ( 0 <= $button_spacing && $button_spacing <= 200 && is_int($button_spacing)) ? $button_spacing : $defaults['button_spacing'];
+            $sanitize_settings['button_height'] = (40 <= $button_height && $button_height <= 200 && is_int($button_height)) ? $button_height : $defaults['button_height'];
+            $sanitize_settings['button_width'] = (40 <= $button_width && $button_width <= 200 && is_int($button_width)) ? $button_width : $defaults['button_width'];
+            $sanitize_settings['icon_size'] = (10 <= $icon_size && $icon_size <= 60 && is_int($icon_size)) ? $icon_size : $defaults['icon_size'];
+            $sanitize_settings['icon_position'] = (-40 <= $icon_position && $icon_position <= 40 && is_int($icon_position)) ? $icon_position : $defaults['icon_position'];
+            $sanitize_settings['top_offset'] = (0 <= $top_offset && $top_offset <= 200 && is_int($top_offset)) ? $top_offset : $defaults['top_offset'];
+            $sanitize_settings['bottom_offset'] = (0 <= $bottom_offset && $bottom_offset <= 200 && is_int($bottom_offset)) ? $bottom_offset : $defaults['bottom_offset'];
+            $sanitize_settings['left_offset'] = (0 <= $left_offset && $left_offset <= 200 && is_int($left_offset)) ? $left_offset : $defaults['left_offset'];
+            $sanitize_settings['right_offset'] = (0 <= $right_offset && $right_offset <= 200 && is_int($right_offset)) ? $right_offset : $defaults['right_offset'];
+            $sanitize_settings['button_spacing'] = (0 <= $button_spacing && $button_spacing <= 200 && is_int($button_spacing)) ? $button_spacing : $defaults['button_spacing'];
             $sanitize_settings['zindex'] = (int) $sfm_settings['zindex'];
 
             $buttons_settings = $sfm_settings['buttons'];
@@ -1096,9 +1108,9 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['tooltip_font']['style'] = array_key_exists($sfm_settings['tooltip_font']['style'], sfm_get_font_weight_choices($sfm_settings['tooltip_font']['family'])) ? $sfm_settings['tooltip_font']['style'] : $defaults['tooltip_font']['style'];
             $sanitize_settings['tooltip_font']['transform'] = array_key_exists($sfm_settings['tooltip_font']['transform'], sfm_get_text_transform_choices()) ? $sfm_settings['tooltip_font']['transform'] : $defaults['tooltip_font']['transform'];
             $sanitize_settings['tooltip_font']['decoration'] = array_key_exists($sfm_settings['tooltip_font']['decoration'], sfm_get_text_decoration_choices()) ? $sfm_settings['tooltip_font']['decoration'] : $defaults['tooltip_font']['decoration'];
-            $sanitize_settings['tooltip_font']['size'] = ( 10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
-            $sanitize_settings['tooltip_font']['line_height'] = ( 0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
-            $sanitize_settings['tooltip_font']['letter_spacing'] = ( -5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
+            $sanitize_settings['tooltip_font']['size'] = (10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
+            $sanitize_settings['tooltip_font']['line_height'] = (0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
+            $sanitize_settings['tooltip_font']['letter_spacing'] = (-5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
             $sanitize_settings['floatmenu_hide_show_pages'] = isset($sfm_settings['floatmenu_hide_show_pages']) && $sfm_settings['floatmenu_hide_show_pages'] == 'show_in_pages' ? 'show_in_pages' : 'hide_in_pages';
             $sanitize_settings['floatmenu_front_pages'] = isset($sfm_settings['floatmenu_front_pages']) ? 'yes' : 'no';
             $sanitize_settings['floatmenu_blog_pages'] = isset($sfm_settings['floatmenu_blog_pages']) ? 'yes' : 'no';
@@ -1210,7 +1222,8 @@ if (!class_exists('Simple_Floating_Menu')) {
         public function welcome_init() {
             if (!get_option('sfm_first_activation')) {
                 update_option('sfm_first_activation', time());
-            };
+            }
+            ;
 
             if (isset($_GET['sfm-hide-notice'], $_GET['sfm_notice_nonce'])) {
                 $notice = sanitize_key($_GET['sfm-hide-notice']);
@@ -1237,8 +1250,10 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                         <?php
                         printf(
-                                /* translators: %1$s is link start tag, %2$s is link end tag. */
-                                esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s and spread your words to the world.', 'simple-floating-menu'), '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">', '</a>'
+                            /* translators: %1$s is link start tag, %2$s is link end tag. */
+                            esc_html__('We have noticed that you have been using Simple Floating Menu for some time. We hope you love it, and we would really appreciate it if you would %1$sgive us a 5 stars rating%2$s and spread your words to the world.', 'simple-floating-menu'),
+                            '<a target="_blank" href="https://wordpress.org/support/plugin/simple-floating-menu/reviews/?rate=5#new-post">',
+                            '</a>'
                         );
                         ?>
                     </p>
@@ -1281,7 +1296,10 @@ if (!class_exists('Simple_Floating_Menu')) {
          * @return void
          */
         public function dismiss_button($name) {
-            printf('<a class="notice-dismiss" href="%s"><span class="screen-reader-text">%s</span></a>', esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', $name), $name, 'sfm_notice_nonce')), esc_html__('Dismiss this notice.', 'simple-floating-menu')
+            printf(
+                '<a class="notice-dismiss" href="%s"><span class="screen-reader-text">%s</span></a>',
+                esc_url(wp_nonce_url(add_query_arg('sfm-hide-notice', $name), $name, 'sfm_notice_nonce')),
+                esc_html__('Dismiss this notice.', 'simple-floating-menu')
             );
         }
 
@@ -1317,7 +1335,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
         private static function sfm_sanitize_color($color) {
             // Is this an rgba color or a hex?
-            $mode = ( false === strpos($color, 'rgba') ) ? 'hex' : 'rgba';
+            $mode = (false === strpos($color, 'rgba')) ? 'hex' : 'rgba';
             if ('rgba' === $mode) {
                 $color = str_replace(' ', '', $color);
                 sscanf($color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha);

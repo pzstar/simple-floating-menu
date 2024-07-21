@@ -166,7 +166,7 @@
         }
     });
 
-    $(".typography_face, .typography_font_style, .typography_text_transform, .typography_text_decoration").chosen({width: "95%"});
+    $(".typography_face, .typography_font_style, .typography_text_transform, .typography_text_decoration").chosen({ width: "95%" });
 
     $('.sfm-sticky-button a').click(function (e) {
         e.preventDefault();
@@ -263,7 +263,7 @@
         $.ajax({
             url: ajaxurl,
             type: 'POST',
-            data: {action: 'sfm_live_preview', values: value},
+            data: { action: 'sfm_live_preview', values: value },
             beforeSend: function () {
                 $('.sfm-live-demo').addClass('sfm-loading');
                 $('.submit .button').attr('disabled', 'disabled');
@@ -322,7 +322,7 @@
 
             reader.onload = function (e) {
                 var htmlPreview =
-                        '<p>' + input.files[0].name + '</p>';
+                    '<p>' + input.files[0].name + '</p>';
                 var wrapperZone = $(input).parent();
                 var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
                 var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
@@ -372,7 +372,7 @@
 
                 reader.onload = function (e) {
                     var htmlPreview =
-                            '<p>' + input.files[0].name + '</p>';
+                        '<p>' + input.files[0].name + '</p>';
                     var wrapperZone = $(input).parent();
                     var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
                     var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
