@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'ElegantIcons';
-    font-style: normal;
-    font-weight: normal;
     src: url('fonts/eleganticons/ElegantIcons.woff') format('woff'),
         url('fonts/eleganticons/ElegantIcons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .arrow_up,
@@ -367,15 +367,15 @@
 .icon_globe_alt,
 .icon_clipboard {
     font-family: 'ElegantIcons' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
     font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: inherit;
-    text-rendering: auto;
-    text-transform: none;
 }
 
 .arrow_up:before {

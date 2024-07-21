@@ -6,24 +6,24 @@
 
 @font-face {
     font-family: "IcoFont";
-    font-style: normal;
-    font-weight: normal;
     src: url("fonts/icofont/icofont.woff2") format("woff2"), 
         url("fonts/icofont/icofont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
 
 [class^="icofont-"],
 [class*=" icofont-"] {
     font-family: 'IcoFont' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
     font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: inherit;
-    text-rendering: auto;
-    text-transform: none;
 }
 
 .icofont-angry-monster:before {
