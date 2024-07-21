@@ -114,7 +114,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
                     $fonts_url = add_query_arg(array(
                         'family' => urlencode($fonts),
                         'subset' => urlencode($subsets),
-                            ), 'https://fonts.googleapis.com/css');
+                    ), 'https://fonts.googleapis.com/css');
                 }
             }
 
