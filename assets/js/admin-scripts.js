@@ -322,7 +322,7 @@
 
             reader.onload = function (e) {
                 var htmlPreview =
-                    '<p>' + input.files[0].name + '</p>';
+                        '<p>' + input.files[0].name + '</p>';
                 var wrapperZone = $(input).parent();
                 var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
                 var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
@@ -372,7 +372,7 @@
 
                 reader.onload = function (e) {
                     var htmlPreview =
-                        '<p>' + input.files[0].name + '</p>';
+                            '<p>' + input.files[0].name + '</p>';
                     var wrapperZone = $(input).parent();
                     var previewZone = $(input).parent().parent().find('.sfm-preview-zone');
                     var boxZone = $(input).parent().parent().find('.sfm-preview-zone').find('.box').find('.box-body');
