@@ -39,7 +39,7 @@ if (!class_exists('Simple_Floating_Menu_Live_Preview')) {
                 ?>
             </div>
             <style>
-            <?php echo $this->live_preview_dynamic_styles($settings, $repeater_settings); ?>
+                <?php echo $this->live_preview_dynamic_styles($settings, $repeater_settings); ?>
             </style>
             <?php
             die();

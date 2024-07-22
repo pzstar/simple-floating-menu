@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: "IcoFont";
-    src: url("fonts/icofont/icofont.woff2") format("woff2"), 
+    src: url("fonts/icofont/icofont.woff2") format("woff2"),
         url("fonts/icofont/icofont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
