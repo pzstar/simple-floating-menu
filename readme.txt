@@ -31,6 +31,10 @@ Want to test the dashboard settings without installing on your website? <a href=
 <li>Export/Import Settings to transfer settings from one to another website</li>
 </ul>
 
+== Premium Upgrade ==
+For premium upgrade, please click below link <br>
+<a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
+ 
 == Installation ==
 The easy way to install the plugin is via WordPress.org plugin directory.
 
@@ -45,10 +49,6 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 2. Admin Panel of Simple Floating Menu
 3. Admin Panel of Simple Floating Menu
 
-== Premium Upgrade ==
-For premium upgrade, please click below link <br>
-<a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
- 
 == Changelog ==
 = 1.2.8 =  20 Jul, 2024
 * Compatibility test with latest WordPress 6.6
