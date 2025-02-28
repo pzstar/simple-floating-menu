@@ -90,7 +90,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
              * Translators: To add an additional character subset specific to your language,
              * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
              */
-            $subset = _x('no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'simple-floating-menu');
+            $subset = esc_html_x('no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'simple-floating-menu');
 
             if ('cyrillic' == $subset) {
                 $subsets .= ',cyrillic,cyrillic-ext';
