@@ -49,6 +49,11 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 2. Admin Panel of Simple Floating Menu
 3. Admin Panel of Simple Floating Menu
 
+== Frequently Asked Questions ==
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/9e5fc0df-dbca-4ca7-a302-9026fae49d65)
+
 == Changelog ==
 = 1.3.0 - 3 Mar, 2025
 * Translation fixes
