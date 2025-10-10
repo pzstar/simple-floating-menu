@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 6.3
-Tested up to: 6.7
-Stable tag: 1.3.0
+Tested up to: 6.8
+Stable tag: 1.3.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,6 +55,10 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/9e5fc0df-dbca-4ca7-a302-9026fae49d65)
 
 == Changelog ==
+= 1.3.1 - 10 Oct, 2025
+* Security Bug fixes
+* Translation fixes
+
 = 1.3.0 - 3 Mar, 2025
 * Translation fixes
 

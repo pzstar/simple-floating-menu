@@ -160,7 +160,15 @@ function sfm_get_text_decoration_choices() {
 }
 
 function sfm_get_google_font_variants() {
-    $font_family = sanitize_text_field(wp_unslash($_REQUEST['font_family']));
+    $nonce = isset($_POST['sfm_nonce']) ? sanitize_text_field(wp_unslash($_POST['sfm_nonce'])) : '';
+
+    if (!wp_verify_nonce($nonce, 'sfm_nonce_update')) {
+        echo $nonce;
+        exit;
+    }
+
+    $font_family = isset($_POST['font_family']) ? sanitize_text_field(wp_unslash($_POST['font_family'])) : '';
+
     $all_font = array_merge(sfm_google_font_array(), sfm_standard_font_array());
     $options = '';
 
@@ -171,7 +179,15 @@ function sfm_get_google_font_variants() {
         $options .= '<option ' . $selected . ' value="' . $key . '">' . $variants . '</option>';
     }
 
-    echo $options;
+    $allowed_tags = array(
+        'option' => array(
+            'selected' => true,
+            'value' => true,
+        ),
+    );
+
+    echo wp_kses($options, $allowed_tags);
+
     die();
 }
 

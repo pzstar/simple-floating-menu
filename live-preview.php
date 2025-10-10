@@ -8,7 +8,13 @@ if (!class_exists('Simple_Floating_Menu_Live_Preview')) {
         }
 
         public function live_preview_callback() {
-            $repeater_settings = str_replace('\\', '', sanitize_text_field($_POST['values']));
+            $nonce = isset($_POST['sfm_nonce']) ? sanitize_text_field(wp_unslash($_POST['sfm_nonce'])) : '';
+
+            if (!wp_verify_nonce($nonce, 'sfm_nonce_update')) {
+                exit;
+            }
+
+            $repeater_settings = isset($_POST['values']) ? str_replace('\\', '', sanitize_text_field(wp_unslash($_POST['values']))) : '';
             $repeater_settings = json_decode($repeater_settings);
             $settings = end($repeater_settings);
             array_pop($repeater_settings);

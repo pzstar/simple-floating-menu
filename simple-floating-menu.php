@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.3.0
+ * Version: 1.3.1
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.3.0');
+define('SFM_VERSION', '1.3.1');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -53,9 +53,6 @@ if (!class_exists('Simple_Floating_Menu')) {
          */
         private function __construct() {
 
-            // Load translation files
-            add_action('init', array($this, 'load_plugin_textdomain'));
-
             // Add necesary backend JS
             add_action('admin_enqueue_scripts', array($this, 'load_backends'));
 
@@ -79,12 +76,6 @@ if (!class_exists('Simple_Floating_Menu')) {
             register_deactivation_hook(__FILE__, array($this, 'erase_hide_notice'));
         }
 
-        /**
-         * Load the plugin text domain for translation.
-         */
-        public function load_plugin_textdomain() {
-            load_plugin_textdomain('simple-floating-menu', false, SFM_PATH . '/languages/');
-        }
 
         /*
          * WP-ADMIN Menu for importer
@@ -124,6 +115,10 @@ if (!class_exists('Simple_Floating_Menu')) {
                 wp_enqueue_script('webfont', SFM_URL . 'assets/js/webfont.js', array(), SFM_VERSION, true);
                 wp_enqueue_script('wp-color-picker-alpha', SFM_URL . 'assets/js/wp-color-picker-alpha.js', array('jquery', 'wp-color-picker'), SFM_VERSION, true);
                 wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
+                wp_localize_script('sfm-admin-script', 'sfm_obj', array(
+                    'nonce' => wp_create_nonce('sfm_nonce_update'),
+                    'ajax_url' => admin_url('admin-ajax.php')
+                ));
 
                 wp_enqueue_style('wp-color-picker');
                 wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
@@ -250,7 +245,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                     <!--
                     <div class="upgrade-pro-banner">
                         <a href="https://1.envato.market/LPXYao" target="_blank">
-                            <img src="<?php echo SFM_URL; ?>assets/img/banner-image.png">
+                            <img src="<?php echo esc_url(SFM_URL . 'assets/img/banner-image.png'); ?>">
                         </a>
                     </div>
                     -->
@@ -401,7 +396,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         }
 
                                                         echo '</div>';
-                                                        echo '<input class="sfm-icon" type="hidden" value="' . esc_attr($button['icon']) . '" name="sfm_settings[buttons][' . $count . '][icon]" data-default="icofont-dart"/>';
+                                                        echo '<input class="sfm-icon" type="hidden" value="' . esc_attr($button['icon']) . '" name="sfm_settings[buttons][' . esc_attr($count) . '][icon]" data-default="icofont-dart"/>';
                                                         echo '</div>';
                                                         ?>
                                                     </div>
@@ -410,14 +405,14 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 <div class="form-row">
                                                     <label class="form-label"><?php esc_html_e('Button Url', 'simple-floating-menu'); ?></label>
                                                     <div class="form-field">
-                                                        <input name="sfm_settings[buttons][<?php echo $count; ?>][url]" type="text" value="<?php echo esc_attr($button['url']); ?>" class="regular-text sfm-ltr" data-default="http://" />
+                                                        <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][url]" type="text" value="<?php echo esc_attr($button['url']); ?>" class="regular-text sfm-ltr" data-default="http://" />
                                                         <p class="form-description"><?php esc_html_e('Leaving empty will not display the button', 'simple-floating-menu'); ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <label class="form-label"><?php esc_html_e('Tool Tip Text', 'simple-floating-menu'); ?></label>
                                                     <div class="form-field">
-                                                        <input name="sfm_settings[buttons][<?php echo $count; ?>][tool_tip_text]" type="text" value="<?php echo esc_html($button['tool_tip_text']); ?>" class="regular-text" />
+                                                        <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][tool_tip_text]" type="text" value="<?php echo esc_html($button['tool_tip_text']); ?>" class="regular-text" />
                                                         <p class="form-description"><?php esc_html_e('This text will display on hovering the button', 'simple-floating-menu'); ?></p>
                                                     </div>
                                                 </div>
@@ -428,7 +423,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                             <?php
                                                             $checkbox_val = isset($button['open_new_tab']) ? true : false;
                                                             ?>
-                                                            <input name="sfm_settings[buttons][<?php echo $count; ?>][open_new_tab]" type="checkbox" value="1" <?php checked($checkbox_val, 1); ?>>
+                                                            <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][open_new_tab]" type="checkbox" value="1" <?php checked($checkbox_val, 1); ?>>
                                                             <?php esc_html_e('Open in New Tab', 'simple-floating-menu'); ?>
                                                         </label>
                                                     </div>
@@ -438,21 +433,21 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Background Color', 'simple-floating-menu'); ?></label>
                                                             <div class="form-field">
-                                                                <input class="sfm-color-picker sfm-button-bg-color" name="sfm_settings[buttons][<?php echo $count; ?>][button_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color']); ?>" data-default="#000000" />
+                                                                <input class="sfm-color-picker sfm-button-bg-color" name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][button_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color']); ?>" data-default="#000000" />
                                                             </div>
                                                         </div>
 
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Icon Color', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-icon-color" name="sfm_settings[buttons][<?php echo $count; ?>][button_icon_color]" type="text" value="<?php echo sanitize_hex_color($button['button_icon_color']); ?>" data-default="#FFFFFF" /></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-icon-color" name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][button_icon_color]" type="text" value="<?php echo sanitize_hex_color($button['button_icon_color']); ?>" data-default="#FFFFFF" /></div>
                                                         </div>
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Background Color Hover', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-button-bg-color-hover" name="sfm_settings[buttons][<?php echo $count; ?>][button_bg_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color_hover']); ?>" data-default="#000000" /></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-button-bg-color-hover" name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][button_bg_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_bg_color_hover']); ?>" data-default="#000000" /></div>
                                                         </div>
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Button Icon Color Hover', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-icon-color-hover" name="sfm_settings[buttons][<?php echo $count; ?>][button_icon_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_icon_color_hover']); ?>" data-default="#FFFFFF" /></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-icon-color-hover" name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][button_icon_color_hover]" type="text" value="<?php echo sanitize_hex_color($button['button_icon_color_hover']); ?>" data-default="#FFFFFF" /></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -460,15 +455,15 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                     <div class="form-flex form-col-2">
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Tool Tip Background Color', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-tool-tip-bg-color" name="sfm_settings[buttons][<?php echo $count; ?>][tooltip_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['tooltip_bg_color']); ?>" data-default="#000000" /></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-tool-tip-bg-color" name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][tooltip_bg_color]" type="text" value="<?php echo sanitize_hex_color($button['tooltip_bg_color']); ?>" data-default="#000000" /></div>
                                                         </div>
                                                         <div class="form-col">
                                                             <label class="form-label"><?php esc_html_e('Tool Tip Text Color', 'simple-floating-menu'); ?></label>
-                                                            <div class="form-field"><input class="sfm-color-picker sfm-tool-tip-text-color" name="sfm_settings[buttons][<?php echo $count; ?>][tooltip_text_color]" type="text" value="<?php echo sanitize_hex_color($button['tooltip_text_color']); ?>" data-default="#FFFFFF" /></div>
+                                                            <div class="form-field"><input class="sfm-color-picker sfm-tool-tip-text-color" name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][tooltip_text_color]" type="text" value="<?php echo sanitize_hex_color($button['tooltip_text_color']); ?>" data-default="#FFFFFF" /></div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input name="sfm_settings[buttons][<?php echo $count; ?>][id]" type="hidden" class="sfm-unique-id" value="<?php echo esc_attr($button['id']); ?>">
+                                                <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][id]" type="hidden" class="sfm-unique-id" value="<?php echo esc_attr($button['id']); ?>">
                                             </div>
                                             <?php
                                             $count++;
@@ -571,15 +566,15 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 <ul class="sfm-shadow-fields">
                                                     <li class="sfm-shadow-settings-field">
                                                         <input type="number" name="sfm_settings[button_shadow][x]" value="<?php echo absint($sfm_settings['button_shadow']['x']) ?>">
-                                                        <label><?php esc_html_e('X', 'super-floating-and-fly-menu') ?></label>
+                                                        <label><?php esc_html_e('X', 'simple-floating-menu'); ?></label>
                                                     </li>
                                                     <li class="sfm-shadow-settings-field">
                                                         <input type="number" name="sfm_settings[button_shadow][y]" value="<?php echo absint($sfm_settings['button_shadow']['y']) ?>">
-                                                        <label><?php esc_html_e('Y', 'super-floating-and-fly-menu') ?></label>
+                                                        <label><?php esc_html_e('Y', 'simple-floating-menu'); ?></label>
                                                     </li>
                                                     <li class="sfm-shadow-settings-field">
                                                         <input type="number" name="sfm_settings[button_shadow][blur]" value="<?php echo absint($sfm_settings['button_shadow']['blur']) ?>">
-                                                        <label><?php esc_html_e('Blur', 'super-floating-and-fly-menu') ?></label>
+                                                        <label><?php esc_html_e('Blur', 'simple-floating-menu'); ?></label>
                                                     </li>
                                                     <li class="sfm-shadow-settings-field">
                                                         <div class="uwcc-color-input-field">
@@ -908,7 +903,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Floating Buttons</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-buttons.png" />
+                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/floating-buttons.png'); ?>" />
                                 <ul class="sfm-feature-box">
                                     <li>Create Unlimited Floating Menu</li>
                                     <li>10 Differently Designed Styles</li>
@@ -926,22 +921,22 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-4 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Template 1', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-2/" target="_blank"><?php esc_html_e('Template 2', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-3/" target="_blank"><?php esc_html_e('Template 3', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-4/" target="_blank"><?php esc_html_e('Template 4', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-5/" target="_blank"><?php esc_html_e('Template 5', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-6/" target="_blank"><?php esc_html_e('Template 6', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-7/" target="_blank"><?php esc_html_e('Template 7', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-8/" target="_blank"><?php esc_html_e('Template 8', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-9/" target="_blank"><?php esc_html_e('Template 9', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-10/" target="_blank"><?php esc_html_e('Template 10', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Template 1', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-2/" target="_blank"><?php esc_html_e('Template 2', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-3/" target="_blank"><?php esc_html_e('Template 3', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-4/" target="_blank"><?php esc_html_e('Template 4', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-5/" target="_blank"><?php esc_html_e('Template 5', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-6/" target="_blank"><?php esc_html_e('Template 6', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-7/" target="_blank"><?php esc_html_e('Template 7', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-8/" target="_blank"><?php esc_html_e('Template 8', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-9/" target="_blank"><?php esc_html_e('Template 9', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-10/" target="_blank"><?php esc_html_e('Template 10', 'simple-floating-menu'); ?></a></li>
                                 </ul>
                             </div>
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Circular Floating Buttons</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/floating-circular-buttons.png" />
+                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/floating-circular-buttons.png'); ?>" />
                                 <ul class="sfm-feature-box">
                                     <li>11 Different Button Shapes</li>
                                     <li>7 Font Icon Packs With 10,000+ Icons</li>
@@ -960,15 +955,15 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-3 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-quater-circular/" target="_blank"><?php esc_html_e('Quater Circular', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-half-circular/" target="_blank"><?php esc_html_e('Half Circular', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-full-circular/" target="_blank"><?php esc_html_e('Full Circular', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-quater-circular/" target="_blank"><?php esc_html_e('Quater Circular', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-half-circular/" target="_blank"><?php esc_html_e('Half Circular', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-full-circular/" target="_blank"><?php esc_html_e('Full Circular', 'simple-floating-menu'); ?></a></li>
                                 </ul>
                             </div>
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Navigation Indicator(One Page) Menu</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/nav-menu.png" />
+                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/nav-menu.png'); ?>" />
                                 <ul class="sfm-feature-box">
                                     <li>One Page Sticky Menu</li>
                                     <li>13 Different Styles</li>
@@ -980,25 +975,25 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-4 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-1/" target="_blank"><?php esc_html_e('Template 1', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-2/" target="_blank"><?php esc_html_e('Template 2', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-3/" target="_blank"><?php esc_html_e('Template 3', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-4/" target="_blank"><?php esc_html_e('Template 4', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-5/" target="_blank"><?php esc_html_e('Template 5', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-6/" target="_blank"><?php esc_html_e('Template 6', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-7/" target="_blank"><?php esc_html_e('Template 7', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-8/" target="_blank"><?php esc_html_e('Template 8', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-9/" target="_blank"><?php esc_html_e('Template 9', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-10/" target="_blank"><?php esc_html_e('Template 10', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-11/" target="_blank"><?php esc_html_e('Template 11', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-12/" target="_blank"><?php esc_html_e('Template 12', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-13/" target="_blank"><?php esc_html_e('Template 13', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-1/" target="_blank"><?php esc_html_e('Template 1', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-2/" target="_blank"><?php esc_html_e('Template 2', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-3/" target="_blank"><?php esc_html_e('Template 3', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-4/" target="_blank"><?php esc_html_e('Template 4', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-5/" target="_blank"><?php esc_html_e('Template 5', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-6/" target="_blank"><?php esc_html_e('Template 6', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-7/" target="_blank"><?php esc_html_e('Template 7', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-8/" target="_blank"><?php esc_html_e('Template 8', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-9/" target="_blank"><?php esc_html_e('Template 9', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-10/" target="_blank"><?php esc_html_e('Template 10', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-11/" target="_blank"><?php esc_html_e('Template 11', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-12/" target="_blank"><?php esc_html_e('Template 12', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-13/" target="_blank"><?php esc_html_e('Template 13', 'simple-floating-menu'); ?></a></li>
                                 </ul>
                             </div>
 
                             <div class="sfm-premium-features">
                                 <h4>Premium Features - Side Panel & Full Screen Menu</h4>
-                                <img src="<?php echo SFM_URL; ?>/assets/img/side-full-menu.png" />
+                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/side-full-menu.png'); ?>" />
                                 <ul class="sfm-feature-box">
                                     <li>7 Sub Menu Open/Close Animations Styles.</li>
                                     <li>Align the menu items to left, center, or right with 3 different Menu hover animations.</li>
@@ -1018,9 +1013,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
                                 </ul>
                                 <ul class="sfm-grid-col-3 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Side Panel Menu', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/skew-side-panel-menu/" target="_blank"><?php esc_html_e('Skew Side Panel Menu', 'super-floating-flying-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/full-screen-menu-wave-animation-1/" target="_blank"><?php esc_html_e('Full Screen Menu', 'super-floating-flying-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Side Panel Menu', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/skew-side-panel-menu/" target="_blank"><?php esc_html_e('Skew Side Panel Menu', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/full-screen-menu-wave-animation-1/" target="_blank"><?php esc_html_e('Full Screen Menu', 'simple-floating-menu'); ?></a></li>
                                 </ul>
                             </div>
 
@@ -1130,14 +1125,15 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         public function handle_form() {
-            if (!isset($_POST['sfm_nonce']) || !wp_verify_nonce($_POST['sfm_nonce'], 'sfm_nonce_update')) {
+            $nonce = isset($_POST['sfm_nonce']) ? sanitize_text_field(wp_unslash($_POST['sfm_nonce'])) : '';
+            if (!wp_verify_nonce($nonce, 'sfm_nonce_update')) {
                 ?>
                 <div class="sfm-error-notice sfm-notice">
                     <p><?php esc_html_e('Sorry, your nonce was not correct. Please try again.', 'simple-floating-menu'); ?></p>
                 </div> <?php
                 exit;
             } else {
-                $sfm_settings = isset($_POST['sfm_settings']) ? $_POST['sfm_settings'] : '';
+                $sfm_settings = isset($_POST['sfm_settings']) ? wp_unslash($_POST['sfm_settings']) : '';
                 $sanitize_settings = $this->sanitize_form($sfm_settings);
                 update_option('sfm_settings', $sanitize_settings);
                 ?>
@@ -1162,7 +1158,8 @@ if (!class_exists('Simple_Floating_Menu')) {
             if (empty($_POST['sfm_imex_action']) || 'export_settings' != $_POST['sfm_imex_action'])
                 return;
 
-            if (!wp_verify_nonce($_POST['sfm_imex_export_nonce'], 'sfm_imex_export_nonce'))
+            $nonce = isset($_POST['sfm_imex_export_nonce']) ? sanitize_text_field(wp_unslash($_POST['sfm_imex_export_nonce'])) : '';
+            if (!wp_verify_nonce($nonce, 'sfm_imex_export_nonce'))
                 return;
 
             if (!current_user_can('manage_options'))
@@ -1174,7 +1171,7 @@ if (!class_exists('Simple_Floating_Menu')) {
 
             nocache_headers();
             header('Content-Type: application/json; charset=utf-8');
-            header('Content-Disposition: attachment; filename=sfm-' . date('m-d-Y') . '.json');
+            header('Content-Disposition: attachment; filename=sfm-' . gmdate('m-d-Y') . '.json');
             header("Expires: 0");
 
             echo json_encode($sfm_settings);
@@ -1186,24 +1183,25 @@ if (!class_exists('Simple_Floating_Menu')) {
             if (empty($_POST['sfm_imex_action']) || 'import_settings' != $_POST['sfm_imex_action'])
                 return;
 
-            if (!wp_verify_nonce($_POST['sfm_imex_import_nonce'], 'sfm_imex_import_nonce'))
+            $nonce = isset($_POST['sfm_imex_import_nonce']) ? sanitize_text_field(wp_unslash($_POST['sfm_imex_import_nonce'])) : '';
+            if (!wp_verify_nonce($nonce, 'sfm_imex_import_nonce'))
                 return;
 
             if (!current_user_can('manage_options'))
                 return;
 
-            $filename = $_FILES['sfm_import_file']['name'];
+            $filename = isset($_FILES['sfm_import_file']['name']) ? sanitize_text_field($_FILES['sfm_import_file']['name']) : '';
             $extension = explode('.', $filename);
             $extension = end($extension);
 
             if ($extension != 'json') {
-                wp_die(__('Please upload a valid .json file'));
+                wp_die(esc_html__('Please upload a valid .json file', 'simple-floating-menu'));
             }
 
-            $sfm_import_file = $_FILES['sfm_import_file']['tmp_name'];
+            $sfm_import_file = isset($_FILES['sfm_import_file']['tmp_name']) ? sanitize_text_field($_FILES['sfm_import_file']['tmp_name']) : '';
 
             if (empty($sfm_import_file)) {
-                wp_die(__('Please upload a file to import'));
+                wp_die(esc_html__('Please upload a file to import', 'simple-floating-menu'));
             }
 
             // Retrieve the settings from the file and convert the json object to an array.

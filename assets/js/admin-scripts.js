@@ -144,9 +144,11 @@
         var font_family = $(this).val();
         var $this = $(this);
         $.ajax({
-            url: ajaxurl,
+            url: sfm_obj.ajax_url,
+            type: 'POST',
             data: {
                 action: 'sfm_get_google_font_variants',
+                sfm_nonce: sfm_obj.nonce,
                 font_family: font_family,
             },
             beforeSend: function () {
@@ -261,9 +263,13 @@
 
     function sfm_live_preview(value) {
         $.ajax({
-            url: ajaxurl,
+            url: sfm_obj.ajax_url,
             type: 'POST',
-            data: {action: 'sfm_live_preview', values: value},
+            data: {
+                action: 'sfm_live_preview',
+                sfm_nonce: sfm_obj.nonce,
+                values: value
+            },
             beforeSend: function () {
                 $('.sfm-live-demo').addClass('sfm-loading');
                 $('.submit .button').attr('disabled', 'disabled');

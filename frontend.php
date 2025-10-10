@@ -54,22 +54,22 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
                     <div class="<?php echo esc_attr(implode(' ', $class)); ?>">
                         <?php if (current_user_can('administrator') && $enable_sfm_setting == 'yes') { ?>
                             <div class="sfm-button sfm-edit">
-                                <div class="sfm-tool-tip"><a href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><?php echo esc_html__('Edit', 'simple-floating-menu') ?></a></div>
-                                <a class="sfm-shape-button" target="_blank" href="<?php echo admin_url('admin.php?page=simple-floating-menu') ?>"><i class="icofont-gear"></i></a>
+                                <div class="sfm-tool-tip"><a href="<?php echo esc_url(admin_url('admin.php?page=simple-floating-menu')); ?>"><?php echo esc_html__('Edit', 'simple-floating-menu') ?></a></div>
+                                <a class="sfm-shape-button" target="_blank" href="<?php echo esc_url(admin_url('admin.php?page=simple-floating-menu')); ?>"><i class="icofont-gear"></i></a>
                             </div>
                         <?php } ?>
 
                         <?php
                         foreach ($buttons as $button) {
                             if ($button['url']) {
-                                $target = isset($button['open_new_tab']) && $button['open_new_tab'] ? 'target="_blank"' : '';
+                                $target = isset($button['open_new_tab']) && $button['open_new_tab'] ? '_blank' : '';
                                 $unique_id = $button['id'];
                                 ?>
                                 <div class="sfm-button <?php echo esc_attr($unique_id); ?>">
                                     <?php if ($button['tool_tip_text']) { ?>
-                                        <div class="sfm-tool-tip"><a <?php echo $target; ?> href="<?php echo esc_url($button['url']) ?>"><?php echo esc_html($button['tool_tip_text']) ?></a></div>
+                                        <div class="sfm-tool-tip"><a target="<?php echo esc_attr($target); ?>" href="<?php echo esc_url($button['url']) ?>"><?php echo esc_html($button['tool_tip_text']) ?></a></div>
                                     <?php } ?>
-                                    <a class="sfm-shape-button" <?php echo $target; ?> href="<?php echo esc_url($button['url']) ?>"><i class="<?php echo esc_attr($button['icon']) ?>"></i></a>
+                                    <a class="sfm-shape-button" target="<?php echo esc_attr($target); ?>" href="<?php echo esc_url($button['url']) ?>"><i class="<?php echo esc_attr($button['icon']) ?>"></i></a>
                                 </div>
                                 <?php
                             }
