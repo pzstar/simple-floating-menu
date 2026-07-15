@@ -338,9 +338,9 @@
 
 .sfm-range-slider .ui-slider .ui-slider-handle {
     position: absolute;
-    height: 10px;
+    height: 16px;
     width: 2px;
-    background: #d9d9d9;
+    background: var(--wp-admin-theme-color);
     border: none;
     border-radius: 0;
     margin-left: -1px;
