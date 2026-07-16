@@ -220,11 +220,16 @@ if (!class_exists('Simple_Floating_Menu')) {
                 ),
             ));
             ?>
-            <div class="wrap">
+            <div class="sfm-wrap">
+                <div class="sfm-title-bar">
+                    <h1>
+                        <i class="essentialicon-menu"></i>
+                        <?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?>
+                        <span>- v <?php echo SFM_VERSION; ?></span>
+                    </h1>
+                </div>
 
                 <div id="sfm-header">
-                    <h3><?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?></h3>
-
                     <div id="sfm-tab-wrapper" class="sfm-tab-wrapper">
                         <?php
                         $count = 1;
@@ -242,13 +247,6 @@ if (!class_exists('Simple_Floating_Menu')) {
                         }
                         ?>
                     </div>
-                    <!--
-                    <div class="upgrade-pro-banner">
-                        <a href="https://1.envato.market/LPXYao" target="_blank">
-                            <img src="<?php echo esc_url(SFM_URL . 'assets/img/banner-image.png'); ?>">
-                        </a>
-                    </div>
-                    -->
                 </div>
 
                 <div id="sfm-form-wrap">
@@ -306,7 +304,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 <div class="sfm-button-fields-header">
                                                     <div class="sfm-drag"><i class="icofont-drag"></i></div>
                                                     <?php esc_html_e('Button', 'simple-floating-menu'); ?>
-                                                    <div class="sfm-remove"><i class="icofont-close-line"></i></div>
+                                                    <div class="sfm-remove"><i class="mdi-trash-can-outline"></i></div>
                                                 </div>
                                                 <div class="form-row">
                                                     <label class="form-label"><?php esc_html_e('Choose Icon', 'simple-floating-menu'); ?></label>
