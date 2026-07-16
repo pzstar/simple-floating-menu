@@ -653,10 +653,10 @@
 }
 
 .sfm-premium-features h4 {
-    font-size: 18px;
+    font-size: 20px;
     text-transform: uppercase;
     margin: 0 0 15px;
-    letter-spacing: 1px;
+    font-weight: bold;
 }
 
 .sfm-feature-box {
