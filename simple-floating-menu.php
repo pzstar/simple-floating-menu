@@ -222,11 +222,15 @@ if (!class_exists('Simple_Floating_Menu')) {
             ?>
             <div class="sfm-wrap">
                 <div class="sfm-title-bar">
-                    <h1>
+                    <h2>
                         <i class="essentialicon-menu"></i>
                         <?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?>
                         <span>- v <?php echo SFM_VERSION; ?></span>
-                    </h1>
+                    </h2>
+                </div>
+
+                <div class="wrap">
+                    <h1></h1>
                 </div>
 
                 <div id="sfm-header">

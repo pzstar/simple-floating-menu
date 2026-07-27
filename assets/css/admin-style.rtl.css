@@ -483,7 +483,11 @@
 
 #sfm-form-wrap p.submit {
     margin: 40px 0 0;
-    padding: 0;
+    border: 1px solid #EEE;
+    position: sticky;
+    bottom: 0;
+    background: #FAFAFA;
+    padding: 20px;
 }
 
 #sfm-form-wrap hr {
