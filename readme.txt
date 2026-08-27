@@ -3,38 +3,93 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 6.3
 Tested up to: 7.0
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Simple Floating Menu add a simple floating button with various layouts and settings.
+Simple Floating Menu adds a floating sticky bar of icon buttons to your site, with tooltips, in the position and shape you choose.
 
 == Description ==
 
-Simple Floating Menu is a free WordPress plugin that allows you to add a floating sticky menu with icons and tool tips with various designs.
+Simple Floating Menu is a free WordPress plugin that puts a floating sticky menu of icon buttons on your site. Each button gets an icon, a link and a tooltip, and the whole bar can sit anywhere on the screen.
 
-The plugin has 5 sets of icons pack with total of more than 5000+ icon to choose from to display the floating menu and interestingly you can add unlimited menu icon buttons. You can show the menu in 8 different positions with 9 different button shapes.
+It ships 5 icon packs with more than 12,000 icons between them, and you can add as many buttons as you like. Place the bar in any of 8 positions, run it down the side of the screen or across it, pick from 9 button shapes, and set the tooltip type from over 1,400 Google fonts.
+
+Everything is set from one screen with a live preview beside it, so you can see the bar change as you work.
 
 Want to test the dashboard settings without installing on your website? <a href="https://demo.tastewp.com/simple-floating-menu" target="_blank">Test Dashboard Settings Here</a>
 
 <h4>Main features</h4>
 <ul>
-<li>Custom Icons - 5 icon pack with 10,000+ icons to choose</li>
-<li>Unlimited Menu Items</li>
-<li>Option to show is same tab or new tab</li>
-<li>8 different position to display</li>
-<li>9 different button shapes to choose</li>
-<li>Customize button with height/width, icon size, color of buttons and toot tip text fonts</li>
-<li>600+ Google fonts to choose from for the toot tip text</li>
-<li>Add internal, external or one page scrolling links</li>
-<li>Export/Import Settings to transfer settings from one to another website</li>
+<li>5 icon packs with more than 12,000 icons between them</li>
+<li>Unlimited buttons</li>
+<li>Open each link in the same tab or a new one</li>
+<li>8 positions on the screen, with your own offset values</li>
+<li>Run the bar vertically or horizontally</li>
+<li>9 button shapes</li>
+<li>Set button height and width, icon size, icon position and a button shadow</li>
+<li>Button and icon colours with their own hover colours, plus tooltip background and text colours</li>
+<li>Over 1,400 Google fonts for the tooltip text, with full typography settings</li>
+<li>Serve Google fonts from your own server to help with GDPR</li>
+<li>Link anywhere: pages on your site, external addresses, or an anchor to a section on the same page</li>
+<li>Turn the menu on and off without deleting your setup</li>
+<li>Export and import your settings to move a bar from one site to another</li>
+<li>Live preview beside the settings</li>
+<li>Hooks for developers</li>
+<li>Translation ready</li>
 </ul>
 
+<h4>Looking for more than one bar?</h4>
+
+<a href="https://1.envato.market/LPXYao" target="_blank">Super Floating &amp; Flying Menu</a> is the premium version of this plugin. It keeps everything above and adds side panel menus, full screen menus, one page navigation and a library of over 100 ready made designs. Here is how the two compare.
+
+<ul>
+<li><strong>Menus</strong> &mdash; Free: one floating bar. Premium: as many menus as you like, each with its own design and its own rules.</li>
+<li><strong>Ready made designs</strong> &mdash; Free: none, you build the bar yourself. Premium: over 100 menus to import in one click and edit as your own.</li>
+<li><strong>Kinds of menu</strong> &mdash; Free: a floating bar. Premium: floating bars, quarter, half and full circular fans, a one page navigation indicator, side panels, skew panels, full screen menus and navigation icon menus.</li>
+<li><strong>Submenus</strong> &mdash; Free: a flat row of buttons. Premium: submenus up to three levels deep.</li>
+<li><strong>Icons</strong> &mdash; Free: 5 packs, 12,000+ icons. Premium: 7 sets, 13,000+ icons, animated hamburger icons, or your own images.</li>
+<li><strong>Animation</strong> &mdash; Free: none. Premium: 12 ways for the bar to appear, 29 hover and 12 idle animations for the buttons, and 37 entrance and 37 exit animations for panels.</li>
+<li><strong>Where it appears</strong> &mdash; Free: on every page. Premium: chosen pages, post types, archives, search and 404, by login state, by user role, by device and by language.</li>
+<li><strong>When it appears</strong> &mdash; Free: always. Premium: after the visitor scrolls, hidden again while they scroll down, or on a schedule of dates and weekdays.</li>
+<li><strong>Panel contents</strong> &mdash; Free: buttons and tooltips. Premium: a header logo, a search form, a social row, footer text, item descriptions and badges, or a panel built in Elementor.</li>
+<li><strong>Moving a setup</strong> &mdash; Free: export and import your settings. Premium: export, import and duplicate any single menu, including duplicating it as the other menu type.</li>
+</ul>
+
+<a href="https://1.envato.market/LPXYao" target="_blank">Get Super Floating &amp; Flying Menu</a> | <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See the demos</a>
+
 == Premium Upgrade ==
-For premium upgrade, please click below link <br>
-<a target="_blank" href="https://1.envato.market/LPXYao">Super Floating and Fly Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">Premium Demos</a>
- 
+
+The comparison is on the Description tab. This is the longer list of what <a target="_blank" href="https://1.envato.market/LPXYao">Super Floating &amp; Flying Menu</a> gives you.
+
+<h4>Everything in the premium version</h4>
+<ul>
+<li>Over 100 ready made menus you can import with one click, then edit as your own</li>
+<li>Build menus without touching Appearance &gt; Menus: each menu is its own item, with a builder screen for its items and settings side by side</li>
+<li>Unlimited menus on one site, each with its own design and its own display rules</li>
+<li>14 floating bar layouts, including quarter, half and full circular fans and a one page navigation indicator with 13 styles</li>
+<li>Side panel, skew side panel, full screen and navigation icon menus, with submenus up to three levels deep</li>
+<li>Panels with a colour, image or video background, a header logo, a search form, a social row and your own footer text</li>
+<li>7 icon packs with more than 13,000 icons, or upload your own image icons</li>
+<li>11 button shapes and 12 show and hide animations for the bar</li>
+<li>29 button hover animations and 12 idle animations to draw the eye</li>
+<li>37 panel entrance and 37 exit animations, plus 6 wave animations for full screen menus</li>
+<li>Set the colours of every button in one place instead of one at a time, and give the tooltips their own hover colours</li>
+<li>Show a menu only after the visitor scrolls, and hide it again while they scroll down</li>
+<li>Schedule a menu by date range and by days of the week, for offers that run themselves</li>
+<li>Show or hide a menu by page, post type, archive, login state or user role</li>
+<li>Hide a menu on desktop, tablet or mobile</li>
+<li>Build the panel contents with Elementor if you prefer a page builder</li>
+<li>Over 1,400 Google fonts with full typography settings on every text element</li>
+<li>Import, export and duplicate any menu, including duplicating it as the other menu type</li>
+<li>RTL ready and multilingual ready, tested with Polylang and WPML</li>
+</ul>
+
+<a target="_blank" href="https://1.envato.market/LPXYao">Buy Super Floating &amp; Flying Menu</a> | <a target="_blank" href="https://demo.hashthemes.com/super-floating-and-flying-menu/">See the demos</a>
+
+Pre sales questions are welcome at support@hashthemes.com
+
 == Installation ==
 The easy way to install the plugin is via WordPress.org plugin directory.
 
@@ -50,6 +105,10 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 3. Admin Panel of Simple Floating Menu
 
 == Changelog ==
+= 1.3.4 - 27 Aug, 2026 =
+* Plugin description and feature list rewritten, with a free and premium comparison
+* Premium features tab updated to match the current premium version
+
 = 1.3.3 - 16 Jul, 2026 =
 * Compatibility test with WordPress version 7.0
 

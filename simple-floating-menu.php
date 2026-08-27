@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.3.3
+ * Version: 1.3.4
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.3.3');
+define('SFM_VERSION', '1.3.4');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -892,6 +892,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </div>
 
                         <div id="tab-upgrade-pro" class="sfm-form-page">
+                            <p><?php esc_html_e('Simple Floating Menu gives you one floating bar. Super Floating &amp; Flying Menu gives you as many menus as you like, in seven different shapes, with over 100 ready made designs to start from and full control over when and where each one appears.', 'simple-floating-menu'); ?></p>
+
                             <h3>Demo and Purchase Links</h3>
                             <div class="sfm-inline-buttons">
                                 <div class="sfm-buy-link sfm-link-button">
@@ -904,20 +906,40 @@ if (!class_exists('Simple_Floating_Menu')) {
                             </div>
 
                             <div class="sfm-premium-features">
+                                <h4>Premium Features - Ready Made Menus</h4>
+                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/banner-image.png'); ?>" />
+                                <ul class="sfm-feature-box">
+                                    <li>Over 100 Ready Made Menus, Imported With One Click</li>
+                                    <li>Browse Them By Category, Or Search By Name</li>
+                                    <li>Start A New Menu From A Template, Or Apply One To A Menu You Already Have</li>
+                                    <li>Every Template Is Yours To Edit Once It Lands</li>
+                                    <li>Build Menus Without Using Appearance &gt; Menus At All</li>
+                                    <li>A Builder Screen With The Item List And Each Item's Settings Side By Side</li>
+                                    <li>Unlimited Menus On One Site, Each With Its Own Design And Display Rules</li>
+                                    <li>Import, Export And Duplicate Any Menu, Including As The Other Menu Type</li>
+                                </ul>
+                                <ul class="sfm-grid-col-3 sfm-grid-col">
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank"><?php esc_html_e('See All Demos', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Floating Menus', 'simple-floating-menu'); ?></a></li>
+                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Panel Menus', 'simple-floating-menu'); ?></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="sfm-premium-features">
                                 <h4>Premium Features - Floating Buttons</h4>
                                 <img src="<?php echo esc_url(SFM_URL . '/assets/img/floating-buttons.png'); ?>" />
                                 <ul class="sfm-feature-box">
                                     <li>Create Unlimited Floating Menu</li>
                                     <li>10 Differently Designed Styles</li>
                                     <li>11 Different Button Shapes</li>
-                                    <li>7 Font Icon Packs With 10,000+ Icons</li>
+                                    <li>7 Font Icon Packs With 13,000+ Icons</li>
                                     <li>Upload Custom Image Icons</li>
                                     <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
                                     <li>Configure Button/Icon Size & Colors</li>
                                     <li>Display Buttons Selectively On Specific Posts/Pages Only</li>
-                                    <li>Set Custom Typography With 800+ Google Fonts And Font Parameters</li>
+                                    <li>Set Custom Typography With 1,400+ Google Fonts And Font Parameters</li>
                                     <li>Import/Export Settings Easily With Just One Click</li>
-                                    <li>Set The Colors Of Buttons At Once Or Set The Colors Of Each Button Individually</li>
+                                    <li>Set Every Button's Colors In One Place Instead Of One At A Time, Plus Hover Colors For The Tooltips</li>
                                     <li>12 Show/Hide Animation</li>
                                     <li>RTL (Right to Left Text) Ready</li>
                                     <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
@@ -941,17 +963,17 @@ if (!class_exists('Simple_Floating_Menu')) {
                                 <img src="<?php echo esc_url(SFM_URL . '/assets/img/floating-circular-buttons.png'); ?>" />
                                 <ul class="sfm-feature-box">
                                     <li>11 Different Button Shapes</li>
-                                    <li>7 Font Icon Packs With 10,000+ Icons</li>
+                                    <li>7 Font Icon Packs With 13,000+ Icons</li>
                                     <li>Upload Custom Image Icons</li>
                                     <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
                                     <li>Configure Button/Icon Size & Colors</li>
                                     <li>Display Buttons Selectively On Specific Posts/Pages Only</li>
-                                    <li>Set Custom Typography With 800+ Google Fonts And Font Parameters</li>
+                                    <li>Set Custom Typography With 1,400+ Google Fonts And Font Parameters</li>
                                     <li>Import/Export Settings Easily With Just One Click</li>
-                                    <li>Set The Colors Of Buttons At Once Or Set The Colors Of Each Button Individually</li>
+                                    <li>Set Every Button's Colors In One Place Instead Of One At A Time, Plus Hover Colors For The Tooltips</li>
                                     <li>12 Show/Hide Animation</li>
-                                    <li>30 Hover Animation</li>
-                                    <li>12 Idle Animation To Grad User Attentions</li>
+                                    <li>29 Hover Animation</li>
+                                    <li>12 Idle Animation To Grab User Attention</li>
                                     <li>Open Sub Menu Items On Hover Or Click</li>
                                     <li>RTL (Right to Left Text) Ready</li>
                                     <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
@@ -1001,9 +1023,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li>Align the menu items to left, center, or right with 3 different Menu hover animations.</li>
                                     <li>Apply color background, Image background or video background to the panel.</li>
                                     <li>Align the content to left, center or right with custom spacing, typography, colors for each elements.</li>
-                                    <li>There are 31 different panel show/hide animation styles in which you can animate the menu panel on the entrance and exit.</li>
-                                    <li>Align the content to left, center or right with custom spacing, typography, colors for each elements.</li>
-                                    <li>Choose from 10,000 fonts icon or 16 animated Hamburger Icons or add your own custom jpg, png or gif images.</li>
+                                    <li>There are 37 entrance and 37 exit animations to choose from for the menu panel.</li>
+                                    <li>Choose from 13,000+ font icons or 16 animated Hamburger Icons, or add your own custom jpg, png or gif images.</li>
                                     <li>Eye catching Button Hover and Idle Animation to grab the attention of the users.</li>
                                     <li>Adjust the button and icon size, colors and shadow.</li>
                                     <li>Place the button at any position on the screen. There are 8 predefined positions to choose from along with offset values to move it.</li>
@@ -1018,6 +1039,21 @@ if (!class_exists('Simple_Floating_Menu')) {
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Side Panel Menu', 'simple-floating-menu'); ?></a></li>
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/skew-side-panel-menu/" target="_blank"><?php esc_html_e('Skew Side Panel Menu', 'simple-floating-menu'); ?></a></li>
                                     <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/full-screen-menu-wave-animation-1/" target="_blank"><?php esc_html_e('Full Screen Menu', 'simple-floating-menu'); ?></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="sfm-premium-features">
+                                <h4>Premium Features - When And Where A Menu Shows</h4>
+                                <ul class="sfm-feature-box">
+                                    <li>Show A Menu Only After The Visitor Has Scrolled Down, By Pixels Or By A Share Of The Page</li>
+                                    <li>Hide It Again While They Scroll Down, And Bring It Back When They Scroll Up</li>
+                                    <li>Schedule A Menu Between Two Dates, So An Offer Starts And Ends On Its Own</li>
+                                    <li>Run A Menu Only On Chosen Days Of The Week</li>
+                                    <li>Show Or Hide By Page, Post Type, Archive, Search Or 404</li>
+                                    <li>Show Only To Logged In Or Logged Out Visitors</li>
+                                    <li>Show Only To Chosen User Roles</li>
+                                    <li>Hide On Desktop, Tablet Or Mobile</li>
+                                    <li>Show A Different Menu Per Language With Polylang Or WPML</li>
                                 </ul>
                             </div>
 
