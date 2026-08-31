@@ -1,0 +1,374 @@
+/* The menu list: the add panel above it, and two columns of its own. */
+
+.sfm-add {
+    margin: 20px 20px 20px 0;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.sfm-add > summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.sfm-add > summary::-webkit-details-marker { display: none; }
+
+.sfm-add > summary:focus-visible {
+    outline: 2px solid #2271b1;
+    outline-offset: -2px;
+}
+
+.sfm-add-icon {
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    font-size: 17px;
+    text-align: center;
+    color: #2271b1;
+    background: #f0f6fc;
+    border-radius: 50%;
+}
+
+.sfm-add-title { font-size: 14px; font-weight: 600; color: #1d2327; }
+
+.sfm-add-hint { flex: 1 1 auto; min-width: 0; font-size: 13px; color: #646970; }
+
+.sfm-add-chevron { flex: 0 0 auto; color: #a7aaad; transition: transform .15s ease; }
+
+.sfm-add[open] > summary { border-bottom: 1px solid #f0f0f1; }
+.sfm-add[open] .sfm-add-chevron { transform: rotate(180deg); }
+
+.sfm-add > summary:hover .sfm-add-title,
+.sfm-add > summary:hover .sfm-add-chevron { color: #2271b1; }
+
+.sfm-add-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.sfm-add-route { padding: 18px; }
+.sfm-add-route + .sfm-add-route { border-left: 1px solid #f0f0f1; }
+
+@media screen and (max-width: 782px) {
+    .sfm-add-body { grid-template-columns: 1fr; }
+    .sfm-add-route + .sfm-add-route { border-left: 0; border-top: 1px solid #f0f0f1; }
+}
+
+.sfm-add-route-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #646970;
+}
+
+.sfm-add-route-title .dashicons { font-size: 16px; width: 16px; height: 16px; }
+
+.sfm-add-route input[type="text"] { width: 100%; max-width: 100%; }
+
+.sfm-add-actions { margin-top: 12px; }
+
+/* The drop zone stretches to fill its column, so both routes end level. */
+.sfm-add-route form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sfm-add-route .description { margin: 10px 0 0; font-size: 12px; }
+
+/* list columns */
+
+.column-sfm_buttons { width: 110px; }
+.column-sfm_position { width: 200px; }
+
+.sfm-pill {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: #f0f6fc;
+    color: #2271b1;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.sfm-muted { color: #646970; font-size: 12px; }
+
+
+/* Import drop zone
+   ------------------------------------------------------------- */
+
+}
+
+/* So both columns end level however tall the drop zone is. */
+.sfm-add-route .sfm-drop {
+    flex: 1 1 auto;
+    min-height: 130px;
+}
+
+/* The panel is already a bounded surface, so the picker inside it scrolls
+   rather than pushing the menu list further down the screen. */
+.sfm-add-route .sfm-tp-grid {
+    max-height: 320px;
+}
+
+.sfm-add-route .sfm-add-fields {
+    margin-top: 12px;
+}
+
+/* Drop zone
+------------------------------------------------------------- */
+
+.sfm-drop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 168px;
+    padding: 26px 20px;
+    text-align: center;
+
+    background: #fff;
+    border: 1px dashed #c3c4c7;
+    border-radius: 8px;
+    transition: border-color .15s ease, background .15s ease;
+}
+
+.sfm-drop:hover {
+    border-color: #2271b1;
+    background: #f7fbfe;
+}
+
+.sfm-drop.is-dragging {
+    border-style: solid;
+    border-color: #2271b1;
+    background: #f0f6fc;
+    box-shadow: inset 0 0 0 3px rgba(34, 113, 177, .09);
+}
+
+.sfm-drop.is-invalid {
+    border-style: solid;
+    border-color: #d63638;
+    background: #fcf3f3;
+}
+
+/* With a file in it the zone stops being a target and becomes a summary. */
+.sfm-drop.is-loaded {
+    min-height: 0;
+    padding: 12px;
+    text-align: left;
+
+    border-style: solid;
+    border-color: #dcdcde;
+    background: #fff;
+}
+
+/* Covers the zone, so dropping and clicking both work with no script. */
+.sfm-drop-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.sfm-drop-input:focus-visible + .sfm-drop-idle .sfm-drop-badge {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #2271b1;
+}
+
+.sfm-drop-idle {
+    display: block;
+    pointer-events: none;
+}
+
+/* display:block would otherwise win over the hidden attribute, leaving the
+   prompt on screen beside the file that replaced it. */
+.sfm-drop-idle[hidden] {
+    display: none;
+}
+
+.sfm-drop-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 14px;
+
+    color: #2271b1;
+    background: #f0f6fc;
+    border-radius: 50%;
+    transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+
+.sfm-drop-badge .dashicons {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    line-height: 1;
+}
+
+.sfm-drop:hover .sfm-drop-badge {
+    color: #fff;
+    background: #2271b1;
+}
+
+.sfm-drop.is-dragging .sfm-drop-badge {
+    color: #fff;
+    background: #2271b1;
+    transform: translateY(-3px);
+}
+
+.sfm-drop.is-invalid .sfm-drop-badge {
+    color: #d63638;
+    background: #fcebeb;
+}
+
+.sfm-drop-idle strong {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 14px;
+    color: #1d2327;
+}
+
+.sfm-drop-sub {
+    display: block;
+    font-size: 13px;
+    color: #646970;
+}
+
+.sfm-drop-sub b {
+    font-weight: 600;
+    color: #2271b1;
+}
+
+.sfm-drop-limit {
+    display: block;
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: #a7aaad;
+}
+
+/* What the file turned out to contain
+------------------------------------------------------------- */
+
+.sfm-drop-file {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.sfm-drop-file[hidden] {
+    display: none;
+}
+
+.sfm-drop-file-icon {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 20px;
+
+    color: #2271b1;
+    background: #f0f6fc;
+    border-radius: 6px;
+}
+
+.sfm-drop-file-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: block;
+}
+
+.sfm-drop-file-title {
+    display: block;
+    font-weight: 600;
+    color: #1d2327;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sfm-drop-file-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3px;
+    font-size: 12px;
+    color: #646970;
+}
+
+.sfm-drop-clear {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    background: none;
+    border: 0;
+    border-radius: 3px;
+    color: #646970;
+    cursor: pointer;
+}
+
+.sfm-drop-clear:hover {
+    background: #f0f0f1;
+    color: #d63638;
+}
+
+.sfm-drop-clear .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.sfm-drop-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+
+    margin: 10px 0 0;
+    color: #b32d2e;
+}
+
+.sfm-drop-error[hidden] {
+    display: none;
+}
+
+.sfm-drop-error::before {
+    content: "\f534";
+    font-family: dashicons;
+    font-size: 18px;
+    line-height: 1.4;
+    flex: 0 0 auto;
+}
+

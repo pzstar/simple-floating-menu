@@ -1,8 +1,20 @@
 <?php
 
-function sfm_dymanic_styles() {
+/**
+ * The menu's dynamic CSS.
+ *
+ * Called with nothing it describes the menu configured on the settings screen,
+ * exactly as it always has. A standalone menu passes its own settings and a
+ * class of its own, so several menus can sit on one page without the last one
+ * rewriting the sizing and position of the others.
+ *
+ * @param  array|null  $settings  Null for the settings screen's own menu.
+ * @param  string      $scope     A class the rules are narrowed to.
+ * @return string
+ */
+function sfm_dymanic_styles($settings = null, $scope = '') {
     $custom_css = "";
-    $settings = Simple_Floating_Menu::get_settings();
+    $settings = is_array($settings) ? $settings : Simple_Floating_Menu::get_settings();
 
     $button_height = $settings['button_height'];
     $button_width = $settings['button_width'];
@@ -16,8 +28,77 @@ function sfm_dymanic_styles() {
     $buttons = $settings['buttons'];
     $zindex = $settings['zindex'];
 
+    /* Published as variables too, so a template can size against them. */
+    $custom_css .= ".sfm-floating-menu{--sfm-button-height:{$button_height}px; --sfm-button-width:{$button_width}px;}";
     $custom_css .= ".sfm-floating-menu a.sfm-shape-button{height:{$button_height}px; width:{$button_width}px;}";
     $custom_css .= ".sfm-floating-menu a.sfm-shape-button{font-size:{$icon_size}px;}";
+
+    /* The menu's own colours. Each button may override any of them, and does so
+       through a longer selector, so those rules win without !important. */
+    if (!empty($settings['button_bg_color'])) {
+        $custom_css .= ".sfm-floating-menu a.sfm-shape-button{background:{$settings['button_bg_color']}}";
+    }
+
+    if (!empty($settings['button_bg_color_hover'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button:hover a.sfm-shape-button{background:{$settings['button_bg_color_hover']}}";
+    }
+
+    if (!empty($settings['button_icon_color'])) {
+        $custom_css .= ".sfm-floating-menu a.sfm-shape-button{color:{$settings['button_icon_color']}}";
+    }
+
+    if (!empty($settings['button_icon_color_hover'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button:hover a.sfm-shape-button{color:{$settings['button_icon_color_hover']}}";
+    }
+
+    if (!empty($settings['tooltip_bg_color'])) {
+        $tip_bg = $settings['tooltip_bg_color'];
+        $custom_css .= ".sfm-floating-menu .sfm-tool-tip{background:{$tip_bg}}";
+        $custom_css .= ".sfm-floating-menu.top-left.horizontal .sfm-tool-tip:after,
+                        .sfm-floating-menu.top-middle.horizontal .sfm-tool-tip:after,
+                        .sfm-floating-menu.top-right.horizontal .sfm-tool-tip:after{border-color: transparent transparent {$tip_bg} transparent;}";
+        $custom_css .= ".sfm-floating-menu.top-left.vertical .sfm-tool-tip:after,
+                        .sfm-floating-menu.top-middle.vertical .sfm-tool-tip:after,
+                        .sfm-floating-menu.bottom-left.vertical .sfm-tool-tip:after,
+                        .sfm-floating-menu.bottom-middle.vertical .sfm-tool-tip:after,
+                        .sfm-floating-menu.middle-left.vertical .sfm-tool-tip:after{border-color: transparent {$tip_bg} transparent transparent;}";
+        $custom_css .= ".sfm-floating-menu.top-right.vertical .sfm-tool-tip:after,
+                        .sfm-floating-menu.middle-right.vertical .sfm-tool-tip:after,
+                        .sfm-floating-menu.bottom-right.vertical .sfm-tool-tip:after{border-color: transparent transparent transparent {$tip_bg};}";
+        $custom_css .= ".sfm-floating-menu.bottom-left.horizontal .sfm-tool-tip:after,
+                        .sfm-floating-menu.bottom-middle.horizontal .sfm-tool-tip:after,
+                        .sfm-floating-menu.bottom-right.horizontal .sfm-tool-tip:after,
+                        .sfm-floating-menu.middle-left.horizontal .sfm-tool-tip:after,
+                        .sfm-floating-menu.middle-right.horizontal .sfm-tool-tip:after{border-color: {$tip_bg} transparent transparent transparent;}";
+    }
+
+    if (!empty($settings['tooltip_bg_color_hover'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button:hover .sfm-tool-tip{background:{$settings['tooltip_bg_color_hover']}}";
+    }
+
+    if (!empty($settings['tooltip_text_color'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-tool-tip a{color:{$settings['tooltip_text_color']}}";
+    }
+
+    if (!empty($settings['tooltip_text_color_hover'])) {
+        $custom_css .= ".sfm-floating-menu .sfm-button:hover .sfm-tool-tip a{color:{$settings['tooltip_text_color_hover']}}";
+    }
+
+    if (isset($settings['tooltip_border_radius']) && $settings['tooltip_border_radius'] !== '') {
+        $custom_css .= ".sfm-floating-menu .sfm-tool-tip{border-radius:{$settings['tooltip_border_radius']}px}";
+    }
+
+    if (isset($settings['tooltip_padding']) && is_array($settings['tooltip_padding'])) {
+        /* A side left empty keeps whatever the stylesheet gives it, so each is
+           written on its own rather than as one shorthand. */
+        foreach (array('top', 'right', 'bottom', 'left') as $side) {
+            $value = isset($settings['tooltip_padding'][$side]) ? $settings['tooltip_padding'][$side] : '';
+
+            if ($value !== '') {
+                $custom_css .= ".sfm-floating-menu .sfm-tool-tip a{padding-{$side}:{$value}px}";
+            }
+        }
+    }
     $custom_css .= ".sfm-floating-menu i{top:{$icon_position}px}";
     $custom_css .= ".sfm-floating-menu.horizontal{margin:0 -{$button_spacing}px}";
     $custom_css .= ".sfm-floating-menu.vertical{margin:-{$button_spacing}px 0}";
@@ -34,27 +115,27 @@ function sfm_dymanic_styles() {
         foreach ($buttons as $button) {
             $class = $button['id'];
 
-            if (isset($button['button_bg_color'])) {
+            if (!empty($button['button_bg_color'])) {
                 $button_bg_color = $button['button_bg_color'];
                 $custom_css .= ".sfm-floating-menu .{$class} a.sfm-shape-button{background:{$button_bg_color}}";
             }
 
-            if (isset($button['button_icon_color'])) {
+            if (!empty($button['button_icon_color'])) {
                 $button_icon_color = $button['button_icon_color'];
                 $custom_css .= ".sfm-floating-menu .{$class} a.sfm-shape-button{color:{$button_icon_color}}";
             }
 
-            if (isset($button['button_bg_color_hover'])) {
+            if (!empty($button['button_bg_color_hover'])) {
                 $button_bg_color_hover = $button['button_bg_color_hover'];
                 $custom_css .= ".sfm-floating-menu .{$class}:hover a.sfm-shape-button{background:{$button_bg_color_hover}}";
             }
 
-            if (isset($button['button_icon_color_hover'])) {
+            if (!empty($button['button_icon_color_hover'])) {
                 $button_icon_color_hover = $button['button_icon_color_hover'];
                 $custom_css .= ".sfm-floating-menu .{$class}:hover a.sfm-shape-button{color:{$button_icon_color_hover}}";
             }
 
-            if (isset($button['tooltip_bg_color'])) {
+            if (!empty($button['tooltip_bg_color'])) {
                 $tooltip_bg_color = $button['tooltip_bg_color'];
                 $custom_css .= ".sfm-floating-menu .{$class} .sfm-tool-tip{background:{$tooltip_bg_color}}";
                 $custom_css .= ".sfm-floating-menu.top-left.horizontal .{$class} .sfm-tool-tip:after,
@@ -75,7 +156,33 @@ function sfm_dymanic_styles() {
                                 .sfm-floating-menu.middle-right.horizontal .{$class} .sfm-tool-tip:after{border-color: {$tooltip_bg_color} transparent transparent transparent;}";
             }
 
-            if (isset($button['tooltip_text_color'])) {
+            if (!empty($button['tooltip_bg_color_hover'])) {
+                $tooltip_bg_color_hover = $button['tooltip_bg_color_hover'];
+                $custom_css .= ".sfm-floating-menu .{$class}:hover .sfm-tool-tip{background:{$tooltip_bg_color_hover}}";
+                $custom_css .= ".sfm-floating-menu.top-left.horizontal .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.top-middle.horizontal .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.top-right.horizontal .{$class}:hover .sfm-tool-tip:after{border-color: transparent transparent {$tooltip_bg_color_hover} transparent;}";
+                $custom_css .= ".sfm-floating-menu.top-left.vertical .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.top-middle.vertical .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.bottom-left.vertical .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.bottom-middle.vertical .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.middle-left.vertical .{$class}:hover .sfm-tool-tip:after{border-color: transparent {$tooltip_bg_color_hover} transparent transparent;}";
+                $custom_css .= ".sfm-floating-menu.top-right.vertical .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.middle-right.vertical .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.bottom-right.vertical .{$class}:hover .sfm-tool-tip:after{border-color: transparent transparent transparent {$tooltip_bg_color_hover};}";
+                $custom_css .= ".sfm-floating-menu.bottom-left.horizontal .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.bottom-middle.horizontal .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.bottom-right.horizontal .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.middle-left.horizontal .{$class}:hover .sfm-tool-tip:after,
+                                .sfm-floating-menu.middle-right.horizontal .{$class}:hover .sfm-tool-tip:after{border-color: {$tooltip_bg_color_hover} transparent transparent transparent;}";
+            }
+
+            if (!empty($button['tooltip_text_color_hover'])) {
+                $tooltip_text_color_hover = $button['tooltip_text_color_hover'];
+                $custom_css .= ".sfm-floating-menu .{$class}:hover .sfm-tool-tip a{color:{$tooltip_text_color_hover}}";
+            }
+
+            if (!empty($button['tooltip_text_color'])) {
                 $tooltip_text_color = $button['tooltip_text_color'];
                 $custom_css .= ".sfm-floating-menu .{$class} .sfm-tool-tip a{color:{$tooltip_text_color}}";
             }
@@ -142,6 +249,11 @@ function sfm_dymanic_styles() {
 
     if ($settings['button_shadow']['color']) {
         $custom_css .= ".sfm-floating-menu .sfm-button{--sfm-button-shadow-color:{$settings['button_shadow']['color']};}";
+    }
+
+    /* Narrowed last, so every rule above is written once and in one style. */
+    if ($scope !== '') {
+        $custom_css = str_replace('.sfm-floating-menu', '.sfm-floating-menu.' . $scope, $custom_css);
     }
 
     return sfm_css_strip_whitespace($custom_css);

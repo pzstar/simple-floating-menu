@@ -1,0 +1,243 @@
+/*
+ * The template picker.
+ *
+ * The card chrome is the premium plugin's, so choosing a design reads the same
+ * in both. Each card shows the template's own preview picture.
+ */
+
+.sfm-tp {
+    margin: 0;
+}
+
+/* ---------------------------------------------------------------- bar --- */
+
+.sfm-tp-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.sfm-tp-search {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 320px;
+}
+
+.sfm-tp-search .dashicons {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 8px;
+    transform: translateY(-50%);
+    color: #8c8f94;
+    pointer-events: none;
+}
+
+.sfm-tp-search-input {
+    width: 100%;
+    /* Logical, so the icon and the caret stay on the same side in RTL. The
+       card artwork below is deliberately not mirrored: it draws where a menu
+       actually sits on the screen, which reading direction does not move. */
+    padding-inline-start: 32px !important;
+}
+
+/* Safari draws its own clear button on type="search" and it lands on ours. */
+.sfm-tp-search-input::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+.sfm-tp-count {
+    color: #646970;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ filters --- */
+
+.sfm-tp-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.sfm-tp-filter {
+    padding: 4px 12px;
+    border: 1px solid #c3c4c7;
+    border-radius: 999px;
+    background: #fff;
+    color: #2c3338;
+    font-size: 12px;
+    line-height: 1.8;
+    cursor: pointer;
+}
+
+.sfm-tp-filter:hover {
+    border-color: #8c8f94;
+    background: #f6f7f7;
+}
+
+.sfm-tp-filter.is-active {
+    border-color: #2271b1;
+    background: #2271b1;
+    color: #fff;
+}
+
+.sfm-tp-filter:focus-visible {
+    outline: 2px solid #2271b1;
+    outline-offset: 1px;
+}
+
+/* --------------------------------------------------------------- grid --- */
+
+.sfm-tp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+    gap: 12px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.sfm-tp-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* If the grid does scroll a card into view, it stops short of the edge. */
+    scroll-margin: 10px;
+}
+
+.sfm-tp-card[hidden] {
+    display: none;
+}
+
+/* Hidden, but still focusable and still reachable by :checked.
+ *
+ * Deliberately not .screen-reader-text: that hides with clip-path: inset(50%)
+ * and a negative margin, which leaves the input with no box to speak of.
+ * Choosing a card focuses it, and a browser asked to scroll a focused element
+ * with a collapsed rect into view scrolls to the top of the document instead
+ * of staying put. Anchoring it inside its own card with opacity keeps it
+ * silent to sighted users and honest to the browser. */
+.sfm-tp-input {
+    position: absolute;
+    top: 10px;
+    inset-inline-start: 10px;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    /* The label in front of it takes every click. */
+    pointer-events: none;
+}
+
+.sfm-tp-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+    padding: 8px;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.sfm-tp-label:hover {
+    border-color: #8c8f94;
+}
+
+.sfm-tp-input:checked + .sfm-tp-label {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.sfm-tp-input:focus-visible + .sfm-tp-label {
+    outline: 2px solid #2271b1;
+    outline-offset: 1px;
+}
+
+.sfm-tp-name {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #1d2327;
+}
+
+.sfm-tp-facts,
+.sfm-tp-warning {
+    font-size: 11px;
+    line-height: 1.5;
+    color: #646970;
+}
+
+.sfm-tp-warning {
+    color: #b32d2e;
+}
+
+.sfm-tp-card.is-unavailable .sfm-tp-label {
+    opacity: .7;
+}
+
+.sfm-tp-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 4px;
+    padding: 0 2px;
+    font-size: 11px;
+    line-height: 1.3;
+    text-decoration: none;
+    align-self: flex-start;
+}
+
+.sfm-tp-demo .dashicons {
+    width: 13px;
+    height: 13px;
+    font-size: 13px;
+}
+
+.sfm-tp-empty {
+    margin: 12px 2px;
+    color: #646970;
+}
+
+
+/* ------------------------------------------------------------ artwork --- */
+
+/* Where the premium plugin draws its hundred templates in CSS, the three here
+   have a picture each, so the art slot is simply the image. */
+
+/* The three previews are the same size, so letting them set their own height
+   keeps the cards even without boxing the picture into a different shape. */
+.sfm-tp-art {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #f6f7f7;
+}
+
+.sfm-tp-art img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.sfm-tp-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 6px 0 0;
+}
+
+.sfm-tp-fact {
+    padding: 2px 7px;
+    border-radius: 9px;
+    background: #f0f0f1;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #50575e;
+}

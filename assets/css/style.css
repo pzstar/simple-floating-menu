@@ -226,7 +226,7 @@
     text-orientation: mixed;
     top: 100%;
     left: 50%;
-    transform: translate(-50%, 20px);
+    transform: translate(-50%, var(--sfm-tooltip-indent, 20px));
 }
 
 .sfm-floating-menu.top-left.horizontal .sfm-tool-tip:after,
@@ -246,7 +246,7 @@
 .sfm-floating-menu.middle-left.vertical .sfm-tool-tip {
     top: 50%;
     left: 100%;
-    transform: translate(20px, -50%);
+    transform: translate(var(--sfm-tooltip-indent, 20px), -50%);
 }
 
 .sfm-floating-menu.top-left.vertical .sfm-tool-tip:after,
@@ -266,7 +266,7 @@
 .sfm-floating-menu.bottom-right.vertical .sfm-tool-tip {
     top: 50%;
     right: 100%;
-    transform: translate(-20px, -50%);
+    transform: translate(calc(var(--sfm-tooltip-indent, 20px) * -1), -50%);
 }
 
 .sfm-floating-menu.top-right.vertical .sfm-tool-tip:after,
@@ -288,7 +288,7 @@
     text-orientation: mixed;
     bottom: 100%;
     left: 50%;
-    transform: translate(-50%, -20px);
+    transform: translate(-50%, calc(var(--sfm-tooltip-indent, 20px) * -1));
 }
 
 .sfm-floating-menu.bottom-left.horizontal .sfm-tool-tip:after,
@@ -319,4 +319,39 @@
 .sfm-shadow-fields li input[type="number"] {
     width: 60px;
     text-align: center;
+}
+
+/* Template 2 - the button swells while it is hovered. */
+
+.sfm-floating-menu.sfm-template-2 .sfm-button:hover a.sfm-shape-button {
+    height: calc(var(--sfm-button-height, 50px) * 1.2);
+    width: calc(var(--sfm-button-width, 50px) * 1.2);
+}
+
+/* Template 3 - the tooltip sits flush against the button, with no pointer. */
+
+.sfm-floating-menu.sfm-template-3 {
+    --sfm-tooltip-indent: 0px;
+}
+
+.sfm-floating-menu.sfm-template-3 .sfm-tool-tip:after {
+    display: none;
+}
+
+.sfm-floating-menu.sfm-template-3 .sfm-tool-tip {
+    display: flex;
+    align-items: center;
+}
+
+.sfm-floating-menu.sfm-template-3.vertical .sfm-tool-tip {
+    height: 80%;
+}
+
+.sfm-floating-menu.sfm-template-3.horizontal .sfm-tool-tip {
+    width: 80%;
+    justify-content: center;
+}
+
+.sfm-floating-menu.sfm-template-3 .sfm-tool-tip a {
+    padding: 10px 20px;
 }

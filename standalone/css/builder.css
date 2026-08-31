@@ -1,0 +1,1489 @@
+/* The menu builder screen.
+ *
+ * Colours are the WordPress admin palette so the screen sits inside the admin
+ * rather than beside it. Spacing is driven by the two variables below, which
+ * is what keeps the list, the editor and the modal reading as one surface.
+ */
+
+.sfm-page {
+    --sfm-blue: #2271b1;
+    --sfm-blue-dark: #135e96;
+    --sfm-ink: #1d2327;
+    --sfm-muted: #646970;
+    --sfm-line: #dcdcde;
+    --sfm-sunken: #f6f7f7;
+    --sfm-gap: 20px;
+    --sfm-pad: 16px;
+
+    margin-right: 20px;
+}
+
+.sfm-page * {
+    box-sizing: border-box;
+}
+
+/* Top bar
+------------------------------------------------------------- */
+
+.sfm-topbar {
+    position: sticky;
+    top: var(--wp-admin--admin-bar--height, 32px);
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    margin: 0 0 var(--sfm-gap);
+    padding: 12px var(--sfm-pad);
+
+    background: #fff;
+    border: 1px solid var(--sfm-line);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+.sfm-topbar-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+
+    padding-right: 12px;
+    margin-right: 2px;
+
+    border-right: 1px solid var(--sfm-line);
+    color: var(--sfm-muted);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.sfm-topbar-back:hover,
+.sfm-topbar-back:focus {
+    color: var(--sfm-blue);
+}
+
+.sfm-topbar-back .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.sfm-topbar-name {
+    flex: 1 1 200px;
+    min-width: 160px;
+}
+
+.sfm-topbar-name input[type="text"] {
+    width: 100%;
+    margin: 0;
+    padding: 6px 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--sfm-ink);
+
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.sfm-topbar-name input[type="text"]:hover {
+    border-color: var(--sfm-line);
+}
+
+.sfm-topbar-name input[type="text"]:focus {
+    background: #fff;
+    border-color: var(--sfm-blue);
+}
+
+.sfm-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.sfm-topbar-actions .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sfm-topbar-actions .button .dashicons {
+    font-size: 17px;
+    width: 17px;
+    height: 17px;
+}
+
+/* Badge and switch
+------------------------------------------------------------- */
+
+.sfm-badge {
+    display: inline-block;
+    padding: 3px 10px;
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+
+    border-radius: 11px;
+}
+
+.sfm-badge-float {
+    background: #e5f1f8;
+    color: #0a4b78;
+}
+
+.sfm-badge-fly {
+    background: #f0e6f6;
+    color: #6b2d8a;
+}
+
+.sfm-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sfm-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+}
+
+.sfm-toggle-track {
+    position: relative;
+    display: block;
+    width: 36px;
+    height: 20px;
+
+    background: #c3c4c7;
+    border-radius: 10px;
+    transition: background .15s ease;
+}
+
+.sfm-toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+    transition: transform .15s ease;
+}
+
+.sfm-toggle input:checked + .sfm-toggle-track {
+    background: #00a32a;
+}
+
+.sfm-toggle input:checked + .sfm-toggle-track .sfm-toggle-knob {
+    transform: translateX(16px);
+}
+
+.sfm-toggle input:focus + .sfm-toggle-track {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sfm-blue);
+}
+
+.sfm-toggle-text {
+    font-weight: 500;
+    color: var(--sfm-ink);
+}
+
+/* Design card
+   The one thing on this screen that opens fourteen panels of settings, so it
+   gets its own surface above the item list rather than a button in a row.
+------------------------------------------------------------- */
+
+.sfm-design {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    margin: 0 0 var(--sfm-gap);
+    padding: 18px 20px;
+
+    background: linear-gradient(180deg, #fff 0%, #f6f7f7 100%);
+    border: 1px solid var(--sfm-line);
+    border-left: 4px solid var(--sfm-ink);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+.sfm-design-preview {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 108px;
+    height: 78px;
+    overflow: hidden;
+
+    background: #fff;
+    border: 1px solid var(--sfm-line);
+    border-radius: 3px;
+}
+
+.sfm-design-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sfm-design-preview .dashicons {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    color: #c3c4c7;
+}
+
+.sfm-design-body {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+.sfm-design-body h2 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sfm-muted);
+}
+
+.sfm-design-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 6px;
+}
+
+.sfm-design-fact {
+    display: inline-block;
+    padding: 2px 9px;
+
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sfm-ink);
+
+    background: #fff;
+    border: 1px solid var(--sfm-line);
+    border-radius: 10px;
+}
+
+.sfm-design-note {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--sfm-muted);
+}
+
+.sfm-design-action {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+/* Deliberately not WordPress blue: it opens a dark modal, and the page already
+   spends its blue on Save. */
+.sfm-design-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 11px 20px;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #fff;
+
+    background: var(--sfm-ink);
+    border: 1px solid var(--sfm-ink);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .12s ease;
+}
+
+.sfm-design-button:hover,
+.sfm-design-button:focus {
+    background: #000;
+    color: #fff;
+}
+
+.sfm-design-button:focus-visible {
+    outline: 2px solid var(--sfm-blue);
+    outline-offset: 2px;
+}
+
+.sfm-design-button .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (max-width: 782px) {
+    .sfm-design-action {
+        flex: 1 1 100%;
+        margin-left: 0;
+    }
+
+    .sfm-design-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Two pane body
+------------------------------------------------------------- */
+
+.sfm-builder-body {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sfm-gap);
+}
+
+.sfm-pane {
+    background: #fff;
+    border: 1px solid var(--sfm-line);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.sfm-pane-list {
+    flex: 0 0 380px;
+    min-width: 0;
+}
+
+.sfm-pane-detail {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: var(--sfm-pad) 20px 24px;
+}
+
+@media screen and (max-width: 1100px) {
+    .sfm-builder-body {
+        flex-direction: column;
+    }
+
+    .sfm-pane-list {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .sfm-pane-detail {
+        width: 100%;
+    }
+}
+
+/* Item list
+------------------------------------------------------------- */
+
+.sfm-pane-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    padding: 12px var(--sfm-pad);
+    border-bottom: 1px solid var(--sfm-line);
+}
+
+.sfm-pane-head h2 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sfm-muted);
+}
+
+.sfm-pane-head .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.sfm-pane-head .dashicons {
+    font-size: 1em;
+    width: auto;
+    height: auto;
+}
+
+.sfm-list {
+    margin: 0;
+    padding: 8px;
+    list-style: none;
+}
+
+.sfm-row {
+    --sfm-depth: 0;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    margin: 0 0 2px;
+    margin-left: calc(var(--sfm-depth) * 22px);
+    padding: 2px 4px 2px 2px;
+
+    background: #fff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: margin-left .15s ease, background .1s ease;
+}
+
+.sfm-row:hover {
+    background: var(--sfm-sunken);
+    border-color: var(--sfm-line);
+}
+
+.sfm-row.is-selected {
+    background: #f0f6fc;
+    border-color: #a7c8e5;
+}
+
+/* A guide line, so a nested item reads as belonging to the one above it. */
+.sfm-row[data-depth]:not([data-depth="0"])::before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    width: 8px;
+    height: 1px;
+    background: var(--sfm-line);
+}
+
+.sfm-row-handle {
+    flex: 0 0 auto;
+    cursor: move;
+    color: #a7aaad;
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+}
+
+.sfm-row:hover .sfm-row-handle {
+    color: var(--sfm-muted);
+}
+
+.sfm-row-open {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px 4px;
+
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sfm-row-open:focus {
+    outline: 1px solid var(--sfm-blue);
+    outline-offset: -1px;
+}
+
+.sfm-row-icon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+
+    color: var(--sfm-muted);
+    background: var(--sfm-sunken);
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.sfm-row.is-selected .sfm-row-icon {
+    background: #fff;
+    color: var(--sfm-blue);
+}
+
+.sfm-row-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: block;
+}
+
+.sfm-row-label,
+.sfm-row-url {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sfm-row-label {
+    font-weight: 500;
+    color: var(--sfm-ink);
+    line-height: 1.4;
+}
+
+.sfm-row-url {
+    font-size: 11px;
+    color: var(--sfm-muted);
+    line-height: 1.4;
+}
+
+.sfm-row-tools {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 1px;
+    opacity: 0;
+    transition: opacity .1s ease;
+}
+
+.sfm-row:hover .sfm-row-tools,
+.sfm-row.is-selected .sfm-row-tools,
+.sfm-row-tools:focus-within {
+    opacity: 1;
+}
+
+.sfm-row-tools button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+
+    background: none;
+    border: 0;
+    border-radius: 3px;
+    color: var(--sfm-muted);
+    cursor: pointer;
+}
+
+.sfm-row-tools button:hover:not(:disabled) {
+    background: #fff;
+    color: var(--sfm-blue);
+    box-shadow: 0 0 0 1px var(--sfm-line);
+}
+
+.sfm-row-tools button:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.sfm-row-tools .sfm-row-remove:hover {
+    color: #d63638;
+}
+
+.sfm-row-tools .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.sfm-row-placeholder {
+    height: 40px;
+    margin-bottom: 2px;
+
+    background: #f0f6fc;
+    border: 1px dashed var(--sfm-blue);
+    border-radius: 3px;
+}
+
+.sfm-list-empty {
+    margin: 0;
+    padding: 24px var(--sfm-pad);
+    text-align: center;
+    color: var(--sfm-muted);
+}
+
+.sfm-pane-foot {
+    padding: 12px var(--sfm-pad);
+    border-top: 1px solid var(--sfm-line);
+    background: var(--sfm-sunken);
+    border-radius: 0 0 3px 3px;
+}
+
+.sfm-pane-foot select {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Premium dresses this control with select2; this plugin already ships Chosen,
+   so Chosen is dressed to match rather than a second library being loaded.
+   The measurements are premium's: a 40px control, a hairline in #949494 and a
+   2px radius. */
+
+.sfm-pane-foot .chosen-container {
+    width: 100% !important;
+}
+
+.sfm-pane-foot .chosen-container-single .chosen-single {
+    height: 40px;
+    padding: 0 8px;
+    border: 1px solid #949494;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: none;
+    color: #1e1e1e;
+    line-height: 40px;
+}
+
+.sfm-pane-foot .chosen-container-single .chosen-single span {
+    margin-right: 40px;
+    line-height: 40px;
+}
+
+.sfm-pane-foot .chosen-container-active .chosen-single,
+.sfm-pane-foot .chosen-container-active.chosen-with-drop .chosen-single {
+    border-color: #949494;
+    background: #fff;
+    box-shadow: none;
+}
+
+.sfm-pane-foot .chosen-container-active.chosen-with-drop .chosen-single {
+    border-radius: 2px 2px 0 0;
+}
+
+/* Chosen draws its arrow from a sprite; premium's is a plain triangle. */
+.sfm-pane-foot .chosen-container-single .chosen-single div {
+    width: 40px;
+}
+
+.sfm-pane-foot .chosen-container-single .chosen-single div b {
+    position: relative;
+    display: block;
+    height: 100%;
+    background: none;
+}
+
+.sfm-pane-foot .chosen-container-single .chosen-single div b:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -2px 0 0 -4px;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    border-color: #888 transparent transparent transparent;
+}
+
+.sfm-pane-foot .chosen-container-active.chosen-with-drop .chosen-single div b:after {
+    margin-top: -3px;
+    border-width: 0 4px 5px 4px;
+    border-color: transparent transparent #888 transparent;
+}
+
+.sfm-pane-foot .chosen-container .chosen-drop {
+    border-color: #949494;
+    border-radius: 0 0 2px 2px;
+    box-shadow: none;
+}
+
+.sfm-pane-foot .chosen-container-single .chosen-search input[type="text"] {
+    border-color: #949494;
+    border-radius: 2px;
+}
+
+.sfm-pane-foot .chosen-container .chosen-results li.highlighted {
+    background: var(--sfm-blue);
+    color: #fff;
+}
+
+.sfm-hint {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--sfm-muted);
+}
+
+/* Item editor
+------------------------------------------------------------- */
+
+.sfm-editor[hidden],
+.sfm-detail-empty[hidden] {
+    display: none;
+}
+
+.sfm-detail-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    min-height: 240px;
+    color: var(--sfm-muted);
+}
+
+.sfm-detail-empty .dashicons {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    opacity: .4;
+}
+
+.sfm-editor-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding-bottom: 12px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--sfm-line);
+}
+
+.sfm-editor-icon {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+
+    color: var(--sfm-blue);
+    background: #f0f6fc;
+    border-radius: 4px;
+}
+
+.sfm-editor-title {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--sfm-ink);
+}
+
+.sfm-section {
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.sfm-section:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sfm-section-title {
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sfm-muted);
+}
+
+.sfm-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px 20px;
+    align-items: start;
+}
+
+.sfm-field-wide {
+    grid-column: 1 / -1;
+}
+
+.sfm-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* A field only some actions use is hidden with the attribute, and display
+   would otherwise win over it. */
+.sfm-field[hidden] {
+    display: none;
+}
+
+/* The link fields still wrap their one control, which is what a label is for.
+   The heading labels below are tied by id instead, so they are excluded. */
+.sfm-field > label:not(.sfm-field-label) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sfm-field-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sfm-ink);
+}
+
+/* Iris builds itself where the input was, so it needs the full column. */
+.sfm-field-color .wp-picker-container {
+    width: 100%;
+}
+
+.sfm-field input[type="text"],
+.sfm-field select,
+.sfm-field textarea {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.sfm-field textarea {
+    resize: vertical;
+}
+
+.sfm-field-check,
+.sfm-field-check > label:not(.sfm-field-label) {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.sfm-field-check label {
+    cursor: pointer;
+}
+
+.sfm-field-check input[type="checkbox"] {
+    margin: 0;
+}
+
+.sfm-field-help {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--sfm-muted);
+}
+
+/* Icon and image choosers
+------------------------------------------------------------- */
+
+.sfm-item-icon,
+.sfm-item-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* An item's icon may be an uploaded image rather than a glyph. */
+.sfm-row-icon img,
+.sfm-editor-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 3px;
+}
+
+.sfm-item-image-preview {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    background: var(--sfm-sunken);
+    border: 1px solid var(--sfm-line);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.sfm-item-image-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sfm-item-icon-preview {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: var(--sfm-sunken);
+    border: 1px solid var(--sfm-line);
+    border-radius: 3px;
+    font-size: 20px;
+}
+
+.sfm-item-icon input[type="text"],
+.sfm-item-image input[type="text"] {
+    min-width: 0;
+}
+
+.sfm-icon-picker {
+    position: absolute;
+    z-index: 100;
+    top: calc(100% + 4px);
+    left: 0;
+
+    width: 320px;
+    max-width: 90vw;
+    max-height: 300px;
+    overflow: auto;
+    padding: 10px;
+
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .16);
+}
+
+.sfm-icon-picker .sfm-icon-library,
+.sfm-icon-picker .sfm-icon-search {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.sfm-icon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin: 0;
+}
+
+.sfm-icon-list li {
+    margin: 0;
+}
+
+.sfm-icon-list i {
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    color: var(--sfm-ink);
+}
+
+.sfm-icon-list i:hover {
+    background: var(--sfm-blue);
+    color: #fff;
+}
+
+/* The one the button is already set to. */
+.sfm-icon-list i.is-current {
+    background: #f0f6fc;
+    box-shadow: inset 0 0 0 1px var(--sfm-blue);
+}
+
+.sfm-icon-empty {
+    margin: 0;
+    padding: 4px 2px;
+    font-size: 12px;
+    color: var(--sfm-muted);
+}
+
+/* Footer
+------------------------------------------------------------- */
+
+.sfm-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-top: var(--sfm-gap);
+    padding: 12px var(--sfm-pad);
+
+    background: #fff;
+    border: 1px solid var(--sfm-line);
+    border-radius: 4px;
+}
+
+.sfm-trash {
+    color: #b32d2e;
+    text-decoration: none;
+}
+
+.sfm-trash:hover,
+.sfm-trash:focus {
+    color: #8a2424;
+    text-decoration: underline;
+}
+
+/* Small screens
+------------------------------------------------------------- */
+
+@media screen and (max-width: 782px) {
+    /* The admin bar stops being fixed here, so a sticky bar would float over
+       a gap rather than under the bar. */
+    .sfm-topbar {
+        position: static;
+    }
+
+    .sfm-topbar-name {
+        flex: 1 1 100%;
+        order: -1;
+    }
+
+    .sfm-topbar-actions {
+        flex: 1 1 100%;
+        margin-left: 0;
+    }
+}
+
+.sfm-flatten-notice {
+    margin: 0 0 var(--sfm-gap);
+}
+
+/* The handle is a control, not decoration: it also takes the arrow keys. */
+.sfm-row-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 3px;
+}
+
+.sfm-row-handle:focus-visible {
+    outline: 2px solid var(--sfm-blue);
+    outline-offset: -2px;
+}
+
+
+
+/* Design modal
+   The frame, the settings rows and the field groups are the premium plugin's
+   own rules, copied across with its prefix swapped for this one's, so the two
+   screens are laid out by the same stylesheet rather than by an imitation of
+   it. What is left out is the machinery this plugin has no markup for.
+------------------------------------------------------------- */
+
+.sfm-mega-menu .sfm-modal .sfm-modal-close {
+    color: #FFF;
+    text-decoration: none;
+    text-align: center;
+    height: 60px;
+    width: 60px;
+    outline: 0;
+    box-shadow: none;
+}
+
+.sfm-frame-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #1d2327;
+    min-height: 60px;
+}
+
+.sfm-frame-title h1 {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 20px 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.sfm-frame-wrap {
+    box-sizing: border-box;
+    display: flex;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    height: 100%;
+}
+
+.sfm-frame-wrap .sfm-frame-menu {
+    flex: 0 1 230px;
+    width: 230px;
+    background: #f4f4f4;
+}
+
+.sfm-frame-wrap .sfm-frame-content {
+    position: relative;
+    flex-grow: 1;
+    width: calc(100% - 230px);
+    overflow: hidden auto;
+}
+
+.sfm-frame-wrap .sfm-frame-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.sfm-frame-wrap .sfm-frame-content::-webkit-scrollbar-track {
+    background: #CCC;
+}
+
+/* Handle */
+.sfm-frame-wrap .sfm-frame-content::-webkit-scrollbar-thumb {
+    background: #AAA;
+}
+
+/* Handle on hover */
+.sfm-frame-wrap .sfm-frame-content::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.sfm-menu > a {
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 15px 20px;
+    margin: 5px 20px 0 0px;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 25px 25px 0;
+    box-shadow: none;
+    outline: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sfm-menu > a:hover {
+    background: #FFF;
+}
+
+.sfm-menu a.active {
+    background: #1d2327;
+    color: #FFF;
+}
+
+.sfm-content .sfm-panel {
+    display: none;
+}
+
+.sfm-content .sfm-panel.active {
+    display: block;
+}
+
+.sfm-frame-toolbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #EEE;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Fields */
+
+.sfm-settings-row {
+    display: flex;
+    border-bottom: 1px solid #F1F1F1;
+    padding: 20px;
+    position: relative;
+}
+
+.sfm-settings-row > label {
+    width: 250px;
+    flex: 0 1 250px;
+    position: relative;
+    padding-right: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sfm-settings-row > label:after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: 1px;
+    top: -20px;
+    bottom: -20px;
+    background: #F1F1F1;
+}
+
+.sfm-settings-row > .sfm-settings-fields {
+    flex-grow: 1;
+    width: calc(100% - 250px);
+    padding-left: 20px;
+}
+
+.sfm-settings-list-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sfm-settings-list > label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sfm-description {
+    font-size: 13px;
+    font-style: italic;
+    margin: 5px 0 0;
+}
+
+.sfm-settings-fields select,
+.sfm-settings-fields input[type="text"],
+.sfm-settings-fields input[type="url"] {
+    width: 300px;
+}
+
+.sfm-settings-fields input[type="number"] {
+    width: 80px;
+    padding-right: 0;
+}
+
+.sfm-settings-fields .sfm-unit {
+    width: 60px;
+    margin-left: 10px;
+}
+
+.sfm-content .sfm-heading {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 15px 20px;
+}
+
+/* Two Column */
+
+.sfm-two-column-row {
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.sfm-two-column-row > li {
+    margin: 0;
+    padding: 0;
+}
+
+.sfm-two-column-row > li > label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Typography Field */
+
+.sfm-typography-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-gap: 20px;
+    margin: 0;
+}
+
+.sfm-typography-fields li {
+    margin: 0;
+    padding: 0;
+}
+
+.sfm-typography-fields li > label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.sfm-settings-row .sfm-typography-fields .chosen-container-single .chosen-single {
+    min-height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    color: #1e1e1e;
+    border-color: #949494;
+    box-shadow: none;
+    border-radius: 2px;
+    background: #fff url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E) no-repeat right 5px top 55%;
+    background-size: 16px 16px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sfm-typography-fields .chosen-container-single .chosen-single div {
+    display: none;
+}
+
+.sfm-typography-fields .chosen-container-single .chosen-search input[type="text"] {
+    background: none !important;
+}
+
+/* Colors */
+
+.sfm-color-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 280px);
+    gap: 20px;
+    margin: 0;
+}
+
+.sfm-color-fields li {
+    margin: 0;
+    padding: 0;
+}
+
+.sfm-color-fields li > label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Shadow */
+
+.sfm-shadow-fields {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.sfm-shadow-fields li > label {
+    text-align: center;
+    display: block;
+}
+
+.sfm-shadow-fields li input[type="number"] {
+    width: 60px;
+    text-align: center;
+}
+
+/* Range Slider */
+
+.sfm-range-slider-field {
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+}
+
+.sfm-range-slider {
+    position: relative;
+    flex-grow: 1;
+    height: 4px;
+    margin: 12px 0;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+
+.sfm-range-slider:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.sfm-range-slider .ui-slider-range {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: var(--wp-admin-theme-color);
+}
+
+.sfm-range-slider .ui-slider-handle {
+    height: 16px;
+    width: 16px;
+    background: #fff;
+    border: none;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    margin: 0;
+    transform: translateY(-50%) translateX(-4px);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sfm-range-slider + .sfm-range-input-selector {
+    margin-left: 10px;
+    margin-right: 5px;
+    width: 60px !important;
+    text-align: center;
+}
+
+/* Color Picker */
+.sfm-settings-fields .wp-picker-container .wp-color-result.button:not([style^='background-color']) {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==);
+}
+
+/* ---- what this plugin adds around premium's rules ---- */
+
+/* The modal is shown by removing the hidden attribute rather than by a class. */
+.sfm-mega-menu[hidden] { display: none; }
+
+.sfm-content .sfm-panel[hidden] { display: none; }
+
+/* A row that only some placements use takes no space of its own, so its label
+   and fields stay in the row flow. */
+.sfm-settings-row[hidden],
+.sfm-settings-list[hidden],
+.sfm-two-column-row > li[hidden] { display: none; }
+
+/* ---- template cards ---- */
+
+/* The icon control: preview, the class itself, and the button that opens the
+   picker. The picker hangs off this row, so it is the positioning context. */
+.sfm-item-icon {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.sfm-item-icon .sfm-item-icon-value { flex: 1 1 auto; }
+
+.sfm-item-icon .sfm-item-icon-choose { flex: 0 0 auto; }
+
+
+
+/* Saved notice
+   Premium's own: slides down from off screen, then takes itself away.
+------------------------------------------------------------- */
+
+.sfm-alert {
+    width: 300px;
+    top: -100px;
+    right: 100px;
+    position: fixed;
+    padding: 20px;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    z-index: 1599999;
+    transition: all .2s ease;
+    visibility: hidden;
+    background: #eee;
+}
+
+.sfm-alert .sfm-alert-message {
+    padding-right: 30px;
+}
+
+.sfm-alert .sfm-alert-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sfm-alert-active {
+    top: 100px;
+    visibility: visible;
+}
+
+.sfm-alert-success {
+    background-color: #42ba96;
+}
+
+.sfm-alert-warning {
+    background-color: #df4759;
+}

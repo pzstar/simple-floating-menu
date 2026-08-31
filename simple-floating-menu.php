@@ -21,6 +21,12 @@ define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
 define('SFM_URL', plugins_url('/', SFM_FILE));
 
+/**
+ * Standalone menus, kept entirely within the standalone folder.
+ * Remove this single line to remove the feature.
+ */
+require_once SFM_PATH . 'standalone/class-sfm-standalone.php';
+
 if (!class_exists('Simple_Floating_Menu')) {
 
     class Simple_Floating_Menu {
@@ -144,16 +150,24 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'sfm_load_google_font_locally' => 'no',
                 'buttons' => array(array(
                     'id' => uniqid('sfm-'),
+                    'label' => '',
                     'icon' => 'icofont-dart',
                     'url' => 'http://',
-                    'tool_tip_text' => '',
+                    'classes' => '',
+                    'attr_title' => '',
+                    'action' => 'default',
+                    'scroll_sectionid' => '',
                     'open_new_tab' => true,
+                    'tooltip_enable' => true,
+                    'tool_tip_text' => '',
                     'button_bg_color' => '#000000',
                     'button_icon_color' => '#FFFFFF',
                     'button_bg_color_hover' => '#000000',
                     'button_icon_color_hover' => '#FFFFFF',
                     'tooltip_bg_color' => '#000000',
+                    'tooltip_bg_color_hover' => '',
                     'tooltip_text_color' => '#FFFFFF',
+                    'tooltip_text_color_hover' => '',
                 )
                 ),
                 'tooltip_font' => array(
@@ -165,6 +179,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                     'line_height' => '1',
                     'letter_spacing' => '0',
                 ),
+                'template' => 'sfm-template-1',
                 'position' => 'middle-right',
                 'orientation' => 'vertical',
                 'style' => 'sfm-rect',
@@ -178,6 +193,22 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'right_offset' => 0,
                 'button_spacing' => 5,
                 'zindex' => 999,
+                'scroll_offset' => 0,
+                'button_bg_color' => '',
+                'button_bg_color_hover' => '',
+                'button_icon_color' => '',
+                'button_icon_color_hover' => '',
+                'tooltip_bg_color' => '',
+                'tooltip_bg_color_hover' => '',
+                'tooltip_text_color' => '',
+                'tooltip_text_color_hover' => '',
+                'tooltip_border_radius' => '',
+                'tooltip_padding' => array(
+                    'top' => '',
+                    'right' => '',
+                    'bottom' => '',
+                    'left' => '',
+                ),
                 'button_shadow' => array(
                     'x' => 0,
                     'y' => 0,
@@ -515,6 +546,17 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 <select class="sfm-button-orientation" name="sfm_settings[orientation]">
                                                     <option value="horizontal" <?php selected($sfm_settings['orientation'], 'horizontal'); ?>><?php esc_html_e('Horizontal', 'simple-floating-menu'); ?></option>
                                                     <option value="vertical" <?php selected($sfm_settings['orientation'], 'vertical'); ?>><?php esc_html_e('Vertical', 'simple-floating-menu'); ?></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th><label><?php esc_html_e('Template', 'simple-floating-menu'); ?></label></th>
+                                            <td>
+                                                <select class="sfm-menu-template" name="sfm_settings[template]">
+                                                    <option value="sfm-template-1" <?php selected($sfm_settings['template'], 'sfm-template-1'); ?>><?php esc_html_e('Template 1', 'simple-floating-menu'); ?></option>
+                                                    <option value="sfm-template-2" <?php selected($sfm_settings['template'], 'sfm-template-2'); ?>><?php esc_html_e('Template 2', 'simple-floating-menu'); ?></option>
+                                                    <option value="sfm-template-3" <?php selected($sfm_settings['template'], 'sfm-template-3'); ?>><?php esc_html_e('Template 3', 'simple-floating-menu'); ?></option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -1079,7 +1121,19 @@ if (!class_exists('Simple_Floating_Menu')) {
             $valid_positions = array('top-left', 'top-right', 'top-middle', 'bottom-middle', 'bottom-left', 'bottom-right', 'middle-left', 'middle-right');
             $valid_styles = array('sfm-rect', 'sfm-round', 'sfm-triangle', 'sfm-rhombus', 'sfm-pentagon', 'sfm-hexagon', 'sfm-star', 'sfm-rabbet', 'sfm-oval');
             $valid_orientation = array('vertical', 'horizontal');
+            $valid_templates = array('sfm-template-1', 'sfm-template-2', 'sfm-template-3');
+            $valid_actions = array('default', 'scroll_sectionid', 'scroll_to_top', 'scroll_to_bottom');
             $valid_icons = array_merge(sfm_font_awesome_icon_array(), sfm_materialdesignicons_array(), sfm_essential_icon_array(), sfm_icofont_icon_array(), sfm_eleganticons_array());
+            /* Premium says these may be left empty to fall back to the default,
+               so an empty one is handed the default rather than being read as
+               a zero. */
+            foreach (array('button_height', 'button_width', 'icon_size', 'icon_position', 'button_spacing',
+                           'top_offset', 'bottom_offset', 'left_offset', 'right_offset', 'zindex') as $sfm_num) {
+                if (isset($sfm_settings[$sfm_num]) && $sfm_settings[$sfm_num] === '') {
+                    $sfm_settings[$sfm_num] = $defaults[$sfm_num];
+                }
+            }
+
             $button_height = (int) $sfm_settings['button_height'];
             $button_width = (int) $sfm_settings['button_width'];
             $icon_size = (int) $sfm_settings['icon_size'];
@@ -1093,6 +1147,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['enable_sfm'] = isset($sfm_settings['enable_sfm']) ? 'yes' : 'no';
             $sanitize_settings['enable_sfm_setting'] = isset($sfm_settings['enable_sfm_setting']) ? 'yes' : 'no';
             $sanitize_settings['sfm_load_google_font_locally'] = isset($sfm_settings['sfm_load_google_font_locally']) ? 'yes' : 'no';
+            $sanitize_settings['template'] = isset($sfm_settings['template']) && in_array($sfm_settings['template'], $valid_templates) ? $sfm_settings['template'] : $defaults['template'];
             $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
             $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];
             $sanitize_settings['style'] = in_array($sfm_settings['style'], $valid_styles) ? $sfm_settings['style'] : $defaults['style'];
@@ -1107,6 +1162,23 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['button_spacing'] = (0 <= $button_spacing && $button_spacing <= 200 && is_int($button_spacing)) ? $button_spacing : $defaults['button_spacing'];
             $sanitize_settings['zindex'] = (int) $sfm_settings['zindex'];
 
+            $scroll_offset = (int) (isset($sfm_settings['scroll_offset']) ? $sfm_settings['scroll_offset'] : 0);
+            $sanitize_settings['scroll_offset'] = (0 <= $scroll_offset && $scroll_offset <= 500) ? $scroll_offset : 0;
+
+            /* The menu's own colours, which each button may override. */
+            foreach (array('button_bg_color', 'button_bg_color_hover', 'button_icon_color', 'button_icon_color_hover',
+                           'tooltip_bg_color', 'tooltip_bg_color_hover', 'tooltip_text_color', 'tooltip_text_color_hover') as $sfm_key) {
+                $sanitize_settings[$sfm_key] = isset($sfm_settings[$sfm_key]) ? sanitize_hex_color($sfm_settings[$sfm_key]) : '';
+            }
+
+            $tooltip_radius = isset($sfm_settings['tooltip_border_radius']) ? $sfm_settings['tooltip_border_radius'] : '';
+            $sanitize_settings['tooltip_border_radius'] = $tooltip_radius === '' ? '' : max(0, min(200, (int) $tooltip_radius));
+
+            foreach (array('top', 'right', 'bottom', 'left') as $sfm_side) {
+                $sfm_pad = isset($sfm_settings['tooltip_padding'][$sfm_side]) ? $sfm_settings['tooltip_padding'][$sfm_side] : '';
+                $sanitize_settings['tooltip_padding'][$sfm_side] = $sfm_pad === '' ? '' : max(0, min(100, (int) $sfm_pad));
+            }
+
             $buttons_settings = $sfm_settings['buttons'];
 
             foreach ($buttons_settings as $index => $settings) {
@@ -1115,11 +1187,20 @@ if (!class_exists('Simple_Floating_Menu')) {
                         $sanitize_settings['buttons'][$index][$key] = esc_url_raw($value);
                     } elseif ($key == 'tool_tip_text') {
                         $sanitize_settings['buttons'][$index][$key] = sanitize_text_field($value);
-                    } elseif ($key == 'open_new_tab') {
-                        $sanitize_settings['buttons'][$index][$key] = isset($value) ? true : false;
+                    } elseif ($key == 'open_new_tab' || $key == 'tooltip_enable') {
+                        /* An unticked box posts nothing, so arriving at all is
+                           what makes it on; the value still decides for a menu
+                           built in code rather than on the screen. */
+                        $sanitize_settings['buttons'][$index][$key] = (bool) $value;
+                    } elseif ($key == 'action') {
+                        $sanitize_settings['buttons'][$index][$key] = in_array($value, $valid_actions, true) ? $value : 'default';
+                    } elseif ($key == 'scroll_sectionid') {
+                        $sanitize_settings['buttons'][$index][$key] = sanitize_html_class(ltrim((string) $value, '#'));
+                    } elseif ($key == 'classes') {
+                        $sanitize_settings['buttons'][$index][$key] = implode(' ', array_filter(array_map('sanitize_html_class', explode(' ', (string) $value))));
                     } elseif ($key == 'icon') {
                         $sanitize_settings['buttons'][$index][$key] = in_array($value, $valid_icons) ? $value : '';
-                    } elseif ($key == 'button_bg_color' || $key == 'button_icon_color' || $key == 'button_bg_color_hover' || $key == 'button_icon_color_hover' || $key == 'tooltip_bg_color' || $key == 'tooltip_text_color') {
+                    } elseif (strpos($key, 'color') !== false) {
                         $sanitize_settings['buttons'][$index][$key] = sanitize_hex_color($value);
                     } else {
                         $sanitize_settings['buttons'][$index][$key] = sanitize_text_field($value);
