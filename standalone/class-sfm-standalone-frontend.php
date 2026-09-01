@@ -33,7 +33,128 @@ class SFM_Standalone_Frontend {
      * @return WP_Post[]
      */
     private function menus() {
-        return apply_filters('sfm_standalone_menus', SFM_Standalone_Store::live_menus());
+        $menus = array();
+
+        foreach (SFM_Standalone_Store::live_menus() as $menu) {
+            if (self::is_visible(SFM_Standalone_Store::get_settings($menu->ID))) {
+                $menus[] = $menu;
+            }
+        }
+
+        return apply_filters('sfm_standalone_menus', $menus);
+    }
+
+    /**
+     * Whether this menu is allowed on the page being viewed.
+     *
+     * The premium plugin's Display panel decides this the same way, from the
+     * same settings, so a menu behaves the same in both.
+     *
+     * @since  1.4.0
+     * @param  array $settings
+     * @return bool
+     */
+    public static function is_visible($settings) {
+        $condition = isset($settings['display_condition']) ? $settings['display_condition'] : 'show_all';
+
+        if ($condition == 'hide_all') {
+            return false;
+        }
+
+        if ($condition != 'show_selected' && $condition != 'hide_selected') {
+            return true;
+        }
+
+        $matched = self::matches_selection($settings);
+
+        return $condition == 'show_selected' ? $matched : !$matched;
+    }
+
+    /**
+     * Whether the page being viewed is one of the ones picked out.
+     *
+     * @param  array $settings
+     * @return bool
+     */
+    private static function matches_selection($settings) {
+        if (is_404()) {
+            return self::is_on($settings, 'error_pages');
+        }
+
+        if (is_search()) {
+            return self::is_on($settings, 'search_pages');
+        }
+
+        /* Asked before the blog, because a site showing its posts on the front
+           page is both, and the front page is the more particular of the two. */
+        if (is_front_page()) {
+            return self::is_on($settings, 'front_pages');
+        }
+
+        if (is_home()) {
+            return self::is_on($settings, 'blog_pages');
+        }
+
+        if (is_singular()) {
+            $post = get_queried_object();
+
+            if (!$post instanceof WP_Post) {
+                return false;
+            }
+
+            $types = isset($settings['cpt_pages']) ? (array) $settings['cpt_pages'] : array();
+            $pages = isset($settings['specific_pages']) ? array_map('intval', (array) $settings['specific_pages']) : array();
+
+            return in_array($post->post_type, $types) || in_array((int) $post->ID, $pages, true);
+        }
+
+        if (is_archive()) {
+            if (self::is_on($settings, 'archive_pages')) {
+                return true;
+            }
+
+            $archives = isset($settings['specific_archive']) ? (array) $settings['specific_archive'] : array();
+
+            return in_array(self::archive_post_type(), $archives);
+        }
+
+        return false;
+    }
+
+    /**
+     * The post type the archive being viewed lists.
+     *
+     * A taxonomy archive is named by what the taxonomy is attached to, and the
+     * date and author archives list posts, so each answers as its type rather
+     * than as nothing at all.
+     *
+     * @return string
+     */
+    private static function archive_post_type() {
+        $object = get_queried_object();
+
+        if ($object instanceof WP_Post_Type) {
+            return $object->name;
+        }
+
+        if ($object instanceof WP_Term) {
+            $taxonomy = get_taxonomy($object->taxonomy);
+
+            if ($taxonomy && !empty($taxonomy->object_type)) {
+                return reset($taxonomy->object_type);
+            }
+        }
+
+        return is_date() || is_author() ? 'post' : '';
+    }
+
+    /**
+     * @param  array  $settings
+     * @param  string $key
+     * @return bool
+     */
+    private static function is_on($settings, $key) {
+        return isset($settings[$key]) && $settings[$key] == 'on';
     }
 
     /**

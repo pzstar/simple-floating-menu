@@ -134,8 +134,8 @@
 
             $picker.val('');
 
-            if ($picker.data('chosen')) {
-                $picker.trigger('chosen:updated');
+            if ($picker.hasClass('select2-hidden-accessible')) {
+                $picker.trigger('change.select2');
             }
         });
 
@@ -502,6 +502,7 @@
         /* ---- settings tabs -------------------------------------------- */
 
         var $tabs = $('.sfm-menu .sfm-tab');
+        var displayReady = false;
 
         $tabs.on('click', function (event) {
             event.preventDefault();
@@ -519,28 +520,122 @@
 
                 $(this).toggleClass('active', match).prop('hidden', !match);
             });
+
+            /* Built the first time the panel is asked for, the way premium
+               builds its own: until then the pickers cost nothing. */
+            if (!displayReady && name === 'display' && $.fn.select2) {
+                displayReady = true;
+                $form.find('.sfm-specific-pages-ids').each(select2Search);
+
+                /* The pickers now say what the list holds, so clearing them
+                   can say that too. */
+                $form.find('.sfm-specific-pages-clear').prop('disabled', false);
+            }
         });
+
+        /* ---- searching the site's content ----------------------------- */
+
+        /* The premium plugin's own page picker, brought across as it stands:
+           the entries already chosen are asked for first and put back as
+           selected options, and everything after that is searched for as it
+           is typed. The dropdown is dropped into the picker's own row, because
+           the panels sit in a modal a dropdown on the page would fall behind. */
+        async function select2Search() {
+            var $field = $(this);
+            var $select = $field.find('select');
+            var dataType = $field.attr('data-type');
+            var dataSelected = $field.attr('data-selected');
+
+            /* Waited for, as premium waits for it: the entries have to be in
+               the select before Select2 reads it, or the picker comes up empty
+               with the pages it holds nowhere to be seen. */
+            await $.post(window.ajaxurl, {
+                action: 'sfm_set_selected_options',
+                post_type: dataType,
+                selected_ids: dataSelected,
+                wp_nonce: sfmBuilder.ajaxNonce
+            }, function (res) {
+                res.results && $.each(res.results, function (index, data) {
+                    var newOption = new Option(data.text, data.id, false, true);
+
+                    $select.append(newOption);
+                });
+            });
+
+            $select.select2({
+                placeholder: sfmBuilder.search,
+                allowClear: false,
+                minimumInputLength: 3,
+                dropdownParent: $select.parent('.sfm-settings-fields'),
+                ajax: {
+                    url: window.ajaxurl,
+                    dataType: 'json',
+                    method: 'post',
+                    /* Select2 4 names these delay and processResults; the 3.x
+                       names they replace were being ignored, so every keypress
+                       was going out as a request of its own. */
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term,
+                            action: 'sfm_get_posts_by_query',
+                            post_type: dataType,
+                            wp_nonce: sfmBuilder.ajaxNonce
+                        };
+                    },
+                    processResults: function (data) {
+                        return { results: (data && data.results) || [] };
+                    },
+                    cache: true
+                }
+            });
+        }
+
+        /* ---- where the menu shows ------------------------------------ */
+
+        /* The premium plugin's own handlers, on the same markup. The lists of
+           pages come and go with the condition through premium's conditional
+           fields plugin, and a box that covers a whole post type hides the
+           list of single entries under it. */
+        function showCptPosts() {
+            var posttype = '#sfm-cpt-' + $(this).data('posttype');
+
+            $(this).is(':checked') ? $(posttype).hide() : $(posttype).show();
+        }
+
+        function showHideArchiveList() {
+            var archivelist = '#sfm-show-archive';
+
+            $(this).is(':checked') ? $(archivelist).hide() : $(archivelist).show();
+        }
+
+        function initToggleFields() {
+            $modal.find('[data-condition="toggle"]').each(function () {
+                $(this).conditionToggle();
+                $(this).change();
+            });
+        }
+
+        $form.on('click', '.sfm-hide-show-cpt-posts', showCptPosts);
+        $form.on('click', '#sfm_archive_pages', showHideArchiveList);
 
         /* ---- start --------------------------------------------------- */
 
-        /* Without Chosen the picker is still a working select, so this only
+        /* Without Select2 the picker is still a working select, so this only
            ever improves it. */
-        if ($.fn.chosen) {
+        if ($.fn.select2) {
             /* Named apart from the icon picker: both live in this one scope,
                and a var declaration is hoisted to the top of it. */
             var $contentPicker = $form.find('.sfm-picker');
 
-            /* The first option carries a readable label for the case where this
-               script never runs. Chosen shows its placeholder only while
-               nothing is chosen, and a first option with text counts as a
-               choice, so the text comes off before it is handed over. */
-            $contentPicker.find('option[value=""]').first().text('');
-
-            $contentPicker.chosen({
+            $contentPicker.select2({
                 width: '100%',
-                placeholder_text_single: sfmBuilder.searchContent,
-                search_contains: true
+                placeholder: sfmBuilder.searchContent
             });
+        }
+
+        if ($.fn.conditionToggle) {
+            initToggleFields();
         }
 
         colorPickers($detail);

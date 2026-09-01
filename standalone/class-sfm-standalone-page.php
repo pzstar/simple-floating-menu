@@ -23,6 +23,13 @@ class SFM_Standalone_Page {
     const PICKER_LIMIT = 200;
 
     /**
+     * Guards the page pickers' two requests.
+     *
+     * @since    1.4.0
+     */
+    const AJAX_NONCE = 'sfm-backend-ajax-nonce';
+
+    /**
      * Guards the design panel's own save.
      *
      * @since    1.4.0
@@ -41,6 +48,8 @@ class SFM_Standalone_Page {
         add_action('admin_enqueue_scripts', array($this, 'scripts'));
         add_action('admin_post_sfm_standalone_save', array($this, 'handle_save'));
         add_action('wp_ajax_sfm_standalone_save_design', array($this, 'handle_save_design'));
+        add_action('wp_ajax_sfm_get_posts_by_query', array($this, 'get_posts_by_query'));
+        add_action('wp_ajax_sfm_set_selected_options', array($this, 'set_selected_options'));
         add_action('admin_post_sfm_standalone_create', array($this, 'handle_create'));
 
         /* The post editor is not where one of these is edited, nor where one
@@ -79,6 +88,104 @@ class SFM_Standalone_Page {
      */
     public static function is_screen() {
         return isset($_GET['page']) && $_GET['page'] === self::PAGE_SLUG;
+    }
+
+    /**
+     * What a page picker offers for what has been typed into it.
+     *
+     * The premium plugin's own picker, brought across as it stands: the same
+     * two requests, the same shape of answer, so a menu is picked out by page
+     * the same way in both.
+     *
+     * @since 1.4.0
+     */
+    public function get_posts_by_query() {
+        check_ajax_referer(self::AJAX_NONCE, 'wp_nonce');
+
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        $search_string = isset($_POST['q']) ? sanitize_text_field(wp_unslash($_POST['q'])) : '';
+        $post_type = isset($_POST['post_type']) ? sanitize_key($_POST['post_type']) : 'post';
+        $results = array();
+
+        add_filter('posts_where', array($this, 'title_filter'), 10, 2);
+        $query = new WP_Query(array(
+            'title_filter' => $search_string,
+            'post_status' => 'publish',
+            'post_type' => $post_type,
+            'posts_per_page' => -1,
+        ));
+        remove_filter('posts_where', array($this, 'title_filter'), 10, 2);
+        wp_reset_postdata();
+
+        if (!isset($query->posts)) {
+            return;
+        }
+
+        foreach ($query->posts as $post) {
+            $results[] = array(
+                'id' => $post->ID,
+                'text' => $post->post_title,
+            );
+        }
+
+        wp_send_json(array('results' => $results));
+    }
+
+    /**
+     * Narrows a picker's search to titles.
+     *
+     * @param  string   $where
+     * @param  WP_Query $wp_query
+     * @return string
+     */
+    public function title_filter($where, $wp_query) {
+        global $wpdb;
+
+        if ($search_term = $wp_query->get('title_filter')) {
+            $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql($wpdb->esc_like($search_term)) . '%\'';
+        }
+
+        return $where;
+    }
+
+    /**
+     * The entries a picker is already set to, so it can name them.
+     *
+     * @since 1.4.0
+     */
+    public function set_selected_options() {
+        check_ajax_referer(self::AJAX_NONCE, 'wp_nonce');
+
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        $post_type = isset($_POST['post_type']) ? sanitize_key($_POST['post_type']) : 'post';
+        $selected_ids = isset($_POST['selected_ids']) ? sanitize_text_field(wp_unslash($_POST['selected_ids'])) : '';
+        $results = array();
+
+        $query = new WP_Query(array(
+            'post_type' => $post_type,
+            'post__in' => array_map('absint', explode(',', $selected_ids)),
+            'posts_per_page' => -1,
+        ));
+        wp_reset_postdata();
+
+        if (!isset($query->posts)) {
+            return;
+        }
+
+        foreach ($query->posts as $post) {
+            $results[] = array(
+                'id' => $post->ID,
+                'text' => $post->post_title,
+            );
+        }
+
+        wp_send_json(array('results' => $results));
     }
 
     /**
@@ -158,8 +265,16 @@ class SFM_Standalone_Page {
            frame the premium plugin's own stylesheet is written against. */
         wp_enqueue_style('media-views');
 
-        /* Chosen turns the content picker into a search box. It already ships
-           with the plugin for the settings screen. */
+        /* Select2 turns the content picker into a search box, the library the
+           premium plugin dresses that control with. */
+        wp_enqueue_style('jquery-select2', SFM_URL . 'assets/css/select2.min.css', array(), '4.1.0');
+        wp_enqueue_script('jquery-select2', SFM_URL . 'assets/js/select2.min.js', array('jquery'), '4.1.0', true);
+
+        /* The premium plugin's own conditional fields plugin, which the
+           display panel's lists are shown and hidden by. */
+        wp_enqueue_script('jquery-condition', SFM_URL . 'assets/js/jquery-condition.js', array('jquery'), SFM_VERSION, true);
+
+        /* Chosen stays for the typography selects, as it does in premium. */
         wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
         wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), SFM_VERSION, true);
 
@@ -179,7 +294,7 @@ class SFM_Standalone_Page {
         wp_enqueue_script(
             'sfm-standalone-builder',
             SFM_URL . 'standalone/js/builder.js',
-            array('jquery', 'jquery-ui-sortable', 'jquery-ui-slider', 'wp-color-picker', 'chosen'),
+            array('jquery', 'jquery-ui-sortable', 'jquery-ui-slider', 'wp-color-picker', 'jquery-select2', 'jquery-condition', 'chosen'),
             SFM_VERSION,
             true
         );
@@ -195,6 +310,8 @@ class SFM_Standalone_Page {
             'designFailed' => esc_html__('The design could not be saved.', 'simple-floating-menu'),
             'libraries' => SFM_Standalone_Store::icon_libraries(),
             'searchIcons' => esc_html__('Search icons', 'simple-floating-menu'),
+            'ajaxNonce' => wp_create_nonce(self::AJAX_NONCE),
+            'search' => esc_html__('Search', 'simple-floating-menu'),
             'noIcons' => esc_html__('No icons match that.', 'simple-floating-menu'),
         ));
     }
@@ -340,15 +457,21 @@ class SFM_Standalone_Page {
         $plugin = Simple_Floating_Menu::get_instance();
         $defaults = Simple_Floating_Menu::default_settings();
 
+        /* Over what is stored rather than over the defaults: a picker that
+           fills itself in only once its panel has been opened posts nothing
+           until then, and that must leave what it holds alone. */
+        $stored = SFM_Standalone_Store::get_raw_settings($post_id);
+        $settings = array_merge($defaults, is_array($stored) ? $stored : array());
+
         /* A grouped field posts only the keys its panel renders, and a plain
            merge would drop the rest of the group. */
         foreach (array('tooltip_font', 'button_shadow', 'tooltip_padding') as $group) {
             if (isset($posted[$group]) && is_array($posted[$group])) {
-                $posted[$group] = array_merge($defaults[$group], $posted[$group]);
+                $posted[$group] = array_merge($settings[$group], $posted[$group]);
             }
         }
 
-        $settings = $plugin->sanitize_form(array_merge($defaults, $posted));
+        $settings = $plugin->sanitize_form(array_merge($settings, $posted));
 
         /* The buttons come back out of the plugin's own sanitiser rather than
            being cleaned a second way here. The store still runs over them, to

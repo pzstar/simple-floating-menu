@@ -264,6 +264,8 @@ $sfm_colors = array(
                                    data-title="<?php esc_attr_e('General Settings', 'simple-floating-menu'); ?>"><?php esc_html_e('General', 'simple-floating-menu'); ?></a>
                                 <a href="#" class="sfm-tab" data-tab="design"
                                    data-title="<?php esc_attr_e('Design Settings', 'simple-floating-menu'); ?>"><?php esc_html_e('Design', 'simple-floating-menu'); ?></a>
+                                <a href="#" class="sfm-tab" data-tab="display"
+                                   data-title="<?php esc_attr_e('Display Settings', 'simple-floating-menu'); ?>"><?php esc_html_e('Display', 'simple-floating-menu'); ?></a>
                             </div>
                         </div>
 
@@ -576,6 +578,145 @@ $sfm_colors = array(
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="sfm-panel" data-panel="display" hidden>
+                                    <?php
+                                    /* The premium plugin's own display panel, brought across field for
+                                       field: the same rows, the same names, the same way of showing and
+                                       hiding the lists under them. */
+                                    $sfm_chosen_pages = array_map('intval', (array) $settings['specific_pages']);
+                                    $sfm_chosen_types = (array) $settings['cpt_pages'];
+                                    $sfm_chosen_archives = (array) $settings['specific_archive'];
+                                    $sfm_chosen_list = implode(',', $sfm_chosen_pages);
+                                    $sfm_selecting = in_array($settings['display_condition'], array('show_selected', 'hide_selected'), true);
+                                    ?>
+                                    <div class="sfm-settings-row">
+                                        <label><?php esc_html_e('Show/Hide in Pages', 'simple-floating-menu') ?></label>
+                                        <div class="sfm-settings-fields">
+                                            <select name="sfm[display_condition]" data-condition="toggle" id="sfm-display-condition">
+                                                <option value="show_all" <?php selected($settings['display_condition'], 'show_all'); ?>><?php esc_html_e('Show in All Pages', 'simple-floating-menu'); ?></option>
+                                                <option value="hide_all" <?php selected($settings['display_condition'], 'hide_all'); ?>><?php esc_html_e('Hide in All Pages', 'simple-floating-menu'); ?></option>
+                                                <option value="show_selected" <?php selected($settings['display_condition'], 'show_selected'); ?>><?php esc_html_e('Show in Selected Pages', 'simple-floating-menu'); ?></option>
+                                                <option value="hide_selected" <?php selected($settings['display_condition'], 'hide_selected'); ?>><?php esc_html_e('Hide in Selected Pages', 'simple-floating-menu'); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div style="<?php echo $sfm_selecting ? '' : 'display: none'; ?>" data-condition-toggle="sfm-display-condition" data-condition-val="show_selected,hide_selected">
+                                        <div class="sfm-settings-row">
+                                            <label><?php esc_html_e('Default WordPress Pages', 'simple-floating-menu') ?></label>
+                                            <div class="sfm-settings-fields sfm-setting-checkbox-field">
+                                                <?php
+                                                /* A box that came off would otherwise post nothing at all, and
+                                                   the design panels are saved over what is already stored, so
+                                                   each of these carries a partner that always posts. */
+                                                ?>
+                                                <p>
+                                                    <input type="hidden" name="sfm[front_pages]" value="off"/>
+                                                    <input type="checkbox" name="sfm[front_pages]" value="on" id="sfm_front_pages" <?php checked($settings['front_pages'], 'on'); ?>/>
+                                                           <label for="sfm_front_pages"><?php esc_html_e('Front Page', 'simple-floating-menu'); ?></label>
+                                                </p>
+
+                                                <p>
+                                                    <input type="hidden" name="sfm[blog_pages]" value="off"/>
+                                                    <input type="checkbox" name="sfm[blog_pages]" value="on" id="sfm_blog_pages" <?php checked($settings['blog_pages'], 'on'); ?>/>
+                                                           <label for="sfm_blog_pages"><?php esc_html_e('Home/Blog Page', 'simple-floating-menu'); ?></label>
+                                                </p>
+
+                                                <p>
+                                                    <input type="hidden" name="sfm[archive_pages]" value="off"/>
+                                                    <input type="checkbox" name="sfm[archive_pages]" value="on" id="sfm_archive_pages" <?php checked($settings['archive_pages'], 'on'); ?>/>
+                                                           <label for="sfm_archive_pages"><?php esc_html_e('All Archive Page', 'simple-floating-menu'); ?></label>
+                                                </p>
+
+                                                <p>
+                                                    <input type="hidden" name="sfm[error_pages]" value="off"/>
+                                                    <input type="checkbox" name="sfm[error_pages]" value="on" id="sfm_404_pages" <?php checked($settings['error_pages'], 'on'); ?>/>
+                                                           <label for="sfm_404_pages"><?php esc_html_e('404 Page', 'simple-floating-menu'); ?></label>
+                                                </p>
+
+                                                <p>
+                                                    <input type="hidden" name="sfm[search_pages]" value="off"/>
+                                                    <input type="checkbox" name="sfm[search_pages]" value="on" id="sfm_search_pages" <?php checked($settings['search_pages'], 'on'); ?>/>
+                                                           <label for="sfm_search_pages"><?php esc_html_e('Search Page', 'simple-floating-menu'); ?></label>
+                                                </p>
+
+                                                <?php
+                                                $sfm_post_types = get_post_types(array('public' => true));
+                                                sort($sfm_post_types);
+                                                foreach ($sfm_post_types as $sfm_post_type) {
+                                                    if (!($sfm_post_type == 'attachment' || $sfm_post_type == SFM_Standalone::POST_TYPE) and get_posts(array('post_type' => $sfm_post_type))) {
+                                                        ?>
+                                                        <p>
+                                                            <input type="checkbox" name="sfm[cpt_pages][]" class="sfm-hide-show-cpt-posts" id="sfm-hscpt-<?php echo esc_attr($sfm_post_type); ?>" data-posttype="<?php echo esc_attr($sfm_post_type); ?>" value="<?php echo esc_attr($sfm_post_type); ?>" <?php checked(in_array($sfm_post_type, $sfm_chosen_types)); ?>/>
+                                                                   <label for="sfm-hscpt-<?php echo esc_attr($sfm_post_type); ?>"><?php echo esc_html('All ' . ucwords($sfm_post_type)); ?></label>
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        $sfm_post_types = get_post_types(array('public' => true));
+                                        sort($sfm_post_types);
+                                        ?>
+                                        <div class="sfm-settings-row sfm-hide-singular" id="sfm-show-archive" style="<?php echo $settings['archive_pages'] == 'on' ? 'display: none;' : ''; ?>">
+                                            <label>
+                                                <?php
+                                                esc_html_e('Specific Archive Page', 'simple-floating-menu');
+                                                ?>
+                                            </label>
+
+                                            <div class="sfm-settings-fields sfm-setting-checkbox-field">
+                                                <?php
+                                                foreach ($sfm_post_types as $sfm_post_type) {
+                                                    if (!($sfm_post_type == 'attachment' || $sfm_post_type == SFM_Standalone::POST_TYPE)) {
+                                                        ?>
+                                                        <p>
+                                                            <input type="checkbox" name="sfm[specific_archive][]" id="sfm-archive-<?php echo esc_attr($sfm_post_type); ?>" value="<?php echo esc_attr($sfm_post_type); ?>" <?php checked(in_array($sfm_post_type, $sfm_chosen_archives)); ?> />
+                                                                   <label for="sfm-archive-<?php echo esc_attr($sfm_post_type); ?>"><?php echo esc_html(ucwords($sfm_post_type)); ?></label>
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        foreach ($sfm_post_types as $sfm_post_type) {
+                                            if (!($sfm_post_type == 'attachment' || $sfm_post_type == SFM_Standalone::POST_TYPE) and get_posts(array('post_type' => $sfm_post_type))) {
+                                                ?>
+                                                <div class="sfm-settings-row sfm-hide-singular" id="sfm-cpt-<?php echo esc_attr($sfm_post_type); ?>" style="<?php echo in_array($sfm_post_type, $sfm_chosen_types) ? 'display: none;' : ''; ?>">
+                                                    <label>
+                                                        <?php
+                                                        esc_html_e('Specific ', 'simple-floating-menu');
+                                                        echo esc_html(ucwords($sfm_post_type));
+                                                        ?>
+                                                    </label>
+                                                    <div class="sfm-settings-fields sfm-specific-pages-ids" data-selected="<?php echo esc_attr($sfm_chosen_list); ?>" data-type="<?php echo esc_attr($sfm_post_type); ?>">
+                                                        <select id="sfm-specific-<?php echo esc_attr($sfm_post_type); ?>" name="sfm[specific_pages][]" multiple></select>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+
+                                        <?php
+                                        /* Emptying a list posts nothing of its own, so each one carries an
+                                           entry the sanitiser drops again. The pages are the exception:
+                                           their pickers fill themselves in when the panel is first opened,
+                                           so until that has happened this entry stays out of the way and
+                                           the stored list is left alone. */
+                                        ?>
+                                        <input type="hidden" name="sfm[cpt_pages][]" value=""/>
+                                        <input type="hidden" name="sfm[specific_archive][]" value=""/>
+                                        <input type="hidden" class="sfm-specific-pages-clear" name="sfm[specific_pages][]" value="" disabled/>
                                     </div>
                                 </div>
 

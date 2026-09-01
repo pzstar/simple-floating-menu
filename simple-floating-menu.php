@@ -3,7 +3,7 @@
  * Plugin Name: Simple Floating Menu
  * Plugin URI: https://github.com/pzstar/simple-floating-menu
  * Description: Simple Floating Menu adds a stylish designed menu in your website.
- * Version: 1.3.4
+ * Version: 1.4.0
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: simple-floating-menu
@@ -15,7 +15,7 @@
 if (!defined('ABSPATH'))
     exit;
 
-define('SFM_VERSION', '1.3.4');
+define('SFM_VERSION', '1.4.0');
 define('SFM_FILE', __FILE__);
 define('SFM_PLUGIN_BASENAME', plugin_basename(SFM_FILE));
 define('SFM_PATH', plugin_dir_path(SFM_FILE));
@@ -68,6 +68,9 @@ if (!class_exists('Simple_Floating_Menu')) {
             // WP-Admin Menu
             add_action('admin_menu', array($this, 'load_menu'));
 
+            // Registered late so the premium link sits at the end of the menu
+            add_action('admin_menu', array($this, 'load_upgrade_menu'), 100);
+
             add_action('admin_footer', array($this, 'sfm_dymanic_styles'));
 
             // Process a settings export that generates a .json file of the simple floating menu settings
@@ -98,6 +101,21 @@ if (!class_exists('Simple_Floating_Menu')) {
             $position = 100;
 
             add_menu_page($page_title, $menu_title, $capability, $slug, $callback, $icon, $position);
+        }
+
+        /*
+         * The premium version, an outbound link rather than a screen, so it is
+         * registered on its own late hook and lands after the plugin's pages.
+         */
+
+        public function load_upgrade_menu() {
+            add_submenu_page(
+                    'simple-floating-menu',
+                    esc_html__('Upgrade To Pro', 'simple-floating-menu'),
+                    esc_html__('Upgrade To Pro', 'simple-floating-menu'),
+                    'manage_options',
+                    esc_url_raw('https://1.envato.market/LPXYao')
+            );
         }
 
         /**
@@ -194,6 +212,17 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'button_spacing' => 5,
                 'zindex' => 999,
                 'scroll_offset' => 0,
+                /* Where a menu is allowed to appear, the way the premium
+                   plugin's Display panel decides it. */
+                'display_condition' => 'show_all',
+                'front_pages' => 'off',
+                'blog_pages' => 'off',
+                'archive_pages' => 'off',
+                'error_pages' => 'off',
+                'search_pages' => 'off',
+                'cpt_pages' => array(),
+                'specific_pages' => array(),
+                'specific_archive' => array(),
                 'button_bg_color' => '',
                 'button_bg_color_hover' => '',
                 'button_icon_color' => '',
@@ -1223,14 +1252,26 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['tooltip_font']['size'] = (10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
             $sanitize_settings['tooltip_font']['line_height'] = (0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
             $sanitize_settings['tooltip_font']['letter_spacing'] = (-5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
-            $sanitize_settings['floatmenu_hide_show_pages'] = isset($sfm_settings['floatmenu_hide_show_pages']) && $sfm_settings['floatmenu_hide_show_pages'] == 'show_in_pages' ? 'show_in_pages' : 'hide_in_pages';
-            $sanitize_settings['floatmenu_front_pages'] = isset($sfm_settings['floatmenu_front_pages']) ? 'yes' : 'no';
-            $sanitize_settings['floatmenu_blog_pages'] = isset($sfm_settings['floatmenu_blog_pages']) ? 'yes' : 'no';
-            $sanitize_settings['floatmenu_archive_pages'] = isset($sfm_settings['floatmenu_archive_pages']) ? 'yes' : 'no';
-            $sanitize_settings['floatmenu_error_pages'] = isset($sfm_settings['floatmenu_error_pages']) ? 'yes' : 'no';
-            $sanitize_settings['floatmenu_search_pages'] = isset($sfm_settings['floatmenu_search_pages']) ? 'yes' : 'no';
-            $sanitize_settings['floatmenu_single_pages'] = isset($sfm_settings['floatmenu_single_pages']) ? 'yes' : 'no';
-            $sanitize_settings['floatmenu_specific_pages'] = isset($sfm_settings['floatmenu_specific_pages']) ? $sfm_settings['floatmenu_specific_pages'] : [];
+            /* The Display panel. A box is read by the value that arrives rather
+               than by arriving at all: the design panels are saved on their
+               own, over what is already stored, so a box that posted nothing
+               when it came off could never be unticked again. */
+            $valid_conditions = array('show_all', 'hide_all', 'show_selected', 'hide_selected');
+            $sanitize_settings['display_condition'] = isset($sfm_settings['display_condition']) && in_array($sfm_settings['display_condition'], $valid_conditions, true) ? $sfm_settings['display_condition'] : $defaults['display_condition'];
+
+            foreach (array('front_pages', 'blog_pages', 'archive_pages', 'error_pages', 'search_pages') as $sfm_page) {
+                $sanitize_settings[$sfm_page] = isset($sfm_settings[$sfm_page]) && $sfm_settings[$sfm_page] == 'on' ? 'on' : 'off';
+            }
+
+            /* The empty entry each list carries, so that clearing it posts
+               something, comes back out here. */
+            foreach (array('cpt_pages', 'specific_archive') as $sfm_list) {
+                $sfm_types = isset($sfm_settings[$sfm_list]) ? array_filter((array) $sfm_settings[$sfm_list], 'is_scalar') : array();
+                $sanitize_settings[$sfm_list] = array_values(array_filter(array_map('sanitize_key', $sfm_types)));
+            }
+
+            $sfm_specific = isset($sfm_settings['specific_pages']) ? array_filter((array) $sfm_settings['specific_pages'], 'is_scalar') : array();
+            $sanitize_settings['specific_pages'] = array_values(array_filter(array_map('absint', $sfm_specific)));
 
             $button_shadow_settings = $sfm_settings['button_shadow'];
             foreach ($button_shadow_settings as $key => $value) {
