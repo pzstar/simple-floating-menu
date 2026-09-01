@@ -1205,8 +1205,6 @@
     padding: 0;
 }
 
-/* The page pickers, dressed exactly as the premium plugin dresses its own.
-   Their width comes from the select rule above, which Select2 reads. */
 
 /* Multiple Select */
 .sfm-settings-fields .select2-container--default .select2-selection--multiple {
@@ -1214,7 +1212,7 @@
     border-radius: 2px;
     min-height: 40px;
     font-size: 14px;
-    padding: 0 0 5px;
+    padding: 0;
 }
 
 .sfm-settings-fields .select2-container--default .select2-selection--multiple .select2-selection__clear {
@@ -1231,6 +1229,7 @@
 .sfm-settings-fields .select2-container--default .select2-selection--multiple .select2-selection__rendered {
     display: block;
     padding: 0 10px;
+    margin: 0;
 }
 
 .sfm-settings-fields .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
@@ -1251,8 +1250,7 @@
     position: relative;
 }
 
-/* Select2 4.1 puts the label in a span of its own and the cross in a button,
-   which it lays out down the side of the chip. */
+
 .sfm-settings-fields .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
     padding: 0;
     cursor: default;
@@ -1283,10 +1281,10 @@
 }
 
 .sfm-settings-fields .select2-container--default .select2-search--inline .select2-search__field {
-    min-height: 0;
+    min-height: 38px;
     min-width: 100%;
-    line-height: 40px;
     margin: 0;
+    padding: 10px;
 }
 
 .sfm-settings-fields .select2-results__option[aria-selected] {
