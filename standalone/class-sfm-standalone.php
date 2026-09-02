@@ -33,14 +33,16 @@ class SFM_Standalone {
     /**
      * Post meta holding the ordered button list.
      *
-     * Kept under this plugin's own prefix rather than the premium one, so the
-     * two never write over each other on a site that has had both. The
-     * premium plugin reads these across when it takes over.
+     * The premium plugin's own key, holding the premium plugin's own shape.
+     * Upgrading is then not a conversion at all: the premium plugin finds the
+     * menu already in the form it reads. SFM_Standalone_Store translates
+     * between that shape and this plugin's flat one, and is the only place
+     * either key is touched.
      */
-    const ITEMS_META = '_sfm_items';
+    const ITEMS_META = '_sffm_items';
 
     /** Post meta holding everything that is not a button. */
-    const CONFIG_META = '_sfm_config';
+    const CONFIG_META = '_sffm_config';
 
     /**
      * Whether the premium plugin is running.

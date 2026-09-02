@@ -3,9 +3,14 @@
 /**
  * Reading and writing standalone menus.
  *
- * A menu's settings are deliberately the same shape as the settings screen's
- * own, so the renderer, the CSS builder and the sanitiser all work on them
- * without a second version of any of it.
+ * A standalone menu is stored in the shape the premium plugin stores its own
+ * menus in, under the same two meta keys. Upgrading is then not a conversion
+ * at all: the premium plugin finds its own data already there and reads it.
+ *
+ * Inside this plugin the settings keep the flat shape the settings screen uses,
+ * so the renderer, the CSS builder and the sanitiser all work on them without a
+ * second version of any of it. This class is the only door to the data, so the
+ * translation lives here and nowhere else.
  *
  * @package Simple_Floating_Menu
  * @since   1.4.0
@@ -14,6 +19,379 @@
 defined('ABSPATH') or die;
 
 class SFM_Standalone_Store {
+
+    /**
+     * The name each of this plugin's settings goes by in the premium one.
+     *
+     * @since  1.4.0
+     * @return array
+     */
+    private static function config_map() {
+        return array(
+            'position' => 'temp_1_position',
+            'orientation' => 'temp_1_orientation',
+            'top_offset' => 'temp_1_offset_top',
+            'bottom_offset' => 'temp_1_offset_bottom',
+            'left_offset' => 'temp_1_offset_left',
+            'right_offset' => 'temp_1_offset_right',
+            'button_height' => 'button_size',
+            'icon_size' => 'icon_size',
+            'button_spacing' => 'tab_spacing',
+            'zindex' => 'zindex',
+            'scroll_offset' => 'scroll_offset',
+            'button_bg_color' => 'button_bg_color',
+            'button_bg_color_hover' => 'button_hover_bg_color',
+            'button_icon_color' => 'button_icon_color',
+            'button_icon_color_hover' => 'button_hover_icon_color',
+            'tooltip_bg_color' => 'tooltip_bg_color',
+            'tooltip_bg_color_hover' => 'tooltip_hover_bg_color',
+            'tooltip_text_color' => 'tooltip_text_color',
+            'tooltip_text_color_hover' => 'tooltip_hover_text_color',
+            'tooltip_border_radius' => 'tooltip_border_radius',
+        );
+    }
+
+    /**
+     * The typography settings, which this plugin nests and the premium one
+     * spreads across keys of its own.
+     *
+     * @since  1.4.0
+     * @return array
+     */
+    private static function font_map() {
+        return array(
+            'family' => 'tooltip_font_family',
+            'style' => 'tooltip_font_style',
+            'transform' => 'tooltip_text_transform',
+            'decoration' => 'tooltip_text_decoration',
+            'size' => 'tooltip_font_size',
+            'line_height' => 'tooltip_line_height',
+            'letter_spacing' => 'tooltip_letter_spacing',
+        );
+    }
+
+    /**
+     * The three templates, and the nine button shapes, as the premium plugin
+     * names them.
+     *
+     * @since  1.4.0
+     * @return array
+     */
+    private static function name_map() {
+        return array(
+            'template' => array(
+                'sfm-template-1' => 'floatmenu-template-1',
+                'sfm-template-2' => 'floatmenu-template-2',
+                'sfm-template-3' => 'floatmenu-template-3',
+            ),
+            'style' => array(
+                'sfm-rect' => 'square',
+                'sfm-round' => 'round',
+                'sfm-triangle' => 'triangle',
+                'sfm-rhombus' => 'rhombus',
+                'sfm-pentagon' => 'pentagon',
+                'sfm-hexagon' => 'hexagon',
+                'sfm-star' => 'star',
+                'sfm-rabbet' => 'rabbet',
+                'sfm-oval' => 'oval',
+            ),
+        );
+    }
+
+    /**
+     * The name each of a button's settings goes by in the premium plugin,
+     * where they sit under a "floatingmenu" key of their own.
+     *
+     * @since  1.4.0
+     * @return array
+     */
+    private static function item_map() {
+        return array(
+            'button_bg_color' => 'bg_color',
+            'button_bg_color_hover' => 'hover_bg_color',
+            'button_icon_color' => 'icon_color',
+            'button_icon_color_hover' => 'hover_icon_color',
+            'tooltip_bg_color' => 'tooltip_bg_color',
+            'tooltip_bg_color_hover' => 'tooltip_hover_bg_color',
+            'tooltip_text_color' => 'tooltip_text_color',
+            'tooltip_text_color_hover' => 'tooltip_hover_text_color',
+            'tool_tip_text' => 'tooltip_text',
+            'action' => 'action',
+            'scroll_sectionid' => 'scroll_sectionid',
+        );
+    }
+
+    /**
+     * The settings this plugin has and the premium one does not.
+     *
+     * @since  1.4.0
+     * @return array
+     */
+    private static function own_keys() {
+        return array('sfm_load_google_font_locally');
+    }
+
+    /**
+     * Turn this plugin's flat settings into the premium plugin's nested ones.
+     *
+     * Only the keys both plugins have are written. The premium plugin fills
+     * everything else from its own defaults when it reads the menu, so a
+     * partial configuration is exactly what it expects.
+     *
+     * @since  1.4.0
+     * @param  array $settings
+     * @return array
+     */
+    public static function to_stored_config($settings) {
+        $names = self::name_map();
+        $float = array();
+
+        $template = isset($settings['template']) ? $settings['template'] : '';
+        $float['template'] = isset($names['template'][$template]) ? $names['template'][$template] : 'floatmenu-template-1';
+
+        $style = isset($settings['style']) ? $settings['style'] : '';
+        $float['temp_1_tab_shape'] = isset($names['style'][$style]) ? $names['style'][$style] : 'round';
+
+        foreach (self::config_map() as $from => $to) {
+            if (isset($settings[$from])) {
+                $float[$to] = $settings[$from];
+            }
+        }
+
+        /* Both plugins keep a shadow's parts together. The premium one carries
+           a spread as well, which this plugin does not offer. */
+        if (isset($settings['button_shadow']) && is_array($settings['button_shadow'])) {
+            $shadow = $settings['button_shadow'];
+
+            $float['button_shadow'] = array(
+                'x' => isset($shadow['x']) ? $shadow['x'] : '',
+                'y' => isset($shadow['y']) ? $shadow['y'] : '',
+                'blur' => isset($shadow['blur']) ? $shadow['blur'] : '',
+                'spread' => isset($shadow['spread']) ? $shadow['spread'] : '',
+                'color' => isset($shadow['color']) ? $shadow['color'] : '',
+            );
+        }
+
+        /* This plugin calls it padding and keeps the sides in one array; the
+           premium one calls it spacing and keeps a key per side. */
+        if (isset($settings['tooltip_padding']) && is_array($settings['tooltip_padding'])) {
+            foreach (array('top', 'right', 'bottom', 'left') as $side) {
+                if (isset($settings['tooltip_padding'][$side])) {
+                    $float['tooltip_spacing_' . $side] = $settings['tooltip_padding'][$side];
+                }
+            }
+        }
+
+        if (isset($settings['tooltip_font']) && is_array($settings['tooltip_font'])) {
+            foreach (self::font_map() as $from => $to) {
+                if (isset($settings['tooltip_font'][$from])) {
+                    $float[$to] = $settings['tooltip_font'][$from];
+                }
+            }
+        }
+
+        $config = array(
+            'menu_enabled' => true,
+            'menu_type' => 'floating_menu',
+            'floatmenu' => $float,
+        );
+
+        /* Settings the premium plugin has no equivalent for ride alongside
+           rather than inside "floatmenu", which is the only key it reads. They
+           are invisible to it, and still here if this plugin is put back. */
+        foreach (self::own_keys() as $key) {
+            if (isset($settings[$key])) {
+                $config['sfm'][$key] = $settings[$key];
+            }
+        }
+
+        return $config;
+    }
+
+    /**
+     * Turn the premium plugin's nested settings back into this plugin's flat
+     * ones. The reverse of self::to_stored_config().
+     *
+     * @since  1.4.0
+     * @param  array $stored
+     * @return array
+     */
+    public static function to_flat_config($stored) {
+        $float = isset($stored['floatmenu']) && is_array($stored['floatmenu']) ? $stored['floatmenu'] : array();
+        $names = self::name_map();
+        $flat = array();
+
+        $template = array_search(isset($float['template']) ? $float['template'] : '', $names['template'], true);
+        if ($template !== false) {
+            $flat['template'] = $template;
+        }
+
+        $style = array_search(isset($float['temp_1_tab_shape']) ? $float['temp_1_tab_shape'] : '', $names['style'], true);
+        if ($style !== false) {
+            $flat['style'] = $style;
+        }
+
+        foreach (self::config_map() as $to => $from) {
+            if (isset($float[$from])) {
+                $flat[$to] = $float[$from];
+            }
+        }
+
+        if (isset($float['button_shadow']) && is_array($float['button_shadow'])) {
+            $flat['button_shadow'] = $float['button_shadow'];
+
+            /* The premium plugin spreads a shadow and this one does not. An
+               empty spread is dropped rather than carried, so a menu saved
+               here keeps the shape this plugin's own settings have; a spread
+               somebody set over there survives untouched. */
+            if (isset($flat['button_shadow']['spread']) && $flat['button_shadow']['spread'] === '') {
+                unset($flat['button_shadow']['spread']);
+            }
+        }
+
+        foreach (array('top', 'right', 'bottom', 'left') as $side) {
+            if (isset($float['tooltip_spacing_' . $side])) {
+                $flat['tooltip_padding'][$side] = $float['tooltip_spacing_' . $side];
+            }
+        }
+
+        foreach (self::font_map() as $to => $from) {
+            if (isset($float[$from])) {
+                $flat['tooltip_font'][$to] = $float[$from];
+            }
+        }
+
+        /* The premium plugin sizes a button on one axis, and so does the
+           builder here: its width field mirrors the size field rather than
+           being set on its own. Squaring it off on the way in is what keeps a
+           menu the same shape either side of an upgrade. */
+        if (isset($flat['button_height'])) {
+            $flat['button_width'] = $flat['button_height'];
+        }
+
+        if (isset($stored['sfm']) && is_array($stored['sfm'])) {
+            foreach (self::own_keys() as $key) {
+                if (isset($stored['sfm'][$key])) {
+                    $flat[$key] = $stored['sfm'][$key];
+                }
+            }
+        }
+
+        return $flat;
+    }
+
+    /**
+     * Turn this plugin's flat buttons into the premium plugin's menu items.
+     *
+     * The premium plugin builds an id for each item by arithmetic on this one,
+     * so it has to be a small whole number. This plugin keys a button's CSS on
+     * its id instead, which is why the flat side gets a name built from the
+     * number rather than the number itself.
+     *
+     * @since  1.4.0
+     * @param  array $buttons
+     * @return array
+     */
+    public static function to_stored_items($buttons) {
+        $items = array();
+        $index = 0;
+
+        foreach ($buttons as $button) {
+            if (!is_array($button)) {
+                continue;
+            }
+
+            $index++;
+
+            $icon = isset($button['icon']) ? $button['icon'] : '';
+            $new_tab = !empty($button['open_new_tab']);
+            $label = isset($button['label']) ? $button['label'] : '';
+            $tooltip = isset($button['tool_tip_text']) ? $button['tool_tip_text'] : '';
+
+            $float = array(
+                'icon_type' => 'available_icon',
+                'available_icon' => $icon,
+                'tooltip_enable' => !empty($button['tooltip_enable']) ? 'on' : 'off',
+                'target_blank' => $new_tab ? 'on' : 'off',
+            );
+
+            foreach (self::item_map() as $from => $to) {
+                if (isset($button[$from])) {
+                    $float[$to] = $button[$from];
+                }
+            }
+
+            /* Carried over so the icon survives a switch to the fly menu, which
+               this plugin has no screen for but the premium one does. */
+            $fly = array();
+
+            if ($icon !== '') {
+                $fly = array('icon_type' => 'available_icon', 'available_icon' => $icon);
+            }
+
+            $items[] = array(
+                'id' => $index,
+                'label' => $label !== '' ? $label : $tooltip,
+                'url' => isset($button['url']) ? $button['url'] : '',
+                'parent' => '0',
+                'target' => $new_tab ? '_blank' : '',
+                'classes' => isset($button['classes']) ? $button['classes'] : '',
+                'attr_title' => isset($button['attr_title']) ? $button['attr_title'] : '',
+                'xfn' => '',
+                'settings' => array('floatingmenu' => $float, 'flymenu' => $fly),
+            );
+        }
+
+        return $items;
+    }
+
+    /**
+     * Turn the premium plugin's menu items back into this plugin's flat
+     * buttons. The reverse of self::to_stored_items().
+     *
+     * @since  1.4.0
+     * @param  array $items
+     * @return array
+     */
+    public static function to_flat_buttons($items) {
+        $buttons = array();
+        $index = 0;
+
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $index++;
+
+            $float = isset($item['settings']['floatingmenu']) && is_array($item['settings']['floatingmenu'])
+                ? $item['settings']['floatingmenu']
+                : array();
+
+            $id = isset($item['id']) ? (int) $item['id'] : $index;
+
+            $button = array(
+                'id' => 'sfm-item-' . ($id > 0 ? $id : $index),
+                'label' => isset($item['label']) ? $item['label'] : '',
+                'icon' => isset($float['available_icon']) ? $float['available_icon'] : '',
+                'url' => isset($item['url']) ? $item['url'] : '',
+                'classes' => isset($item['classes']) ? $item['classes'] : '',
+                'attr_title' => isset($item['attr_title']) ? $item['attr_title'] : '',
+                'open_new_tab' => isset($item['target']) && $item['target'] === '_blank',
+                'tooltip_enable' => !isset($float['tooltip_enable']) || $float['tooltip_enable'] === 'on',
+            );
+
+            foreach (self::item_map() as $to => $from) {
+                if (isset($float[$from])) {
+                    $button[$to] = $float[$from];
+                }
+            }
+
+            $buttons[] = $button;
+        }
+
+        return $buttons;
+    }
 
     /**
      * Every menu that should appear on the site.
@@ -41,10 +419,7 @@ class SFM_Standalone_Store {
      * @return array
      */
     public static function get_settings($post_id) {
-        $stored = get_post_meta($post_id, SFM_Standalone::CONFIG_META, true);
-        $stored = is_array($stored) ? $stored : array();
-
-        $settings = array_merge(Simple_Floating_Menu::default_settings(), $stored);
+        $settings = array_merge(Simple_Floating_Menu::default_settings(), self::get_raw_settings($post_id));
 
         /* The buttons live in their own row, so they are put back here where
            the renderer expects to find them. */
@@ -67,7 +442,7 @@ class SFM_Standalone_Store {
     public static function get_raw_settings($post_id) {
         $stored = get_post_meta($post_id, SFM_Standalone::CONFIG_META, true);
 
-        return is_array($stored) ? $stored : array();
+        return is_array($stored) ? self::to_flat_config($stored) : array();
     }
 
     /**
@@ -79,7 +454,7 @@ class SFM_Standalone_Store {
     public static function save_settings($post_id, $settings) {
         unset($settings['buttons']);
 
-        update_post_meta($post_id, SFM_Standalone::CONFIG_META, $settings);
+        update_post_meta($post_id, SFM_Standalone::CONFIG_META, self::to_stored_config($settings));
     }
 
     /**
@@ -89,9 +464,9 @@ class SFM_Standalone_Store {
      * @return array
      */
     public static function get_buttons($post_id) {
-        $buttons = get_post_meta($post_id, SFM_Standalone::ITEMS_META, true);
+        $items = get_post_meta($post_id, SFM_Standalone::ITEMS_META, true);
 
-        return is_array($buttons) ? $buttons : array();
+        return is_array($items) ? self::to_flat_buttons($items) : array();
     }
 
     /**
@@ -101,7 +476,9 @@ class SFM_Standalone_Store {
      * @param array $buttons
      */
     public static function save_buttons($post_id, $buttons) {
-        update_post_meta($post_id, SFM_Standalone::ITEMS_META, self::sanitize_buttons($buttons));
+        $clean = self::sanitize_buttons($buttons);
+
+        update_post_meta($post_id, SFM_Standalone::ITEMS_META, self::to_stored_items($clean));
     }
 
     /**
