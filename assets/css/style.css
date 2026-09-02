@@ -62,14 +62,16 @@
 .sfm-floating-menu a.sfm-shape-button {
     background: #000000;
     text-align: center;
-    transition: background 0.3s ease;
     text-decoration: none;
     color: #FFF;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s ease, background-color 0.3s ease;
+
+    /* Everything, not only the colours: a template may grow the button on
+       hover, and that has to animate too. */
+    transition: all 0.3s ease;
 }
 
 .sfm-floating-menu i {
@@ -185,15 +187,48 @@
     position: absolute;
     background: #000000;
     font-size: 0.8em;
+    line-height: 1.2;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease-in-out;
+    border-radius: var(--sfm-tooltip-border-radius, 4px);
+    transition: all 0.2s ease;
 }
 
 .sfm-floating-menu .sfm-button:hover .sfm-tool-tip {
     opacity: 1;
     visibility: visible;
+}
+
+/* Hovering slides the tooltip out from under the button, each edge moving on
+   the axis it sits on. */
+
+.sfm-floating-menu.top-left.horizontal .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.top-middle.horizontal .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.top-right.horizontal .sfm-button:hover .sfm-tool-tip {
+    margin-top: var(--sfm-tooltip-indent-hover, 10px);
+}
+
+.sfm-floating-menu.top-left.vertical .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.top-middle.vertical .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.bottom-left.vertical .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.bottom-middle.vertical .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.middle-left.vertical .sfm-button:hover .sfm-tool-tip {
+    margin-left: var(--sfm-tooltip-indent-hover, 10px);
+}
+
+.sfm-floating-menu.top-right.vertical .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.middle-right.vertical .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.bottom-right.vertical .sfm-button:hover .sfm-tool-tip {
+    margin-right: var(--sfm-tooltip-indent-hover, 10px);
+}
+
+.sfm-floating-menu.bottom-left.horizontal .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.bottom-middle.horizontal .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.bottom-right.horizontal .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.middle-left.horizontal .sfm-button:hover .sfm-tool-tip,
+.sfm-floating-menu.middle-right.horizontal .sfm-button:hover .sfm-tool-tip {
+    margin-bottom: var(--sfm-tooltip-indent-hover, 10px);
 }
 
 .sfm-floating-menu .sfm-tool-tip a {
@@ -226,7 +261,8 @@
     text-orientation: mixed;
     top: 100%;
     left: 50%;
-    transform: translate(-50%, var(--sfm-tooltip-indent, 20px));
+    transform: translateX(-50%);
+    margin-top: var(--sfm-tooltip-indent, -20px);
 }
 
 .sfm-floating-menu.top-left.horizontal .sfm-tool-tip:after,
@@ -246,7 +282,8 @@
 .sfm-floating-menu.middle-left.vertical .sfm-tool-tip {
     top: 50%;
     left: 100%;
-    transform: translate(var(--sfm-tooltip-indent, 20px), -50%);
+    transform: translateY(-50%);
+    margin-left: var(--sfm-tooltip-indent, -20px);
 }
 
 .sfm-floating-menu.top-left.vertical .sfm-tool-tip:after,
@@ -266,7 +303,8 @@
 .sfm-floating-menu.bottom-right.vertical .sfm-tool-tip {
     top: 50%;
     right: 100%;
-    transform: translate(calc(var(--sfm-tooltip-indent, 20px) * -1), -50%);
+    transform: translateY(-50%);
+    margin-right: var(--sfm-tooltip-indent, -20px);
 }
 
 .sfm-floating-menu.top-right.vertical .sfm-tool-tip:after,
@@ -288,7 +326,8 @@
     text-orientation: mixed;
     bottom: 100%;
     left: 50%;
-    transform: translate(-50%, calc(var(--sfm-tooltip-indent, 20px) * -1));
+    transform: translateX(-50%);
+    margin-bottom: var(--sfm-tooltip-indent, -20px);
 }
 
 .sfm-floating-menu.bottom-left.horizontal .sfm-tool-tip:after,
@@ -331,7 +370,8 @@
 /* Template 3 - the tooltip sits flush against the button, with no pointer. */
 
 .sfm-floating-menu.sfm-template-3 {
-    --sfm-tooltip-indent: 0px;
+    --sfm-tooltip-indent: 30px;
+    --sfm-tooltip-indent-hover: 5px;
 }
 
 .sfm-floating-menu.sfm-template-3 .sfm-tool-tip:after {
