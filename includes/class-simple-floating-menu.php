@@ -947,7 +947,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </div>
 
                         <div id="tab-upgrade-pro" class="sfm-form-page">
-                            <p><?php esc_html_e('Simple Floating Menu gives you one floating bar. Super Floating &amp; Flying Menu gives you as many menus as you like, in seven different shapes, with over 100 ready made designs to start from and full control over when and where each one appears.', 'simple-floating-menu'); ?></p>
+                            <p><?php esc_html_e('Simple Floating Menu gives you floating bars. Super Floating &amp; Flying Menu adds six more kinds of menu, over 100 ready made designs to start from, and full control over who sees each menu and when and where it appears.', 'simple-floating-menu'); ?></p>
 
                             <h3>Demo and Purchase Links</h3>
                             <div class="sfm-inline-buttons">
