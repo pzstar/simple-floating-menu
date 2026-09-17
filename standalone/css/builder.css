@@ -863,17 +863,23 @@
     z-index: 100;
     top: calc(100% + 4px);
     left: 0;
-
     width: 320px;
     max-width: 90vw;
-    max-height: 300px;
-    overflow: auto;
     padding: 10px;
-
     background: #fff;
     border: 1px solid #c3c4c7;
     border-radius: 4px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, .16);
+}
+
+.sfm-icon-picker-header {
+    position: sticky;
+    top: 0;
+}
+
+.sfm-icon-picker-body {
+    max-height: 250px;
+    overflow: auto;
 }
 
 .sfm-icon-picker .sfm-icon-library,

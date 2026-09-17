@@ -232,6 +232,7 @@
             var libraries = sfmBuilder.libraries || {};
             var html = '<div class="sfm-icon-picker">';
 
+            html += '<div class="sfm-icon-picker-header">';
             html += '<select class="sfm-icon-library">';
 
             $.each(libraries, function (slug, library) {
@@ -240,6 +241,9 @@
 
             html += '</select>';
             html += '<input type="search" class="sfm-icon-search" placeholder="' + sfmBuilder.searchIcons + '"/>';
+            html += '</div>';
+
+            html += '<div class="sfm-icon-picker-body">';
 
             $.each(libraries, function (slug, library) {
                 html += '<ul class="sfm-icon-list" data-library="' + slug + '">';
@@ -252,6 +256,7 @@
             });
 
             html += '<p class="sfm-icon-empty" hidden>' + sfmBuilder.noIcons + '</p>';
+            html += '</div>';
 
             return $(html + '</div>');
         }
