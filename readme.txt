@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: menu, sticky button, floating menu, fixed menu
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,9 +20,9 @@ Want to test the dashboard settings without installing on your website? <a href=
 
 <h4>Two ways to build a menu</h4>
 
-<strong>The settings screen.</strong> Open Simple Floating Menu > Settings and build one bar, with a live preview beside it so you can see it change as you work. This is the original way and nothing about it has changed.
+<strong>The Simple Floating Menu screen.</strong> Open Simple Floating Menu in your dashboard and build one bar, with a live preview beside it so you can see it change as you work. This is the original way and nothing about it has changed.
 
-<strong>The Menus screen.</strong> Open Simple Floating Menu > Menus and build as many separate bars as you like. Each one is its own item with its own buttons and its own design, edited on a builder screen that puts the button list and the settings for the selected button side by side. Start from one of three ready made designs, then change whatever you want. Menus can be switched on and off, duplicated, exported and imported one at a time.
+<strong>The Floating Menus screen.</strong> Open Simple Floating Menu > Floating Menus and build as many separate bars as you like. Each one is its own item with its own buttons, its own design and its own choice of pages to appear on, edited on a builder screen that puts the button list and the settings for the selected button side by side. Start from one of three ready made designs, then change whatever you want. Menus can be switched on and off, duplicated, exported and imported one at a time.
 
 Both kinds run on the same front end and can run together.
 
@@ -44,6 +44,7 @@ Both kinds run on the same front end and can run together.
 <li>Open each link in the same tab or a new one</li>
 <li>Over 1,400 Google fonts for the tooltip text, with full typography settings</li>
 <li>Serve Google fonts from your own server to help with GDPR</li>
+<li>Show a menu on every page, or only on the pages, posts, archives, search results or 404 page you choose (Floating Menus screen)</li>
 <li>Turn a menu on and off without deleting your setup</li>
 <li>Export, import and duplicate a menu, or export your settings, to move a setup between sites</li>
 <li>Live preview beside the settings</li>
@@ -53,21 +54,23 @@ Both kinds run on the same front end and can run together.
 
 <h4>Looking for more?</h4>
 
-<a href="https://1.envato.market/LPXYao" target="_blank">Super Floating &amp; Flying Menu</a> is the premium version of this plugin. It keeps everything above and adds side panel menus, full screen menus, one page navigation and a library of over 100 ready made designs. Here is how the two compare.
+<a href="https://1.envato.market/LPXYao" target="_blank">Super Floating &amp; Flying Menu</a> is the premium version of this plugin. It keeps everything above and adds side panel menus, full screen menus, one page navigation and a library of over 100 ready made designs. Here is how the two compare. The same comparison is inside the plugin, under Simple Floating Menu > Free vs Pro.
 
 <ul>
-<li><strong>Menus</strong> &mdash; Free: as many floating bars as you like. Premium: the same, and each menu gets its own rules about who sees it, and when and where.</li>
+<li><strong>Kinds of menu</strong> &mdash; Free: a floating button bar. Premium: floating bars, quarter, half and full circular fans, a one page navigation indicator, side panels, skew panels, full screen menus and navigation icon menus.</li>
+<li><strong>Floating bar styles</strong> &mdash; Free: 3. Premium: 10, plus the three circular fans.</li>
 <li><strong>Ready made designs</strong> &mdash; Free: 3 designs to build a menu on. Premium: over 100 finished menus to import in one click and edit as your own.</li>
-<li><strong>Kinds of menu</strong> &mdash; Free: a floating bar. Premium: floating bars in 14 layouts, quarter, half and full circular fans, a one page navigation indicator, side panels, skew panels, full screen menus and navigation icon menus.</li>
-<li><strong>Built on</strong> &mdash; Free: its own Menus screen. Premium: the same, or a WordPress nav menu if you already keep your links there.</li>
-<li><strong>Submenus</strong> &mdash; Free: a flat row of buttons. Premium: submenus up to three levels deep.</li>
-<li><strong>Icons</strong> &mdash; Free: 5 packs, 12,000+ icons. Premium: 7 sets, 13,000+ icons, animated hamburger icons, or your own images.</li>
+<li><strong>Menus</strong> &mdash; Free: as many floating bars as you like, each on its own builder screen. Premium: the same, or built on a WordPress nav menu if you already keep your links there.</li>
+<li><strong>Submenus</strong> &mdash; Free: a flat row of buttons. Premium: multi level submenus, with 7 ways to open them.</li>
+<li><strong>Icons</strong> &mdash; Free: 5 packs, 12,000+ icons. Premium: 7 packs, 13,000+ icons, 16 animated hamburger icons, or your own images.</li>
 <li><strong>Button shapes</strong> &mdash; Free: 9. Premium: 11.</li>
-<li><strong>Animation</strong> &mdash; Free: none. Premium: 12 ways for the bar to appear, 29 hover and 12 idle animations for the buttons, and 37 entrance and 37 exit animations for panels.</li>
-<li><strong>Where it appears</strong> &mdash; Free: on every page. Premium: chosen pages, post types, archives, search and 404, by login state, by user role, by device and by language.</li>
+<li><strong>Tablet and mobile</strong> &mdash; Free: one set of sizes for every screen. Premium: separate sizes and spacing for tablet and mobile.</li>
+<li><strong>Animation</strong> &mdash; Free: none. Premium: 12 ways for a floating bar to appear, hover and idle animations for the trigger button, 37 entrance and 37 exit animations for panels, and 6 wave transitions for full screen menus.</li>
+<li><strong>Where it appears</strong> &mdash; Free: every page, or for menus on the Floating Menus screen, chosen pages, posts, archives, search results and the 404 page. Premium: the same, and by login state, user role, device and language.</li>
 <li><strong>When it appears</strong> &mdash; Free: always. Premium: after the visitor scrolls, hidden again while they scroll down, or on a schedule of dates and weekdays.</li>
 <li><strong>Panel contents</strong> &mdash; Free: buttons and tooltips. Premium: a header logo, a search form, a social row, footer text, item descriptions and badges, or a panel built in Elementor.</li>
 <li><strong>Moving a setup</strong> &mdash; Free: export, import and duplicate a menu. Premium: the same, and a menu can be duplicated as the other menu type.</li>
+<li><strong>Support</strong> &mdash; Free: the WordPress.org forum. Premium: premium support from HashThemes.</li>
 </ul>
 
 <a href="https://1.envato.market/LPXYao" target="_blank">Get Super Floating &amp; Flying Menu</a> | <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank">See the demos</a>
@@ -76,15 +79,19 @@ Both kinds run on the same front end and can run together.
 
 = Do I have to use Appearance > Menus? =
 
-No. This plugin never touches WordPress nav menus. Build a bar from Simple Floating Menu > Settings, or build separate menus under Simple Floating Menu > Menus.
+No. This plugin never touches WordPress nav menus. Build a bar on the Simple Floating Menu screen, or build separate menus under Simple Floating Menu > Floating Menus.
 
-= What is the difference between the Settings screen and the Menus screen? =
+= What is the difference between the Simple Floating Menu screen and the Floating Menus screen? =
 
-The Settings screen builds one bar and has a live preview beside it. The Menus screen builds as many separate bars as you like, each with its own buttons and design, on a builder screen of its own. Both run on the same front end, and you can use both at once.
+The Simple Floating Menu screen builds one bar and has a live preview beside it. The Floating Menus screen builds as many separate bars as you like, each with its own buttons, design and pages to appear on, on a builder screen of its own. Both run on the same front end, and you can use both at once.
 
 = How many menus can I have? =
 
 As many as you like. Each one is switched on and off on its own.
+
+= Can a menu appear on some pages only? =
+
+Yes, for menus built on the Floating Menus screen. Show a menu on every page, or show or hide it on the front page, the blog page, archives, the search page, the 404 page, chosen post types, or chosen posts and pages.
 
 = Can a button do something other than open a link? =
 
@@ -92,7 +99,11 @@ Yes. A button can scroll to a section on the page, to the top or to the bottom, 
 
 = Will my menus carry over if I upgrade to the premium version? =
 
-Yes. Super Floating &amp; Flying Menu reads menus built here exactly as they stand, with no import step. Bars built on the Settings screen are brought over with the importer on its Settings tab.
+Yes. Super Floating &amp; Flying Menu reads menus built on the Floating Menus screen exactly as they stand, with no import step. A bar built on the Simple Floating Menu screen moves across with the premium plugin's Import From Free.
+
+= Where can I compare the free and premium versions? =
+
+Inside the plugin, under Simple Floating Menu > Free vs Pro, or on the Free vs Pro tab of the Simple Floating Menu screen. Both show the same feature by feature table, with a link to upgrade.
 
 = Can I serve Google fonts from my own server? =
 
@@ -112,7 +123,8 @@ The comparison is on the Description tab. This is the longer list of what <a tar
 <li>Panels with a colour, image or video background, a header logo, a search form, a social row and your own footer text</li>
 <li>7 icon packs with more than 13,000 icons, or upload your own image icons</li>
 <li>11 button shapes and 12 show and hide animations for the bar</li>
-<li>29 button hover animations and 12 idle animations to draw the eye</li>
+<li>29 hover and 12 idle animations for the trigger button, to draw the eye</li>
+<li>Separate sizes and spacing for tablet and mobile</li>
 <li>37 panel entrance and 37 exit animations, plus 6 wave animations for full screen menus</li>
 <li>Show a menu only after the visitor scrolls, and hide it again while they scroll down</li>
 <li>Schedule a menu by date range and by days of the week, for offers that run themselves</li>
@@ -143,6 +155,12 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 3. Admin Panel of Simple Floating Menu
 
 == Changelog ==
+= 1.4.1 - 17 Sep, 2026 =
+* A Free vs Pro page under Simple Floating Menu, comparing this plugin with Super Floating &amp; Flying Menu feature by feature, with links to upgrade and to the demos. It replaces the Upgrade To Pro menu link, which left the dashboard
+* The Premium Features tab on the Simple Floating Menu screen is now a Free vs Pro tab with the same comparison, and the live preview steps aside while it is open
+* The old premium feature banners and images are gone, so the plugin is smaller to download
+* Readme: the comparison now shows that menus on the Floating Menus screen can be limited to chosen pages, and the screens are named as they appear in the dashboard menu
+
 = 1.4.0 - 3 Sep, 2026 =
 * Menus that do not need the settings screen, managed under Simple Floating Menu > Menus, with as many as you like on one site
 * A builder screen for each menu, with the button list and each button's settings side by side

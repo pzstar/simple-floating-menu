@@ -1,0 +1,209 @@
+/* Free vs Pro
+   Loaded on that screen alone. Logical properties throughout, so the page
+   reads the same way round on a right to left site without a second file. */
+
+.sfm-fvp {
+    max-width: 1080px;
+    margin-top: 0;
+}
+
+/* The intro card, with the way to upgrade beside it */
+
+.sfm-fvp-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 0 0 20px;
+    padding: 28px 32px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.sfm-fvp-hero-text {
+    flex: 1 1 420px;
+    min-width: 0;
+}
+
+.sfm-fvp-eyebrow {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--wp-admin-theme-color, #2271b1);
+}
+
+.sfm-fvp .sfm-fvp-heading {
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: 22px;
+    line-height: 1.3;
+    color: #1d2327;
+}
+
+.sfm-fvp-lead {
+    max-width: 62ch;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #50575e;
+}
+
+.sfm-fvp-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sfm-fvp-actions .button {
+    margin: 0;
+}
+
+/* The table */
+
+.sfm-fvp-table-wrap {
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.sfm-fvp-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.sfm-fvp-table th,
+.sfm-fvp-table td {
+    padding: 12px 20px;
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: start;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.sfm-fvp-table .sfm-fvp-feature {
+    width: 50%;
+    font-weight: 400;
+    color: #1d2327;
+}
+
+.sfm-fvp-table .sfm-fvp-free,
+.sfm-fvp-table .sfm-fvp-pro {
+    width: 25%;
+    text-align: center;
+}
+
+/* Pro is the column being sold, so it carries a tint the whole way down,
+   drawn from the admin colour scheme so it matches the buttons. */
+.sfm-fvp-table .sfm-fvp-pro {
+    background: #f0f6fc;
+    background: color-mix(in srgb, var(--wp-admin-theme-color, #2271b1) 7%, #fff);
+}
+
+.sfm-fvp-table thead th {
+    padding-block: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1d2327;
+    background: #f6f7f7;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.sfm-fvp-table thead .sfm-fvp-pro {
+    color: #fff;
+    background: var(--wp-admin-theme-color, #2271b1);
+}
+
+.sfm-fvp-table .sfm-fvp-group th,
+.sfm-fvp-table .sfm-fvp-group td {
+    padding-block: 20px 8px;
+    border-bottom-color: #dcdcde;
+}
+
+.sfm-fvp-table .sfm-fvp-group th {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #646970;
+}
+
+.sfm-fvp-table tbody:first-of-type .sfm-fvp-group th,
+.sfm-fvp-table tbody:first-of-type .sfm-fvp-group td {
+    padding-block-start: 16px;
+}
+
+.sfm-fvp-yes,
+.sfm-fvp-no {
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+}
+
+.sfm-fvp-yes {
+    color: #00a32a;
+}
+
+.sfm-fvp-no {
+    color: #c3c4c7;
+}
+
+.sfm-fvp-text {
+    font-size: 13px;
+    color: #1d2327;
+}
+
+.sfm-fvp-free .sfm-fvp-text {
+    color: #50575e;
+}
+
+.sfm-fvp-table tfoot td {
+    padding-block: 18px;
+    border-bottom: 0;
+}
+
+.sfm-fvp-table tfoot .button {
+    margin: 0;
+}
+
+.sfm-fvp-current {
+    font-size: 13px;
+    color: #646970;
+}
+
+.sfm-fvp-note {
+    max-width: 80ch;
+    margin: 16px 0 0;
+    color: #646970;
+}
+
+@media (max-width: 782px) {
+    .sfm-fvp-hero {
+        padding: 20px;
+    }
+
+    .sfm-fvp-table th,
+    .sfm-fvp-table td {
+        padding-inline: 12px;
+    }
+}
+
+/* As a tab on the Simple Floating Menu screen, where the live preview has
+   nothing to show, so the comparison takes the room it would use. */
+
+#sfm-form-wrap.sfm-fvp-active .sfm-live-demo {
+    display: none;
+}
+
+#sfm-form-wrap.sfm-fvp-active div.sfm-form-start {
+    width: 100%;
+    max-width: 1080px;
+}

@@ -6,6 +6,10 @@
 
         $('.sfm-form-page').hide();
         $(id).fadeIn()
+
+        /* The Free vs Pro table has no use for the live preview beside it. */
+        $('#sfm-form-wrap').toggleClass('sfm-fvp-active', id == '#tab-upgrade-pro');
+
         if (id == '#tab-upgrade-pro' || id == '#tab-sfm-imex') {
             $('body').find('.sfm-form-row').hide();
         } else {

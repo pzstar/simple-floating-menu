@@ -88,18 +88,32 @@ if (!class_exists('Simple_Floating_Menu')) {
         }
 
         /*
-         * The premium version, an outbound link rather than a screen, so it is
-         * registered on its own late hook and lands after the plugin's pages.
+         * Free vs Pro: what the premium version adds, side by side with what
+         * this one does, and the way to get it. Registered on its own late
+         * hook so it lands after the plugin's other pages.
          */
 
         public function load_upgrade_menu() {
-            add_submenu_page(
+            $hook = add_submenu_page(
                     'simple-floating-menu',
-                    esc_html__('Upgrade To Pro', 'simple-floating-menu'),
-                    esc_html__('Upgrade To Pro', 'simple-floating-menu'),
+                    esc_html__('Free vs Pro', 'simple-floating-menu'),
+                    esc_html__('Free vs Pro', 'simple-floating-menu'),
                     'manage_options',
-                    esc_url_raw('https://1.envato.market/LPXYao')
+                    'sfm-free-vs-pro',
+                    array($this, 'free_vs_pro_page')
             );
+
+            if ($hook) {
+                add_action('admin_print_styles-' . $hook, array($this, 'free_vs_pro_styles'));
+            }
+        }
+
+        public function free_vs_pro_page() {
+            include SFM_PATH . 'inc/free-vs-pro.php';
+        }
+
+        public function free_vs_pro_styles() {
+            wp_enqueue_style('sfm-free-vs-pro', SFM_URL . 'assets/css/free-vs-pro.css', array(), SFM_VERSION);
         }
 
         /**
@@ -136,6 +150,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                 wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), SFM_VERSION);
                 wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
+
+                /* For the Free vs Pro tab */
+                $this->free_vs_pro_styles();
             }
             wp_enqueue_style('essentialicon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
             if (is_rtl()) {
@@ -259,8 +276,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 'sfm-upgrade-nav' => array(
                     'href' => '#tab-upgrade-pro',
                     'icon' => 'mdi mdi-arrow-up-bold',
-                    'title' => esc_html__('Premium Features', 'simple-floating-menu'),
-                    'image' => SFM_URL . 'assets/img/upgrade-pro.png'
+                    'title' => esc_html__('Free vs Pro', 'simple-floating-menu'),
                 ),
             ));
             ?>
@@ -947,173 +963,9 @@ if (!class_exists('Simple_Floating_Menu')) {
                         </div>
 
                         <div id="tab-upgrade-pro" class="sfm-form-page">
-                            <p><?php esc_html_e('Simple Floating Menu gives you floating bars. Super Floating &amp; Flying Menu adds six more kinds of menu, over 100 ready made designs to start from, and full control over who sees each menu and when and where it appears.', 'simple-floating-menu'); ?></p>
-
-                            <h3>Demo and Purchase Links</h3>
-                            <div class="sfm-inline-buttons">
-                                <div class="sfm-buy-link sfm-link-button">
-                                    <a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank"><?php esc_html_e('Premium Demos', 'simple-floating-menu'); ?></a>
-                                </div>
-
-                                <div class="sfm-demo-link sfm-link-button">
-                                    <a href="https://1.envato.market/LPXYao" target="_blank"><?php esc_html_e('Buy Premium Version', 'simple-floating-menu'); ?></a>
-                                </div>
+                            <div class="sfm-fvp">
+                                <?php include SFM_PATH . 'inc/free-vs-pro-table.php'; ?>
                             </div>
-
-                            <div class="sfm-premium-features">
-                                <h4>Premium Features - Ready Made Menus</h4>
-                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/banner-image.png'); ?>" />
-                                <ul class="sfm-feature-box">
-                                    <li>Over 100 Ready Made Menus, Imported With One Click</li>
-                                    <li>Browse Them By Category, Or Search By Name</li>
-                                    <li>Start A New Menu From A Template, Or Apply One To A Menu You Already Have</li>
-                                    <li>Every Template Is Yours To Edit Once It Lands</li>
-                                    <li>Build Menus Without Using Appearance &gt; Menus At All</li>
-                                    <li>A Builder Screen With The Item List And Each Item's Settings Side By Side</li>
-                                    <li>Unlimited Menus On One Site, Each With Its Own Design And Display Rules</li>
-                                    <li>Import, Export And Duplicate Any Menu, Including As The Other Menu Type</li>
-                                </ul>
-                                <ul class="sfm-grid-col-3 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/" target="_blank"><?php esc_html_e('See All Demos', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Floating Menus', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Panel Menus', 'simple-floating-menu'); ?></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sfm-premium-features">
-                                <h4>Premium Features - Floating Buttons</h4>
-                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/floating-buttons.png'); ?>" />
-                                <ul class="sfm-feature-box">
-                                    <li>Create Unlimited Floating Menu</li>
-                                    <li>10 Differently Designed Styles</li>
-                                    <li>11 Different Button Shapes</li>
-                                    <li>7 Font Icon Packs With 13,000+ Icons</li>
-                                    <li>Upload Custom Image Icons</li>
-                                    <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
-                                    <li>Configure Button/Icon Size & Colors</li>
-                                    <li>Display Buttons Selectively On Specific Posts/Pages Only</li>
-                                    <li>Set Custom Typography With 1,400+ Google Fonts And Font Parameters</li>
-                                    <li>Import/Export Settings Easily With Just One Click</li>
-                                    <li>Set Every Button's Colors In One Place Instead Of One At A Time, Plus Hover Colors For The Tooltips</li>
-                                    <li>12 Show/Hide Animation</li>
-                                    <li>RTL (Right to Left Text) Ready</li>
-                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
-                                </ul>
-                                <ul class="sfm-grid-col-4 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-1/" target="_blank"><?php esc_html_e('Template 1', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-2/" target="_blank"><?php esc_html_e('Template 2', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-3/" target="_blank"><?php esc_html_e('Template 3', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-4/" target="_blank"><?php esc_html_e('Template 4', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-5/" target="_blank"><?php esc_html_e('Template 5', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-6/" target="_blank"><?php esc_html_e('Template 6', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-7/" target="_blank"><?php esc_html_e('Template 7', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-8/" target="_blank"><?php esc_html_e('Template 8', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-9/" target="_blank"><?php esc_html_e('Template 9', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-template-10/" target="_blank"><?php esc_html_e('Template 10', 'simple-floating-menu'); ?></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sfm-premium-features">
-                                <h4>Premium Features - Circular Floating Buttons</h4>
-                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/floating-circular-buttons.png'); ?>" />
-                                <ul class="sfm-feature-box">
-                                    <li>11 Different Button Shapes</li>
-                                    <li>7 Font Icon Packs With 13,000+ Icons</li>
-                                    <li>Upload Custom Image Icons</li>
-                                    <li>Display Buttons At Any Position On The Screen With Custom Offset Values</li>
-                                    <li>Configure Button/Icon Size & Colors</li>
-                                    <li>Display Buttons Selectively On Specific Posts/Pages Only</li>
-                                    <li>Set Custom Typography With 1,400+ Google Fonts And Font Parameters</li>
-                                    <li>Import/Export Settings Easily With Just One Click</li>
-                                    <li>Set Every Button's Colors In One Place Instead Of One At A Time, Plus Hover Colors For The Tooltips</li>
-                                    <li>12 Show/Hide Animation</li>
-                                    <li>29 Hover Animation</li>
-                                    <li>12 Idle Animation To Grab User Attention</li>
-                                    <li>Open Sub Menu Items On Hover Or Click</li>
-                                    <li>RTL (Right to Left Text) Ready</li>
-                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
-                                </ul>
-                                <ul class="sfm-grid-col-3 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-quater-circular/" target="_blank"><?php esc_html_e('Quater Circular', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-half-circular/" target="_blank"><?php esc_html_e('Half Circular', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/floating-menu-full-circular/" target="_blank"><?php esc_html_e('Full Circular', 'simple-floating-menu'); ?></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sfm-premium-features">
-                                <h4>Premium Features - Navigation Indicator(One Page) Menu</h4>
-                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/nav-menu.png'); ?>" />
-                                <ul class="sfm-feature-box">
-                                    <li>One Page Sticky Menu</li>
-                                    <li>13 Different Styles</li>
-                                    <li>Display Left Or Right</li>
-                                    <li>Custom Navigation Item Size, Color & Spacing</li>
-                                    <li>Custom Top Offset Value For Sticky Header</li>
-                                    <li>Custom Typography For Tool Tips</li>
-                                    <li>RTL (Right to Left Text) Ready</li>
-                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
-                                </ul>
-                                <ul class="sfm-grid-col-4 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-1/" target="_blank"><?php esc_html_e('Template 1', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-2/" target="_blank"><?php esc_html_e('Template 2', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-3/" target="_blank"><?php esc_html_e('Template 3', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-4/" target="_blank"><?php esc_html_e('Template 4', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-5/" target="_blank"><?php esc_html_e('Template 5', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-6/" target="_blank"><?php esc_html_e('Template 6', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-7/" target="_blank"><?php esc_html_e('Template 7', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-8/" target="_blank"><?php esc_html_e('Template 8', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-9/" target="_blank"><?php esc_html_e('Template 9', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-10/" target="_blank"><?php esc_html_e('Template 10', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-11/" target="_blank"><?php esc_html_e('Template 11', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-12/" target="_blank"><?php esc_html_e('Template 12', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/nav-indicator-animation-13/" target="_blank"><?php esc_html_e('Template 13', 'simple-floating-menu'); ?></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sfm-premium-features">
-                                <h4>Premium Features - Side Panel & Full Screen Menu</h4>
-                                <img src="<?php echo esc_url(SFM_URL . '/assets/img/side-full-menu.png'); ?>" />
-                                <ul class="sfm-feature-box">
-                                    <li>7 Sub Menu Open/Close Animations Styles.</li>
-                                    <li>Align the menu items to left, center, or right with 3 different Menu hover animations.</li>
-                                    <li>Apply color background, Image background or video background to the panel.</li>
-                                    <li>Align the content to left, center or right with custom spacing, typography, colors for each elements.</li>
-                                    <li>There are 37 entrance and 37 exit animations to choose from for the menu panel.</li>
-                                    <li>Choose from 13,000+ font icons or 16 animated Hamburger Icons, or add your own custom jpg, png or gif images.</li>
-                                    <li>Eye catching Button Hover and Idle Animation to grab the attention of the users.</li>
-                                    <li>Adjust the button and icon size, colors and shadow.</li>
-                                    <li>Place the button at any position on the screen. There are 8 predefined positions to choose from along with offset values to move it.</li>
-                                    <li>Display the Menu selectively only on the pages that you want.</li>
-                                    <li>Insert the trigger button at the start or at the end of the menu items on any menu. </li>
-                                    <li>Download the menu setting easily with just one click. And import it to any other menus on the same website or different website easily.</li>
-                                    <li>If you are a fan of pagebuider then you can create the content of the side panel with the Elementor Page builder.</li>
-                                    <li>RTL (Right to Left Text) Ready</li>
-                                    <li>Multilingual Ready (Compatible With Polylang & WPML Plugin)</li>
-                                </ul>
-                                <ul class="sfm-grid-col-3 sfm-grid-col">
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/side-panel-menu-slide-up-down-submenu/" target="_blank"><?php esc_html_e('Side Panel Menu', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/skew-side-panel-menu/" target="_blank"><?php esc_html_e('Skew Side Panel Menu', 'simple-floating-menu'); ?></a></li>
-                                    <li><a href="https://demo.hashthemes.com/super-floating-and-flying-menu/full-screen-menu-wave-animation-1/" target="_blank"><?php esc_html_e('Full Screen Menu', 'simple-floating-menu'); ?></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sfm-premium-features">
-                                <h4>Premium Features - When And Where A Menu Shows</h4>
-                                <ul class="sfm-feature-box">
-                                    <li>Show A Menu Only After The Visitor Has Scrolled Down, By Pixels Or By A Share Of The Page</li>
-                                    <li>Hide It Again While They Scroll Down, And Bring It Back When They Scroll Up</li>
-                                    <li>Schedule A Menu Between Two Dates, So An Offer Starts And Ends On Its Own</li>
-                                    <li>Run A Menu Only On Chosen Days Of The Week</li>
-                                    <li>Show Or Hide By Page, Post Type, Archive, Search Or 404</li>
-                                    <li>Show Only To Logged In Or Logged Out Visitors</li>
-                                    <li>Show Only To Chosen User Roles</li>
-                                    <li>Hide On Desktop, Tablet Or Mobile</li>
-                                    <li>Show A Different Menu Per Language With Polylang Or WPML</li>
-                                </ul>
-                            </div>
-
-                            <h3>Pre Sales Questions?</h3>
-                            <p>If you have any pre sales questions, then feel free to email us at support@hashthemes.com</p>
                         </div>
 
                     </div>
