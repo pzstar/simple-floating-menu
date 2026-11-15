@@ -48,6 +48,17 @@ class SFM_Standalone_Store {
             'tooltip_text_color' => 'tooltip_text_color',
             'tooltip_text_color_hover' => 'tooltip_hover_text_color',
             'tooltip_border_radius' => 'tooltip_border_radius',
+            /* The Display panel. The premium plugin keeps these under the
+               same names, and its own front end reads them from here. */
+            'display_condition' => 'display_condition',
+            'front_pages' => 'front_pages',
+            'blog_pages' => 'blog_pages',
+            'archive_pages' => 'archive_pages',
+            'error_pages' => 'error_pages',
+            'search_pages' => 'search_pages',
+            'cpt_pages' => 'cpt_pages',
+            'specific_pages' => 'specific_pages',
+            'specific_archive' => 'specific_archive',
         );
     }
 

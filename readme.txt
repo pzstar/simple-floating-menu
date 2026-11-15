@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: floating menu, floating buttons, sticky buttons, social buttons, back to top
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -237,11 +237,23 @@ Questions before you buy? Email support@hashthemes.com
 Prefer a single bar with a live preview? Open the Simple Floating Menu screen instead.
 
 == Screenshots ==
-1. Admin Panel of Simple Floating Menu
-2. Admin Panel of Simple Floating Menu
-3. Admin Panel of Simple Floating Menu
+1. Buttons tab: add buttons with an icon, link, tooltip and colours, and see them in the live preview.
+2. The icon picker, with 12,000+ icons in five icon packs and a search filter.
+3. Settings tab: position, orientation, template, button shape and size.
+4. Settings tab: tooltip typography, offsets, spacing and z-index.
+5. Floating Menus: build as many menus as you need, start an empty one or import one you exported.
+6. The menu builder: drag buttons into order and edit each one's link, icon, behaviour, tooltip and colours.
+7. Design settings for a menu: pick a template and a button shape.
+8. Design settings for a menu: position, offsets, button sizes, spacing and z-index.
+9. Design settings for a menu: button colours, shadow and tooltip styling.
+10. Import/Export: download your settings as a file, or bring them back in.
+11. Display settings for a menu: show or hide it on all pages, or only on the pages you pick.
 
 == Changelog ==
+= 1.5.1 - 15 Nov, 2026 =
+* Fixed: a menu's Display settings (show or hide it on all pages or on the pages you pick) were not saved from the menu builder, so every menu showed on every page
+* New screenshots of the settings screen, the icon picker, the Floating Menus list and the menu builder
+
 = 1.5.0 - 17 Sep, 2026 =
 * A Free vs Pro page under Simple Floating Menu, comparing this plugin with Super Floating &amp; Flying Menu feature by feature, with links to upgrade and to the demos. It replaces the Upgrade To Pro menu link, which left the dashboard
 * The Premium Features tab on the Simple Floating Menu screen is now a Free vs Pro tab with the same comparison, and the live preview steps aside while it is open
