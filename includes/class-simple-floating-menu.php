@@ -143,10 +143,10 @@ if (!class_exists('Simple_Floating_Menu')) {
                 ));
 
                 wp_enqueue_style('wp-color-picker');
-                wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
-                wp_enqueue_style('eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
-                wp_enqueue_style('iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
-                wp_enqueue_style('materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
+                wp_enqueue_style('fontawesome-7.3.1', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
+                wp_enqueue_style('eleganticons-1.0', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
+                wp_enqueue_style('icofont-1.0.1', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
+                wp_enqueue_style('materialdesignicons-7.4.47', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
                 wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
                 wp_enqueue_style('sfm-fonts', Simple_Floating_Menu_Frontend::sfm_fonts_url(), array(), SFM_VERSION);
                 wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
@@ -154,7 +154,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                 /* For the Free vs Pro tab */
                 $this->free_vs_pro_styles();
             }
-            wp_enqueue_style('essentialicon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
+            wp_enqueue_style('essentialicon-1.0', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
             if (is_rtl()) {
                 wp_enqueue_style('sfm-admin-style', SFM_URL . 'assets/css/admin-style.rtl.css', array(), SFM_VERSION);
             } else {
@@ -283,7 +283,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             <div class="sfm-wrap">
                 <div class="sfm-title-bar">
                     <h2>
-                        <i class="essentialicon-menu"></i>
+                        <i class="esi-menu"></i>
                         <?php esc_html_e('Simple Floating Menu Settings', 'simple-floating-menu'); ?>
                         <span>- v <?php echo SFM_VERSION; ?></span>
                     </h2>
@@ -1236,7 +1236,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             ?>
             <div class="sfm-notice notice notice-info">
                 <?php $this->dismiss_button('review'); ?>
-                <i class="essentialicon-menu-1"></i>
+                <i class="esi-menu-1"></i>
                 <div class="sfm-notice-info">
                     <p>
 

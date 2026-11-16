@@ -9,7 +9,7 @@ defined('ABSPATH') or die;
 ?>
 <div class="sfm-title-bar">
     <h2>
-        <i class="essentialicon-menu"></i>
+        <i class="esi-menu"></i>
         <?php esc_html_e('Free vs Pro', 'simple-floating-menu'); ?>
     </h2>
 </div>

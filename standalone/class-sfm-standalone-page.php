@@ -280,11 +280,11 @@ class SFM_Standalone_Page {
 
         /* The five icon fonts, so a button's glyph shows in the list and in its
            editor rather than as an empty square. */
-        wp_enqueue_style('fontawesome-6.3.0', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
-        wp_enqueue_style('eleganticons', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
-        wp_enqueue_style('iconfont', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
-        wp_enqueue_style('materialdesignicons', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
-        wp_enqueue_style('essentialicon', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
+        wp_enqueue_style('fontawesome-7.3.1', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
+        wp_enqueue_style('eleganticons-1.0', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
+        wp_enqueue_style('icofont-1.0.1', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
+        wp_enqueue_style('materialdesignicons-7.4.47', SFM_URL . 'assets/css/materialdesignicons.css', array(), SFM_VERSION);
+        wp_enqueue_style('essentialicon-1.0', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
         wp_enqueue_style('sfm-standalone-builder', SFM_URL . 'standalone/css/builder.css', array('wp-color-picker'), SFM_VERSION);
 
         /* The design modal picks a template with the same picker the menu list

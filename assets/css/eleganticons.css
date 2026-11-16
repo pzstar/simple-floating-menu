@@ -1,9 +1,11 @@
+/* Elegant Icons - handle eleganticons-1.0. Every class carries the egi- prefix. */
 @font-face {
     font-family: 'ElegantIcons';
     src: url('fonts/eleganticons/ElegantIcons.woff') format('woff'),
         url('fonts/eleganticons/ElegantIcons.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 [class^="egi-"],

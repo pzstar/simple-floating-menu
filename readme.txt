@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: floating menu, floating buttons, sticky buttons, social buttons, back to top
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 1.5.1
+Stable tag: 1.6.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -250,6 +250,12 @@ Prefer a single bar with a live preview? Open the Simple Floating Menu screen in
 11. Display settings for a menu: show or hide it on all pages, or only on the pages you pick.
 
 == Changelog ==
+= 1.6.0 - 16 Nov, 2026 =
+* Changed: Essential Icons are now written esi-add rather than essentialicon-add, the same in every HashThemes theme and plugin. Icons already chosen in your menus and standalone menus are renamed automatically when the plugin updates.
+* Changed: Font Awesome updated to 7.3.1 (with the Font Awesome 4 names built in) and Material Design Icons to 7.4.47.
+* Changed: each icon font loads under the same stylesheet handle as in the other HashThemes themes and plugins, so it loads only once.
+* Changed: the icon picker lists match the icon fonts exactly, with the newer IcoFont brand icons (X, TikTok, Discord, Figma and more).
+
 = 1.5.1 - 15 Nov, 2026 =
 * Fixed: a menu's Display settings (show or hide it on all pages or on the pages you pick) were not saved from the menu builder, so every menu showed on every page
 * New screenshots of the settings screen, the icon picker, the Floating Menus list and the menu builder
