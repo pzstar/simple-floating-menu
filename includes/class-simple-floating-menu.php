@@ -3,9 +3,6 @@
 /**
  * The plugin's own class.
  *
- * Kept out of the plugin file so that it is only read when the plugin is
- * actually going to run. See the sfm_load_plugin filter.
- *
  * @package Simple_Floating_Menu
  */
 
@@ -87,11 +84,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             add_menu_page($page_title, $menu_title, $capability, $slug, $callback, $icon, $position);
         }
 
-        /*
-         * Free vs Pro: what the premium version adds, side by side with what
-         * this one does, and the way to get it. Registered on its own late
-         * hook so it lands after the plugin's other pages.
-         */
+        /* Free vs Pro: what the premium version adds, side by side with what this one does. */
 
         public function load_upgrade_menu() {
             $hook = add_submenu_page(
@@ -989,9 +982,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             $valid_templates = array('sfm-template-1', 'sfm-template-2', 'sfm-template-3');
             $valid_actions = array('default', 'scroll_sectionid', 'scroll_to_top', 'scroll_to_bottom');
             $valid_icons = array_merge(sfm_font_awesome_icon_array(), sfm_materialdesignicons_array(), sfm_essential_icon_array(), sfm_icofont_icon_array(), sfm_eleganticons_array());
-            /* Premium says these may be left empty to fall back to the default,
-               so an empty one is handed the default rather than being read as
-               a zero. */
+            /* Premium lets these be empty to use the default, so an empty one gets the default, not zero. */
             foreach (array('button_height', 'button_width', 'icon_size', 'icon_position', 'button_spacing',
                            'top_offset', 'bottom_offset', 'left_offset', 'right_offset', 'zindex') as $sfm_num) {
                 if (isset($sfm_settings[$sfm_num]) && $sfm_settings[$sfm_num] === '') {
@@ -1053,9 +1044,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                     } elseif ($key == 'tool_tip_text') {
                         $sanitize_settings['buttons'][$index][$key] = sanitize_text_field($value);
                     } elseif ($key == 'open_new_tab' || $key == 'tooltip_enable') {
-                        /* An unticked box posts nothing, so arriving at all is
-                           what makes it on; the value still decides for a menu
-                           built in code rather than on the screen. */
+                        /* An unticked box posts nothing, so arriving at all means on. */
                         $sanitize_settings['buttons'][$index][$key] = (bool) $value;
                     } elseif ($key == 'action') {
                         $sanitize_settings['buttons'][$index][$key] = in_array($value, $valid_actions, true) ? $value : 'default';
@@ -1088,10 +1077,7 @@ if (!class_exists('Simple_Floating_Menu')) {
             $sanitize_settings['tooltip_font']['size'] = (10 <= $font_size && $font_size <= 60 && is_int($font_size)) ? $font_size : (int) $defaults['tooltip_font']['size'];
             $sanitize_settings['tooltip_font']['line_height'] = (0.5 <= $line_height && $line_height <= 5 && is_float($line_height)) ? $line_height : (float) $defaults['tooltip_font']['line_height'];
             $sanitize_settings['tooltip_font']['letter_spacing'] = (-5 <= $letter_spacing && $letter_spacing <= 5 && is_float($letter_spacing)) ? $letter_spacing : (float) $defaults['tooltip_font']['letter_spacing'];
-            /* The Display panel. A box is read by the value that arrives rather
-               than by arriving at all: the design panels are saved on their
-               own, over what is already stored, so a box that posted nothing
-               when it came off could never be unticked again. */
+            /* The Display panel: read by the posted value, as the panels save over what is stored. */
             $valid_conditions = array('show_all', 'hide_all', 'show_selected', 'hide_selected');
             $sanitize_settings['display_condition'] = isset($sfm_settings['display_condition']) && in_array($sfm_settings['display_condition'], $valid_conditions, true) ? $sfm_settings['display_condition'] : $defaults['display_condition'];
 

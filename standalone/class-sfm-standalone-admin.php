@@ -3,10 +3,6 @@
 /**
  * The menu list.
  *
- * Sits under the plugin's own top level entry, beside the settings screen the
- * plugin has always had, so the single bar and these menus are found in the
- * same place.
- *
  * @package Simple_Floating_Menu
  * @since   1.4.0
  */
@@ -139,9 +135,7 @@ class SFM_Standalone_Admin {
             $template = isset($settings['template']) ? $settings['template'] : '';
             $templates = SFM_Standalone_Templates::all();
 
-            /* The words the picker uses, and the first of the template's own
-               traits beside them, so the column says something about the menu
-               rather than only numbering it. */
+            /* The words the picker uses. */
             $name = isset($templates[$template]) ? $templates[$template]['name'] : $template;
             $trait = isset($templates[$template]['facts'][0]) ? $templates[$template]['facts'][0] : '';
 

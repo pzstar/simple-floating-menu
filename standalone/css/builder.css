@@ -1,9 +1,4 @@
-/* The menu builder screen.
- *
- * Colours are the WordPress admin palette so the screen sits inside the admin
- * rather than beside it. Spacing is driven by the two variables below, which
- * is what keeps the list, the editor and the modal reading as one surface.
- */
+/* The menu builder screen. */
 
 .sfm-page {
     --sfm-blue: #2271b1;
@@ -298,8 +293,7 @@
     margin-left: auto;
 }
 
-/* Deliberately not WordPress blue: it opens a dark modal, and the page already
-   spends its blue on Save. */
+/* Deliberately not WordPress blue. */
 .sfm-design-button {
     display: inline-flex;
     align-items: center;
@@ -626,9 +620,7 @@
     max-width: 100%;
 }
 
-/* Select2 dresses this control, the way premium dresses its own. The
-   measurements are premium's: a 40px control, a hairline in #949494 and a
-   2px radius. */
+/* Select2 dresses this control, the way premium dresses its own. */
 
 .sfm-pane-foot .select2-container--default .select2-selection--single {
     box-shadow: 0 0 0 transparent;
@@ -750,8 +742,7 @@
     display: none;
 }
 
-/* The link fields still wrap their one control, which is what a label is for.
-   The heading labels below are tied by id instead, so they are excluded. */
+/* The link fields still wrap their one control, which is what a label is for. */
 .sfm-field > label:not(.sfm-field-label) {
     display: flex;
     flex-direction: column;
@@ -961,8 +952,7 @@
 ------------------------------------------------------------- */
 
 @media screen and (max-width: 782px) {
-    /* The admin bar stops being fixed here, so a sticky bar would float over
-       a gap rather than under the bar. */
+    /* The admin bar stops being fixed here. */
     .sfm-topbar {
         position: static;
     }
@@ -1472,16 +1462,14 @@
 
 .sfm-content .sfm-panel[hidden] { display: none; }
 
-/* A row that only some placements use takes no space of its own, so its label
-   and fields stay in the row flow. */
+/* A row that only some placements use takes no space of its own. */
 .sfm-settings-row[hidden],
 .sfm-settings-list[hidden],
 .sfm-two-column-row > li[hidden] { display: none; }
 
 /* ---- template cards ---- */
 
-/* The icon control: preview, the class itself, and the button that opens the
-   picker. The picker hangs off this row, so it is the positioning context. */
+/* The icon control: preview, the class itself, and the button that opens the picker. */
 .sfm-item-icon {
     position: relative;
     display: flex;

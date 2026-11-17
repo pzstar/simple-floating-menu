@@ -3,15 +3,6 @@
 /**
  * Reading and writing standalone menus.
  *
- * A standalone menu is stored in the shape the premium plugin stores its own
- * menus in, under the same two meta keys. Upgrading is then not a conversion
- * at all: the premium plugin finds its own data already there and reads it.
- *
- * Inside this plugin the settings keep the flat shape the settings screen uses,
- * so the renderer, the CSS builder and the sanitiser all work on them without a
- * second version of any of it. This class is the only door to the data, so the
- * translation lives here and nowhere else.
- *
  * @package Simple_Floating_Menu
  * @since   1.4.0
  */
@@ -48,8 +39,7 @@ class SFM_Standalone_Store {
             'tooltip_text_color' => 'tooltip_text_color',
             'tooltip_text_color_hover' => 'tooltip_hover_text_color',
             'tooltip_border_radius' => 'tooltip_border_radius',
-            /* The Display panel. The premium plugin keeps these under the
-               same names, and its own front end reads them from here. */
+            /* The Display panel. */
             'display_condition' => 'display_condition',
             'front_pages' => 'front_pages',
             'blog_pages' => 'blog_pages',
@@ -145,10 +135,6 @@ class SFM_Standalone_Store {
     /**
      * Turn this plugin's flat settings into the premium plugin's nested ones.
      *
-     * Only the keys both plugins have are written. The premium plugin fills
-     * everything else from its own defaults when it reads the menu, so a
-     * partial configuration is exactly what it expects.
-     *
      * @since  1.4.0
      * @param  array $settings
      * @return array
@@ -169,8 +155,7 @@ class SFM_Standalone_Store {
             }
         }
 
-        /* Both plugins keep a shadow's parts together. The premium one carries
-           a spread as well, which this plugin does not offer. */
+        /* Both plugins keep a shadow's parts together. */
         if (isset($settings['button_shadow']) && is_array($settings['button_shadow'])) {
             $shadow = $settings['button_shadow'];
 
@@ -183,8 +168,7 @@ class SFM_Standalone_Store {
             );
         }
 
-        /* This plugin calls it padding and keeps the sides in one array; the
-           premium one calls it spacing and keeps a key per side. */
+        /* This plugin calls it padding and keeps the sides in one array. */
         if (isset($settings['tooltip_padding']) && is_array($settings['tooltip_padding'])) {
             foreach (array('top', 'right', 'bottom', 'left') as $side) {
                 if (isset($settings['tooltip_padding'][$side])) {
@@ -207,9 +191,7 @@ class SFM_Standalone_Store {
             'floatmenu' => $float,
         );
 
-        /* Settings the premium plugin has no equivalent for ride alongside
-           rather than inside "floatmenu", which is the only key it reads. They
-           are invisible to it, and still here if this plugin is put back. */
+        /* Settings premium has no equivalent for sit beside "floatmenu", the only key it reads. */
         foreach (self::own_keys() as $key) {
             if (isset($settings[$key])) {
                 $config['sfm'][$key] = $settings[$key];
@@ -251,10 +233,7 @@ class SFM_Standalone_Store {
         if (isset($float['button_shadow']) && is_array($float['button_shadow'])) {
             $flat['button_shadow'] = $float['button_shadow'];
 
-            /* The premium plugin spreads a shadow and this one does not. An
-               empty spread is dropped rather than carried, so a menu saved
-               here keeps the shape this plugin's own settings have; a spread
-               somebody set over there survives untouched. */
+            /* The premium plugin spreads a shadow and this one does not. */
             if (isset($flat['button_shadow']['spread']) && $flat['button_shadow']['spread'] === '') {
                 unset($flat['button_shadow']['spread']);
             }
@@ -272,10 +251,7 @@ class SFM_Standalone_Store {
             }
         }
 
-        /* The premium plugin sizes a button on one axis, and so does the
-           builder here: its width field mirrors the size field rather than
-           being set on its own. Squaring it off on the way in is what keeps a
-           menu the same shape either side of an upgrade. */
+        /* The premium plugin sizes a button on one axis, so width follows size. */
         if (isset($flat['button_height'])) {
             $flat['button_width'] = $flat['button_height'];
         }
@@ -293,11 +269,6 @@ class SFM_Standalone_Store {
 
     /**
      * Turn this plugin's flat buttons into the premium plugin's menu items.
-     *
-     * The premium plugin builds an id for each item by arithmetic on this one,
-     * so it has to be a small whole number. This plugin keys a button's CSS on
-     * its id instead, which is why the flat side gets a name built from the
-     * number rather than the number itself.
      *
      * @since  1.4.0
      * @param  array $buttons
@@ -332,8 +303,7 @@ class SFM_Standalone_Store {
                 }
             }
 
-            /* Carried over so the icon survives a switch to the fly menu, which
-               this plugin has no screen for but the premium one does. */
+            /* Carried over so the icon survives a switch to the fly menu. */
             $fly = array();
 
             if ($icon !== '') {
@@ -407,9 +377,6 @@ class SFM_Standalone_Store {
     /**
      * Every menu that should appear on the site.
      *
-     * A draft is a menu somebody is still working on, so only published ones
-     * are returned.
-     *
      * @return WP_Post[]
      */
     public static function live_menus() {
@@ -432,12 +399,10 @@ class SFM_Standalone_Store {
     public static function get_settings($post_id) {
         $settings = array_merge(Simple_Floating_Menu::default_settings(), self::get_raw_settings($post_id));
 
-        /* The buttons live in their own row, so they are put back here where
-           the renderer expects to find them. */
+        /* The buttons live in their own row. */
         $settings['buttons'] = self::get_buttons($post_id);
 
-        /* Neither belongs to a standalone menu: it is switched on by being
-           published, and it is edited from its own screen. */
+        /* Neither belongs to a standalone menu. */
         $settings['enable_sfm'] = 'yes';
         $settings['enable_sfm_setting'] = 'no';
 
@@ -494,10 +459,6 @@ class SFM_Standalone_Store {
 
     /**
      * Cleans a button list coming from a form or an import.
-     *
-     * Every button gets an id of its own, because the id is what its colours
-     * are keyed to in the CSS; two buttons sharing one would be coloured the
-     * same however they were set.
      *
      * @param  array $buttons
      * @return array
@@ -611,12 +572,6 @@ class SFM_Standalone_Store {
 
     /**
      * The icon fonts the plugin ships, grouped for the picker.
-     *
-     * The same five libraries the settings screen offers, honouring the same
-     * filters, so hiding one hides it in both places. This is the picker's
-     * view; valid_icons() stays the whole set, or a saved icon from a library
-     * somebody later switched off would be wiped the next time its menu was
-     * saved.
      *
      * @since    1.4.0
      * @return   array

@@ -1,9 +1,4 @@
-/*
- * The template picker.
- *
- * The card chrome is the premium plugin's, so choosing a design reads the same
- * in both. Each card shows the template's own preview picture.
- */
+/* The template picker. */
 
 .sfm-tp {
     margin: 0;
@@ -35,9 +30,7 @@
 
 .sfm-tp-search-input {
     width: 100%;
-    /* Logical, so the icon and the caret stay on the same side in RTL. The
-       card artwork below is deliberately not mirrored: it draws where a menu
-       actually sits on the screen, which reading direction does not move. */
+    /* Logical, so the icon and the caret stay on the same side in RTL. */
     padding-inline-start: 32px !important;
 }
 
@@ -111,14 +104,7 @@
     display: none;
 }
 
-/* Hidden, but still focusable and still reachable by :checked.
- *
- * Deliberately not .screen-reader-text: that hides with clip-path: inset(50%)
- * and a negative margin, which leaves the input with no box to speak of.
- * Choosing a card focuses it, and a browser asked to scroll a focused element
- * with a collapsed rect into view scrolls to the top of the document instead
- * of staying put. Anchoring it inside its own card with opacity keeps it
- * silent to sighted users and honest to the browser. */
+/* Hidden but focusable. Not .screen-reader-text: its collapsed box makes focusing a card scroll to the top. */
 .sfm-tp-input {
     position: absolute;
     top: 10px;
@@ -208,11 +194,9 @@
 
 /* ------------------------------------------------------------ artwork --- */
 
-/* Where the premium plugin draws its hundred templates in CSS, the three here
-   have a picture each, so the art slot is simply the image. */
+/* Where the premium plugin draws its hundred templates in CSS, the three here have a picture each. */
 
-/* The three previews are the same size, so letting them set their own height
-   keeps the cards even without boxing the picture into a different shape. */
+/* The three previews are the same size. */
 .sfm-tp-art {
     display: block;
     overflow: hidden;

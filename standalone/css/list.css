@@ -117,8 +117,7 @@
     min-height: 130px;
 }
 
-/* The panel is already a bounded surface, so the picker inside it scrolls
-   rather than pushing the menu list further down the screen. */
+/* The panel is already a bounded surface. */
 .sfm-add-route .sfm-tp-grid {
     max-height: 320px;
 }
@@ -198,8 +197,7 @@
     pointer-events: none;
 }
 
-/* display:block would otherwise win over the hidden attribute, leaving the
-   prompt on screen beside the file that replaced it. */
+/* display:block would otherwise win over the hidden attribute, leaving the prompt on screen beside the file that replaced it. */
 .sfm-drop-idle[hidden] {
     display: none;
 }

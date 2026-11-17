@@ -3,11 +3,6 @@
 /**
  * Putting standalone menus on the site.
  *
- * Each one is printed by the plugin's own renderer and described by the
- * plugin's own CSS builder, passed that menu's settings and a class of its
- * own. The menu from the settings screen is untouched and still prints
- * itself.
- *
  * @package Simple_Floating_Menu
  * @since   1.4.0
  */
@@ -47,9 +42,6 @@ class SFM_Standalone_Frontend {
     /**
      * Whether this menu is allowed on the page being viewed.
      *
-     * The premium plugin's Display panel decides this the same way, from the
-     * same settings, so a menu behaves the same in both.
-     *
      * @since  1.4.0
      * @param  array $settings
      * @return bool
@@ -85,8 +77,7 @@ class SFM_Standalone_Frontend {
             return self::is_on($settings, 'search_pages');
         }
 
-        /* Asked before the blog, because a site showing its posts on the front
-           page is both, and the front page is the more particular of the two. */
+        /* Asked before the blog, because a site showing its posts on the front page is both. */
         if (is_front_page()) {
             return self::is_on($settings, 'front_pages');
         }
@@ -123,10 +114,6 @@ class SFM_Standalone_Frontend {
 
     /**
      * The post type the archive being viewed lists.
-     *
-     * A taxonomy archive is named by what the taxonomy is attached to, and the
-     * date and author archives list posts, so each answers as its type rather
-     * than as nothing at all.
      *
      * @return string
      */
@@ -179,8 +166,7 @@ class SFM_Standalone_Frontend {
             return;
         }
 
-        /* The handle the plugin already registers, so this lands with the
-           rest of the menu's CSS rather than as another request. */
+        /* The handle the plugin already registers. */
         if (wp_style_is('sfm-style', 'enqueued') || wp_style_is('sfm-style', 'registered')) {
             wp_add_inline_style('sfm-style', $css);
             return;
@@ -203,10 +189,7 @@ class SFM_Standalone_Frontend {
             return;
         }
 
-        /* Built without running its constructor on purpose: that constructor
-           hooks wp_footer and wp_enqueue_scripts, so a second instance would
-           print the settings screen's menu all over again. Only the one
-           method is wanted here. */
+        /* Built without its constructor, which would hook wp_footer and print the main menu again. */
         $reflection = new ReflectionClass('Simple_Floating_Menu_Frontend');
         $printer = $reflection->newInstanceWithoutConstructor();
 

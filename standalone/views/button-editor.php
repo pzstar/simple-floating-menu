@@ -88,8 +88,7 @@ foreach (array('label', 'tool_tip_text') as $sfm_source) {
                 </label>
 
                 <?php
-                /* The picker itself is built once by the script and moved into
-                   whichever field asked for it, so it is not in the markup. */
+                /* The picker itself is built once by the script and moved into whichever field asked for it. */
                 ?>
                 <div class="sfm-item-icon">
                     <span class="sfm-item-icon-preview"><i class="<?php echo esc_attr(isset($sfm_button['icon']) ? $sfm_button['icon'] : ''); ?>" aria-hidden="true"></i></span>
@@ -139,9 +138,7 @@ foreach (array('label', 'tool_tip_text') as $sfm_source) {
 
             <div class="sfm-field sfm-field-check" data-when-action="default" <?php echo $sfm_action === 'default' ? '' : 'hidden'; ?>>
                 <?php
-                /* An unticked box posts nothing, and the sanitiser would then
-                   fall back to the default, which is on. The companion always
-                   posts, and the box overrides it when ticked. */
+                /* An unticked box posts nothing, and the sanitiser would then fall back to the default, which is on. */
                 ?>
                 <input type="hidden" name="<?php echo esc_attr($sfm_name); ?>[open_new_tab]" value="0"/>
                 <label>
@@ -159,8 +156,7 @@ foreach (array('label', 'tool_tip_text') as $sfm_source) {
         <div class="sfm-fields">
             <div class="sfm-field sfm-field-check">
                 <?php
-                /* Absent on a menu saved before this field existed, and a
-                   tooltip was shown then, so absent has to mean on. */
+                /* Absent on menus saved before this field, which showed tooltips, so absent means on. */
                 $sfm_tooltip_on = !isset($sfm_button['tooltip_enable']) || $sfm_button['tooltip_enable'];
                 ?>
                 <input type="hidden" name="<?php echo esc_attr($sfm_name); ?>[tooltip_enable]" value="0"/>

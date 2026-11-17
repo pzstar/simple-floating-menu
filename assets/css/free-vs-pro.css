@@ -1,6 +1,4 @@
-/* Free vs Pro
-   Loaded on that screen alone. Logical properties throughout, so the page
-   reads the same way round on a right to left site without a second file. */
+/* Free vs Pro: loaded on that screen alone; logical properties, so RTL needs no second file. */
 
 .sfm-fvp {
     max-width: 1080px;
@@ -101,8 +99,7 @@
     text-align: center;
 }
 
-/* Pro is the column being sold, so it carries a tint the whole way down,
-   drawn from the admin colour scheme so it matches the buttons. */
+/* Pro is the column being sold. */
 .sfm-fvp-table .sfm-fvp-pro {
     background: #f0f6fc;
     background: color-mix(in srgb, var(--wp-admin-theme-color, #2271b1) 7%, #fff);
@@ -196,8 +193,7 @@
     }
 }
 
-/* As a tab on the Simple Floating Menu screen, where the live preview has
-   nothing to show, so the comparison takes the room it would use. */
+/* As a tab on the Simple Floating Menu screen, where the live preview has nothing to show. */
 
 #sfm-form-wrap.sfm-fvp-active .sfm-live-demo {
     display: none;

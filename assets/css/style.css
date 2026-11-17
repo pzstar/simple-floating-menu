@@ -69,8 +69,7 @@
     align-items: center;
     justify-content: center;
 
-    /* Everything, not only the colours: a template may grow the button on
-       hover, and that has to animate too. */
+    /* Everything, not only the colours. */
     transition: all 0.3s ease;
 }
 

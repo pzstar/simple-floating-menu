@@ -127,9 +127,7 @@ $sfm_colors = array(
         </div>
 
         <?php
-        /* The design card. Everything that decides how the menu looks sits
-           behind this one button, the way it does in the premium plugin, so the
-           button list below is not competing with a wall of settings. */
+        /* The design card. */
         $sfm_template_number = str_replace('sfm-template-', '', $settings['template']);
         $sfm_thumbnail = SFM_PATH . 'assets/images/templates/template' . $sfm_template_number . '.jpg';
         $sfm_facts = array(
@@ -240,9 +238,7 @@ $sfm_colors = array(
         </div>
 
         <?php
-        /* The design settings, in the premium plugin's own frame: the WordPress
-           media modal shell it uses, a title naming the open panel, a menu
-           column, the panels, and a toolbar. */
+        /* The design settings, in the premium plugin's own frame. */
         ?>
         <div id="sfm-mega-menu" class="sfm-mega-menu" hidden>
             <div class="sfm-modal media-modal wp-core-ui">
@@ -375,10 +371,7 @@ $sfm_colors = array(
                                             </div>
 
                                             <?php
-                                            /* This plugin sizes buttons on two axes and can nudge the
-                                               icon; premium offers one size and no nudge. These carry
-                                               the rest through so a menu already using them is not
-                                               flattened, and the width follows the size when it is set. */
+                                            /* This plugin sizes buttons on two axes and can nudge the icon; premium offers one size and no nudge. */
                                             ?>
                                             <input type="hidden" id="sfm-button_width" name="sfm[button_width]" value="<?php echo esc_attr($settings['button_width']); ?>"/>
                                             <input type="hidden" name="sfm[icon_position]" value="<?php echo esc_attr($settings['icon_position']); ?>"/>
@@ -583,9 +576,7 @@ $sfm_colors = array(
 
                                 <div class="sfm-panel" data-panel="display" hidden>
                                     <?php
-                                    /* The premium plugin's own display panel, brought across field for
-                                       field: the same rows, the same names, the same way of showing and
-                                       hiding the lists under them. */
+                                    /* The premium plugin's own display panel, brought across field for field. */
                                     $sfm_chosen_pages = array_map('intval', (array) $settings['specific_pages']);
                                     $sfm_chosen_types = (array) $settings['cpt_pages'];
                                     $sfm_chosen_archives = (array) $settings['specific_archive'];
@@ -609,9 +600,7 @@ $sfm_colors = array(
                                             <label><?php esc_html_e('Default WordPress Pages', 'simple-floating-menu') ?></label>
                                             <div class="sfm-settings-fields sfm-setting-checkbox-field">
                                                 <?php
-                                                /* A box that came off would otherwise post nothing at all, and
-                                                   the design panels are saved over what is already stored, so
-                                                   each of these carries a partner that always posts. */
+                                                /* An unticked box posts nothing, so each has a partner that always posts. */
                                                 ?>
                                                 <p>
                                                     <input type="hidden" name="sfm[front_pages]" value="off"/>
@@ -708,11 +697,7 @@ $sfm_colors = array(
                                         ?>
 
                                         <?php
-                                        /* Emptying a list posts nothing of its own, so each one carries an
-                                           entry the sanitiser drops again. The pages are the exception:
-                                           their pickers fill themselves in when the panel is first opened,
-                                           so until that has happened this entry stays out of the way and
-                                           the stored list is left alone. */
+                                        /* Emptying a list posts nothing of its own, so each one carries an entry the sanitiser drops again. */
                                         ?>
                                         <input type="hidden" name="sfm[cpt_pages][]" value=""/>
                                         <input type="hidden" name="sfm[specific_archive][]" value=""/>
@@ -738,8 +723,7 @@ $sfm_colors = array(
         </div>
 
         <?php
-        /* Premium leaves the panels open after a save and says so with a
-           notice that slides in and goes away on its own. */
+        /* Premium leaves the panels open after a save. */
         ?>
         <div class="sfm-alert">
             <span class="sfm-alert-message"></span>

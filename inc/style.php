@@ -3,11 +3,6 @@
 /**
  * The menu's dynamic CSS.
  *
- * Called with nothing it describes the menu configured on the settings screen,
- * exactly as it always has. A standalone menu passes its own settings and a
- * class of its own, so several menus can sit on one page without the last one
- * rewriting the sizing and position of the others.
- *
  * @param  array|null  $settings  Null for the settings screen's own menu.
  * @param  string      $scope     A class the rules are narrowed to.
  * @return string
@@ -33,8 +28,7 @@ function sfm_dymanic_styles($settings = null, $scope = '') {
     $custom_css .= ".sfm-floating-menu a.sfm-shape-button{height:{$button_height}px; width:{$button_width}px;}";
     $custom_css .= ".sfm-floating-menu a.sfm-shape-button{font-size:{$icon_size}px;}";
 
-    /* The menu's own colours. Each button may override any of them, and does so
-       through a longer selector, so those rules win without !important. */
+    /* The menu's own colours. */
     if (!empty($settings['button_bg_color'])) {
         $custom_css .= ".sfm-floating-menu a.sfm-shape-button{background:{$settings['button_bg_color']}}";
     }
@@ -89,8 +83,7 @@ function sfm_dymanic_styles($settings = null, $scope = '') {
     }
 
     if (isset($settings['tooltip_padding']) && is_array($settings['tooltip_padding'])) {
-        /* A side left empty keeps whatever the stylesheet gives it, so each is
-           written on its own rather than as one shorthand. */
+        /* A side left empty keeps whatever the stylesheet gives it. */
         foreach (array('top', 'right', 'bottom', 'left') as $side) {
             $value = isset($settings['tooltip_padding'][$side]) ? $settings['tooltip_padding'][$side] : '';
 

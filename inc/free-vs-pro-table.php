@@ -2,13 +2,6 @@
 /**
  * The Free vs Pro comparison: the intro card, the table and the notes under it.
  *
- * Shared by the Free vs Pro page and the Free vs Pro tab on the Simple
- * Floating Menu screen, so the two can never drift apart.
- *
- * Every row is something this plugin or the premium one actually does, so
- * the table stays honest as either changes: a row is true for included, false
- * for not included, or a short string where a number says more than a tick.
- *
  * @package Simple_Floating_Menu
  */
 

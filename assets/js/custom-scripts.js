@@ -19,16 +19,12 @@ jQuery(document).ready(function ($) {
     $(".sfm-floating-menu a").on('click', function (event) {
         // Store hash
         var hash = this.hash;
-        // Make sure this.hash has a value before overriding default behavior
-        // A bare "#" is what the scroll actions carry, and $("#") is not a
-        // selector jQuery accepts.
+        // Only a real hash: scroll actions carry a bare "#", which jQuery can't select.
         if (hash !== "" && hash !== "#" && $(hash).length > 0) {
             // Prevent default anchor click behavior
             event.preventDefault();
 
-            // Using jQuery's animate() method to add smooth page scroll
-            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-            // The menu may ask for room above whatever it scrolls to.
+            // Smooth scroll in 800ms, leaving the room the menu asks for above the target.
             var offset = parseInt($(this).closest('.sfm-floating-menu').attr('data-scroll-offset'), 10) || 0;
 
             $('html, body').animate({

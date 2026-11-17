@@ -3,10 +3,6 @@
 /**
  * The builder screen for one menu.
  *
- * The buttons on the left, the selected button's settings on the right, and
- * the menu's own design above them. Replaces the post editor for this type,
- * which has nothing useful to offer a menu.
- *
  * @package Simple_Floating_Menu
  * @since   1.4.0
  */
@@ -52,9 +48,7 @@ class SFM_Standalone_Page {
         add_action('wp_ajax_sfm_set_selected_options', array($this, 'set_selected_options'));
         add_action('admin_post_sfm_standalone_create', array($this, 'handle_create'));
 
-        /* The post editor is not where one of these is edited, nor where one
-           is made: Add New would otherwise open a bare editor and leave an
-           empty auto draft behind every time it was clicked. */
+        /* The post editor is not where one of these is edited, nor where one is made. */
         add_action('load-post.php', array($this, 'redirect_edit'));
         add_action('load-post-new.php', array($this, 'redirect_new'));
         add_filter('parent_file', array($this, 'parent_file'));
@@ -92,10 +86,6 @@ class SFM_Standalone_Page {
 
     /**
      * What a page picker offers for what has been typed into it.
-     *
-     * The premium plugin's own picker, brought across as it stands: the same
-     * two requests, the same shape of answer, so a menu is picked out by page
-     * the same way in both.
      *
      * @since 1.4.0
      */
@@ -261,25 +251,21 @@ class SFM_Standalone_Page {
 
         wp_enqueue_style('wp-color-picker');
 
-        /* The design settings sit in the WordPress media modal, which is the
-           frame the premium plugin's own stylesheet is written against. */
+        /* The design settings sit in the WordPress media modal. */
         wp_enqueue_style('media-views');
 
-        /* Select2 turns the content picker into a search box, the library the
-           premium plugin dresses that control with. */
+        /* Select2 turns the content picker into a search box, the library the premium plugin dresses that control with. */
         wp_enqueue_style('jquery-select2', SFM_URL . 'assets/css/select2.min.css', array(), '4.1.0');
         wp_enqueue_script('jquery-select2', SFM_URL . 'assets/js/select2.min.js', array('jquery'), '4.1.0', true);
 
-        /* The premium plugin's own conditional fields plugin, which the
-           display panel's lists are shown and hidden by. */
+        /* The premium plugin's own conditional fields plugin. */
         wp_enqueue_script('jquery-condition', SFM_URL . 'assets/js/jquery-condition.js', array('jquery'), SFM_VERSION, true);
 
         /* Chosen stays for the typography selects, as it does in premium. */
         wp_enqueue_style('chosen', SFM_URL . 'assets/css/chosen.css', array(), SFM_VERSION);
         wp_enqueue_script('chosen', SFM_URL . 'assets/js/chosen.jquery.js', array('jquery'), SFM_VERSION, true);
 
-        /* The five icon fonts, so a button's glyph shows in the list and in its
-           editor rather than as an empty square. */
+        /* The five icon fonts, so a button's glyph shows in the list and in its editor. */
         wp_enqueue_style('fontawesome-7.3.1', SFM_URL . 'assets/css/fontawesome-6.3.0.css', array(), SFM_VERSION);
         wp_enqueue_style('eleganticons-1.0', SFM_URL . 'assets/css/eleganticons.css', array(), SFM_VERSION);
         wp_enqueue_style('icofont-1.0.1', SFM_URL . 'assets/css/icofont.css', array(), SFM_VERSION);
@@ -287,8 +273,7 @@ class SFM_Standalone_Page {
         wp_enqueue_style('essentialicon-1.0', SFM_URL . 'assets/css/essentialicon.css', array(), SFM_VERSION);
         wp_enqueue_style('sfm-standalone-builder', SFM_URL . 'standalone/css/builder.css', array('wp-color-picker'), SFM_VERSION);
 
-        /* The design modal picks a template with the same picker the menu list
-           offers, so the stylesheet is needed here too. */
+        /* The design modal picks a template with the same picker the menu list offers. */
         SFM_Standalone_Templates::enqueue();
 
         wp_enqueue_script(
@@ -384,11 +369,6 @@ class SFM_Standalone_Page {
     /**
      * Saves the design panels on their own.
      *
-     * The premium plugin saves its design settings without leaving the page, so
-     * this does the same: only the panels' own fields are sent, merged over
-     * what is stored, and run through the plugin's sanitiser. The buttons are
-     * carried along untouched so the sanitiser has the whole menu to work on.
-     *
      * @since    1.4.0
      */
     public function handle_save_design() {
@@ -452,19 +432,15 @@ class SFM_Standalone_Page {
 
         $posted = isset($_POST['sfm']) && is_array($_POST['sfm']) ? wp_unslash($_POST['sfm']) : array();
 
-        /* The plugin's own sanitiser, so a standalone menu is cleaned by
-           exactly the same rules as the settings screen's menu. */
+        /* The plugin's own sanitiser. */
         $plugin = Simple_Floating_Menu::get_instance();
         $defaults = Simple_Floating_Menu::default_settings();
 
-        /* Over what is stored rather than over the defaults: a picker that
-           fills itself in only once its panel has been opened posts nothing
-           until then, and that must leave what it holds alone. */
+        /* Over what is stored, so a panel that was never opened keeps its values. */
         $stored = SFM_Standalone_Store::get_raw_settings($post_id);
         $settings = array_merge($defaults, is_array($stored) ? $stored : array());
 
-        /* A grouped field posts only the keys its panel renders, and a plain
-           merge would drop the rest of the group. */
+        /* A grouped field posts only the keys its panel renders, so a plain merge would drop the rest. */
         foreach (array('tooltip_font', 'button_shadow', 'tooltip_padding') as $group) {
             if (isset($posted[$group]) && is_array($posted[$group])) {
                 $posted[$group] = array_merge($settings[$group], $posted[$group]);
@@ -473,10 +449,7 @@ class SFM_Standalone_Page {
 
         $settings = $plugin->sanitize_form(array_merge($settings, $posted));
 
-        /* The buttons come back out of the plugin's own sanitiser rather than
-           being cleaned a second way here. The store still runs over them, to
-           guarantee every button keeps an id of its own: the id is what its
-           colours are keyed to in the CSS. */
+        /* The buttons come back out of the plugin's own sanitiser rather than being cleaned a second way here. */
         SFM_Standalone_Store::save_buttons($post_id, isset($settings['buttons']) ? $settings['buttons'] : array());
         SFM_Standalone_Store::save_settings($post_id, $settings);
 

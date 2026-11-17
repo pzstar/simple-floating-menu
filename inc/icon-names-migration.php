@@ -2,12 +2,6 @@
 /**
  * One-time rename of saved Essential Icons classes.
  *
- * Essential Icons are now written esi-add rather than essentialicon-add (or the older
- * essential-icon-add), the same in every HashThemes theme and plugin. Icons picked
- * before the change are saved under the old names, so they are renamed once: in the
- * menu settings and in the standalone menus. Only exact Essential Icons names change
- * (essentialicon-X becomes esi-X when esi-X exists, which is the same glyph).
- *
  * @package Simple_Floating_Menu
  */
 
@@ -17,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 if (!function_exists('sfm_esi_names')) {
 
-    // Essential Icons names (without the esi- prefix), read from the stylesheet the plugin ships.
+    // Essential names, from the shipped stylesheet.
     function sfm_esi_names() {
         static $names = null;
 
@@ -36,7 +30,7 @@ if (!function_exists('sfm_esi_names')) {
 
 if (!function_exists('sfm_esi_rename')) {
 
-    // essentialicon-X / essential-icon-X -> esi-X, in a string, an array or an object.
+    // essentialicon-X / essential-icon-X -> esi-X.
     function sfm_esi_rename($value) {
         if (is_array($value)) {
             foreach ($value as $key => $item) {
@@ -83,7 +77,7 @@ if (!function_exists('sfm_migrate_esi_names')) {
             }
         }
 
-        // Standalone menus: written by meta id, so a revision never writes into its parent post.
+        // Standalone menus, written by meta id so a revision never writes into its parent post.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time migration.
         $rows = $wpdb->get_results("SELECT meta_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key IN ('_sffm_items', '_sffm_config') AND (meta_value LIKE '%essentialicon-%' OR meta_value LIKE '%essential-icon-%')");
         foreach ((array) $rows as $row) {

@@ -12,8 +12,7 @@
 
 defined('ABSPATH') or die;
 
-/* The label names the button; the tooltip stands in while it is empty, which
-   is how a menu built before the label existed still reads. */
+/* The label names the button; the tooltip stands in while it is empty. */
 $sfm_row_label = __('Untitled button', 'simple-floating-menu');
 
 foreach (array('label', 'tool_tip_text') as $sfm_source) {

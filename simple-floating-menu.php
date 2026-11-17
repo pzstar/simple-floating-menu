@@ -22,17 +22,8 @@ define('SFM_PATH', plugin_dir_path(SFM_FILE));
 define('SFM_URL', plugins_url('/', SFM_FILE));
 
 /**
- * Whether this plugin should load.
- *
- * Everything the plugin does is loaded through this, so another plugin can
- * stand it down without it having to be deactivated. The premium version does
- * exactly that: it draws the same menus, and the two running together would
- * give a site two of them and two copies of the icon fonts.
- *
- * The answer is asked for on plugins_loaded rather than here, so a plugin
- * loaded after this one still gets its say.
- *
- *     add_filter('sfm_load_plugin', '__return_false');
+ * Whether this plugin should load. The premium plugin stands it down with
+ * add_filter('sfm_load_plugin', '__return_false').
  *
  * @since 1.4.0
  * @return bool
@@ -52,8 +43,7 @@ function simple_floating_menu() {
     require_once SFM_PATH . 'includes/class-simple-floating-menu.php';
     require_once SFM_PATH . 'inc/icon-names-migration.php';
 
-    /* Standalone menus, kept entirely within the standalone folder.
-       Remove this single line to remove the feature. */
+    /* Standalone menus, kept entirely within the standalone folder. */
     require_once SFM_PATH . 'standalone/class-sfm-standalone.php';
 
     Simple_Floating_Menu::get_instance();

@@ -1,9 +1,5 @@
 /**
  * The menu builder.
- *
- * The list on the left and the editors on the right are two views of the same
- * buttons: selecting a row shows that button's editor, and typing in an editor
- * updates the row it belongs to.
  */
 (function ($) {
     'use strict';
@@ -120,8 +116,7 @@
             addButton('', '').find('.sfm-input-label').trigger('focus');
         });
 
-        /* Picking a page fills a new button in with its title and address, so
-           the common case takes one choice instead of two fields. */
+        /* Picking a page fills a new button in with its title and address. */
         $form.on('change', '.sfm-picker', function () {
             var $picker = $(this);
             var url = $picker.val();
@@ -182,8 +177,7 @@
 
         /* ---- what the placement makes possible -------------------------- */
 
-        /* An offset only means something on the edge it is measured from, and
-           only a corner has room to run either way. */
+        /* An offset only means something on the edge it is measured from. */
         function applyPosition() {
             var position = $('#sfm-position').val();
 
@@ -196,8 +190,7 @@
 
         $form.on('change', '#sfm-position', applyPosition);
 
-        /* One size control stands for both axes, as it does in premium, so the
-           width follows the moment somebody sets a size. */
+        /* One size control stands for both axes. */
         $form.on('input', '#sfm-button_height', function () {
             $('#sfm-button_width').val($(this).val());
         });
@@ -220,10 +213,7 @@
 
         /* ---- the icon chooser ---------------------------------------- */
 
-        /* One picker for the whole screen, built the first time it is asked
-           for and then moved into whichever field wants it. Building the five
-           libraries costs enough that it is not worth doing per button, and
-           never at all for somebody who does not open it. */
+        /* One picker for the whole screen, built the first time it is asked for and then moved into whichever field wants it. */
 
         var $picker = null;
         var $pickerField = null;
@@ -443,8 +433,7 @@
             $('.sfm-alert').removeClass('sfm-alert-active sfm-alert-success sfm-alert-warning');
         });
 
-        /* Premium saves the design without leaving the page, so this sends the
-           panels' own fields and leaves the rest of the builder alone. */
+        /* Premium saves the design without leaving the page. */
         $form.on('click', '#sfm-design-save', function () {
             var $button = $(this);
             var $spinner = $modal.find('.sfm-toolbar .spinner');
@@ -478,8 +467,7 @@
                     });
                 }
 
-                /* The panels stay open, the way premium leaves them, so more
-                   than one can be worked through without reopening. */
+                /* The panels stay open, the way premium leaves them. */
                 showAlert(sfmBuilder.designSaved, 'success');
             }).fail(function () {
                 showAlert(sfmBuilder.designFailed, 'warning');
@@ -498,8 +486,7 @@
             }
         });
 
-        /* The design fields live inside the form, so they save with everything
-           else; the card only summarises what they are set to. */
+        /* The design fields live inside the form. */
         $modal.on('change', 'select, input', function () {
             markDirty();
         });
@@ -526,8 +513,7 @@
                 $(this).toggleClass('active', match).prop('hidden', !match);
             });
 
-            /* Built the first time the panel is asked for, the way premium
-               builds its own: until then the pickers cost nothing. */
+            /* Built the first time the panel is asked for, the way premium builds its own. */
             if (!displayReady && name === 'display' && $.fn.select2) {
                 displayReady = true;
                 $form.find('.sfm-specific-pages-ids').each(select2Search);
@@ -540,20 +526,14 @@
 
         /* ---- searching the site's content ----------------------------- */
 
-        /* The premium plugin's own page picker, brought across as it stands:
-           the entries already chosen are asked for first and put back as
-           selected options, and everything after that is searched for as it
-           is typed. The dropdown is dropped into the picker's own row, because
-           the panels sit in a modal a dropdown on the page would fall behind. */
+        /* The premium plugin's own page picker, brought across as it stands. */
         async function select2Search() {
             var $field = $(this);
             var $select = $field.find('select');
             var dataType = $field.attr('data-type');
             var dataSelected = $field.attr('data-selected');
 
-            /* Waited for, as premium waits for it: the entries have to be in
-               the select before Select2 reads it, or the picker comes up empty
-               with the pages it holds nowhere to be seen. */
+            /* Waited for: the entries must be in the select before Select2 reads it. */
             await $.post(window.ajaxurl, {
                 action: 'sfm_set_selected_options',
                 post_type: dataType,
@@ -576,9 +556,7 @@
                     url: window.ajaxurl,
                     dataType: 'json',
                     method: 'post',
-                    /* Select2 4 names these delay and processResults; the 3.x
-                       names they replace were being ignored, so every keypress
-                       was going out as a request of its own. */
+                    /* Select2 4 names these delay and processResults; the 3.x names were ignored. */
                     delay: 250,
                     data: function (params) {
                         return {
@@ -598,10 +576,7 @@
 
         /* ---- where the menu shows ------------------------------------ */
 
-        /* The premium plugin's own handlers, on the same markup. The lists of
-           pages come and go with the condition through premium's conditional
-           fields plugin, and a box that covers a whole post type hides the
-           list of single entries under it. */
+        /* The premium plugin's own handlers, on the same markup. */
         function showCptPosts() {
             var posttype = '#sfm-cpt-' + $(this).data('posttype');
 
@@ -629,8 +604,7 @@
         /* Without Select2 the picker is still a working select, so this only
            ever improves it. */
         if ($.fn.select2) {
-            /* Named apart from the icon picker: both live in this one scope,
-               and a var declaration is hoisted to the top of it. */
+            /* Named apart from the icon picker: var is hoisted in this shared scope. */
             var $contentPicker = $form.find('.sfm-picker');
 
             $contentPicker.select2({
@@ -646,8 +620,7 @@
         colorPickers($detail);
         colorPickers($modal);
 
-        /* The typography controls, set up the way premium sets them up: a
-           search box on each select, and a slider beside each number. */
+        /* The typography controls, set up the way premium sets them up. */
         if ($.fn.chosen) {
             $form.find('.sfm-typography-input-field > select').chosen({ width: '100%' });
         }
@@ -694,8 +667,7 @@
         applyPosition();
         select($list.children('.sfm-row').first());
 
-        /* Setting the fields up counts as a change to the browser, so the
-           unsaved warning only starts once the page has settled. */
+        /* Setting the fields up counts as a change, so the unsaved warning starts afterwards. */
         dirty = false;
     });
 }(jQuery));

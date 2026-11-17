@@ -1,10 +1,5 @@
 /**
  * The menu list.
- *
- * Two fixes to where WordPress puts things on this screen: the add panel is
- * printed through admin_notices, which lands it above the page heading, and
- * the Add New button beside that heading goes to the post editor, which is
- * not where one of these menus is made.
  */
 (function () {
     'use strict';
@@ -24,8 +19,7 @@
             return;
         }
 
-        /* Move it under the heading, where WordPress moves its own notices,
-           rather than leaving it stranded above the page title. */
+        /* Move it under the heading, where WordPress moves its own notices. */
         var anchor = document.querySelector('.wrap .wp-header-end');
 
         if (anchor && anchor.parentNode) {
@@ -43,8 +37,7 @@
             }
         }
 
-        /* Add New belongs to the post editor, which this type does not use.
-           Pointed at the panel that is already on the screen instead. */
+        /* Add New belongs to the post editor, which this type does not use. */
         var addNew = document.querySelector('.wrap .page-title-action');
 
         if (addNew) {
@@ -65,13 +58,7 @@
         dropZone(panel);
     });
 
-    /* The import drop zone.
-     *
-     * Dropping and browsing both work without any of this: the file input
-     * covers the whole box, so the browser handles them on its own. What this
-     * adds is reading the file before it is sent, so an export can be named and
-     * counted on the screen, and a file that is not one can be turned away here
-     * rather than after a round trip. */
+    /* The import drop zone. */
     function dropZone(panel) {
         var strings = window.sfmList || {};
         var drop = panel.querySelector('.sfm-drop');
@@ -86,8 +73,7 @@
         var error = panel.querySelector('.sfm-drop-error');
         var submit = panel.querySelector('.sfm-import-submit');
 
-        /* Only disabled once the script is running, so with no script the form
-           still submits and the server still decides. */
+        /* Only disabled once the script is running, so without it the form still submits. */
         submit.disabled = true;
 
         function clear() {
@@ -106,8 +92,7 @@
             error.textContent = message;
         }
 
-        /* A list can arrive as an object rather than an array, because that is
-           what PHP encodes a gappy array as. */
+        /* A list can arrive as an object, as PHP encodes a gappy array that way. */
         function entries(value) {
             if (Array.isArray(value)) {
                 return value;
@@ -176,8 +161,7 @@
                 return;
             }
 
-            /* wp_localize_script stringifies everything it is given, so the
-               limit is read back as a number rather than compared as one. */
+            /* wp_localize_script stringifies everything, so the limit is read back as a number. */
             if (chosen.size > parseInt(strings.maxBytes, 10)) {
                 reject(String(strings.tooBig).replace('%s', strings.sizeLimit));
                 return;
@@ -219,8 +203,7 @@
 
             event.preventDefault();
 
-            /* Resetting through a throwaway form is the one way to empty a file
-               input that every browser agrees on. */
+            /* Resetting through a throwaway form is the one way to empty a file input that every browser agrees on. */
             var holder = document.createElement('form');
             input.parentNode.insertBefore(holder, input);
             holder.appendChild(input);

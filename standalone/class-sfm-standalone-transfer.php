@@ -3,9 +3,6 @@
 /**
  * Exporting and importing one menu.
  *
- * A file written here carries a menu's design and its buttons, so a setup can
- * be moved to another site without building it again.
- *
  * @package Simple_Floating_Menu
  * @since   1.4.0
  */
@@ -65,9 +62,7 @@ class SFM_Standalone_Transfer {
             <?php wp_nonce_field('sfm_standalone_import'); ?>
 
             <?php
-            /* The input covers the whole box, so dropping a file and clicking to
-               browse are the same control. Everything below it is the picture
-               drawn behind it; the script only swaps which half is shown. */
+            /* The input covers the whole box, so dropping a file and clicking to browse are the same control. */
             ?>
             <div class="sfm-drop">
                 <input type="file" name="sfm_import_file" class="sfm-drop-input" required

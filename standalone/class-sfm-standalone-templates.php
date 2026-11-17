@@ -3,13 +3,8 @@
 /**
  * The starting designs a new menu can be built from.
  *
- * The premium plugin ships a catalogue of ready made menus; this one has the
- * three templates the front end can draw. The picker they are chosen with is
- * the same one, so the choice reads the same in both.
- *
  * @link       https://hashthemes.com
  * @since      1.4.0
- *
  * @package    Simple_Floating_Menu
  * @subpackage Simple_Floating_Menu/standalone
  */

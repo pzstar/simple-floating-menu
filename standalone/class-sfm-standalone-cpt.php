@@ -3,9 +3,6 @@
 /**
  * The post type one standalone menu is stored as.
  *
- * Not public: a menu is not a page on the site, it is something that appears
- * on the pages of the site, so it has no permalink of its own.
- *
  * @package Simple_Floating_Menu
  * @since   1.4.0
  */

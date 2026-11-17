@@ -67,10 +67,6 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
         /**
          * Prints one floating menu.
          *
-         * Called with nothing it prints the menu from the settings screen, as
-         * it always has. A standalone menu passes its own settings and a class
-         * of its own, which is what its CSS is narrowed to.
-         *
          * @param array|null  $settings
          * @param string      $scope
          */
@@ -124,9 +120,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
                                 ? $button['tool_tip_text']
                                 : (isset($button['label']) ? $button['label'] : '');
 
-                            /* Shared by the button and its tooltip, so clicking
-                               either does the same thing. The shape class is the
-                               button's alone and is added to it below. */
+                            /* Shared by the button and its tooltip, so clicking either does the same thing. */
                             $link = array('class' => array());
 
                             if (!empty($button['attr_title'])) {
@@ -202,9 +196,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             $standard_font_families = sfm_get_standard_font_families();
             $all_font = array_merge(sfm_standard_font_array(), sfm_google_font_array());
 
-            /* Every family on the page, not only the one the settings screen
-               sets: a standalone menu carries a tooltip font of its own, and
-               without this its CSS would name a font nothing had fetched. */
+            /* Every family on the page, not only the one the settings screen sets. */
             $families = array();
 
             if (isset($settings['tooltip_font']['family'])) {
