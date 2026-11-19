@@ -67,7 +67,21 @@ function sfm_dymanic_styles($settings = null, $scope = '') {
     }
 
     if (!empty($settings['tooltip_bg_color_hover'])) {
-        $custom_css .= ".sfm-floating-menu .sfm-button:hover .sfm-tool-tip{background:{$settings['tooltip_bg_color_hover']}}";
+        $tip_hov = $settings['tooltip_bg_color_hover'];
+        $custom_css .= ".sfm-floating-menu .sfm-button:hover .sfm-tool-tip{background:{$tip_hov}}";
+        /* The pointer arrow follows the tooltip, on whichever side the menu puts it. */
+        foreach (array(
+            'transparent transparent %s transparent' => array('top-left.horizontal', 'top-middle.horizontal', 'top-right.horizontal'),
+            'transparent %s transparent transparent' => array('top-left.vertical', 'top-middle.vertical', 'bottom-left.vertical', 'bottom-middle.vertical', 'middle-left.vertical'),
+            'transparent transparent transparent %s' => array('top-right.vertical', 'middle-right.vertical', 'bottom-right.vertical'),
+            '%s transparent transparent transparent' => array('bottom-left.horizontal', 'bottom-middle.horizontal', 'bottom-right.horizontal', 'middle-left.horizontal', 'middle-right.horizontal'),
+        ) as $sfm_border => $sfm_places) {
+            $sfm_selectors = array();
+            foreach ($sfm_places as $sfm_place) {
+                $sfm_selectors[] = '.sfm-floating-menu.' . $sfm_place . ' .sfm-button:hover .sfm-tool-tip:after';
+            }
+            $custom_css .= implode(',', $sfm_selectors) . '{border-color:' . sprintf($sfm_border, $tip_hov) . ';}';
+        }
     }
 
     if (!empty($settings['tooltip_text_color'])) {

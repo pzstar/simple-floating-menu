@@ -48,7 +48,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             wp_enqueue_style('sfm-style', SFM_URL . 'assets/css/style.css', array(), SFM_VERSION);
             wp_add_inline_style('sfm-style', sfm_dymanic_styles());
 
-            wp_enqueue_script('sfm-custom-scripts', SFM_URL . 'assets/js/custom-scripts.js', array(), SFM_VERSION, true);
+            wp_enqueue_script('sfm-custom-scripts', SFM_URL . 'assets/js/custom-scripts.js', array('jquery'), SFM_VERSION, true);
             $fonts_url = self::sfm_fonts_url();
             $settings = Simple_Floating_Menu::get_settings();
             $load_font_locally = $settings['sfm_load_google_font_locally'];
@@ -86,7 +86,12 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
                 $scroll_offset = isset($settings['scroll_offset']) ? (int) $settings['scroll_offset'] : 0;
                 $class[] = isset($settings['position']) && $settings['position'] ? $settings['position'] : '';
                 $class[] = isset($settings['style']) && $settings['style'] ? $settings['style'] : '';
-                $class[] = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
+                $orientation = isset($settings['orientation']) && $settings['orientation'] ? $settings['orientation'] : '';
+                if ($standalone && isset($settings['position'])) { // the builder only offers Orientation in the corners; middles follow their edge
+                    if (in_array($settings['position'], array('top-middle', 'bottom-middle'), true)) $orientation = 'horizontal';
+                    if (in_array($settings['position'], array('middle-left', 'middle-right'), true)) $orientation = 'vertical';
+                }
+                $class[] = $orientation;
                 $sfm_show_menu = (is_admin() || $enable_sfm == 'yes') && $buttons;
                 if (apply_filters('sfm_before_floating_menu_render', $sfm_show_menu)) {
                     ?>
@@ -104,7 +109,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
 
                             /* A scrolling button needs no address, so only a
                                plain link is dropped for want of one. */
-                            if ($action === 'default' && empty($button['url'])) {
+                            if ($action === 'default' && (empty($button['url']) || in_array($button['url'], array('http://', 'https://'), true))) {
                                 continue;
                             }
 
@@ -199,7 +204,7 @@ if (!class_exists('Simple_Floating_Menu_Frontend')) {
             /* Every family on the page, not only the one the settings screen sets. */
             $families = array();
 
-            if (isset($settings['tooltip_font']['family'])) {
+            if (isset($settings['tooltip_font']['family']) && (is_admin() || (isset($settings['enable_sfm']) && $settings['enable_sfm'] == 'yes'))) {
                 $families[] = $settings['tooltip_font']['family'];
             }
 

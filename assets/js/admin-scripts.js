@@ -36,7 +36,9 @@
                 var defaultVal = $(this).attr('data-default');
 
                 var checkClasss = $(this).attr('class');
-                if (checkClasss == 'sfm-unique-id') {
+                if ($(this).is(':checkbox')) {
+                    $(this).prop('checked', true); // a new button opens in a new tab, like the first one did
+                } else if (checkClasss == 'sfm-unique-id') {
                     var id = 'sfm-' + Date.now();
                     $(this).val(id);
                 } else {
@@ -85,7 +87,11 @@
 
     $('body').on('click', '.sfm-remove', function () {
         var $el = $(this);
-        $el.closest('.sfm-button-fields').fadeOut()
+        if ($('.sfm-button-repeater .sfm-button-fields').not('.sfm-removing').length < 2) { // Add New copies an existing button, so one must stay
+            alert(sfm_obj.last_button);
+            return;
+        }
+        $el.closest('.sfm-button-fields').addClass('sfm-removing').fadeOut()
         setTimeout(function () {
             $el.closest('.sfm-button-fields').remove()
             var value = sfm_refresh_repeater_values();

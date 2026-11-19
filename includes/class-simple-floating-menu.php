@@ -132,7 +132,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                 wp_enqueue_script('sfm-admin-script', SFM_URL . 'assets/js/admin-scripts.js', array('jquery', 'jquery-ui-slider', 'jquery-ui-sortable'), SFM_VERSION, true);
                 wp_localize_script('sfm-admin-script', 'sfm_obj', array(
                     'nonce' => wp_create_nonce('sfm_nonce_update'),
-                    'ajax_url' => admin_url('admin-ajax.php')
+                    'ajax_url' => admin_url('admin-ajax.php'),
+                    'last_button' => __('At least one button is needed. Clear its Button Url to hide it.', 'simple-floating-menu')
                 ));
 
                 wp_enqueue_style('wp-color-picker');
@@ -164,7 +165,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                     'id' => uniqid('sfm-'),
                     'label' => '',
                     'icon' => 'icofont-dart',
-                    'url' => 'http://',
+                    'url' => '',
                     'classes' => '',
                     'attr_title' => '',
                     'action' => 'default',
@@ -460,7 +461,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                 <div class="form-row">
                                                     <label class="form-label"><?php esc_html_e('Button Url', 'simple-floating-menu'); ?></label>
                                                     <div class="form-field">
-                                                        <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][url]" type="text" value="<?php echo esc_attr($button['url']); ?>" class="regular-text sfm-ltr" data-default="http://" />
+                                                        <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][url]" type="text" value="<?php echo esc_attr($button['url']); ?>" class="regular-text sfm-ltr" data-default="" />
                                                         <p class="form-description"><?php esc_html_e('Leaving empty will not display the button', 'simple-floating-menu'); ?></p>
                                                     </div>
                                                 </div>
@@ -476,7 +477,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                     <div class="form-field">
                                                         <label class="form-label">
                                                             <?php
-                                                            $checkbox_val = isset($button['open_new_tab']) ? true : false;
+                                                            $checkbox_val = !empty($button['open_new_tab']);
                                                             ?>
                                                             <input name="sfm_settings[buttons][<?php echo esc_attr($count); ?>][open_new_tab]" type="checkbox" value="1" <?php checked($checkbox_val, 1); ?>>
                                                             <?php esc_html_e('Open in New Tab', 'simple-floating-menu'); ?>
@@ -631,11 +632,11 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             <td>
                                                 <ul class="sfm-shadow-fields">
                                                     <li class="sfm-shadow-settings-field">
-                                                        <input type="number" name="sfm_settings[button_shadow][x]" value="<?php echo absint($sfm_settings['button_shadow']['x']) ?>">
+                                                        <input type="number" name="sfm_settings[button_shadow][x]" value="<?php echo intval($sfm_settings['button_shadow']['x']) ?>">
                                                         <label><?php esc_html_e('X', 'simple-floating-menu'); ?></label>
                                                     </li>
                                                     <li class="sfm-shadow-settings-field">
-                                                        <input type="number" name="sfm_settings[button_shadow][y]" value="<?php echo absint($sfm_settings['button_shadow']['y']) ?>">
+                                                        <input type="number" name="sfm_settings[button_shadow][y]" value="<?php echo intval($sfm_settings['button_shadow']['y']) ?>">
                                                         <label><?php esc_html_e('Y', 'simple-floating-menu'); ?></label>
                                                     </li>
                                                     <li class="sfm-shadow-settings-field">
@@ -671,8 +672,8 @@ if (!class_exists('Simple_Floating_Menu')) {
                                             <td>
                                                 <?php
                                                 echo '<div class="sfm-range-slider">';
-                                                echo '<div class="range-input"  value="' . absint($sfm_settings['icon_position']) . '" data-min="-40" data-max="40" data-step="1"></div>';
-                                                echo '<input class="range-input-selector sfm-icon-position" type="hidden" value="' . absint($sfm_settings['icon_position']) . '" name="sfm_settings[icon_position]"/>';
+                                                echo '<div class="range-input"  value="' . intval($sfm_settings['icon_position']) . '" data-min="-40" data-max="40" data-step="1"></div>';
+                                                echo '<input class="range-input-selector sfm-icon-position" type="hidden" value="' . intval($sfm_settings['icon_position']) . '" name="sfm_settings[icon_position]"/>';
                                                 echo '</div>';
                                                 ?>
                                             </td>
@@ -939,7 +940,7 @@ if (!class_exists('Simple_Floating_Menu')) {
                                                     <div class="sfm-dropzone-wrapper">
                                                         <div class="sfm-dropzone-desc">
                                                             <i class="icofont-download"></i>
-                                                            <p><?php esc_html_e("Choose an json file or drag it here", "simple-floating-menu"); ?></p>
+                                                            <p><?php esc_html_e("Choose a JSON file or drag it here", "simple-floating-menu"); ?></p>
                                                         </div>
                                                         <input type="file" name="sfm_import_file" class="sfm-dropzone">
                                                     </div>
@@ -973,6 +974,11 @@ if (!class_exists('Simple_Floating_Menu')) {
             </div> <?php
         }
 
+        /* A ticked box posts a value, an unticked one nothing; an imported file says "no" outright. */
+        private static function switch_on($settings, $key) {
+            return isset($settings[$key]) && !in_array($settings[$key], array('no', 'off', '', false, 0, '0'), true);
+        }
+
         public function sanitize_form($sfm_settings) {
             $defaults = self::default_settings();
 
@@ -1000,9 +1006,9 @@ if (!class_exists('Simple_Floating_Menu')) {
             $right_offset = (int) $sfm_settings['right_offset'];
             $button_spacing = (int) $sfm_settings['button_spacing'];
 
-            $sanitize_settings['enable_sfm'] = isset($sfm_settings['enable_sfm']) ? 'yes' : 'no';
-            $sanitize_settings['enable_sfm_setting'] = isset($sfm_settings['enable_sfm_setting']) ? 'yes' : 'no';
-            $sanitize_settings['sfm_load_google_font_locally'] = isset($sfm_settings['sfm_load_google_font_locally']) ? 'yes' : 'no';
+            $sanitize_settings['enable_sfm'] = self::switch_on($sfm_settings, 'enable_sfm') ? 'yes' : 'no';
+            $sanitize_settings['enable_sfm_setting'] = self::switch_on($sfm_settings, 'enable_sfm_setting') ? 'yes' : 'no';
+            $sanitize_settings['sfm_load_google_font_locally'] = self::switch_on($sfm_settings, 'sfm_load_google_font_locally') ? 'yes' : 'no';
             $sanitize_settings['template'] = isset($sfm_settings['template']) && in_array($sfm_settings['template'], $valid_templates) ? $sfm_settings['template'] : $defaults['template'];
             $sanitize_settings['position'] = in_array($sfm_settings['position'], $valid_positions) ? $sfm_settings['position'] : $defaults['position'];
             $sanitize_settings['orientation'] = in_array($sfm_settings['orientation'], $valid_orientation) ? $sfm_settings['orientation'] : $defaults['orientation'];

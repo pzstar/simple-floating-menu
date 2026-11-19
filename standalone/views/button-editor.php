@@ -108,7 +108,7 @@ foreach (array('label', 'tool_tip_text') as $sfm_source) {
     </div>
 
     <div class="sfm-section">
-        <h3 class="sfm-section-title"><?php esc_html_e('Behaviour', 'simple-floating-menu'); ?></h3>
+        <h3 class="sfm-section-title"><?php esc_html_e('Behavior', 'simple-floating-menu'); ?></h3>
 
         <?php $sfm_action = isset($sfm_button['action']) ? $sfm_button['action'] : 'default'; ?>
 
@@ -181,7 +181,7 @@ foreach (array('label', 'tool_tip_text') as $sfm_source) {
     </div>
 
     <div class="sfm-section">
-        <h3 class="sfm-section-title"><?php esc_html_e('Colours', 'simple-floating-menu'); ?></h3>
+        <h3 class="sfm-section-title"><?php esc_html_e('Colors', 'simple-floating-menu'); ?></h3>
 
         <div class="sfm-fields">
             <?php foreach ($sfm_colors as $sfm_key => $sfm_label) { ?>

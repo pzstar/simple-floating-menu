@@ -430,6 +430,13 @@ class SFM_Standalone_Store {
     public static function save_settings($post_id, $settings) {
         unset($settings['buttons']);
 
+        /* The builder offers Orientation only in the corners; the middles follow their edge, and are stored that way so the premium plugin shows them the same. */
+        if (isset($settings['position']) && in_array($settings['position'], array('top-middle', 'bottom-middle'), true)) {
+            $settings['orientation'] = 'horizontal';
+        } elseif (isset($settings['position']) && in_array($settings['position'], array('middle-left', 'middle-right'), true)) {
+            $settings['orientation'] = 'vertical';
+        }
+
         update_post_meta($post_id, SFM_Standalone::CONFIG_META, self::to_stored_config($settings));
     }
 

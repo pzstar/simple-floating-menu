@@ -58,7 +58,7 @@
             var name = label || tooltip || sfmBuilder.untitled;
 
             $row.find('.sfm-row-label').text(name);
-            $row.find('.sfm-row-url').text(url || '');
+            $row.find('.sfm-row-url').text(url || sfmBuilder.noLink);
             /* The glyph is the <i> inside each holder, not the holder. */
             $row.find('.sfm-row-icon i').attr('class', icon || '');
             $editor.find('.sfm-editor-icon i').attr('class', icon || '');
@@ -362,11 +362,27 @@
 
         if ($.fn.sortable) {
             $list.sortable({
-                handle: '.sfm-row-grip',
+                handle: '.sfm-row-handle',
+                cancel: 'input, textarea, select, option', // the handle is a <button>, which jQuery UI ignores by default
                 axis: 'y',
                 update: markDirty
             });
         }
+
+        /* The handle's label promises the arrow keys too. */
+        $list.on('keydown', '.sfm-row-handle', function (e) {
+            var $row = $(this).closest('.sfm-row');
+            if (e.key === 'ArrowUp' && $row.prev('.sfm-row').length) {
+                $row.insertBefore($row.prev('.sfm-row'));
+            } else if (e.key === 'ArrowDown' && $row.next('.sfm-row').length) {
+                $row.insertAfter($row.next('.sfm-row'));
+            } else {
+                return;
+            }
+            e.preventDefault();
+            $(this).trigger('focus');
+            markDirty();
+        });
 
         /* ---- leaving ------------------------------------------------- */
 
@@ -624,6 +640,19 @@
         if ($.fn.chosen) {
             $form.find('.sfm-typography-input-field > select').chosen({ width: '100%' });
         }
+
+        /* A new font family offers its own weights, as on the settings screen. */
+        $form.on('change', '#sfm-tooltip-family', function () {
+            $.post(window.ajaxurl, {
+                action: 'sfm_get_google_font_variants',
+                sfm_nonce: sfmBuilder.fontNonce,
+                font_family: $(this).val()
+            }).done(function (options) {
+                if (typeof options === 'string' && options.indexOf('<option') !== -1) {
+                    $('#sfm-tooltip-style').html(options).trigger('chosen:updated');
+                }
+            });
+        });
 
         if ($.fn.slider) {
             $form.find('.sfm-range-input-selector').each(function () {

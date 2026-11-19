@@ -20,6 +20,7 @@ if (!class_exists('Simple_Floating_Menu_Live_Preview')) {
             array_pop($repeater_settings);
 
             $class = array('sfm-floating-menu');
+            $class[] = !empty($settings->template) ? $settings->template : 'sfm-template-1';
             $class[] = $settings->position;
             $class[] = $settings->style;
             $class[] = $settings->orientation;
@@ -28,7 +29,7 @@ if (!class_exists('Simple_Floating_Menu_Live_Preview')) {
                 <?php
                 foreach ($repeater_settings as $value) {
                     $url = $value->url;
-                    if ($url) {
+                    if ($url && !in_array($url, array('http://', 'https://'), true)) {
                         $unique_id = $value->id;
                         $tool_tip_text = $value->tool_tip_text;
                         $icon = $value->icon;

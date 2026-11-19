@@ -19,8 +19,11 @@ jQuery(document).ready(function ($) {
     $(".sfm-floating-menu a").on('click', function (event) {
         // Store hash
         var hash = this.hash;
-        // Only a real hash: scroll actions carry a bare "#", which jQuery can't select.
-        if (hash !== "" && hash !== "#" && $(hash).length > 0) {
+        // Make sure this.hash has a value before overriding default behavior
+        // A bare "#" is what the scroll actions carry, and $("#") is not a
+        // selector jQuery accepts.
+        var samePage = this.host === window.location.host && this.pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '');
+        if (samePage && hash !== "" && hash !== "#" && $(hash).length > 0) {
             // Prevent default anchor click behavior
             event.preventDefault();
 
@@ -29,10 +32,17 @@ jQuery(document).ready(function ($) {
 
             $('html, body').animate({
                 scrollTop: $(hash).offset().top - offset
-            }, 800, function () {
+            }, 800).promise().done(function () {
 
-                // Add hash (#) to URL when done scrolling (default click behavior)
-                window.location.hash = hash;
+                // Add hash (#) to URL when done scrolling, once, without the browser's own jump that would undo the offset.
+                if (window.location.hash === hash) {
+                    return;
+                }
+                if (window.history && window.history.pushState) {
+                    window.history.pushState(null, '', hash);
+                } else {
+                    window.location.hash = hash;
+                }
             });
         } // End if
     });

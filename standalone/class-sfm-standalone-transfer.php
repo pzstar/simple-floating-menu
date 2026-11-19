@@ -242,7 +242,13 @@ class SFM_Standalone_Transfer {
         }
 
         $settings = isset($data['settings']) && is_array($data['settings']) ? $data['settings'] : array();
-        SFM_Standalone_Store::save_settings($post_id, array_merge(Simple_Floating_Menu::default_settings(), $settings));
+        $defaults = Simple_Floating_Menu::default_settings();
+        foreach (array('tooltip_font', 'button_shadow', 'tooltip_padding') as $group) {
+            $settings[$group] = array_merge($defaults[$group], isset($settings[$group]) && is_array($settings[$group]) ? $settings[$group] : array());
+        }
+        /* Through the same sanitiser as the builder: these values end up in inline CSS. */
+        $settings = Simple_Floating_Menu::get_instance()->sanitize_form(array_merge($defaults, $settings, array('buttons' => array())));
+        SFM_Standalone_Store::save_settings($post_id, $settings);
         SFM_Standalone_Store::save_buttons($post_id, $data['buttons']);
 
         wp_safe_redirect(add_query_arg('sfm_notice', 'imported', SFM_Standalone_Page::url($post_id)));

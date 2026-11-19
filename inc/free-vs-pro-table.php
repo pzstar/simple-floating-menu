@@ -31,7 +31,7 @@ $sfm_comparison = array(
             array(__('Font icons', 'simple-floating-menu'), __('5 packs, 12,000+', 'simple-floating-menu'), __('7 packs, 13,000+', 'simple-floating-menu')),
             array(__('Your own image icons', 'simple-floating-menu'), false, true),
             array(__('Animated hamburger trigger icons', 'simple-floating-menu'), false, '16'),
-            array(__('Colours per button, and 1,400+ Google fonts', 'simple-floating-menu'), true, true),
+            array(__('Colors per button, and 1,900+ Google fonts', 'simple-floating-menu'), true, true),
             array(__('Separate sizes and spacing for tablet and mobile', 'simple-floating-menu'), false, true),
         ),
     ),
@@ -67,7 +67,7 @@ $sfm_comparison = array(
     array(
         'title' => __('Workflow and support', 'simple-floating-menu'),
         'rows' => array(
-            array(__('Export, import and duplicate a menu', 'simple-floating-menu'), true, true),
+            array(__('Export and import a menu', 'simple-floating-menu'), true, true),
             array(__('Duplicate a menu as the other menu type', 'simple-floating-menu'), false, true),
             array(__('Serve Google fonts from your own server', 'simple-floating-menu'), true, true),
             array(__('Support', 'simple-floating-menu'), __('Community forum', 'simple-floating-menu'), __('Premium support', 'simple-floating-menu')),

@@ -48,7 +48,7 @@ $sfm_shadow_fields = array(
 $sfm_numbers = array(
     'button_height' => array(__('Button Size (px)', 'simple-floating-menu'), 40, 200),
     'button_width' => array(__('Button Width (px)', 'simple-floating-menu'), 40, 200),
-    'icon_size' => array(__('Font/Image Icon Size (px)', 'simple-floating-menu'), 10, 60),
+    'icon_size' => array(__('Icon Size (px)', 'simple-floating-menu'), 10, 60),
     'icon_position' => array(__('Icon Offset (px)', 'simple-floating-menu'), -40, 40),
     'button_spacing' => array(__('Spacing Between Buttons (px)', 'simple-floating-menu'), 0, 200),
     'top_offset' => array(__('Offset from Top (px)', 'simple-floating-menu'), 0, 200),
@@ -158,7 +158,7 @@ $sfm_colors = array(
                 <?php } ?>
 
                 <p class="sfm-design-note">
-                    <?php esc_html_e('Template, placement, button shape and size, shadow and tooltip type. Saved together with this menu.', 'simple-floating-menu'); ?>
+                    <?php esc_html_e('Template, placement, button shape and size, colors, tooltip style and where the menu shows. Saved together with this menu.', 'simple-floating-menu'); ?>
                 </p>
             </div>
 
@@ -223,7 +223,7 @@ $sfm_colors = array(
                     </select>
 
                     <p class="sfm-hint">
-                        <?php esc_html_e('Drag to reorder. A floating menu shows every button in one row.', 'simple-floating-menu'); ?>
+                        <?php esc_html_e('Drag to reorder. The menu shows the buttons in this order.', 'simple-floating-menu'); ?>
                     </p>
                 </div>
             </div>
@@ -393,7 +393,7 @@ $sfm_colors = array(
                                         <div class="sfm-settings-fields">
                                             <input type="number" name="sfm[scroll_offset]" min="0" max="500" step="1"
                                                    value="<?php echo esc_attr($settings['scroll_offset']); ?>"/>
-                                            <p class="sfm-description"><?php esc_html_e('The amount of top spacing when link is clicked to link to scroll to the section', 'simple-floating-menu'); ?></p>
+                                            <p class="sfm-description"><?php esc_html_e('Space left above a section when a button scrolls to it', 'simple-floating-menu'); ?></p>
                                         </div>
                                     </div>
 
@@ -448,7 +448,7 @@ $sfm_colors = array(
                                     </div>
 
                                     <div class="sfm-settings-row">
-                                        <label><?php esc_html_e('ToolTip', 'simple-floating-menu'); ?></label>
+                                        <label><?php esc_html_e('Tooltip', 'simple-floating-menu'); ?></label>
                                         <div class="sfm-settings-fields">
                                             <div class="sfm-settings-list-row">
                                                 <div class="sfm-settings-list">
@@ -617,7 +617,7 @@ $sfm_colors = array(
                                                 <p>
                                                     <input type="hidden" name="sfm[archive_pages]" value="off"/>
                                                     <input type="checkbox" name="sfm[archive_pages]" value="on" id="sfm_archive_pages" <?php checked($settings['archive_pages'], 'on'); ?>/>
-                                                           <label for="sfm_archive_pages"><?php esc_html_e('All Archive Page', 'simple-floating-menu'); ?></label>
+                                                           <label for="sfm_archive_pages"><?php esc_html_e('All Archive Pages', 'simple-floating-menu'); ?></label>
                                                 </p>
 
                                                 <p>
@@ -640,7 +640,7 @@ $sfm_colors = array(
                                                         ?>
                                                         <p>
                                                             <input type="checkbox" name="sfm[cpt_pages][]" class="sfm-hide-show-cpt-posts" id="sfm-hscpt-<?php echo esc_attr($sfm_post_type); ?>" data-posttype="<?php echo esc_attr($sfm_post_type); ?>" value="<?php echo esc_attr($sfm_post_type); ?>" <?php checked(in_array($sfm_post_type, $sfm_chosen_types)); ?>/>
-                                                                   <label for="sfm-hscpt-<?php echo esc_attr($sfm_post_type); ?>"><?php echo esc_html('All ' . ucwords($sfm_post_type)); ?></label>
+                                                                   <label for="sfm-hscpt-<?php echo esc_attr($sfm_post_type); ?>"><?php /* translators: %s: post type plural name, e.g. Pages */ echo esc_html(sprintf(__('All %s', 'simple-floating-menu'), get_post_type_object($sfm_post_type)->labels->name)); ?></label>
                                                         </p>
                                                         <?php
                                                     }
@@ -667,7 +667,7 @@ $sfm_colors = array(
                                                         ?>
                                                         <p>
                                                             <input type="checkbox" name="sfm[specific_archive][]" id="sfm-archive-<?php echo esc_attr($sfm_post_type); ?>" value="<?php echo esc_attr($sfm_post_type); ?>" <?php checked(in_array($sfm_post_type, $sfm_chosen_archives)); ?> />
-                                                                   <label for="sfm-archive-<?php echo esc_attr($sfm_post_type); ?>"><?php echo esc_html(ucwords($sfm_post_type)); ?></label>
+                                                                   <label for="sfm-archive-<?php echo esc_attr($sfm_post_type); ?>"><?php echo esc_html(get_post_type_object($sfm_post_type)->labels->name); ?></label>
                                                         </p>
                                                         <?php
                                                     }
@@ -683,8 +683,8 @@ $sfm_colors = array(
                                                 <div class="sfm-settings-row sfm-hide-singular" id="sfm-cpt-<?php echo esc_attr($sfm_post_type); ?>" style="<?php echo in_array($sfm_post_type, $sfm_chosen_types) ? 'display: none;' : ''; ?>">
                                                     <label>
                                                         <?php
-                                                        esc_html_e('Specific ', 'simple-floating-menu');
-                                                        echo esc_html(ucwords($sfm_post_type));
+                                                        /* translators: %s: post type singular name, e.g. Page */
+                                                        echo esc_html(sprintf(__('Specific %s', 'simple-floating-menu'), get_post_type_object($sfm_post_type)->labels->singular_name));
                                                         ?>
                                                     </label>
                                                     <div class="sfm-settings-fields sfm-specific-pages-ids" data-selected="<?php echo esc_attr($sfm_chosen_list); ?>" data-type="<?php echo esc_attr($sfm_post_type); ?>">

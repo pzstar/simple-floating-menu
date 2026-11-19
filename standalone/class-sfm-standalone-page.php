@@ -298,6 +298,8 @@ class SFM_Standalone_Page {
             'ajaxNonce' => wp_create_nonce(self::AJAX_NONCE),
             'search' => esc_html__('Search', 'simple-floating-menu'),
             'noIcons' => esc_html__('No icons match that.', 'simple-floating-menu'),
+            'fontNonce' => wp_create_nonce('sfm_nonce_update'),
+            'noLink' => esc_html__('No link', 'simple-floating-menu'),
         ));
     }
 
@@ -433,6 +435,11 @@ class SFM_Standalone_Page {
         $posted = isset($_POST['sfm']) && is_array($_POST['sfm']) ? wp_unslash($_POST['sfm']) : array();
 
         /* The plugin's own sanitiser. */
+        /* No rows posts no buttons at all; without this the default sample button would come back. */
+        $posted['buttons'] = isset($posted['buttons']) && is_array($posted['buttons']) ? $posted['buttons'] : array();
+
+        /* The plugin's own sanitiser, so a standalone menu is cleaned by
+           exactly the same rules as the settings screen's menu. */
         $plugin = Simple_Floating_Menu::get_instance();
         $defaults = Simple_Floating_Menu::default_settings();
 
